@@ -15,7 +15,7 @@ from typing import Any, Callable
 
 import httpx
 
-from .models import EFFORT, price
+from .models import EFFORT, IMAGE, IMAGE_USD_PER_IMAGE, price
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = BACKEND_DIR / ".muse-cache"
@@ -96,6 +96,48 @@ def log_cost(entry: dict[str, Any]) -> None:
 
 def read_prompt(name: str) -> str:
     return (BACKEND_DIR / "prompts" / f"{name}.md").read_text()
+
+
+def generate_image(
+    *,
+    prompt: str,
+    size: str = "1024x1792",
+    run_spend_cap_usd: float = 5.0,
+    run_spent_usd: float = 0.0,
+) -> tuple[bytes, float]:
+    """Generate one image via the Meta Model API. Returns (png_bytes, cost_usd).
+
+    Assumes an OpenAI-compatible images/generations shape; first live run must
+    verify and this function gets corrected to match (no silent fallback).
+    """
+    if killed():
+        raise KillSwitchEngaged("KILL_PAID_CALLS is set; refusing paid call")
+    if run_spent_usd >= run_spend_cap_usd:
+        raise BudgetExceeded(f"run cap ${run_spend_cap_usd:.2f} reached")
+    headers = {"Authorization": f"Bearer {api_key()}"}
+    payload = {"model": IMAGE, "prompt": prompt, "size": size, "response_format": "b64_json"}
+    try:
+        with httpx.Client(timeout=180.0) as client:
+            resp = client.post(f"{API_BASE}/images/generations", json=payload, headers=headers)
+    except httpx.HTTPError as exc:
+        raise ModelCallError(f"image: transport error: {exc}") from exc
+    if resp.status_code != 200:
+        raise ModelCallError(f"image: HTTP {resp.status_code}: {resp.text[:300]}")
+    try:
+        datum = resp.json()["data"][0]
+    except (KeyError, IndexError, ValueError) as exc:
+        raise ModelCallError(f"image: unexpected response shape: {resp.text[:300]}") from exc
+    import base64 as _b64
+
+    if "b64_json" in datum:
+        blob = _b64.b64decode(datum["b64_json"])
+    elif "url" in datum:
+        with httpx.Client(timeout=120.0) as client:
+            blob = client.get(datum["url"]).content
+    else:
+        raise ModelCallError(f"image: no b64_json or url in response: {str(datum)[:200]}")
+    log_cost({"agent": "b3_image", "model": IMAGE, "usd": IMAGE_USD_PER_IMAGE})
+    return blob, IMAGE_USD_PER_IMAGE
 
 
 def call_json(

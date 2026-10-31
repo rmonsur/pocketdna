@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "style_prefix": "Painterly archival realism, warm amber and deep charcoal palette, soft documentary light, no text, no watermark, no identifiable faces, era- and region-accurate dress and landscape, vertical 9:16 composition with clear lower third for titles",
+  "negative": "battle, war, weapons, soldiers, fantasy tropes, ethnic caricature, modern artifacts, vehicles, power lines, text, watermark, logo, photorealistic faces",
+  "scenes": [
+    {
+      "id": "scene-bronze-steppe-01",
+      "era": "bronze",
+      "populations": ["yamnaya", "steppe-pastoralist"],
+      "brief": "Yamnaya pastoralist camp at dawn on the Pontic steppe: round felt tents, grazing cattle, a family loading a wooden wagon for a seasonal move, vast grassland to the horizon"
+    },
+    {
+      "id": "scene-bronze-farm-01",
+      "era": "bronze",
+      "populations": ["anatolian-farmer", "neolithic-farmer"],
+      "brief": "Anatolian farming village at harvest: mudbrick houses with flat roofs, villagers carrying grain baskets, terraced fields and olive trees in warm afternoon light"
+    },
+    {
+      "id": "scene-bronze-craft-01",
+      "era": "bronze",
+      "populations": ["sintashta", "corded-ware"],
+      "brief": "Bronze Age settlement workshop: craft workers casting bronze tools in clay molds beside timber longhouses, children watching, river and pine forest beyond"
+    },
+    {
+      "id": "scene-middle-market-01",
+      "era": "middle",
+      "populations": ["medieval-western-european"],
+      "brief": "Medieval market town square on market day: timber-framed stalls with cloth and pottery, townsfolk trading, a stone church tower behind, autumn morning"
+    },
+    {
+      "id": "scene-middle-coast-01",
+      "era": "middle",
+      "populations": ["norse", "medieval-scandinavian"],
+      "brief": "Norse coastal hamlet at low tide: wooden longhouses, fishing boats pulled onto shingle, nets drying on racks, gulls over a grey northern sea"
+    },
+    {
+      "id": "scene-middle-caravan-01",
+      "era": "middle",
+      "populations": ["central-asian", "silk-road"],
+      "brief": "Caravanserai courtyard at dusk on a trade route: laden camels resting, merchants sharing bread around a fire, arched mudbrick galleries, desert hills beyond"
+    },
+    {
+      "id": "scene-modern-harbor-01",
+      "era": "modern",
+      "populations": ["northwestern-european", "migrant"],
+      "brief": "Nineteenth-century harbor at departure time: a tall sailing ship at the quay, families with traveling trunks waving from the dock, gulls and morning mist"
+    },
+    {
+      "id": "scene-modern-croft-01",
+      "era": "modern",
+      "populations": ["british-irish", "highland"],
+      "brief": "Highland croft at peat-cutting season: a stone cottage with a smoking chimney, stacked peat banks, sheep on the hill, low clouds and green moorland"
+    },
+    {
+      "id": "scene-modern-homestead-01",
+      "era": "modern",
+      "populations": ["french-german", "settler"],
+      "brief": "Prairie homestead at golden hour: a timber farmhouse and barn, wheat fields to the horizon, a family walking home along a dirt track"
+    },
+    {
+      "id": "scene-method-dark",
+      "era": "method",
+      "populations": [],
+      "brief": "Dark archival texture plate: deep charcoal background with faint antique map lines and star-chart geometry, subtle amber grain, empty center for monospaced type"
+    },
+    {
+      "id": "scene-stamp-dark",
+      "era": "stamp",
+      "populations": [],
+      "brief": "Dark closing plate: near-black background with a soft warm vignette and faint compass-rose geometry, minimal, space in center for a wordmark and code"
+    }
+  ]
+}

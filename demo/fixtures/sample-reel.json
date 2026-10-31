@@ -9,7 +9,7 @@
       "t_end": 5,
       "copy": "Your oldest signal is 5,000 years old.",
       "explainer": "Part of your ancestry is consistent with Bronze Age steppe pastoralists who moved west into Europe.",
-      "citation_ids": ["c1"],
+      "citation_ids": ["c-steppe-haak2015"],
       "scene_id": "scene-bronze-steppe-01",
       "map_path": [[38.0, 48.0], [30.0, 52.0]]
     },
@@ -32,7 +32,7 @@
       "t_end": 19,
       "copy": "Bronze Age: steppe ancestry moves west.",
       "explainer": "Pastoralists from the Pontic steppe migrated into Europe, mixing with local farming communities.",
-      "citation_ids": ["c1"],
+      "citation_ids": ["c-steppe-haak2015"],
       "scene_id": "scene-bronze-steppe-01",
       "map_path": [[38.0, 48.0], [20.0, 50.0], [0.0, 51.5]]
     },
@@ -44,7 +44,7 @@
       "t_end": 28,
       "copy": "Middle Ages: your line passes through market towns.",
       "explainer": "By medieval times your ancestors lived among farming and trading communities in western Europe.",
-      "citation_ids": ["c2"],
+      "citation_ids": ["c-viking-margaryan2020"],
       "scene_id": "scene-middle-market-01",
       "map_path": [[0.0, 51.5], [2.3, 48.8]]
     },

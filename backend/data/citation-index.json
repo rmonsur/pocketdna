@@ -1,20 +1,87 @@
 {
-  "version": 0,
-  "status": "stub: B1 CitationIndexerAgent replaces with ~50 reviewed Reich Lab entries at build time",
+  "version": 1,
+  "status": "9 seeds written offline. EVERY entry must pass b1_verify.py + builder review before ship. Expand toward ~50 via b1_indexer.py (Spark, builder machine).",
   "entries": [
     {
-      "id": "c1",
-      "claim": "Bronze Age steppe pastoralists migrated west into Europe and mixed with farming communities.",
-      "explainer": "Herders from the grasslands moved west and their descendants mixed with local farmers.",
-      "source": "TBD (B1 review)",
-      "status": "stub"
+      "id": "c-steppe-haak2015",
+      "claim": "Pastoralists from the Pontic-Caspian steppe migrated into central Europe around 4,500 years ago, contributing substantially to later European ancestry.",
+      "explainer": "Herders from the eastern grasslands moved west, and many Europeans today descend partly from them.",
+      "source": {"authors": "Haak et al.", "year": 2015, "venue": "Nature", "doi": "10.1038/nature14317"},
+      "populations": ["yamnaya", "corded-ware", "steppe-pastoralist"],
+      "epochs": ["bronze"],
+      "status": "seeded-offline — verify"
     },
     {
-      "id": "c2",
-      "claim": "Medieval western European communities show continuity with earlier local populations plus later migration.",
-      "explainer": "Towns in the Middle Ages kept older roots while welcoming newcomers.",
-      "source": "TBD (B1 review)",
-      "status": "stub"
+      "id": "c-bronze-allentoft2015",
+      "claim": "Bronze Age Eurasia saw large-scale population movements connecting the steppe, Siberia, and Europe.",
+      "explainer": "The Bronze Age was a time of big migrations across Europe and Asia.",
+      "source": {"authors": "Allentoft et al.", "year": 2015, "venue": "Nature", "doi": "10.1038/nature14507"},
+      "populations": ["sintashta", "andronovo", "steppe-pastoralist"],
+      "epochs": ["bronze"],
+      "status": "seeded-offline — verify"
+    },
+    {
+      "id": "c-euro3-lazaridis2014",
+      "claim": "Present-day Europeans descend from three deep ancestral sources: western hunter-gatherers, early Anatolian farmers, and steppe pastoralists.",
+      "explainer": "Modern Europeans mix three ancient groups: early hunters, first farmers, and steppe herders.",
+      "source": {"authors": "Lazaridis et al.", "year": 2014, "venue": "Nature", "doi": "10.1038/nature13673"},
+      "populations": ["western-hunter-gatherer", "anatolian-farmer", "yamnaya"],
+      "epochs": ["bronze", "modern"],
+      "status": "seeded-offline — verify"
+    },
+    {
+      "id": "c-farming-lazaridis2016",
+      "claim": "Farming spread into Europe through the migration of farming communities from Anatolia and the Near East.",
+      "explainer": "Europe's first farmers migrated from what is now Turkey and the Middle East.",
+      "source": {"authors": "Lazaridis et al.", "year": 2016, "venue": "Nature", "doi": "10.1038/nature19310"},
+      "populations": ["anatolian-farmer", "neolithic-farmer"],
+      "epochs": ["bronze"],
+      "status": "seeded-offline — verify"
+    },
+    {
+      "id": "c-iceage-fu2016",
+      "claim": "Europe's Ice Age hunter-gatherers belonged to lineages largely replaced by postglacial and farming expansions.",
+      "explainer": "The people of Ice Age Europe were later joined, and mostly replaced, by newcomers.",
+      "source": {"authors": "Fu et al.", "year": 2016, "venue": "Nature", "doi": "10.1038/nature17993"},
+      "populations": ["western-hunter-gatherer", "ice-age-european"],
+      "epochs": ["bronze"],
+      "status": "seeded-offline — verify"
+    },
+    {
+      "id": "c-minoan-lazaridis2017",
+      "claim": "Minoans and Mycenaeans shared deep Aegean farmer ancestry, with additional eastern-related ancestry in Mycenaeans.",
+      "explainer": "The ancient peoples of Crete and mainland Greece shared local roots, with later arrivals from the east.",
+      "source": {"authors": "Lazaridis et al.", "year": 2017, "venue": "Nature", "doi": "10.1038/nature23310"},
+      "populations": ["minoan", "mycenaean", "aegean"],
+      "epochs": ["bronze"],
+      "status": "seeded-offline — verify"
+    },
+    {
+      "id": "c-viking-margaryan2020",
+      "claim": "Viking Age Scandinavians voyaged, traded, and settled widely, carrying Scandinavian ancestry across Europe.",
+      "explainer": "Vikings sailed, traded, and settled far from home, leaving descendants across Europe.",
+      "source": {"authors": "Margaryan et al.", "year": 2020, "venue": "Nature", "doi": "10.1038/s41586-020-2682-5"},
+      "populations": ["norse", "medieval-scandinavian"],
+      "epochs": ["middle"],
+      "status": "seeded-offline — verify"
+    },
+    {
+      "id": "c-pca-patterson2006",
+      "claim": "Principal components analysis recovers population structure from genome-wide genotype data (smartpca).",
+      "explainer": "A math tool called PCA turns DNA similarities into a map of ancestry.",
+      "source": {"authors": "Patterson, Price & Reich", "year": 2006, "venue": "PLoS Genetics", "doi": "10.1371/journal.pgen.0020190"},
+      "populations": [],
+      "epochs": [],
+      "status": "seeded-offline — verify"
+    },
+    {
+      "id": "c-aadr-dataset",
+      "claim": "The Allen Ancient DNA Resource compiles thousands of published ancient genomes with curated population labels.",
+      "explainer": "Scientists share thousands of ancient genomes in one public collection.",
+      "source": {"authors": "Reich Lab", "year": 2024, "venue": "Harvard Dataverse", "doi": "10.7910/DVN/FFIDCW"},
+      "populations": [],
+      "epochs": ["bronze", "middle", "modern"],
+      "status": "dataset DOI from project docs — confirm version at build"
     }
   ]
 }

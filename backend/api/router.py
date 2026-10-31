@@ -6,8 +6,6 @@ from __future__ import annotations
 import io
 import zipfile
 
-TIER2_PARKED = True  # Oct 31: builder testing bioinformatics; raw-file math on hold.
-
 MAX_IMAGE_BYTES = 10 * 1024 * 1024
 MAX_RAW_BYTES = 50 * 1024 * 1024
 MAX_ZIP_ENTRIES = 8
@@ -36,6 +34,16 @@ def unzip_vendor_file(blob: bytes) -> tuple[str | None, str]:
             return zf.read(inner).decode("utf-8", errors="replace"), ""
     except zipfile.BadZipFile:
         return None, "R2"
+
+
+def extract_raw_text(filename: str, blob: bytes) -> str:
+    """Inner vendor text for an already-routed raw upload. Raises ValueError if unreadable."""
+    if blob.startswith(ZIP_MAGIC) or filename.lower().endswith(".zip"):
+        text, errmsg = unzip_vendor_file(blob)
+        if errmsg or text is None:
+            raise ValueError("unreadable archive")
+        return text
+    return blob.decode("utf-8", errors="replace")
 
 
 def detect_raw_vendor(text: str) -> str:

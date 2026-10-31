@@ -25,10 +25,6 @@ from muse.models import SPARK_13
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 
 
-class Tier2Parked(RuntimeError):
-    pass
-
-
 def _data(name: str) -> Any:
     return json.loads((BACKEND_DIR / "data" / name).read_text())
 
@@ -67,10 +63,19 @@ def run_agent(
     run_spent_usd: float = 0.0,
 ) -> CallResult:
     prompt_file, effort, validate = AGENT_DEFS[name]
-    if tier == "tier2":
-        raise Tier2Parked("Tier 2 engine on hold (builder testing); open-weights path wires up on unpark")
     system = read_prompt(prompt_file)
     messages = [{"role": "system", "content": system}, {"role": "user", "content": user_content}]
+    if tier == "tier2":
+        from agents.openweights import call_open, model_id
+        from muse.models import EFFORT
+
+        temperature, max_tokens = EFFORT[effort]
+        validated = call_open(
+            agent=name, tier=tier, messages=messages, validate=validate,
+            temperature=temperature, max_tokens=max_tokens,
+        )
+        return CallResult(data=validated, model=f"open:{model_id()}", input_tokens=0,
+                          output_tokens=0, cost_usd=0.0, cached=False)
     schema = {"name": f"pocketdna_{name}", "strict": True, "schema": {"type": "object"}}
     return call_json(
         agent=name, tier=tier, model=SPARK_13, messages=messages,

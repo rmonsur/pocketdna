@@ -108,7 +108,7 @@ class AuditOut(BaseModel):
 class JobStatus(BaseModel):
     job_id: str
     tier: Literal["tier1", "tier2"]
-    state: Literal["queued", "running", "done", "failed", "parked", "rejected"]
+    state: Literal["queued", "running", "done", "failed", "rejected"]
     rejection: Literal["R1", "R2", "R3", "R4", "R5"] | None = None
     message: str = ""
     reel: Reel | None = None

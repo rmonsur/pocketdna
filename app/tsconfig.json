@@ -4,5 +4,14 @@
     "strict": true,
     "noEmit": true
   },
-  "include": ["src", "app"]
+  "include": [
+    "src",
+    "app",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "src/reel/engine.test.ts"
+  ]
 }
