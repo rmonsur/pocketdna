@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "duration_s": 42,
+  "beats": [
+    {
+      "id": "b1",
+      "kind": "hook",
+      "t_start": 0,
+      "t_end": 5,
+      "copy": "Your oldest signal is 5,000 years old.",
+      "explainer": "Part of your ancestry is consistent with Bronze Age steppe pastoralists who moved west into Europe.",
+      "citation_ids": ["c1"],
+      "scene_id": "scene-bronze-steppe-01",
+      "map_path": [[38.0, 48.0], [30.0, 52.0]]
+    },
+    {
+      "id": "b2",
+      "kind": "method",
+      "t_start": 5,
+      "t_end": 10,
+      "copy": "Your composition, compared against 10,000 ancient genomes.",
+      "explainer": "Vendor percentages are matched to dated ancient samples. Every claim below binds to a published paper.",
+      "citation_ids": [],
+      "scene_id": "scene-method-dark",
+      "map_path": []
+    },
+    {
+      "id": "b3",
+      "kind": "era",
+      "epoch": "bronze",
+      "t_start": 10,
+      "t_end": 19,
+      "copy": "Bronze Age: steppe ancestry moves west.",
+      "explainer": "Pastoralists from the Pontic steppe migrated into Europe, mixing with local farming communities.",
+      "citation_ids": ["c1"],
+      "scene_id": "scene-bronze-steppe-01",
+      "map_path": [[38.0, 48.0], [20.0, 50.0], [0.0, 51.5]]
+    },
+    {
+      "id": "b4",
+      "kind": "era",
+      "epoch": "middle",
+      "t_start": 19,
+      "t_end": 28,
+      "copy": "Middle Ages: your line passes through market towns.",
+      "explainer": "By medieval times your ancestors lived among farming and trading communities in western Europe.",
+      "citation_ids": ["c2"],
+      "scene_id": "scene-middle-market-01",
+      "map_path": [[0.0, 51.5], [2.3, 48.8]]
+    },
+    {
+      "id": "b5",
+      "kind": "era",
+      "epoch": "modern",
+      "t_start": 28,
+      "t_end": 35,
+      "copy": "Modern: all paths lead to you.",
+      "explainer": "Recent centuries bring every branch of the story together in the present day.",
+      "citation_ids": [],
+      "scene_id": "scene-modern-harbor-01",
+      "map_path": [[2.3, 48.8], [-74.0, 40.7]]
+    },
+    {
+      "id": "b6",
+      "kind": "convergence",
+      "t_start": 35,
+      "t_end": 39,
+      "copy": "Every path leads to you.",
+      "explainer": "",
+      "citation_ids": [],
+      "scene_id": "scene-modern-harbor-01",
+      "map_path": [[38.0, 48.0], [2.3, 48.8], [-74.0, 40.7]]
+    },
+    {
+      "id": "b7",
+      "kind": "stamp",
+      "t_start": 39,
+      "t_end": 42,
+      "copy": "PocketDNA. Watch your origins.",
+      "explainer": "",
+      "citation_ids": [],
+      "scene_id": "scene-stamp-dark",
+      "map_path": []
+    }
+  ]
+}

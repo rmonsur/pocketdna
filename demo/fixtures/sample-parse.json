@@ -1,0 +1,10 @@
+{
+  "vendor": "23andme",
+  "shares": [
+    {"id": "british-irish", "label": "British & Irish", "weight": 0.62, "confidence": 0.95},
+    {"id": "french-german", "label": "French & German", "weight": 0.24, "confidence": 0.9},
+    {"id": "scandinavian", "label": "Scandinavian", "weight": 0.09, "confidence": 0.81},
+    {"id": "unassigned", "label": "Unassigned", "weight": 0.05, "confidence": 0.99}
+  ],
+  "omitted": []
+}

@@ -1,0 +1,10 @@
+{
+  "version": 0,
+  "status": "stub: B2 CartographerAgent replaces at build time",
+  "coords": "lon-lat pairs for d3-geo",
+  "paths": {
+    "bronze": [[38.0, 48.0], [20.0, 50.0], [0.0, 51.5]],
+    "middle": [[0.0, 51.5], [2.3, 48.8]],
+    "modern": [[2.3, 48.8], [-74.0, 40.7]]
+  }
+}

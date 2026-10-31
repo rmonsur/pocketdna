@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PocketDNA reel JSON (t-driven engine input)",
+  "type": "object",
+  "required": ["version", "duration_s", "beats"],
+  "properties": {
+    "version": { "const": 1 },
+    "duration_s": { "type": "number", "minimum": 30, "maximum": 60 },
+    "beats": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": { "$ref": "#/definitions/beat" }
+    }
+  },
+  "definitions": {
+    "beat": {
+      "type": "object",
+      "required": ["id", "kind", "t_start", "t_end", "copy"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "enum": ["hook", "method", "era", "convergence", "stamp"] },
+        "epoch": { "enum": ["bronze", "middle", "modern"] },
+        "t_start": { "type": "number", "minimum": 0 },
+        "t_end": { "type": "number", "minimum": 0 },
+        "copy": { "type": "string", "maxLength": 140 },
+        "explainer": { "type": "string", "maxLength": 280 },
+        "citation_ids": { "type": "array", "items": { "type": "string" } },
+        "scene_id": { "type": "string" },
+        "map_path": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "prefixItems": [{ "type": "number" }, { "type": "number" }],
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    }
+  }
+}

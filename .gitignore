@@ -1,0 +1,10 @@
+.env
+.muse-cache/
+.muse-cost.jsonl
+__pycache__/
+*.pyc
+node_modules/
+.expo/
+dist/
+*.log
+.DS_Store

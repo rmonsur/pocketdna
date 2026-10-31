@@ -1,0 +1,20 @@
+{
+  "version": 0,
+  "status": "stub: B1 CitationIndexerAgent replaces with ~50 reviewed Reich Lab entries at build time",
+  "entries": [
+    {
+      "id": "c1",
+      "claim": "Bronze Age steppe pastoralists migrated west into Europe and mixed with farming communities.",
+      "explainer": "Herders from the grasslands moved west and their descendants mixed with local farmers.",
+      "source": "TBD (B1 review)",
+      "status": "stub"
+    },
+    {
+      "id": "c2",
+      "claim": "Medieval western European communities show continuity with earlier local populations plus later migration.",
+      "explainer": "Towns in the Middle Ages kept older roots while welcoming newcomers.",
+      "source": "TBD (B1 review)",
+      "status": "stub"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "vendor": "23andme",
+  "report_type": "health",
+  "route": "rejection",
+  "rejection": "R1",
+  "confidence": 0.98
+}
