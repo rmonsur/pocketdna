@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "exportedAt": "2026-11-04T15:51:55.441Z",
+  "mode": "replay",
+  "duration_s": 120,
+  "fps": 10,
+  "frames": 1200,
+  "size": "1080x1920",
+  "sound": "silent",
+  "citations": [
+    {
+      "id": "haak2015",
+      "authors": "Haak et al.",
+      "year": 2015,
+      "venue": "Nature 522, 207–211",
+      "doi": "10.1038/nature14317"
+    },
+    {
+      "id": "margaryan2020",
+      "authors": "Margaryan et al.",
+      "year": 2020,
+      "venue": "Nature 585, 390–396",
+      "doi": "10.1038/s41586-020-2682-5"
+    },
+    {
+      "id": "leslie2015",
+      "authors": "Leslie et al.",
+      "year": 2015,
+      "venue": "Nature 519, 309–314",
+      "doi": "10.1038/nature14230"
+    }
+  ],
+  "evidenceKind": "raw",
+  "limitations": [
+    "Replay: saved illustrative generation, not a live measurement.",
+    "Ranges are bootstrap 5–95 intervals on the fitted shares."
+  ]
+}

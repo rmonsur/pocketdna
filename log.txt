@@ -1,0 +1,120 @@
+PocketDNA test and validation log
+=================================
+
+Purpose: record tests performed so far, their evidence, status and limitations.
+Historical project QA entries below are transcribed from the cited existing QA
+logs; they were not rerun as part of this validation. Dates are those stated
+in the source files. A historical pass does not establish current behavior.
+Do not put DNA calls, sensitive personal summaries, API keys or paid-call
+payloads in this file. Append new checks with commands, outcome and scope.
+
+Project QA history (source: muse-loop/qa-logs/)
+------------------------------------------------
+- 2026-10-31 backend-tier1: reported backend tests green after fixing import
+  setup; live API and FastAPI serving were unverified. Source:
+  2026-10-31-backend-tier1.md.
+- 2026-10-31 reel-engine: reported beat mapping, clamp, determinism and map
+  midpoint tests green. No UI render. Source: 2026-10-31-reel-engine.md.
+- 2026-10-31 app-screens: reported static checks clean; UI not rendered due to
+  missing Expo dependencies. Source: 2026-10-31-app-screens.md.
+- 2026-10-31 b1-citations: reported contract tests green; nine citation seeds
+  still required source verification. Source: 2026-10-31-b1-citations.md.
+- 2026-10-31 b3-export: reported compilation, backend and engine tests green;
+  librarian dry run completed; actual image generation/MP4 export not tested.
+  Source: 2026-10-31-b3-export.md.
+- 2026-10-31 eas-domain: reported PNG dimension checks, JSON parsing and eight
+  OG tags; EAS/TestFlight unverified. Source: 2026-10-31-eas-domain.md.
+- 2026-10-31 tier2-unpark: reported 25 passed, one skipped; mini-panel engine
+  checks passed. Real panel and smartpca oracle not yet tested in that run.
+  Source: 2026-10-31-tier2-unpark.md.
+- 2026-10-31 web-bundle and fix1: reported TypeScript and web export checks,
+  OG tags, and corrected CSS utility output after a failed initial styling
+  check. Sources: 2026-10-31-web-bundle.md, 2026-10-31-web-bundle-fix1.md.
+- 2026-10-31 web-verify: source records human confirmation of styled welcome
+  screen; sample playback and live screenshot flow remained unverified.
+  Source: 2026-10-31-web-verify.md.
+- 2026-10-31 review-fixes-pivot: reported pytest 29 passed, tsc clean and
+  live local kill-switch API smoke; GPU deployment unverified. Source:
+  2026-10-31-review-fixes-pivot.md.
+- 2026-11-04 duration-90-150: reported pytest 30 passed, engine test green,
+  tsc clean. Source: 2026-11-04-duration-90-150.md.
+- 2026-11-04 target-runtime: reported offline build and server app.request
+  checks; live screenshot, browser and export remained pending. Source:
+  2026-11-04-target-runtime.md.
+- 2026-11-05 live-screenshot: reported offline failure-lane/kill-switch checks;
+  actual live keyed run and browser check pending. Source:
+  2026-11-05-live-screenshot.md.
+- 2026-11-05 export-atlas: reported frame-math/manifest unit tests and export
+  error handling; full MP4 and actual local-app export pending. Source:
+  2026-11-05-export-atlas.md.
+
+Reference validation performed in this conversation
+----------------------------------------------------
+- Documentation reconciliation: 84 local Markdown links resolved; catalog
+  accounted for 6,881 historical IDs and 550 population rows; nine listed
+  questionable records matched catalog. git diff --check passed. This did not
+  reverify external study data or provider documentation.
+- smartpca full-marker compatibility smoke: timed out after 180 seconds; not
+  a successful PCA run. Chromosome 22 smoke: passed with 64 technical-fixture
+  samples and generated eigenvectors and marker weights. This was not an
+  approved scientific basis.
+- python3 research/validate_reference.py: five AADR files matched their
+  supplied MD5 manifest; TGENO header matched 27,594 samples and 584,131
+  markers; all sample IDs matched annotations. Checksums do not establish
+  source authenticity or scientific validity.
+- python3 research/audit_samples_markers.py: no duplicate marker coordinates
+  or within-chromosome decreases; 23 individual/group label differences; 2,280
+  Individual ID groups had multiple records. Review artifacts are ignored.
+- python3 research/measure_reference_calls.py: measured full-autosomal calls
+  for 27,594 reference records. Screening denominator was 579,720 markers,
+  not the final filtered basis. No personal DNA was used.
+- python3 research/check_tgeno_oracle.py: 515,456 calls across 64 samples and
+  8,054 chr22 markers matched EIGENSOFT convertf output exactly.
+- Chromosome 22 PLINK 1.9 relatedness pilot: completed on 3,692 candidate
+  samples after excluding chimpanzee and hg19 reference controls. Its result
+  was overly broad and is not adequate to establish genome-wide unrelatedness.
+- python3 research/check_plink_oracle.py: 475,186 calls from 59 overlapping
+  reference samples matched the independent convertf output; no differences.
+- Genome-wide PLINK 2 KING screen: completed for 3,692 exploratory candidates
+  using 101,914 pooled-screened markers; 160 flagged pairs. Twenty high-kinship
+  pairs have 0.030%–0.482% discordance across jointly called autosomal markers.
+  This is review evidence, not proof of identity or a final basis.
+- External marker and KING screens: EGDP 50, SGDP 0 and Franco-Cantabrian 3
+  candidate cross-panel pairs at kinship >=0.0884; 43 EGDP and 3 Franco pairs
+  >=0.354. Both sides of each PLINK merge matched input via pgen-diff including
+  missing calls. No pairs above threshold in the three external-to-external
+  screens. Marker harmonization/build provenance remains incomplete.
+- python3 -m unittest discover -s research/tests -v: three marker-classification
+  tests passed; wrong-coordinate, invalid, palindromic and complemented marker
+  cases remain distinct. py_compile and git diff --check passed for the new
+  research scripts.
+- Experimental split: 2,829 basis and 698 evaluation samples; 121 related
+  group members and 44 records marked relative/outlier/ignore omitted. Groups
+  with detected kinship are kept together. The split is exploratory; unknown
+  relationships and biased representation prevent final independence claims.
+- Training-only marker selection: 99,794 markers retained from 579,720 raw
+  autosomal markers under documented exploratory filters. No long-range LD mask.
+- python3 research/check_pca_export.py: 6,386,816 genotype codes across 64
+  reference samples and 99,794 markers matched between source PLINK BED and
+  the exported smartpca TGENO file. This is format parity, not biological truth.
+- Experimental smartpca basis and held-out projection: completed successfully
+  on 2,829 basis samples, 698 held-out samples, 99,794 markers and 25 PCs.
+  Status and hashes are recorded in ignored experimental-pca/pca-manifest.json.
+  Completion does not validate projection mathematics or historical accuracy.
+- Experimental EIGENSOFT export: first PLINK 2 export failed because combined
+  sample IDs exceeded 39 characters; an initial alias command then failed
+  because ID updates run before keep filtering. Both failures were corrected
+  with a deterministic alias crosswalk and an alias-based keep list; the
+  corrected export completed and the parity check above passed.
+- python3 research/check_experimental_split.py: passed; exact sample roles,
+  marker IDs, aliases and flagged-group separation verified. It cannot detect
+  relationships absent from the review graph.
+- PLINK 2 independent training PCA: completed on the same 2,829 basis samples
+  and 99,794 markers; python3 research/validate_experimental_pca.py passed
+  sample/role and marker identity checks, and finite output checks. In-sample
+  absolute PC correlations ranged from 0.9691 to 0.999999; PC1-8 subspace
+  principal-angle cosines were >=0.999997. This is descriptive in-sample
+  agreement, not held-out projection parity or ancestry validation.
+- python3 research/audit_demo_overlap.py: completed a private aggregate-only
+  ID/position/allele overlap check. Its output is ignored and is not scientific
+  validation, a genotype log, or proof of build/strand compatibility.

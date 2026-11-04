@@ -1,6 +1,6 @@
 # muse-loop (self-improvement evidence)
 
-Every CHECKLIST.md item lands here before it commits. Loop spec: `docs/muse-improv.md`.
+Every CHECKLIST.md item lands here before it commits. Loop spec: `docs/muse-improve.md`.
 
 - `qa-shots/<date>-<item>/` — 5 fixture PNGs (b1, b2, era, b6, b7) + SHA256SUMS. Failing shots kept, fixes get `-fixed` suffix.
 - `qa-logs/<date>-<item>.md` — scorecard per the loop template, checksums appended.

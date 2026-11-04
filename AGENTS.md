@@ -60,3 +60,7 @@ Legacy generic labels map to these canonical roles: controller/orchestrator → 
 Follow the phase gates in [ABOUT.md](docs/ABOUT.md). If the reference data or scientific validation is missing, report the raw branch as blocked/incomplete and ship only honestly labelled eligible paths. More credits are not scientific evidence. Deferred items include voiceover, G25 prediction, screenshot proxy simulation, extra terrain, optional SAM, hosted export and hosted deployment.
 
 This documentation pass ends after reconciliation, document indexing, ownership definitions and the dataset folder. Wait for the user's next task before starting the implementation plan.
+
+## Test log
+
+Append every test or validation check performed to the repository-root [log.txt](log.txt), including the command or method, result, date when known, relevant scope and any failure or skip. Preserve earlier entries; link to detailed QA artifacts when appropriate. Never record DNA calls, personal ancestry summaries, secrets or raw model payloads. Distinguish historical reports from checks actually rerun and never mark unperformed checks as passed.

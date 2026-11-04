@@ -5,7 +5,7 @@
   "required": ["version", "duration_s", "beats"],
   "properties": {
     "version": { "const": 1 },
-    "duration_s": { "type": "number", "minimum": 30, "maximum": 60 },
+    "duration_s": { "type": "number", "minimum": 90, "maximum": 150 },
     "beats": {
       "type": "array",
       "minItems": 7,

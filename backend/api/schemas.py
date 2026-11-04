@@ -47,7 +47,7 @@ class Beat(BaseModel):
 
 class Reel(BaseModel):
     version: Literal[1]
-    duration_s: float = Field(ge=30, le=60)
+    duration_s: float = Field(ge=90, le=150)
     beats: list[Beat] = Field(min_length=7, max_length=7)
 
 

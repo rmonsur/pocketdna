@@ -16,7 +16,7 @@ export const BeatSchema = z.object({
 
 export const ReelSchema = z.object({
   version: z.literal(1),
-  duration_s: z.number().min(30).max(60),
+  duration_s: z.number().min(90).max(150),
   beats: z.array(BeatSchema).length(7),
 });
 

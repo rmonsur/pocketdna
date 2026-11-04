@@ -1,0 +1,36 @@
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/900.css";
+@import "@fontsource/inter/400-italic.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-obsidian: #080706;
+  --surface-charcoal: #12110f;
+  --surface-translucent: rgba(24, 23, 21, 0.75);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --archival-amber: #eeb057;
+  --bio-lime: #c8f45b;
+  --text-primary: #ffffff;
+  --text-muted: #a3a3a3;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background-obsidian);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

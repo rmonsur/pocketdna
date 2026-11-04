@@ -28,7 +28,7 @@ export default function Welcome(): React.JSX.Element {
         Your DNA results have a story. Watch it.
       </Text>
       <Text className="mt-4 font-mono text-sm text-white/70">
-        A 30-second documentary of your origins, every claim cited.
+        A two-minute documentary of your origins, every claim cited.
       </Text>
       <View className="mt-10 gap-3">
         <Button label="Make your Reel" onPress={() => router.push("/upload")} variant="pill" />

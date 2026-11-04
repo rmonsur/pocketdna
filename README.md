@@ -81,7 +81,7 @@ Pipeline: gatekeeper (vendor, health-panel rejection) -> parse or engine -> cita
 
 ## Data rights
 
-- Builder's own DNA export: owned; used only in the demo video, never committed.
+- Builder's own DNA export: the builder requested it be eligible for Git tracking for the demo. Committing and pushing it publishes sensitive genetic data.
 - Sample raw file in the repo is synthetic (`backend/pipeline/fixtures/mini-genome.txt`).
 - Shared screenshots: sent directly by group members with permission, PII redacted. Permission records kept.
 - Reference: AADR (Reich Lab, Harvard Dataverse, DOI 10.7910/DVN/FFIDCW), v66.0. Mallick et al. 2024, Scientific Data.

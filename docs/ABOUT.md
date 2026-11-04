@@ -33,7 +33,7 @@ Fit Bronze Age, Medieval and Modern models independently where references suppor
 
 Live historical research is bounded and attached to specific claims. Reviewed, versioned evidence packs support outages and replay. A URL alone is not verification. Generated people are fictional inhabitants of a documented setting, never portraits of the viewer's ancestors or appearance predictions.
 
-Ancestry only: no health, traits, personality, ethnic essentialism, political framing or battle imagery. Reject health panels. Raw DNA, private screenshots and personal episode manifests stay out of Git and logs. Public demo inputs require redistribution permission; private permission to show a screenshot is insufficient.
+Ancestry only: no health, traits, personality, ethnic essentialism, political framing or battle imagery. Reject health panels. Raw DNA stays out of logs. The builder explicitly requested that their own demo DNA file be eligible for Git tracking; other private DNA, screenshots and personal episode manifests stay out of Git. Public demo inputs require redistribution permission; private permission to show a screenshot is insufficient.
 
 ## Five-to-six-hour implementation plan
 

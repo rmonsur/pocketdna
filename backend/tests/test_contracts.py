@@ -21,7 +21,7 @@ def test_shared_schemas_are_valid_json() -> None:
 def test_sample_reel_validates() -> None:
     reel = Reel.model_validate(json.loads((FIX / "sample-reel.json").read_text()))
     assert len(reel.beats) == 7
-    assert 30 <= reel.duration_s <= 60
+    assert 90 <= reel.duration_s <= 150
     for beat in reel.beats:
         assert beat.t_end > beat.t_start, beat.id
         assert len(beat.copy) <= 140, beat.id

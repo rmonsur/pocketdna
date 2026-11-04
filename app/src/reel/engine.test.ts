@@ -15,11 +15,11 @@ assert.equal(frameAt(reel, 0).beat.id, "b1");
 const expected: Array<[number, string]> = [
   [2, "b1"],
   [7, "b2"],
-  [12, "b3"],
-  [20, "b4"],
-  [30, "b5"],
-  [36, "b6"],
-  [40, "b7"],
+  [20, "b3"],
+  [50, "b4"],
+  [80, "b5"],
+  [100, "b6"],
+  [115, "b7"],
 ];
 for (const [t, id] of expected) {
   assert.equal(frameAt(reel, t).beat.id, id, `t=${t}`);
@@ -43,8 +43,8 @@ assert.ok(Math.abs(mid[1] - 50.07) < 0.05, `lat ${mid[1]}`);
 
 assert.equal(pathPointAt([], 0.5), null);
 assert.equal(frameAt(reel, 7).mapPoint, null);
-assert.ok(frameAt(reel, 12).mapPoint !== null);
-assert.ok(frameAt(reel, 10.1).sceneAlpha < 1);
+assert.ok(frameAt(reel, 20).mapPoint !== null);
+assert.ok(frameAt(reel, 6.1).sceneAlpha < 1);
 assert.equal(frameAt(reel, 15).sceneAlpha, 1);
 
 console.log("PASS engine beat/clamp/determinism/map");
