@@ -51,6 +51,28 @@ export async function extractPreview(file: File): Promise<ExtractedShares> {
   return unwrap(res, (d) => ExtractedSharesSchema.parse(d));
 }
 
+export interface RawEpisodeSummary {
+  basisId: string;
+  markerCount: number;
+  usableMarkers: number;
+  epochs: {
+    era: "bronze" | "middle" | "modern";
+    shares: { id: string; label: string; weight: number; low: number; high: number }[];
+    closest: { label: string; distance: number }[];
+  }[];
+  limitations: string[];
+}
+
+/** Derived summary only — the server rejects any genotype/coordinate fields. */
+export async function createRawEpisode(summary: RawEpisodeSummary): Promise<CreateJobResponse> {
+  const res = await fetch("/api/raw-episodes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(summary),
+  });
+  return unwrap(res, (d) => CreateJobResponseSchema.parse(d));
+}
+
 export async function createJob(file: File, corrected?: ExtractedShares): Promise<CreateJobResponse> {
   const form = new FormData();
   form.append("file", file);

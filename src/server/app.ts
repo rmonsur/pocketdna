@@ -8,11 +8,12 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
-import { JobStatusSchema } from "../contracts/index.ts";
+import { z } from "zod";
+import { EvidenceRecordSchema, JobStatusSchema } from "../contracts/index.ts";
 import { REPLAY } from "../contracts/fixtures.ts";
 import { KillSwitchEngaged, ModelCallError } from "../lib/muse/client.ts";
 import { createJobRecord, jobs, type Job } from "./jobs.ts";
-import { CorrectedSharesSchema, extractComposition, runScreenshotJob } from "./pipeline.ts";
+import { CorrectedSharesSchema, extractComposition, runRawEpisodeJob, runScreenshotJob } from "./pipeline.ts";
 
 export const app = new Hono();
 
@@ -150,6 +151,63 @@ app.post("/api/jobs", async (c) => {
   const jobId = randomUUID().slice(0, 12);
   const job = createJobRecord(jobId);
   void runScreenshotJob(job, Buffer.from(bytes).toString("base64"), mediaType, corrected).catch((failure: unknown) => {
+    failJob(job, failure);
+  });
+  return ok({ job_id: jobId, state: job.state });
+});
+
+/**
+ * Raw-episode creation from the browser's derived summary. Strict schema:
+ * genotypes, calls and personal coordinates are not accepted fields at all
+ * (STACK 105) — anything extra is a 400, never silently forwarded.
+ */
+const RawSummarySchema = z
+  .object({
+    basisId: z.string().min(1),
+    markerCount: z.number().int().positive(),
+    usableMarkers: z.number().int().nonnegative(),
+    epochs: z
+      .array(
+        z
+          .object({
+            era: z.enum(["bronze", "middle", "modern"]),
+            shares: z
+              .array(
+                z
+                  .object({
+                    id: z.string(),
+                    label: z.string(),
+                    weight: z.number().min(0).max(1),
+                    low: z.number().min(0).max(1),
+                    high: z.number().min(0).max(1),
+                  })
+                  .strict(),
+              )
+              .max(24),
+            closest: z.array(z.object({ label: z.string(), distance: z.number().nonnegative() }).strict()).max(6),
+          })
+          .strict(),
+      )
+      .min(1)
+      .max(3),
+    limitations: z.array(z.string()).max(12),
+  })
+  .strict();
+
+app.post("/api/raw-episodes", async (c) => {
+  if (rateLimited()) return err("R5", "Too many jobs this minute; paid-call protection. Try again shortly.", 429);
+  let body: unknown;
+  try {
+    body = await c.req.json();
+  } catch {
+    return err("R2", "JSON body required");
+  }
+  const parsed = RawSummarySchema.safeParse(body);
+  if (!parsed.success) return err("R2", "derived summary failed validation");
+  const evidence = EvidenceRecordSchema.parse({ kind: "raw", ...parsed.data });
+  const jobId = randomUUID().slice(0, 12);
+  const job = createJobRecord(jobId);
+  void runRawEpisodeJob(job, evidence).catch((failure: unknown) => {
     failJob(job, failure);
   });
   return ok({ job_id: jobId, state: job.state });

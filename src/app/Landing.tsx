@@ -10,7 +10,7 @@ import { RejectionNotice, type NoticeKind } from "../components/RejectionNotice"
 import { UploadCard } from "../components/UploadCard";
 import { REPLAY } from "../contracts/fixtures";
 import type { ProgressEvent, ViewingBundle } from "../contracts/index";
-import { ApiError, createJob, extractPreview, getJob, subscribeJob, type ExtractedShares } from "../lib/api";
+import { ApiError, createJob, createRawEpisode, extractPreview, getJob, subscribeJob, type ExtractedShares } from "../lib/api";
 import { runRawAnalysis, type RawRunResult } from "../lib/rawAnalysis";
 import { CorrectionTable } from "../components/CorrectionTable";
 import { RawResult } from "../components/RawResult";
@@ -93,27 +93,51 @@ export function Landing(): React.JSX.Element {
     }
   }
 
+  function watchJob(jobId: string): void {
+    setPhase({ kind: "processing", jobId, events: [] });
+    streamRef.current?.close();
+    streamRef.current = subscribeJob(
+      jobId,
+      (event) =>
+        setPhase((p) => (p.kind === "processing" && p.jobId === jobId ? { ...p, events: [...p.events, event] } : p)),
+      () => void finish(jobId),
+      () => {
+        /* SSE dropped: fall back to a single status poll. */
+        void finish(jobId);
+      },
+    );
+  }
+
   async function startJob(file: File, corrected?: ExtractedShares): Promise<void> {
     try {
       const created = await createJob(file, corrected);
-      setPhase({ kind: "processing", jobId: created.job_id, events: [] });
-      streamRef.current?.close();
-      streamRef.current = subscribeJob(
-        created.job_id,
-        (event) =>
-          setPhase((p) => (p.kind === "processing" && p.jobId === created.job_id ? { ...p, events: [...p.events, event] } : p)),
-        (state) => {
-          if (state === "done") void finish(created.job_id);
-          else void finish(created.job_id);
-        },
-        () => {
-          /* SSE dropped: fall back to a single status poll. */
-          void finish(created.job_id);
-        },
-      );
+      watchJob(created.job_id);
     } catch (err) {
       const notice = (err instanceof ApiError ? err.code : "R4") as NoticeKind;
       setPhase({ kind: "error", notice, message: err instanceof ApiError ? err.message : "upload failed" });
+    }
+  }
+
+  async function generateEpisode(result: RawRunResult): Promise<void> {
+    try {
+      const created = await createRawEpisode({
+        basisId: result.basisId,
+        markerCount: result.markers,
+        usableMarkers: result.usableMarkers,
+        epochs: result.eras.map((era) => ({
+          era: era.era as "bronze" | "middle" | "modern",
+          shares: era.shares
+            .filter((s) => s.weight > 0)
+            .slice(0, 12)
+            .map((s) => ({ id: s.source_id, label: s.source_id, weight: s.weight, low: s.low, high: s.high })),
+          closest: era.closest.map((c) => ({ label: c.source_id, distance: c.distance })),
+        })),
+        limitations: result.limitations,
+      });
+      watchJob(created.job_id);
+    } catch (err) {
+      const notice = (err instanceof ApiError ? err.code : "R4") as NoticeKind;
+      setPhase({ kind: "error", notice, message: err instanceof ApiError ? err.message : "episode creation failed" });
     }
   }
 
@@ -143,7 +167,9 @@ export function Landing(): React.JSX.Element {
               {phase.kind === "raw-processing" && (
                 <p className="text-sm text-text-muted" role="status">{phase.step}…</p>
               )}
-              {phase.kind === "raw-result" && <RawResult result={phase.result} />}
+              {phase.kind === "raw-result" && (
+                <RawResult result={phase.result} onGenerateEpisode={() => void generateEpisode(phase.result)} />
+              )}
               {phase.kind === "error" && (
                 <RejectionNotice kind={phase.notice} message={phase.message} onRetry={() => setPhase({ kind: "idle" })} onReplay={watchReplay} />
               )}

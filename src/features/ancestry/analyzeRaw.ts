@@ -32,6 +32,7 @@ export interface EraFitResult {
 
 export interface RawAnalysisResult {
   basisId: string;
+  markers: number;
   coordinates: number[];
   usableMarkers: number;
   callRate: number;
@@ -139,6 +140,7 @@ export function analyzeRaw(
 
   return {
     basisId: bundle.basisId,
+    markers: bundle.markers,
     coordinates: [...coordinates],
     usableMarkers: obsRows.length,
     callRate: obsRows.length / bundle.markers,

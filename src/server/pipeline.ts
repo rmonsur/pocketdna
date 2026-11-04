@@ -284,6 +284,20 @@ export async function extractComposition(b64: string, mediaType = "image/png"): 
   return { kind: "ok", vendor: parsed.data.vendor, shares: parsed.data.shares, omitted: parsed.data.omitted };
 }
 
+/**
+ * Raw-episode job: the browser already computed coordinates and era fits.
+ * Only the derived summary (as an EvidenceRecord) reaches this server —
+ * no genotypes, no personal coordinates (STACK 105). Interpretation,
+ * direction and both audits are shared with the screenshot path.
+ */
+export async function runRawEpisodeJob(job: Job, evidence: EvidenceRecord): Promise<void> {
+  job.state = "running";
+  job.evidence = evidence;
+  pushEvent(job, 1, "Analysed on your device", "browser-worker", "done", "PCA-25 projection (on-device)");
+  pushEvent(job, 2, "Fitting era sources", "browser-worker", "done", "era mixtures with bootstrap ranges");
+  await continueJob(job, loadIndex(), 0);
+}
+
 export async function runScreenshotJob(
   job: Job,
   b64: string,

@@ -8,7 +8,13 @@ const ERA_TITLE: Record<string, string> = {
   modern: "Modern reference populations",
 };
 
-export function RawResult({ result }: { result: RawRunResult }): React.JSX.Element {
+export function RawResult({
+  result,
+  onGenerateEpisode,
+}: {
+  result: RawRunResult;
+  onGenerateEpisode: () => void;
+}): React.JSX.Element {
   return (
     <div className="flex w-full max-w-[560px] flex-col gap-5 rounded-2xl bg-surface-translucent p-6 shadow-xl backdrop-blur-xl lg:p-8">
       <div>
@@ -44,6 +50,17 @@ export function RawResult({ result }: { result: RawRunResult }): React.JSX.Eleme
           </p>
         </section>
       ))}
+
+      <button
+        type="button"
+        onClick={onGenerateEpisode}
+        className="inline-flex min-h-12 items-center justify-center rounded-xl bg-bio-lime px-6 text-base font-black tracking-wide text-surface-container-lowest"
+      >
+        Generate your episode
+      </button>
+      <p className="-mt-2 text-center text-[12px] text-text-muted">
+        Sends only this derived summary (era fits and counts) to the film agents — never your genotypes or coordinates.
+      </p>
 
       <section>
         <h3 className="pb-1 text-[11px] font-bold uppercase tracking-wider text-archival-amber">Limitations</h3>
