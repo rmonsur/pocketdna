@@ -34,29 +34,37 @@ def _zip(files: dict[str, bytes]) -> bytes:
 
 
 def test_png_routes_tier1() -> None:
-    assert route_upload("shot.png", PNG)[:2] == ("tier1", "screenshot")
+    r = route_upload("shot.png", PNG)
+    assert (r.tier, r.detail) == ("tier1", "screenshot")
 
 
 def test_unknown_bytes_reject_r2() -> None:
-    assert route_upload("blob.bin", b"not-a-file" * 10)[:2] == ("rejection", "R2")
+    r = route_upload("blob.bin", b"not-a-file" * 10)
+    assert (r.tier, r.detail) == ("rejection", "R2")
 
 
 def test_23andme_txt_routes_tier2() -> None:
-    assert route_upload("genome.txt", TTAM.encode())[:2] == ("tier2", "23andme")
+    r = route_upload("genome.txt", TTAM.encode())
+    assert (r.tier, r.detail) == ("tier2", "23andme")
+    assert r.text == TTAM
 
 
 def test_ancestry_txt_routes_tier2() -> None:
-    assert route_upload("dna.txt", ANCESTRY.encode())[:2] == ("tier2", "ancestry")
+    r = route_upload("dna.txt", ANCESTRY.encode())
+    assert (r.tier, r.detail) == ("tier2", "ancestry")
 
 
 def test_zip_inner_file_sniffed() -> None:
     blob = _zip({"genome_test.txt": TTAM.encode()})
-    assert route_upload("export.zip", blob)[:2] == ("tier2", "23andme")
+    r = route_upload("export.zip", blob)
+    assert (r.tier, r.detail) == ("tier2", "23andme")
+    assert r.text == TTAM
 
 
 def test_zip_bomb_guarded() -> None:
     blob = _zip({f"f{i}.txt": b"x" for i in range(20)})
-    assert route_upload("export.zip", blob)[:2] == ("rejection", "R3")
+    r = route_upload("export.zip", blob)
+    assert (r.tier, r.detail) == ("rejection", "R3")
 
 
 def test_privacy_assertion_blocks_hosted() -> None:
@@ -67,6 +75,18 @@ def test_privacy_assertion_blocks_hosted() -> None:
     except AssertionError:
         return
     raise SystemExit("privacy assertion did not fire")
+
+
+def test_call_open_refuses_hosted_provider(monkeypatch) -> None:
+    """Fix 4: the invariant is enforced on the request path, not only in tests."""
+    import pytest
+
+    monkeypatch.setenv("OPEN_WEIGHT_PROVIDER", "hosted")
+    monkeypatch.setenv("OPENWEIGHT_BASE_URL", "https://example.invalid/v1")
+    from agents.openweights import call_open
+
+    with pytest.raises(AssertionError, match="privacy invariant"):
+        call_open(agent="a2", tier="tier2", messages=[], validate=lambda d: d)
 
 
 def test_store_roundtrip() -> None:

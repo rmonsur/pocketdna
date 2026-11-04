@@ -6,6 +6,7 @@ import json
 import uuid
 
 from fastapi import FastAPI, File, UploadFile
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import JSONResponse
 
 from agents.openweights import OpenWeightsDown
@@ -25,18 +26,19 @@ async def create(file: UploadFile = File(...)) -> JSONResponse:
     except Exception:
         return err("R2", "could not read upload")
     name = file.filename or ""
-    tier, detail, message = route_upload(name, blob)
+    routed = await run_in_threadpool(route_upload, name, blob)
     job_id = uuid.uuid4().hex[:12]
-    if tier == "rejection":
-        create_job(job_id, "tier1", "rejected", message)
-        set_state(job_id, "rejected", message, detail)
+    if routed.tier == "rejection":
+        create_job(job_id, "tier1", "rejected", routed.message)
+        set_state(job_id, "rejected", routed.message, routed.detail)
         return ok({"job_id": job_id, "tier": "tier1", "state": "rejected",
-                   "rejection": detail, "message": message})
-    create_job(job_id, tier, "queued")
+                   "rejection": routed.detail, "message": routed.message})
+    create_job(job_id, routed.tier, "queued")
     try:
-        if tier == "tier2":
-            return run_tier2(job_id, detail, name, blob)
-        return run_tier1(job_id, blob)
+        # Pipelines are synchronous (blocking httpx + NumPy); keep the event loop free for polls.
+        if routed.tier == "tier2":
+            return await run_in_threadpool(run_tier2, job_id, routed.detail, routed.text, blob)
+        return await run_in_threadpool(run_tier1, job_id, blob)
     except PanelMissing as exc:
         set_state(job_id, "failed", f"R4: {exc}", "R4")
         return err("R4", str(exc), 500)

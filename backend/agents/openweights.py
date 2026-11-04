@@ -13,6 +13,7 @@ from typing import Any, Callable
 
 import httpx
 
+from api.router import assert_open_weights_only
 from muse.client import cache_get, cache_key, cache_put, killed, log_cost
 
 
@@ -59,6 +60,7 @@ def call_open(
     """POST an OpenAI-compatible chat call. Cached; validated twice like hosted."""
     if tier not in ("tier2", "build"):
         raise AssertionError(f"open-weights client is for tier2/build, got {tier}")
+    assert_open_weights_only(tier, provider())  # privacy invariant, enforced on every call
     if killed():
         raise OpenWeightsDown("KILL_PAID_CALLS is set; refusing open-weights call")
     import json as _json

@@ -95,6 +95,14 @@ def analyze(
         raise ValueError(f"only {len(rows)} usable markers; need >= 50")
     coords = project(dosage, rows, panel)
     rng = np.random.default_rng(seed)
+
+    # Resample markers once; the projection is epoch-independent, so the three
+    # epochs share the same resamples and their intervals are directly comparable.
+    boot_coords = np.zeros((n_boot, len(coords)))
+    for b in range(n_boot):
+        pick = rng.integers(0, len(rows), len(rows))
+        boot_coords[b] = project(dosage[pick], rows[pick], panel)
+
     out: dict = {
         "panel_id": str(panel["panel_id"]),
         "n_markers_total": int(len(calls)),
@@ -107,11 +115,7 @@ def analyze(
         ids = panel[f"src_{epoch}_ids"].tolist()
         labels = panel[f"src_{epoch}_labels"]
         weights = fit_weights(coords, cents)
-        boots = np.zeros((n_boot, len(weights)))
-        for b in range(n_boot):
-            pick = rng.integers(0, len(rows), len(rows))
-            boot_coords = project(dosage[pick], rows[pick], panel)
-            boots[b] = fit_weights(boot_coords, cents)
+        boots = np.stack([fit_weights(bc, cents) for bc in boot_coords])
         shares = [
             {
                 "id": str(ids[i]),

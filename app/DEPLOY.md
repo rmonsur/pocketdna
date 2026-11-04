@@ -1,6 +1,7 @@
 # PocketDNA deploy runbook
 
-Two shippables. Web first (primary judge surface), TestFlight second (demo-video hero).
+Pivot Oct 31: judges run the repo locally (see README). Hosting is optional polish.
+TestFlight is KILLED; section B is kept only as history and must not be executed.
 
 ## A. Web + custom domain (~30 min + DNS wait, ~$12)
 
@@ -14,7 +15,7 @@ Two shippables. Web first (primary judge surface), TestFlight second (demo-video
    per USER_FLOW 1b once drop lands (pickers work meanwhile).
 6. Set `EXPO_PUBLIC_API_URL` in the host env to the Modal API URL (see backend deploy).
 
-## B. TestFlight via EAS (~1 hr + 1-2 day review; submit by Nov 2)
+## B. KILLED (Oct 31): TestFlight via EAS
 
 Prereqs: Apple Developer Program ($99/yr), an App Store Connect app record,
 `npm i -g eas-cli`, `eas login`.

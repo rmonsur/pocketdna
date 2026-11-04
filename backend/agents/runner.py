@@ -7,7 +7,6 @@ Tier 2 models are open weights only (parked until the engine hold lifts).
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +14,7 @@ from api.schemas import (
     AuditOut,
     CitationResult,
     GatekeeperOut,
+    ParseError,
     ParseOut,
     Reel,
     ScenePicks,
@@ -44,10 +44,16 @@ def _validate_a5(raw: dict[str, Any]) -> dict[str, Any]:
     return AuditOut.model_validate(raw).model_dump()
 
 
+def _validate_a1(raw: dict[str, Any]) -> dict[str, Any]:
+    if "error" in raw:
+        return ParseError.model_validate(raw).model_dump()
+    return ParseOut.model_validate(raw).model_dump()
+
+
 AGENT_DEFS: dict[str, tuple[str, str, Any]] = {
     # name: (prompt_file, effort, validator)
     "a0": ("a0", "low", lambda d: GatekeeperOut.model_validate(d).model_dump()),
-    "a1": ("a1", "medium", lambda d: ParseOut.model_validate(d).model_dump()),
+    "a1": ("a1", "medium", _validate_a1),
     "a2": ("a2", "high", lambda d: CitationResult.model_validate(d).model_dump()),
     "a3": ("a3", "high", lambda d: Reel.model_validate(d).model_dump()),
     "a4": ("a4", "low", lambda d: ScenePicks.model_validate(d).model_dump()),
@@ -83,6 +89,3 @@ def run_agent(
         run_spent_usd=run_spent_usd,
     )
 
-
-def open_weight_provider() -> str:
-    return os.environ.get("OPEN_WEIGHT_PROVIDER", "modal")

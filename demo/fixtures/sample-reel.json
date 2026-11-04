@@ -9,9 +9,20 @@
       "t_end": 5,
       "copy": "Your oldest signal is 5,000 years old.",
       "explainer": "Part of your ancestry is consistent with Bronze Age steppe pastoralists who moved west into Europe.",
-      "citation_ids": ["c-steppe-haak2015"],
+      "citation_ids": [
+        "c-steppe-haak2015"
+      ],
       "scene_id": "scene-bronze-steppe-01",
-      "map_path": [[38.0, 48.0], [30.0, 52.0]]
+      "map_path": [
+        [
+          38.0,
+          48.0
+        ],
+        [
+          30.0,
+          52.0
+        ]
+      ]
     },
     {
       "id": "b2",
@@ -32,9 +43,24 @@
       "t_end": 19,
       "copy": "Bronze Age: steppe ancestry moves west.",
       "explainer": "Pastoralists from the Pontic steppe migrated into Europe, mixing with local farming communities.",
-      "citation_ids": ["c-steppe-haak2015"],
+      "citation_ids": [
+        "c-steppe-haak2015"
+      ],
       "scene_id": "scene-bronze-steppe-01",
-      "map_path": [[38.0, 48.0], [20.0, 50.0], [0.0, 51.5]]
+      "map_path": [
+        [
+          38.0,
+          48.0
+        ],
+        [
+          20.0,
+          50.0
+        ],
+        [
+          0.0,
+          51.5
+        ]
+      ]
     },
     {
       "id": "b4",
@@ -42,11 +68,22 @@
       "epoch": "middle",
       "t_start": 19,
       "t_end": 28,
-      "copy": "Middle Ages: your line passes through market towns.",
-      "explainer": "By medieval times your ancestors lived among farming and trading communities in western Europe.",
-      "citation_ids": ["c-viking-margaryan2020"],
+      "copy": "Middle Ages: Norse ships carry your line across the sea.",
+      "explainer": "Viking Age Scandinavians sailed, traded, and settled far from home, spreading Scandinavian ancestry across Europe.",
+      "citation_ids": [
+        "c-viking-margaryan2020"
+      ],
       "scene_id": "scene-middle-market-01",
-      "map_path": [[0.0, 51.5], [2.3, 48.8]]
+      "map_path": [
+        [
+          10.7,
+          59.9
+        ],
+        [
+          -1.5,
+          53.8
+        ]
+      ]
     },
     {
       "id": "b5",
@@ -58,7 +95,16 @@
       "explainer": "Recent centuries bring every branch of the story together in the present day.",
       "citation_ids": [],
       "scene_id": "scene-modern-harbor-01",
-      "map_path": [[2.3, 48.8], [-74.0, 40.7]]
+      "map_path": [
+        [
+          2.3,
+          48.8
+        ],
+        [
+          -74.0,
+          40.7
+        ]
+      ]
     },
     {
       "id": "b6",
@@ -69,7 +115,20 @@
       "explainer": "",
       "citation_ids": [],
       "scene_id": "scene-modern-harbor-01",
-      "map_path": [[38.0, 48.0], [2.3, 48.8], [-74.0, 40.7]]
+      "map_path": [
+        [
+          38.0,
+          48.0
+        ],
+        [
+          2.3,
+          48.8
+        ],
+        [
+          -74.0,
+          40.7
+        ]
+      ]
     },
     {
       "id": "b7",

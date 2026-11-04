@@ -1,37 +1,92 @@
 # PocketDNA
 
-Finding Your Roots for everyone: drop your DNA test, get a 30-60s micro documentary of your origins.
+Finding Your Roots for everyone: drop your DNA test, get a 30-60 second cited micro documentary of your origins.
 
-Meta Global AI Developer Hackathon, Oct 26 - Nov 4, 2026. Indie track. All code in this repo was built during the event window. Prior concept (DNAless) informed the idea; no old code, prompts, or assets are reused.
+Meta Global AI Developer Hackathon, Oct 26 - Nov 4, 2026. Indie track. All code in this repo was built during the event window. A prior concept (DNAless) informed the idea; no old code, prompts, or assets are reused.
+
+## Run it (judges start here)
+
+Requirements: Python 3.12+, Node 20+, Chrome. Two terminals. Runs fully on your machine; no hosted deployment needed.
+
+```sh
+# 1. Backend (FastAPI + NumPy engine)
+cd backend
+pip install -r requirements.txt
+cp .env.example .env            # add your Meta Model API key (see below); never commit .env
+python3 -m uvicorn api.main:app --port 8000
+
+# 2. Web app (Expo + React Native Web), in a second terminal
+cd app
+npm install
+npx expo start --web            # opens http://localhost:8081
+```
+
+Then in the browser:
+
+1. **Watch a sample Reel**: works with no key at all (fixture reel, every claim cited).
+2. **Raw DNA file**: upload `backend/pipeline/fixtures/mini-genome.txt` (synthetic 23andMe-format
+   export). The deterministic engine runs locally; interpretation runs on Meta open weights (see keys).
+3. **Screenshot**: upload a 23andMe or AncestryDNA ancestry-composition screenshot. Needs a Meta key.
+
+### Keys (`backend/.env`, copied from `backend/.env.example`)
+
+| Variable | Needed for | Where to get it |
+|---|---|---|
+| `META_API_KEY` | Screenshot tier (Muse Spark vision + agents) | dev.meta.ai |
+| `OPENWEIGHT_BASE_URL` | Raw-file tier (Muse Glimmer, open weights) | The project's Modal endpoint URL (in `.env.example` at submission) or your own `modal deploy backend/glimmer/serve.py` |
+| `BASETEN_API_KEY` + `OPEN_WEIGHT_PROVIDER=baseten` | Raw-file tier fallback via Muse Spark Open on Baseten | baseten.co |
+
+Never commit a real key. `backend/.env`, the dev cache, and the cost log are gitignored.
+`KILL_PAID_CALLS=1` refuses every paid call (the app then degrades to typed errors, never a hang).
+
+### Verify
+
+```sh
+cd backend && python3 -m pytest -q      # engine, router, privacy invariant, orchestration (offline)
+cd app && npx tsc --noEmit              # strict TypeScript
+```
 
 ## How it works
 
 Two input tiers, one hero output (9:16 reel + evidence layer):
 
-- Tier 1: ancestry screenshot -> Muse Spark vision parses vendor percentages.
-- Tier 2: raw 23andMe/AncestryDNA file -> deterministic NumPy engine (PCA projection onto precomputed AADR eigenspace + 3-epoch constrained NNLS). ALL interpretation on self-hosted open weights (Muse Glimmer / Muse Spark Open). Raw DNA never touches a hosted API.
+- **Tier 1, screenshot**: Muse Spark vision parses vendor percentages, then Spark agents cite, direct, pick scenes, and audit.
+- **Tier 2, raw 23andMe or AncestryDNA file**: deterministic NumPy engine (least-squares projection onto a precomputed AADR eigenspace, then 3-epoch constrained NNLS with bootstrap intervals). ALL interpretation runs on self-hosted Meta open weights (Muse Glimmer on Modal, Muse Spark Open on Baseten as fallback). Raw DNA never touches a hosted API; the router asserts this on every call and a test proves it.
 
-Scientific honesty rule: the LLM never computes ancestry. Math is deterministic population genetics (validated against EIGENSOFT smartpca); Muse does interpretation, narrative, visuals, cited grounding.
+Scientific honesty rule: the LLM never computes ancestry. The math is deterministic population genetics (validated against EIGENSOFT smartpca); Muse does interpretation, narrative, visuals, and cited grounding.
+
+Pipeline: gatekeeper (vendor, health-panel rejection) -> parse or engine -> citation binding against a builder-reviewed Reich Lab index -> reel direction (7 beats, 30-60 s) -> scene selection -> compliance audit (no reel renders without a pass) -> t-driven reel engine (every frame a pure function of time, so MP4 export is exact).
 
 ## Meta models used
 
-Spark (Tier 1 parse + direction + fixture visual QA), Wonder (hardest build-time passes), Image (scene library), SAM 3.1 (parallax masks), Glimmer + Spark Open (all Tier 2 reasoning), Voice Transcribe (stretch), Muse Code (this codebase).
+| Model | Role |
+|---|---|
+| Muse Spark 1.3 | Tier 1 vision parsing, citation binding, reel direction, scene scoring, compliance audit, fixture visual QA |
+| Muse Glimmer (open weights, Modal GPU) | Every agent in the raw-file tier |
+| Muse Spark Open (Baseten) | One-line fallback for the open-weights path |
+| Muse Image | Pregenerated 9:16 historical scene library |
+| SAM 3.1 | 2.5D parallax masks over the scene library |
+| Muse Wonder | Hardest build-time passes (citation index) |
+| Muse Code | Wrote this codebase, including the bioinformatics engine |
 
-## Quickstart
+## Screenshots
 
-```sh
-# backend (Python 3.12, Modal)
-pip install -r backend/requirements.txt
-cp backend/.env.example backend/.env  # add keys; never commit
-modal deploy backend/modal_app.py
-
-# app (Expo, TypeScript strict)
-cd app && npm install && npx expo start
-```
+(added before submission: welcome, upload, processing log, reel, evidence sheet, library)
 
 ## Data rights
 
-- Builder's own DNA export: owned.
+- Builder's own DNA export: owned; used only in the demo video, never committed.
+- Sample raw file in the repo is synthetic (`backend/pipeline/fixtures/mini-genome.txt`).
 - Shared screenshots: sent directly by group members with permission, PII redacted. Permission records kept.
-- Reference: AADR (Reich Lab, Harvard Dataverse, DOI 10.7910/DVN/FFIDCW). Version recorded at build.
+- Reference: AADR (Reich Lab, Harvard Dataverse, DOI 10.7910/DVN/FFIDCW), v66.0. Mallick et al. 2024, Scientific Data.
 - Reel clock pattern adapted from MengTo Skills html-reel (MIT, attributed).
+
+## Repo layout
+
+```
+app/        Expo + React Native Web (TypeScript strict). Web is the only surface.
+backend/    FastAPI api/, agents/, deterministic pipeline/, muse/ client, glimmer/ Modal GPU server
+shared/     JSON schemas shared app <-> backend
+demo/       Fixtures (sample reel, sample parse, gatekeeper rejection)
+docs/       Planning docs; start with PIVOT-2026-10-31.md
+```

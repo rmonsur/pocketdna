@@ -83,6 +83,10 @@ class ParseOut(BaseModel):
     omitted: list[str] = []
 
 
+class ParseError(BaseModel):
+    error: Literal["R1", "R2"]
+
+
 class ScenePick(BaseModel):
     beat_id: str
     scene_id: str | None = None

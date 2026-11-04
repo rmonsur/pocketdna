@@ -70,6 +70,36 @@ def test_tier1_happy_path() -> None:
     assert len(body["data"]["reel"]["beats"]) == 7
 
 
+def test_job_status_with_events_is_200() -> None:
+    """Fix 1: events carry job_id so JobStatus validates (processing screen polls this)."""
+    if not HAS_APP:
+        return
+    from fastapi.testclient import TestClient
+
+    store.create_job("gj", "tier1", "running")
+    store.add_event("gj", 1, "Reading your results", "muse-spark-1.3", "running")
+    res = TestClient(app).get("/v1/jobs/gj")
+    assert res.status_code == 200, res.text
+    body = res.json()
+    assert body["ok"] is True
+    assert body["data"]["events"][0]["job_id"] == "gj"
+
+
+def test_tier1_a1_error_branch_rejects_r2() -> None:
+    """Fix 3: A1 may answer {"error": "R2"}; it must surface as a rejected job, not R4."""
+    from agents.runner import AGENT_DEFS
+
+    validate = AGENT_DEFS["a1"][2]
+    assert validate({"error": "R2"}) == {"error": "R2"}
+    script = _script()
+    script["a1"] = {"error": "R2"}
+    create_job("t1e", "tier1", "queued")
+    with patch("api.jobs.run_agent", side_effect=lambda name, **kw: _mock(script[name])):
+        body = json.loads(run_tier1("t1e", b"fake-image-bytes").body)
+    assert body["data"]["state"] == "rejected" and body["data"]["rejection"] == "R2"
+    assert "composition screen" in body["data"]["message"]
+
+
 def test_tier1_r1_rejection() -> None:
     script = _script()
     script["a0"] = {"vendor": "23andme", "report_type": "health",
@@ -87,7 +117,7 @@ def test_tier2_mini_panel_end_to_end() -> None:
         blob = (PIPEFIX / "mini-genome.txt").read_bytes()
         create_job("t2", "tier2", "queued")
         with patch("api.jobs.run_agent", side_effect=lambda name, **kw: _mock(script[name])):
-            body = json.loads(run_tier2("t2", "23andme", "mini-genome.txt", blob).body)
+            body = json.loads(run_tier2("t2", "23andme", blob.decode(), blob).body)
         assert body["ok"] and body["data"]["state"] == "done", body
         job = store.get_job("t2")
         assert job is not None
@@ -102,7 +132,7 @@ def test_tier2_no_panel_honest_error() -> None:
     try:
         create_job("t2n", "tier2", "queued")
         try:
-            run_tier2("t2n", "23andme", "g.txt", b"rs1\t1\t100\tAA\n")
+            run_tier2("t2n", "23andme", "rs1\t1\t100\tAA\n", b"rs1\t1\t100\tAA\n")
         except PanelMissing:
             return
         raise SystemExit("expected PanelMissing")

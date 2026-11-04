@@ -1,7 +1,9 @@
 /** Typed HTTP client for the PocketDNA backend. Frontend never touches model APIs directly. */
+import { Platform } from "react-native";
 import { JobStatusSchema, ReelSchema, type JobStatusDto, type ReelDto } from "./schemas";
 
 const BASE = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:8000";
+const UPLOAD_FIELD = "file";
 
 export class ApiError extends Error {
   code: string;
@@ -27,9 +29,20 @@ export interface PickedFile {
   mimeType: string;
 }
 
-export async function createJob(file: PickedFile): Promise<JobStatusDto> {
+/** Browsers stringify RN's {uri,name,type} shape; fetch the picker URI into a Blob on web. */
+async function buildUploadForm(file: PickedFile): Promise<FormData> {
   const form = new FormData();
-  form.append("file", { uri: file.uri, name: file.name, type: file.mimeType } as unknown as Blob);
+  if (Platform.OS === "web") {
+    const blob = await (await fetch(file.uri)).blob();
+    form.append(UPLOAD_FIELD, blob, file.name);
+    return form;
+  }
+  form.append(UPLOAD_FIELD, { uri: file.uri, name: file.name, type: file.mimeType } as unknown as Blob);
+  return form;
+}
+
+export async function createJob(file: PickedFile): Promise<JobStatusDto> {
+  const form = await buildUploadForm(file);
   const res = await fetch(`${BASE}/v1/jobs`, { method: "POST", body: form });
   return envelope(res, (d) => JobStatusSchema.parse(d));
 }

@@ -7,7 +7,13 @@ const path = require("path");
 const FILE = path.join(__dirname, "..", "dist", "index.html");
 const TITLE = "PocketDNA — Your DNA results have a story. Watch it.";
 const DESCRIPTION = "Drop your DNA test, get a 30-second cited documentary of your origins.";
-const IMAGE = "/og-image.png";
+// Open Graph needs an absolute og:image for link previews. Set EXPO_PUBLIC_SITE_URL when
+// hosting; unset (judges running locally) keeps a relative path and warns.
+const SITE_URL = (process.env.EXPO_PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
+if (!SITE_URL) {
+  console.warn("EXPO_PUBLIC_SITE_URL unset: og:image stays relative (fine for local runs)");
+}
+const IMAGE = `${SITE_URL}/og-image.png`;
 
 const TAGS = [
   `<meta property="og:title" content="${TITLE}">`,

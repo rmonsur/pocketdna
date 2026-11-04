@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import io
 import zipfile
+from dataclasses import dataclass
 
 MAX_IMAGE_BYTES = 10 * 1024 * 1024
 MAX_RAW_BYTES = 50 * 1024 * 1024
@@ -36,16 +37,6 @@ def unzip_vendor_file(blob: bytes) -> tuple[str | None, str]:
         return None, "R2"
 
 
-def extract_raw_text(filename: str, blob: bytes) -> str:
-    """Inner vendor text for an already-routed raw upload. Raises ValueError if unreadable."""
-    if blob.startswith(ZIP_MAGIC) or filename.lower().endswith(".zip"):
-        text, errmsg = unzip_vendor_file(blob)
-        if errmsg or text is None:
-            raise ValueError("unreadable archive")
-        return text
-    return blob.decode("utf-8", errors="replace")
-
-
 def detect_raw_vendor(text: str) -> str:
     """Deterministic vendor detect from export header. Returns vendor id or ''."""
     head = "\n".join(text.splitlines()[:25]).lower()
@@ -67,38 +58,46 @@ def detect_raw_vendor(text: str) -> str:
     return ""
 
 
-def route_upload(filename: str, blob: bytes) -> tuple[str, str, str]:
-    """Return (tier, detail, error). tier in {tier1, tier2, rejection}.
+@dataclass(frozen=True)
+class RoutedUpload:
+    tier: str  # "tier1" | "tier2" | "rejection"
+    detail: str  # vendor id on success, rejection id (R1-R3) on rejection
+    message: str  # human-readable reason on rejection, else ""
+    text: str = ""  # decoded raw export text for tier2 (unzipped once, here), else ""
 
-    detail is vendor id on success, rejection id (R1-R3) on rejection.
+
+def route_upload(filename: str, blob: bytes) -> RoutedUpload:
+    """Sniff content, route to a tier, decode raw text exactly once.
+
     R1 (health panel) is decided by A0 vision, not here.
     """
     lower = filename.lower()
     if sniff_image(blob):
         if len(blob) > MAX_IMAGE_BYTES:
-            return "rejection", "R2", "image over 10MB"
-        return "tier1", "screenshot", ""
-    text: str | None = None
+            return RoutedUpload("rejection", "R2", "image over 10MB")
+        return RoutedUpload("tier1", "screenshot", "")
     if blob.startswith(ZIP_MAGIC) or lower.endswith(".zip"):
         if len(blob) > MAX_RAW_BYTES:
-            return "rejection", "R3", "archive over 50MB"
+            return RoutedUpload("rejection", "R3", "archive over 50MB")
         text, err = unzip_vendor_file(blob)
-        if err:
-            return "rejection", err, "unreadable archive"
-        assert text is not None
+        if err or text is None:
+            return RoutedUpload("rejection", err or "R2", "unreadable archive")
     elif lower.endswith(".txt"):
         if len(blob) > MAX_RAW_BYTES:
-            return "rejection", "R3", "file over 50MB"
+            return RoutedUpload("rejection", "R3", "file over 50MB")
         text = blob.decode("utf-8", errors="replace")
     else:
-        return "rejection", "R2", "unsupported file type"
+        return RoutedUpload("rejection", "R2", "unsupported file type")
     vendor = detect_raw_vendor(text)
     if not vendor:
-        return "rejection", "R3", "not a 23andMe or AncestryDNA export"
-    return "tier2", vendor, ""
+        return RoutedUpload("rejection", "R3", "not a 23andMe or AncestryDNA export")
+    return RoutedUpload("tier2", vendor, "", text)
+
+
+OPEN_WEIGHT_PROVIDERS = ("modal", "baseten")
 
 
 def assert_open_weights_only(tier: str, provider: str) -> None:
-    """Block hosted-API providers for raw-file jobs. Tested; never silent."""
-    if tier == "tier2" and provider not in ("modal", "baseten"):
+    """Block hosted-API providers for raw-file jobs. Enforced in agents.openweights.call_open."""
+    if tier == "tier2" and provider not in OPEN_WEIGHT_PROVIDERS:
         raise AssertionError(f"privacy invariant: Tier 2 provider must be open weights, got {provider!r}")

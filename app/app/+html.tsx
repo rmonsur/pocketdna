@@ -4,7 +4,8 @@ import type { PropsWithChildren } from "react";
 
 const TITLE = "PocketDNA — Your DNA results have a story. Watch it.";
 const DESCRIPTION = "Drop your DNA test, get a 30-second cited documentary of your origins.";
-const IMAGE = "/og-image.png";
+const SITE_URL = (process.env.EXPO_PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
+const IMAGE = `${SITE_URL}/og-image.png`;
 
 export default function Root({ children }: PropsWithChildren): React.JSX.Element {
   return (

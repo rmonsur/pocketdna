@@ -81,8 +81,11 @@ def run_tier1(job_id: str, blob: bytes) -> JSONResponse:
     spent += parsed.cost_usd
     if "error" in parsed.data:
         rej = parsed.data["error"]
-        set_state(job_id, "rejected", "Could not parse this screenshot.", rej)
-        return ok({"job_id": job_id, "tier": "tier1", "state": "rejected", "rejection": rej})
+        msg = ("PocketDNA reads ancestry only. We never interpret health data." if rej == "R1"
+               else "Could not read that screenshot. Please upload the ancestry composition screen.")
+        set_state(job_id, "rejected", msg, rej)
+        add_event(job_id, 1, "Reading your results", "muse-spark-1.3", "done", f"rejected {rej}")
+        return ok({"job_id": job_id, "tier": "tier1", "state": "rejected", "rejection": rej, "message": msg})
     shares = parsed.data["shares"]
 
     add_event(job_id, 5, "Selecting your citations", "muse-spark-1.3", "running")
@@ -119,16 +122,17 @@ def run_tier1(job_id: str, blob: bytes) -> JSONResponse:
     return ok({"job_id": job_id, "tier": "tier1", "state": "done", "reel": reel_data})
 
 
-def run_tier2(job_id: str, vendor: str, filename: str, blob: bytes) -> JSONResponse:
-    """Raw-file path: deterministic engine + open-weights agents only. Zero hosted calls."""
-    from api.router import extract_raw_text
+def run_tier2(job_id: str, vendor: str, text: str, blob: bytes) -> JSONResponse:
+    """Raw-file path: deterministic engine + open-weights agents only. Zero hosted calls.
+
+    `text` is the decoded export (unzipped once by the router); `blob` seeds the bootstrap.
+    """
     from api.store import add_event, save_reel, set_state
 
     set_state(job_id, "running")
     model = open_model_id()
 
     add_event(job_id, 1, "Validating markers", "engine", "running")
-    text = extract_raw_text(filename, blob)
     parsed = parse_raw(vendor, text)
     add_event(job_id, 1, "Validating markers", "engine", "done",
               f"{parsed.n_lines} markers, {parsed.n_nocall} no-calls")

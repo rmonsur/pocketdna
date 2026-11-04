@@ -78,7 +78,8 @@ def get_job(job_id: str) -> dict | None:
         conn.close()
         return None
     events = [dict(r) for r in conn.execute(
-        "SELECT step, title, model, status, artifact FROM events WHERE job_id = ? ORDER BY id", (job_id,))]
+        "SELECT job_id, step, title, model, status, artifact FROM events WHERE job_id = ? ORDER BY id",
+        (job_id,))]
     conn.close()
     job = dict(row)
     job["events"] = events
