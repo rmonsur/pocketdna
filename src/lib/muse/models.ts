@@ -9,7 +9,8 @@ export const SAM = "sam-3.1";
 export const EFFORT: Record<string, { temperature: number; maxTokens: number }> = {
   low: { temperature: 0.2, maxTokens: 1024 },
   medium: { temperature: 0.4, maxTokens: 2048 },
-  high: { temperature: 0.7, maxTokens: 8192 },
+  /* Spark counts its reasoning as completion tokens; long structured plans need the headroom. */
+  high: { temperature: 0.7, maxTokens: 16384 },
 };
 
 /** USD per 1M tokens: [input, output]. */

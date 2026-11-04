@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What one Muse call goes through · PocketDNA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:  #0A0908;
+      --color-ink:    #FFFFFF;
+      --color-muted:  #A3A3A3;
+      --color-accent: #EEB057;
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --font-serif:   'Instrument Serif', serif;
+      --font-mono:    'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1160px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+    svg { width: 100%; min-width: 1160px; display: block; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Sequence · PocketDNA · Diagram Design</p>
+    <h1>What one Muse call goes through</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1160 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="muse-call-title muse-call-desc">
+        <title id="muse-call-title">What one Muse call goes through</title>
+        <desc id="muse-call-desc">Sequence diagram of callJson in the Muse adapter: kill switch and run cap, content-addressed cache lookup, Meta API chat completion with a JSON schema, Zod validation with one retry, cache write, cost log append and a typed result.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#A3A3A3"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#EEB057"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#C8F45B"/></marker>
+          <marker id="arrow-open" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polyline points="0 0, 8 3, 0 6" fill="none" stroke="#A3A3A3" stroke-width="1.2"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#0A0908"/>
+<line x1="120" y1="128" x2="120" y2="696" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="360" y1="128" x2="360" y2="696" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="600" y1="128" x2="600" y2="696" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="840" y1="128" x2="840" y2="696" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="1040" y1="128" x2="1040" y2="696" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+<rect x="356" y="176" width="8" height="488" fill="rgba(255,255,255,0.06)" stroke="#A3A3A3" stroke-width="0.8"/>
+<rect x="596" y="256" width="8" height="88" fill="rgba(255,255,255,0.06)" stroke="#A3A3A3" stroke-width="0.8"/>
+<rect x="596" y="584" width="8" height="16" fill="rgba(255,255,255,0.06)" stroke="#A3A3A3" stroke-width="0.8"/>
+<rect x="836" y="432" width="8" height="40" fill="rgba(255,255,255,0.06)" stroke="#A3A3A3" stroke-width="0.8"/>
+<rect x="836" y="552" width="8" height="16" fill="rgba(255,255,255,0.06)" stroke="#A3A3A3" stroke-width="0.8"/>
+<rect x="1036" y="616" width="8" height="8" fill="rgba(255,255,255,0.06)" stroke="#A3A3A3" stroke-width="0.8"/>
+<path d="M 124,176 H 356" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 364,200 H 404 V 224 H 368" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 364,256 H 596" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<rect x="232" y="288" width="856" height="344" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+<rect x="232" y="288" width="40" height="16" rx="2" fill="#0A0908" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+<text x="252" y="300" fill="#A3A3A3" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.12em">ALT</text>
+<text x="244" y="324" fill="#A3A3A3" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.04em">[cache hit]</text>
+<path d="M 596,344 H 368" fill="none" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<line x1="240" y1="376" x2="1080" y2="376" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="244" y="400" fill="#A3A3A3" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.04em">[else · miss]</text>
+<path d="M 364,432 H 836" fill="none" stroke="#C8F45B" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+<path d="M 836,472 H 368" fill="none" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<path d="M 364,496 H 404 V 520 H 368" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 364,552 H 836" fill="none" stroke="#C8F45B" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+<path d="M 364,584 H 596" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 364,616 H 1036" fill="none" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow-open)"/>
+<path d="M 356,664 H 128" fill="none" stroke="#EEB057" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<rect x="200" y="160" width="80" height="12" rx="2" fill="#0A0908"/>
+<text x="240" y="169.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">CALLJSON(OPTS)</text>
+<rect x="412" y="206" width="76" height="12" rx="2" fill="#0A0908"/>
+<text x="450" y="215.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">KILL · CAP $5</text>
+<rect x="450" y="240" width="60" height="12" rx="2" fill="#0A0908"/>
+<text x="480" y="249.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">SHA256 KEY</text>
+<rect x="456" y="328" width="48" height="12" rx="2" fill="#0A0908"/>
+<text x="480" y="337.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">HIT · $0</text>
+<rect x="690" y="416" width="60" height="12" rx="2" fill="#0A0908"/>
+<text x="720" y="425.5" fill="#C8F45B" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">POST /CHAT</text>
+<rect x="450" y="456" width="60" height="12" rx="2" fill="#0A0908"/>
+<text x="480" y="465.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">COMPLETION</text>
+<rect x="412" y="502" width="80" height="12" rx="2" fill="#0A0908"/>
+<text x="452" y="511.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">ZOD · RETRY ×1</text>
+<rect x="682" y="536" width="76" height="12" rx="2" fill="#0A0908"/>
+<text x="720" y="545.5" fill="#C8F45B" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">RETRY + ERROR</text>
+<rect x="442" y="568" width="76" height="12" rx="2" fill="#0A0908"/>
+<text x="480" y="577.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">PUT VALIDATED</text>
+<rect x="910" y="600" width="60" height="12" rx="2" fill="#0A0908"/>
+<text x="940" y="609.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">APPEND USD</text>
+<rect x="206" y="648" width="68" height="12" rx="2" fill="#0A0908"/>
+<text x="240" y="657.5" fill="#EEB057" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">TYPED RESULT</text>
+<rect x="48" y="72" width="144" height="56" rx="6" fill="#0A0908"/>
+<rect x="48" y="72" width="144" height="56" rx="6" fill="rgba(163,163,163,0.10)" stroke="#8A8A8A" stroke-width="1"/>
+<rect x="56" y="80" width="36" height="12" rx="2" fill="transparent" stroke="rgba(138,138,138,0.4)" stroke-width="0.8"/>
+<text x="74" y="89" fill="#8A8A8A" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STAGE</text>
+<text x="120" y="108" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Pipeline stage</text>
+<text x="120" y="124" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">pipeline.ts</text>
+<rect x="288" y="72" width="144" height="56" rx="6" fill="#0A0908"/>
+<rect x="288" y="72" width="144" height="56" rx="6" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
+<rect x="296" y="80" width="44" height="12" rx="2" fill="transparent" stroke="rgba(238,176,87,0.5)" stroke-width="0.8"/>
+<text x="318" y="89" fill="#EEB057" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">ADAPTER</text>
+<text x="360" y="108" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Muse adapter</text>
+<text x="360" y="124" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">client.ts</text>
+<rect x="528" y="72" width="144" height="56" rx="6" fill="#0A0908"/>
+<rect x="528" y="72" width="144" height="56" rx="6" fill="rgba(255,255,255,0.05)" stroke="#A3A3A3" stroke-width="1"/>
+<rect x="536" y="80" width="24" height="12" rx="2" fill="transparent" stroke="rgba(163,163,163,0.5)" stroke-width="0.8"/>
+<text x="548" y="89" fill="#A3A3A3" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">FS</text>
+<text x="600" y="108" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Local cache</text>
+<text x="600" y="124" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">.local/muse-cache</text>
+<rect x="768" y="72" width="144" height="56" rx="6" fill="#0A0908"/>
+<rect x="768" y="72" width="144" height="56" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+<rect x="776" y="80" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+<text x="794" y="89" fill="#8A8A8A" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">HTTPS</text>
+<text x="840" y="108" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Meta API</text>
+<text x="840" y="124" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">muse-spark-1.3</text>
+<rect x="968" y="72" width="144" height="56" rx="6" fill="#0A0908"/>
+<rect x="968" y="72" width="144" height="56" rx="6" fill="rgba(255,255,255,0.05)" stroke="#A3A3A3" stroke-width="1"/>
+<rect x="976" y="80" width="28" height="12" rx="2" fill="transparent" stroke="rgba(163,163,163,0.5)" stroke-width="0.8"/>
+<text x="990" y="89" fill="#A3A3A3" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">LOG</text>
+<text x="1040" y="108" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Cost log</text>
+<text x="1040" y="124" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">muse-cost.jsonl</text>
+<text x="1120" y="48" fill="#FFFFFF" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">Muse Image takes the same gate via /responses ($0.01 per image); bytes never enter logs.</text>
+<path d="M 1000,54 Q 940,52 904,70" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+<circle cx="900" cy="72" r="2" fill="#FFFFFF"/>
+<line x1="40" y1="712" x2="1120" y2="712" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+<text x="40" y="728" fill="#A3A3A3" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.18em">LEGEND</text>
+<rect x="40" y="744" width="14" height="10" rx="2" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
+<text x="60" y="752" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Focal: the only module that spends money</text>
+<rect x="292" y="740" width="28" height="18" rx="2" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+<text x="300" y="752" fill="#A3A3A3" font-size="7" font-family="'Geist Mono', ui-monospace, monospace">ALT</text>
+<text x="328" y="752" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Cache branch</text>
+<line x1="414.4" y1="748" x2="442.4" y2="748" stroke="#C8F45B" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+<text x="450.4" y="752" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">HTTPS call</text>
+<line x1="526.4" y1="748" x2="554.4" y2="748" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<text x="562.4" y="752" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Return</text>
+<line x1="617.6" y1="748" x2="645.6" y2="748" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow-open)"/>
+<text x="653.6" y="752" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Async append</text>
+<line x1="740" y1="748" x2="768" y2="748" stroke="#EEB057" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<text x="776" y="752" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Validated result</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

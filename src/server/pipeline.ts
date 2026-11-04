@@ -17,7 +17,11 @@ import {
 } from "../contracts/index.ts";
 import { callJson, readPrompt } from "../lib/muse/client.ts";
 import { SPARK } from "../lib/muse/models.ts";
+import { convergenceScene, eraScene } from "./atlasScenes.ts";
+import { loadGazetteer } from "./gazetteer.ts";
+import { illustrateEpisode } from "./images.ts";
 import { pushEvent, type Job } from "./jobs.ts";
+import { displayName, profilePopulations, type PopulationProfile } from "./profiles.ts";
 
 const ASSET_IDS = [
   "asset-steppe-horseman",
@@ -381,11 +385,52 @@ export async function runScreenshotJob(
   await continueJob(job, index, spent);
 }
 
-async function continueJob(job: Job, index: IndexEntry[], spent: number): Promise<void> {
-  const evidence = job.evidence;
-  if (evidence === null) throw new Error("continueJob requires evidence");
+/** Evidence with readable population names in place of panel codes (ids unchanged). */
+export function readableEvidence(evidence: EvidenceRecord, profiles: PopulationProfile[]): EvidenceRecord {
+  if (evidence.kind !== "raw") return evidence;
+  const gazetteer = loadGazetteer();
+  return {
+    ...evidence,
+    epochs: evidence.epochs.map((epoch) => ({
+      ...epoch,
+      shares: epoch.shares.map((s) => ({ ...s, label: displayName(s.id, profiles, gazetteer, s.label) })),
+      closest: epoch.closest.map((c) => ({ ...c, label: displayName(c.label, profiles, gazetteer, c.label) })),
+    })),
+  };
+}
 
-  pushEvent(job, 3, "Selecting your citations", SPARK, "running");
+/** Deterministic globe scenes from gazetteer records (ATLAS): never model-chosen geometry. */
+export function withAtlas(plan: ReelPlan, evidence: EvidenceRecord): ReelPlan {
+  const gazetteer = loadGazetteer();
+  return {
+    ...plan,
+    beats: plan.beats.map((beat) => {
+      if (beat.kind === "era" && beat.era !== undefined) {
+        const atlas = eraScene(evidence, beat.era, gazetteer);
+        return atlas === undefined ? beat : { ...beat, atlas };
+      }
+      if (beat.kind === "convergence") {
+        const atlas = convergenceScene(evidence, gazetteer);
+        return atlas === undefined ? beat : { ...beat, atlas };
+      }
+      return beat;
+    }),
+  };
+}
+
+async function continueJob(job: Job, index: IndexEntry[], spentAtStart: number): Promise<void> {
+  const original = job.evidence;
+  if (original === null) throw new Error("continueJob requires evidence");
+  let spent = spentAtStart;
+
+  pushEvent(job, 3, "Profiling reference populations", SPARK, "running");
+  const profiled = await profilePopulations(original, spent);
+  spent += profiled.costUsd;
+  const evidence = readableEvidence(original, profiled.profiles);
+  job.evidence = evidence;
+  pushEvent(job, 3, "Profiling reference populations", SPARK, "done", `${profiled.profiles.length} populations explained`);
+
+  pushEvent(job, 4, "Selecting your citations", SPARK, "running");
   const cited = await callJson({
     agent: "interpretation", model: SPARK, effort: "high",
     messages: [
@@ -400,9 +445,9 @@ async function continueJob(job: Job, index: IndexEntry[], spent: number): Promis
     runSpentUsd: spent,
   });
   spent += cited.costUsd;
-  const claims = toClaims(cited.data, index);
+  const claims = [...profiled.claims, ...toClaims(cited.data, index)];
   job.claims = claims;
-  pushEvent(job, 3, "Selecting your citations", SPARK, "done", `${claims.length} claims grounded`);
+  pushEvent(job, 4, "Selecting your citations", SPARK, "done", `${claims.length} claims grounded`);
 
   const directOnce = async (repairIssues: unknown): Promise<ReelPlan> => {
     const reel = await callJson({
@@ -414,7 +459,7 @@ async function continueJob(job: Job, index: IndexEntry[], spent: number): Promis
           content: [
             {
               type: "text",
-              text: JSON.stringify({ evidence, claims, assetIds: ASSET_IDS, repairIssues }),
+              text: JSON.stringify({ evidence, profiles: profiled.profiles, claims, assetIds: ASSET_IDS, repairIssues }),
             },
           ],
         },
@@ -431,9 +476,9 @@ async function continueJob(job: Job, index: IndexEntry[], spent: number): Promis
     return reel.data;
   };
 
-  pushEvent(job, 4, "Directing your film", SPARK, "running");
+  pushEvent(job, 5, "Directing your film", SPARK, "running");
   let plan = await directOnce(null);
-  pushEvent(job, 5, "Choosing your scenes", SPARK, "done", "plates assigned");
+  pushEvent(job, 5, "Directing your film", SPARK, "done", `${plan.beats.length} beats, ${plan.duration_s}s`);
   pushEvent(job, 6, "Auditing", SPARK, "running");
 
   const auditOnce = async (audited: ReelPlan) => {
@@ -441,7 +486,7 @@ async function continueJob(job: Job, index: IndexEntry[], spent: number): Promis
       agent: "narrative-auditor", model: SPARK, effort: "high",
       messages: [
         { role: "system", content: readPrompt("narrative-auditor") },
-        { role: "user", content: [{ type: "text", text: JSON.stringify({ plan: audited, evidence }) }] },
+        { role: "user", content: [{ type: "text", text: JSON.stringify({ plan: audited, evidence, claims }) }] },
       ],
       jsonSchema: schema("narrative-auditor"),
       validate: (d) => AuditOut.parse(d),
@@ -476,9 +521,24 @@ async function continueJob(job: Job, index: IndexEntry[], spent: number): Promis
     pushEvent(job, 6, "Auditing", SPARK, "failed", "audit blocked");
     return;
   }
+  pushEvent(job, 6, "Auditing", SPARK, "done", "narrative + compliance pass");
+
+  /* Approved copy is frozen here; atlas scenes and images add no claims. */
+  plan = withAtlas(plan, evidence);
+  const atlasBeats = plan.beats.filter((b) => b.atlas !== undefined).length;
+  pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "running", `${atlasBeats} globe scenes from reference sampling records`);
+  try {
+    const illustrated = await illustrateEpisode(job.id, plan, spent);
+    spent += illustrated.costUsd;
+    job.assets = illustrated.assets;
+    const approved = illustrated.outcomes.filter((o) => o.status === "approved").length;
+    const fallback = illustrated.outcomes.length - approved;
+    pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "done", `${approved} reviewed images, ${fallback} on fallback plates`);
+  } catch (err) {
+    pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "failed", err instanceof Error ? err.message.slice(0, 80) : "image step failed");
+  }
 
   job.reel = plan;
   job.state = "done";
-  pushEvent(job, 6, "Auditing", SPARK, "done", "A5 pass");
-  pushEvent(job, 7, "Film ready", "engine", "done", "7+ beats, cited");
+  pushEvent(job, 8, "Film ready", "engine", "done", `${plan.beats.length} beats, cited, $${spent.toFixed(2)} this run`);
 }

@@ -6,6 +6,8 @@ interface Props {
   onWatchReplay: () => void;
   onGenerate: (file: File, tab: "screenshot" | "raw") => void;
   busy: boolean;
+  /** The raw file whose on-device analysis is complete; the CTA then continues into the episode. */
+  analysed: File | null;
 }
 
 const INSTRUCTIONS = {
@@ -15,8 +17,10 @@ const INSTRUCTIONS = {
 
 type Tab = keyof typeof INSTRUCTIONS;
 
-export function UploadCard({ onWatchReplay, onGenerate, busy }: Props): React.JSX.Element {
+export function UploadCard({ onWatchReplay, onGenerate, busy, analysed }: Props): React.JSX.Element {
   const { tab, setTab, file, notice, setNotice, fileInput, bindDrop, pickFile, onFiles } = useDropzone();
+  const analysisReady = tab === "raw" && file !== null && analysed === file;
+  const ctaLabel = busy ? "Working" : analysisReady ? "Generate your Episode from this analysis" : "Generate your Episode";
 
   function generate(): void {
     if (busy) return;
@@ -70,7 +74,13 @@ export function UploadCard({ onWatchReplay, onGenerate, busy }: Props): React.JS
           <p className="text-sm text-text-muted">{INSTRUCTIONS[tab]}</p>
           <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-surface-container-high px-4 py-1.5 text-[12px] font-medium text-primary">
             <span className="h-2 w-2 animate-pulse rounded-full bg-bio-lime" />
-            <span>{file !== null ? `${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB) ready` : "No file yet. Watch the saved episode to see the film."}</span>
+            <span>
+              {file === null
+                ? "No file yet. Watch the saved episode to see the film."
+                : analysisReady
+                  ? `${file.name} analysed on this device`
+                  : `${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB) ready`}
+            </span>
           </div>
         </div>
       </div>
@@ -93,7 +103,7 @@ export function UploadCard({ onWatchReplay, onGenerate, busy }: Props): React.JS
           disabled={busy}
           className="inline-flex h-14 items-center gap-3 rounded-xl bg-bio-lime px-8 text-lg font-black tracking-wide text-surface-container-lowest shadow-[0_0_24px_rgba(200,244,91,0.25)] transition-transform hover:scale-[1.02] disabled:opacity-40"
         >
-          <span>{busy ? "Working" : "Generate your Episode"}</span>
+          <span>{ctaLabel}</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
             <path d="M4 7c3 0 5 4 8 4s5-4 8-4M4 17c3 0 5-4 8-4s5 4 8 4M7 8.5v7M17 8.5v7M12 11v2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

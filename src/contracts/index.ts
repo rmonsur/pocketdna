@@ -85,6 +85,29 @@ export const MapPathSchema = z.object({
   label: z.string().nullable(),
 });
 
+/** One reference sampling location on the reel globe (ATLAS 6: provenance, never territory). */
+export const AtlasMarkerSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  place: z.string().nullable(),
+  dateText: z.string().nullable(),
+  lon: z.number().min(-180).max(180),
+  lat: z.number().min(-90).max(90),
+  weight: z.number().min(0).max(1),
+});
+
+export type AtlasMarker = z.infer<typeof AtlasMarkerSchema>;
+
+/** Deterministic globe scene attached to a beat by the server, from gazetteer records only. */
+export const AtlasSceneSchema = z.object({
+  preset: z.enum(["locate-region", "affinity-overview"]),
+  focus: z.tuple([z.number(), z.number()]),
+  markers: z.array(AtlasMarkerSchema).max(12),
+  legend: z.string(),
+});
+
+export type AtlasScene = z.infer<typeof AtlasSceneSchema>;
+
 export const BeatSchema = z.object({
   id: z.string(),
   kind: z.enum(["hook", "method", "era", "convergence", "stamp"]),
@@ -99,6 +122,7 @@ export const BeatSchema = z.object({
   assetId: z.string(),
   coords: z.string().nullable(),
   mapPaths: z.array(MapPathSchema),
+  atlas: AtlasSceneSchema.optional(),
 });
 
 export type Beat = z.infer<typeof BeatSchema>;
@@ -142,17 +166,32 @@ export const ReplayBundleSchema = z.object({
 
 export type ReplayBundle = z.infer<typeof ReplayBundleSchema>;
 
+/** A reviewed scene image for one beat asset id; the URL is same-origin. */
+export const SceneAssetSchema = z.object({
+  url: z.string(),
+  mode: z.enum(["live", "cache", "fallback"]),
+  label: z.string(),
+  audit: z.enum(["pass", "fallback"]),
+  place: z.string().nullable(),
+  dateText: z.string().nullable(),
+});
+
+export type SceneAsset = z.infer<typeof SceneAssetSchema>;
+
+export type SceneAssets = Record<string, SceneAsset>;
+
 /** What the viewport renders, regardless of origin. */
 export interface ViewingBundle {
   mode: "replay" | "live";
   plan: ReelPlan;
   evidence: EvidenceRecord;
   claims: Claim[];
+  assets: SceneAssets;
 }
 
 export const ProgressEventSchema = z.object({
   job_id: z.string(),
-  step: z.number().int().min(1).max(7),
+  step: z.number().int().min(1).max(9),
   title: z.string(),
   model: z.string(),
   status: z.enum(["running", "done", "failed"]),
@@ -169,6 +208,7 @@ export const JobStatusSchema = z.object({
   reel: ReelPlanSchema.nullable().default(null),
   evidence: EvidenceRecordSchema.nullable().default(null),
   claims: z.array(ClaimSchema).default([]),
+  assets: z.record(z.string(), SceneAssetSchema).default({}),
   events: z.array(ProgressEventSchema).default([]),
 });
 

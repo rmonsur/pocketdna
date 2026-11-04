@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One historical scene, from job to asset · PocketDNA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:  #0A0908;
+      --color-ink:    #FFFFFF;
+      --color-muted:  #A3A3A3;
+      --color-accent: #EEB057;
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --font-serif:   'Instrument Serif', serif;
+      --font-mono:    'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1240px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+    svg { width: 100%; min-width: 1240px; display: block; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">State machine · PocketDNA · Diagram Design</p>
+    <h1>One historical scene, from job to asset</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1240 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="image-agent-title image-agent-desc">
+        <title id="image-agent-title">One historical scene, from job to asset</title>
+        <desc id="image-agent-desc">State machine for the HistoricalImageAgent: queued, researching, prompt ready, generating, auditing, an optional single repair, then approved or fallback, with cancellation and failure reachable from any state.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#A3A3A3"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#EEB057"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#C8F45B"/></marker>
+          <marker id="arrow-open" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polyline points="0 0, 8 3, 0 6" fill="none" stroke="#A3A3A3" stroke-width="1.2"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#0A0908"/>
+<path d="M 62,192 H 120" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 280,192 H 336" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 496,192 H 552" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 712,192 H 768" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 848,224 V 336" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 768,368 H 696" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 616,336 C 616,264 800,264 800,336" fill="none" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<path d="M 928,360 H 984" fill="none" stroke="#EEB057" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<path d="M 848,400 V 472 Q 848,480 856,480 H 984" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 1144,368 H 1188" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 1144,480 H 1188" fill="none" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<rect x="80" y="172" width="24" height="12" rx="2" fill="#0A0908"/>
+<text x="92" y="181.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">JOB</text>
+<rect x="284" y="172" width="48" height="12" rx="2" fill="#0A0908"/>
+<text x="308" y="181.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">VALIDATE</text>
+<rect x="500" y="172" width="48" height="12" rx="2" fill="#0A0908"/>
+<text x="524" y="181.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">BRIEF OK</text>
+<rect x="712" y="172" width="56" height="12" rx="2" fill="#0A0908"/>
+<text x="740" y="181.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">BUDGET OK</text>
+<rect x="856" y="274" width="56" height="12" rx="2" fill="#0A0908"/>
+<text x="884" y="283.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">CANDIDATE</text>
+<rect x="702" y="348" width="60" height="12" rx="2" fill="#0A0908"/>
+<text x="732" y="357.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">ONE REPAIR</text>
+<rect x="684" y="262" width="48" height="12" rx="2" fill="#0A0908"/>
+<text x="708" y="271.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">RE-AUDIT</text>
+<rect x="942" y="340" width="28" height="12" rx="2" fill="#0A0908"/>
+<text x="956" y="349.5" fill="#EEB057" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">PASS</text>
+<rect x="856" y="424" width="48" height="12" rx="2" fill="#0A0908"/>
+<text x="880" y="433.5" fill="#8A8A8A" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">FALLBACK</text>
+<circle cx="56" cy="192" r="6" fill="#FFFFFF"/>
+<rect x="120" y="160" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="120" y="160" width="160" height="64" rx="8" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="128" y="168" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+<text x="146" y="177" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="200" y="196" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Queued</text>
+<text x="200" y="212" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">validate scene · mode</text>
+<rect x="336" y="160" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="336" y="160" width="160" height="64" rx="8" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="344" y="168" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+<text x="362" y="177" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="416" y="196" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Researching</text>
+<text x="416" y="212" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">brief · sources · dates</text>
+<rect x="552" y="160" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="552" y="160" width="160" height="64" rx="8" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="560" y="168" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+<text x="578" y="177" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="632" y="196" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Prompt ready</text>
+<text x="632" y="212" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">HIST-IMAGE-01 compiled</text>
+<rect x="768" y="160" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="768" y="160" width="160" height="64" rx="8" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="776" y="168" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+<text x="794" y="177" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="848" y="196" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Generating</text>
+<text x="848" y="212" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">muse-image · 9:16 · png</text>
+<rect x="536" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="536" y="336" width="160" height="64" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="544" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
+<text x="562" y="353" fill="#8A8A8A" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="616" y="372" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Repairing</text>
+<text x="616" y="388" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">HIST-REPAIR-01 · ≤1/scene</text>
+<rect x="768" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="768" y="336" width="160" height="64" rx="8" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="776" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+<text x="794" y="353" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="848" y="372" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Auditing</text>
+<text x="848" y="388" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">HIST-AUDIT-01 · Spark vision</text>
+<rect x="984" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="984" y="336" width="160" height="64" rx="8" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
+<rect x="992" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(238,176,87,0.5)" stroke-width="0.8"/>
+<text x="1010" y="353" fill="#EEB057" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="1064" y="372" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Approved</text>
+<text x="1064" y="388" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">manifest · hash · label</text>
+<rect x="984" y="448" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="984" y="448" width="160" height="64" rx="8" fill="rgba(255,255,255,0.05)" stroke="#A3A3A3" stroke-width="1"/>
+<rect x="992" y="456" width="36" height="12" rx="2" fill="transparent" stroke="rgba(163,163,163,0.5)" stroke-width="0.8"/>
+<text x="1010" y="465" fill="#A3A3A3" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="1064" y="484" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Fallback</text>
+<text x="1064" y="500" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">reviewed plate · honest label</text>
+<rect x="120" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
+<rect x="120" y="336" width="160" height="64" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+<rect x="128" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
+<text x="146" y="353" fill="#8A8A8A" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<text x="200" y="372" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Cancelled / failed</text>
+<text x="200" y="388" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">no late result enters</text>
+<circle cx="1196" cy="368" r="8" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="1196" cy="368" r="5" fill="#FFFFFF"/>
+<circle cx="1196" cy="480" r="8" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="1196" cy="480" r="5" fill="#FFFFFF"/>
+<text x="192" y="548" fill="#FFFFFF" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="start">Any state → cancelled / failed on cancel, uncertain timeout or exhausted budget.</text>
+<path d="M 184,544 Q 176,470 200,404" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+<circle cx="200" cy="400" r="2" fill="#FFFFFF"/>
+<text x="1200" y="572" fill="#FFFFFF" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">images.ts v1 skips repair: a failed audit goes straight to fallback; AGENT.md allows one repair per scene.</text>
+<path d="M 676,566 Q 640,500 604,404" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+<circle cx="600" cy="400" r="2" fill="#FFFFFF"/>
+<line x1="40" y1="596" x2="1200" y2="596" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+<text x="40" y="612" fill="#A3A3A3" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.18em">LEGEND</text>
+<rect x="40" y="628" width="14" height="10" rx="2" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
+<text x="60" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Agent state</text>
+<rect x="141.2" y="628" width="14" height="10" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="161.2" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Specified, not yet in code</text>
+<rect x="320.4" y="628" width="14" height="10" rx="2" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
+<text x="340.4" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Approved asset</text>
+<rect x="437.2" y="628" width="14" height="10" rx="2" fill="rgba(255,255,255,0.05)" stroke="#A3A3A3" stroke-width="1"/>
+<text x="457.2" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Honest substitute</text>
+<line x1="569.6" y1="632" x2="597.6" y2="632" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<text x="605.6" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Transition</text>
+<line x1="681.6" y1="632" x2="709.6" y2="632" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<text x="717.6" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Repair loop</text>
+<line x1="798.8000000000001" y1="632" x2="826.8000000000001" y2="632" stroke="#EEB057" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<text x="834.8000000000001" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Happy path</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

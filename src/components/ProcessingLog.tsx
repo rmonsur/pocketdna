@@ -5,11 +5,12 @@ import type { ProgressEvent } from "../contracts/index.ts";
 const STEPS = [
   { step: 1, title: "Reading your results" },
   { step: 2, title: "Extracting composition" },
-  { step: 3, title: "Selecting your citations" },
-  { step: 4, title: "Directing your film" },
-  { step: 5, title: "Choosing your scenes" },
+  { step: 3, title: "Profiling reference populations" },
+  { step: 4, title: "Selecting your citations" },
+  { step: 5, title: "Directing your film" },
   { step: 6, title: "Auditing" },
-  { step: 7, title: "Film ready" },
+  { step: 7, title: "Illustrating scenes" },
+  { step: 8, title: "Film ready" },
 ] as const;
 
 export function ProcessingLog({ events }: { events: ProgressEvent[] }): React.JSX.Element {

@@ -11,14 +11,30 @@ import { fileURLToPath } from "node:url";
 import { EFFORT, priceUsd } from "./models.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const CACHE_DIR = join(ROOT, ".local", "muse-cache");
-const COST_LOG = join(ROOT, ".local", "muse-cost.jsonl");
+/** Private diagnostics root; tests point this at a scratch directory. */
+const LOCAL_DIR = process.env.POCKETDNA_LOCAL_DIR ?? join(ROOT, ".local");
+const CACHE_DIR = join(LOCAL_DIR, "muse-cache");
+const COST_LOG = join(LOCAL_DIR, "muse-cost.jsonl");
 const API_BASE = process.env.META_API_URL ?? "https://api.meta.ai/v1";
-const MAX_TOKENS_PER_CALL = 8192;
+const MAX_TOKENS_PER_CALL = 16384;
+/** Recorded pricing snapshot (IMAGE.md): $0.01 per returned image, grounding included. */
+export const IMAGE_USD_PER_IMAGE = 0.01;
+const IMAGE_TIMEOUT_MS = 180_000;
+/** Live-verified: the Responses API rejected "1080x1920" as an unknown value; 1024x1536 is the accepted portrait size. */
+export const IMAGE_PORTRAIT_SIZE = "1024x1536";
 
 export class KillSwitchEngaged extends Error {}
 export class BudgetExceeded extends Error {}
 export class ModelCallError extends Error {}
+
+export interface ImageResult {
+  bytes: Uint8Array;
+  format: "webp" | "png" | "jpeg";
+  model: string;
+  costUsd: number;
+  cached: boolean;
+  responseId: string | null;
+}
 
 export interface CallResult<T> {
   data: T;
@@ -233,13 +249,97 @@ export async function callJson<T>(opts: CallJsonOpts<T>): Promise<CallResult<T>>
     }
   }
   try {
-    mkdirSync(join(ROOT, ".local"), { recursive: true });
+    mkdirSync(LOCAL_DIR, { recursive: true });
     writeFileSync(
-      join(ROOT, ".local", "last-model-failure.json"),
+      join(LOCAL_DIR, "last-model-failure.json"),
       JSON.stringify({ agent: opts.agent, error: lastError, preview: lastContent.slice(0, 1500), at: new Date().toISOString() }) + "\n",
     );
   } catch {
     /* diagnostics only */
   }
   throw new ModelCallError(`${opts.agent}: schema validation failed twice: ${lastError}`);
+}
+
+export interface CallImageOpts {
+  agent: string;
+  model: string;
+  prompt: string;
+  /** "WxH" aspect request from the provider's accepted set; a ratio hint, not guaranteed pixels. */
+  size?: string;
+  format?: "webp" | "png" | "jpeg";
+  reasoningStrength?: "high" | "low";
+  runSpentUsd?: number;
+  runSpendCapUsd?: number;
+}
+
+interface ResponsesOutputItem {
+  type?: string;
+  id?: string;
+  result?: string;
+}
+
+function imageCacheGet(key: string): { format: ImageResult["format"]; bytes: Uint8Array } | null {
+  const meta = join(CACHE_DIR, `${key}.image.json`);
+  const bin = join(CACHE_DIR, `${key}.image.bin`);
+  if (!existsSync(meta) || !existsSync(bin)) return null;
+  const parsed = JSON.parse(readFileSync(meta, "utf8")) as { format: ImageResult["format"] };
+  return { format: parsed.format, bytes: new Uint8Array(readFileSync(bin)) };
+}
+
+function imageCachePut(key: string, format: string, bytes: Uint8Array): void {
+  mkdirSync(CACHE_DIR, { recursive: true });
+  writeFileSync(join(CACHE_DIR, `${key}.image.json`), JSON.stringify({ format }));
+  writeFileSync(join(CACHE_DIR, `${key}.image.bin`), bytes);
+}
+
+/**
+ * Muse Image through the Responses API (IMAGE.md): only the image_generation
+ * tool, shell disabled, store:false. Bytes never enter logs; the cache keys on
+ * the exact compiled prompt, model and settings.
+ */
+export async function callImage(opts: CallImageOpts): Promise<ImageResult> {
+  if (killed()) throw new KillSwitchEngaged("KILL_PAID_CALLS is set; refusing paid call");
+  const cap = opts.runSpendCapUsd ?? 5.0;
+  if ((opts.runSpentUsd ?? 0) + IMAGE_USD_PER_IMAGE > cap) throw new BudgetExceeded(`run cap $${cap.toFixed(2)} reached`);
+  const format = opts.format ?? "webp";
+  const tool = {
+    type: "image_generation",
+    size: opts.size ?? IMAGE_PORTRAIT_SIZE,
+    output_format: format,
+    reasoning_strength: opts.reasoningStrength ?? "high",
+    enable_web_search: true,
+    enable_image_search: true,
+    enable_shell: false,
+  };
+  const key = cacheKey(opts.model, opts.prompt, tool);
+  const hit = imageCacheGet(key);
+  if (hit !== null) {
+    return { bytes: hit.bytes, format: hit.format, model: opts.model, costUsd: 0, cached: true, responseId: null };
+  }
+  let resp: Response;
+  try {
+    resp = await fetch(`${API_BASE}/responses`, {
+      method: "POST",
+      signal: AbortSignal.timeout(IMAGE_TIMEOUT_MS),
+      headers: { Authorization: `Bearer ${apiKey()}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ model: opts.model, input: opts.prompt, store: false, tools: [tool] }),
+    });
+  } catch (err) {
+    throw new ModelCallError(`${opts.agent}: transport error: ${String(err).slice(0, 200)}`);
+  }
+  if (!resp.ok) throw new ModelCallError(`${opts.agent}: HTTP ${resp.status}: ${(await resp.text()).slice(0, 300)}`);
+  const raw = (await resp.json()) as { id?: string; output?: ResponsesOutputItem[] };
+  const item = (raw.output ?? []).find((o) => o.type === "image_generation_call" && typeof o.result === "string");
+  if (item === undefined || item.result === undefined) {
+    throw new ModelCallError(`${opts.agent}: no image_generation_call item in response`);
+  }
+  const bytes = new Uint8Array(Buffer.from(item.result, "base64"));
+  if (bytes.length < 1024) throw new ModelCallError(`${opts.agent}: image payload too small (${bytes.length} bytes)`);
+  imageCachePut(key, format, bytes);
+  mkdirSync(dirname(COST_LOG), { recursive: true });
+  appendFileSync(
+    COST_LOG,
+    JSON.stringify({ agent: opts.agent, model: opts.model, in: 0, out: 0, usd: IMAGE_USD_PER_IMAGE }) + "\n",
+  );
+  return { bytes, format, model: opts.model, costUsd: IMAGE_USD_PER_IMAGE, cached: false, responseId: raw.id ?? null };
 }

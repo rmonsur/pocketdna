@@ -135,3 +135,68 @@ Production-validation work (current continuation)
   unchanged, exactly 16 reference test records were masked, and modified calls
   only became missing. The masked smartpca result was still running at this
   entry; see ignored experimental-pca/demo-marker-mask/manifest.json.
+
+Raw-episode UI handoff debugging (2026-11-05, Claude Code session)
+------------------------------------------------------------------
+- Reproduced the report "analysis happens but the viewport never shows the
+  new reel" in Chrome against the running dev server (vite 5173 -> API 8000)
+  with the repository's raw export. Finding: the server job, SSE stream,
+  status fetch and viewport swap all worked once the SECOND "Generate your
+  episode" button (inside the results card, below the fold) was pressed; the
+  upload-card CTA reverted to "Generate your Episode" after analysis and
+  re-ran the on-device analysis instead, and the right-hand viewport gave no
+  generation feedback during the multi-minute job. No DNA calls recorded.
+- Fix: upload-card CTA continues into episode generation for an analysed
+  file (label changes), results card scrolls into view, on-device result is
+  kept across a failed episode request, and a GenerationStatus card above
+  the viewport mirrors pipeline progress (step n/7).
+- npx tsc --noEmit: clean (after the changes).
+- npm test: 17/17 pass, including the new tests/generationStatus.test.ts
+  (status derivation from pipeline events). The first attempt failed only
+  because node --experimental-strip-types cannot load .tsx; the pure logic
+  was moved to src/lib/generationStatus.ts.
+- Browser check (cached model calls, dev server): main CTA -> status card ->
+  viewport switched to "Live episode". A second, uncached run (job
+  e7838955-96d) was started to verify the same under real model latency;
+  outcome recorded below.
+- Uncached live run (job e7838955-96d, dev server through the vite proxy):
+  state done, no rejection, 9 SSE events over ~254 s with no stream error or
+  reconnect; the status card advanced 3/7 -> 6/7 and the viewport switched
+  to the "Live episode" reel on completion. Verified in Chrome, 2026-11-05.
+
+Reel content pass: readable populations, globe, images (2026-11-05, Claude Code session)
+---------------------------------------------------------------------------------------
+- node scripts/build-gazetteer.mjs: 326 panel sources, 324 matched to AADR
+  v66.p1 annotation rows (group, sample or verified alias), 2 unmatched
+  (RUS_Maykop_Novosvobodnaya, Iraqi_Jew). Output
+  dataset/interim/era-panels/gazetteer.json (public sampling metadata only).
+- Observed curation mismatch while building: middle-panel samples BOL001..009
+  carry the panel family label "Volga (AD 200-400)" but their AADR group is
+  Russia_Tver_BA dated about 2528 BCE. Reported, not changed (ScientificEngineer
+  owns the panels).
+- npx tsc --noEmit: clean after contracts (AtlasScene, SceneAsset, step max 9),
+  server (gazetteer, atlasScenes, profiles, images, pipeline, asset route),
+  client (ReelGlobe, ReelViewport layers, labels) changes.
+- npm test: 19/19 pass including new tests/atlasScenes.test.ts (markers only
+  from gazetteer rows, weighted focus, deterministic camera, hidden hemisphere
+  rules) and tests/images.test.ts (HIST-IMAGE-01 compile with no unresolved
+  placeholders and no fit values, brief selection, Responses-API parsing with
+  mocked fetch, cache hit without network, budget and kill-switch guards). The
+  image test first polluted .local/muse-cost.jsonl and muse-cache; fixed by
+  POCKETDNA_LOCAL_DIR scratch override loaded before the client (helper module);
+  the stray entries were removed.
+- Live runs (browser, dev server, raw export): job 8c38aa3c-9f4 failed at the
+  director repair call with "empty completion" (Spark reasoning tokens exceeded
+  the 8192 completion cap; cap raised to 16384). Job e7f925e9-8f6 failed audit:
+  narrative auditor rejected gazetteer dates it could not see (claims were not
+  passed to it; fixed). Job bb01165c-671 failed audit: compliance demanded the
+  literal phrase "consistent with" in era headlines; auditors and director
+  aligned on accepted qualifiers. Each failed run was a typed R4 with no reel.
+- Live run (job 00dff4cf-4e7, dev server, raw export, 2026-11-05): done;
+  narrative + compliance pass first round; 4 atlas scenes attached; Muse
+  Image 3/3 generated live at size 1024x1536 (1080x1920 is rejected by the
+  API) and 3/3 passed the independent visual audit; assets served from
+  .local/episodes/<job>/ and shown in the viewport with globe-to-image
+  dissolve. Verified in Chrome: Bronze Age, Modern and convergence beats.
+- npx tsc --noEmit clean; npm test 19/19 pass after the globe resize and
+  overflow-clip change. Details: muse-loop/qa-logs/2026-11-05-reel-content.md.

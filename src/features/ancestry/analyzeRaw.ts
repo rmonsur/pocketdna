@@ -18,6 +18,8 @@ export type EraPanels = Record<string, EraPanelSource[]>;
 
 export interface EraFitShare {
   source_id: string;
+  /** Curated panel family label (era_group), readable on screen; the id stays the panel key. */
+  label: string;
   weight: number;
   low: number;
   high: number;
@@ -154,7 +156,7 @@ export function analyzeRaw(
           const values = reps.map((w) => w[i]).sort((a, b) => a - b);
           const pct = (p: number): number =>
             values.length === 0 ? fit.weights[i] : values[Math.min(values.length - 1, Math.floor(p * values.length))];
-          return { source_id: s.source_id, weight: fit.weights[i], low: pct(0.05), high: pct(0.95) };
+          return { source_id: s.source_id, label: s.era_group, weight: fit.weights[i], low: pct(0.05), high: pct(0.95) };
         })
         .sort((a, b) => b.weight - a.weight),
     })),

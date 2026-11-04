@@ -1,6 +1,6 @@
 /** Job records + event log (SSE source). In-memory; manifests persist with export. */
 
-import type { Claim, EvidenceRecord, ReelPlan } from "../contracts/index.ts";
+import type { Claim, EvidenceRecord, ReelPlan, SceneAssets } from "../contracts/index.ts";
 
 export type JobState = "queued" | "running" | "done" | "failed" | "rejected";
 
@@ -20,6 +20,7 @@ export interface Job {
   reel: ReelPlan | null;
   evidence: EvidenceRecord | null;
   claims: Claim[];
+  assets: SceneAssets;
   events: JobEvent[];
   waiters: Array<() => void>;
 }
@@ -35,6 +36,7 @@ export function createJobRecord(id: string): Job {
     reel: null,
     evidence: null,
     claims: [],
+    assets: {},
     events: [],
     waiters: [],
   };

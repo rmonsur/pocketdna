@@ -4,7 +4,7 @@
  */
 
 import { randomUUID } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
@@ -12,6 +12,8 @@ import { z } from "zod";
 import { EvidenceRecordSchema, JobStatusSchema } from "../contracts/index.ts";
 import { REPLAY } from "../contracts/fixtures.ts";
 import { KillSwitchEngaged, ModelCallError } from "../lib/muse/client.ts";
+import { loadGazetteer } from "./gazetteer.ts";
+import { EPISODE_DIR } from "./images.ts";
 import { createJobRecord, jobs, type Job } from "./jobs.ts";
 import { CorrectedSharesSchema, extractComposition, runRawEpisodeJob, runScreenshotJob } from "./pipeline.ts";
 
@@ -224,10 +226,26 @@ app.get("/api/jobs/:id", (c) => {
     reel: job.reel,
     evidence: job.evidence,
     claims: job.claims,
+    assets: job.assets,
     events: job.events.map((e) => ({ job_id: job.id, ...e })),
   });
   return ok(status);
 });
+
+/* Reviewed scene images for one job: allowlisted file names only, served from the private episode dir. */
+const ASSET_TYPES: Record<string, string> = { png: "image/png", webp: "image/webp", jpeg: "image/jpeg" };
+app.get("/api/jobs/:id/assets/:file", (c) => {
+  const job = jobs.get(c.req.param("id"));
+  const file = c.req.param("file");
+  const match = /^([a-z0-9_-]+)\.(png|webp|jpeg)$/i.exec(file);
+  if (job === undefined || match === null) return err("NOT_FOUND", "unknown asset", 404);
+  const path = join(EPISODE_DIR, job.id, file);
+  if (!existsSync(path)) return err("NOT_FOUND", "unknown asset", 404);
+  return new Response(readFileSync(path), { headers: { "Content-Type": ASSET_TYPES[match[2].toLowerCase()] ?? "application/octet-stream", "Cache-Control": "private, max-age=3600" } });
+});
+
+/* Public reference sampling metadata for the panel sources (labels, places, dates, DOIs). */
+app.get("/api/gazetteer", () => ok(Object.fromEntries(loadGazetteer())));
 
 app.get("/api/jobs/:id/events", (c) => {
   const job = jobs.get(c.req.param("id"));
