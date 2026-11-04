@@ -6,7 +6,13 @@ framing or war/invasion/conquest glorification; modern nations named as heirs;
 confidence language missing on ancestry claims; imagery or maps implying a
 stronger claim than the approved evidence.
 
-Confidence language is satisfied by any of: "consistent with", "similar to",
+For provider (screenshot) evidence, a provider percentage attached to an
+ancient population or site ("your 24% is similar to Neolithic farmers") is
+a stronger claim than the evidence and must be blocked; ancient chapters
+are context only.
+
+Hook, method, convergence and stamp beats make no new ancestry claim and
+need no qualifier of their own. Confidence language is satisfied by any of: "consistent with", "similar to",
 "most similar to", "closest to ... in this comparison", or an explicit
 "similarity, not descent" qualifier in the same beat (headline or subtext).
 Globe dots labelled as reference sampling locations are not a route or

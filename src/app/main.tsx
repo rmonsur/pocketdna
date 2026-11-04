@@ -7,6 +7,7 @@ import { Landing } from "./Landing";
 /* Atlas (Three.js) and Library load on demand; the landing path stays lean. */
 const AtlasPage = React.lazy(() => import("./AtlasPage").then((m) => ({ default: m.AtlasPage })));
 const LibraryPage = React.lazy(() => import("./LibraryPage").then((m) => ({ default: m.LibraryPage })));
+const ReelPage = React.lazy(() => import("./ReelPage").then((m) => ({ default: m.ReelPage })));
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="/" element={<Landing />} />
           <Route path="/atlas" element={<AtlasPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/reel" element={<ReelPage />} />
           <Route path="*" element={<Landing />} />
         </Routes>
       </Suspense>

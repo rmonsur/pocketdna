@@ -4,7 +4,7 @@ Architecture decision and build specification
 
 ## 1. Product and architectural decision
 
-PocketDNA turns ancestry evidence into a cinematic, interactive, 9:16 episode. The hackathon release targets **90–150 seconds**, with a silent, readable core, three historical chapters, a convergence map, and an evidence layer that explains the “why.” 
+PocketDNA turns ancestry evidence into a cinematic, interactive, 16:9 episode. The hackathon release targets **90–150 seconds**, with a silent, readable core, three historical chapters, a convergence map, and an evidence layer that explains the “why.” 
 
 **Python belongs in the repository and the reproducible research workflow. It is not a prerequisite for judges to run the application.** Prepare and validate the ancestry model offline with Python and EIGENSOFT; ship a versioned reference bundle; execute user-file analysis in a TypeScript Web Worker. A small local Node server handles Muse calls and export orchestration.
 
@@ -16,7 +16,7 @@ This document specifies intended implementation, not completed functionality or 
 
 [ABOUT.md](ABOUT.md) owns the reconciled product scope and 5–6 hour delivery plan. [RULES.md](RULES.md) owns constraints and engineering gates; this document owns architecture. [AGENTS.md](../AGENTS.md) owns role names and handoffs. [BIOINFORMATICS.md](BIOINFORMATICS.md), [DESIGN.md](DESIGN.md), [DIRECTOR.md](DIRECTOR.md), [IMAGE.md](IMAGE.md), [AGENT.md](AGENT.md) and [ATLAS.md](ATLAS.md) define their specialist contracts.
 
-The target uses silent-first 90–150 second films, default 120; 23andMe/AncestryDNA inputs; provider-only screenshot findings; native PocketDNA PCA-25 raw findings; browser-local genotypes; live images for both tiers; reviewed replay/fallback assets; and local export. No personal migration chain, IBD or unsupported confidence is inferred. Image limits are six initial scenes plus at most two repairs total, one per scene, initial concurrency two.
+The target uses silent-first 90–150 second films, default 120; 23andMe/AncestryDNA raw inputs; native PocketDNA PCA-25 raw findings; browser-local genotypes; live images; reviewed replay/fallback assets; and local export. No personal migration chain, IBD or unsupported confidence is inferred. Image limits are six initial scenes plus at most two repairs total, one per scene, initial concurrency two.
 
 The existing Expo/FastAPI code is an earlier prototype. Paths and technologies below describe the target migration, not already available commands. The 5–6 hour plan prioritizes one defensible end-to-end path; extensive research experiments and optional enhancements are not all mandatory within that window. A raw-data feature without its validated bundle remains unavailable, as ABOUT specifies.
 
@@ -104,23 +104,15 @@ QC includes matched SNP count, call rate, allele mismatch count, usable PC dimen
 
 Raw genotypes remain in browser memory and are released on reset. Neither raw calls nor projected personal coordinates need to reach Muse; send only the minimal derived findings required for the story. Derived ancestry summaries are still personal information. No genotype logging or analytics.
 
-### Screenshot
+### Evidence contract
 
-Accept PNG/JPEG up to 10 MB with decoded-image checks. Scope launch support to 23andMe and AncestryDNA, consistent with the main product statement. MyHeritage is an extension after dedicated fixtures exist.
-
-Muse Spark routes/rejects health panels, extracts provider labels, percentages, ranges and hierarchy, and returns a schema-validated draft. The user corrects it before generation. Preserve “unassigned,” rounding and parent-child categories without double-counting. Explain that screenshot content is sent to the model service and provide cropping/redaction before submission.
-
-Screenshot evidence never claims SNP analysis, measured PCA coordinates, individual genetic distances or deep-time percentages. If an experimental population-proxy simulation is later added, label it throughout the interface and export as a model of provider categories, not an analysis of the person's genotype.
-
-### Shared evidence contract
-
-Both branches yield a discriminated evidence record: input type, provider or basis ID, supported findings, QC, limitations, historical context and provenance. Only the raw-data branch can contain measured projection/fit results. This distinction must survive every agent and render boundary.
+The raw-DNA branch yields an evidence record: input type, basis ID, supported findings, QC, limitations, historical context and provenance. Measured projection/fit results and their limitations must survive every agent and render boundary.
 
 ## 6. Agent graph and model responsibilities
 
 Implement a small explicit directed workflow in TypeScript. Preserve ABOUT's orchestrator/worker/auditor classes without deploying separate services for each role.
 
-The complete canonical roster, responsibilities and graph are in [AGENTS.md](../AGENTS.md). PipelineOrchestrator owns routing and budgets; GatekeeperAgent/ScreenshotExtractor handle screenshots; deterministic browser code handles raw data; InterpretationAgent and the research roles prepare approved evidence; DocumentaryDirector writes the ReelPlan. HistoricalImageAgent and AtlasAgent supply reviewed assets through their respective auditors. AssetSelector resolves the manifest; NarrativeAuditor and ComplianceAuditorAgent gate final assembly by ReelAssembler. No role approves its own unsupported output.
+The complete canonical roster, responsibilities and graph are in [AGENTS.md](../AGENTS.md). PipelineOrchestrator owns routing and budgets; deterministic browser code handles raw data; InterpretationAgent and the research roles prepare approved evidence; DocumentaryDirector writes the ReelPlan. HistoricalImageAgent and AtlasAgent supply reviewed assets through their respective auditors. AssetSelector resolves the manifest; NarrativeAuditor and ComplianceAuditorAgent gate final assembly by ReelAssembler. No role approves its own unsupported output.
 
 Use Muse Spark for runtime multimodal reasoning and structured planning, Muse Image for illustration production, and Wonder for development/research assistance. Configure concrete model IDs centrally and smoke-test account access. Do not assume a model supports every sampling parameter; send only supported settings.
 
@@ -154,23 +146,23 @@ Bundle Earth textures, modest elevation relief and a few regional meshes. Globe-
 
 ## 8. Tappable evidence and visual system
 
-Retain the supplied mockup's landing-page composition: generous headline, upload card, bright generation action and large portrait film preview. On mobile, stack input and player. Avoid replacing this with a generic analytics dashboard or full video-editing studio.
+Retain the supplied mockup's landing-page composition: generous headline, upload card, bright generation action and large film preview. On mobile, stack input and player. Avoid replacing this with a generic analytics dashboard or full video-editing studio.
 
-Use black/warm-charcoal backgrounds, dark translucent surfaces, white principal text, #A3A3A3 secondary text, #EEB057 emphasis and #C8F45B primary action/status accents. Use Inter throughout. Main panels can use larger rounded corners consistent with the screenshot; small controls share a limited radius scale. These tokens match DESIGN.md.
+Use black/warm-charcoal backgrounds, dark translucent surfaces, white principal text, #A3A3A3 secondary text, #EEB057 emphasis and #C8F45B primary action/status accents. Use Inter throughout. Main panels can use larger rounded corners consistent with the mockup; small controls share a limited radius scale. These tokens match DESIGN.md.
 
 Start body text around 16 px for readability, responsive display text around 48–88 px on desktop, and 12–14 px utility labels. Preserve the 4 px spacing rhythm, restrained glass blur and moderate motion. Use Solar outlines. Bundle fonts and icon assets locally.
 
 Components, in dependency order:
 
-1. App shell, design tokens, responsive hero and portrait viewport.
+1. App shell, design tokens, responsive hero and film viewport.
 2. Input tabs, drag/drop area, validation messages and sample selection.
-3. Extraction correction table and raw-analysis quality summary.
+3. Raw-analysis quality summary.
 4. Generation stage list with cancel/retry and partial results.
 5. Chapter tabs, progress segments, play/pause, scrub and fullscreen.
 6. Clickable claim overlays and evidence drawer/sheet.
 7. Export progress, download, source manifest and replay controls.
 
-Clicking a claim pauses playback and opens an accessible evidence drawer. Include: what the result says; why this model/provider reports it; how the historical context relates; source links; what cannot be inferred. Statistical similarity and historical causation must be distinguished. A tooltip alone is inadequate for the core “why” experience. Provide keyboard access, focus restoration and a mobile sheet.
+Clicking a claim pauses playback and opens an accessible evidence drawer. Include: what the result says; why this model reports it; how the historical context relates; source links; what cannot be inferred. Statistical similarity and historical causation must be distinguished. A tooltip alone is inadequate for the core “why” experience. Provide keyboard access, focus restoration and a mobile sheet.
 
 Remove the mockup's unearned “99.8% confidence,” “Identity-by-Descent Phase,” and precise convergence dates. Show actual matched markers, model/version, residual and documented sensitivity where available. Fix the misleading sample filename suggesting an unsupported vendor chip version. Credibility counts refer to samples actually used, not the entire size of a source database.
 
@@ -178,7 +170,7 @@ MP4 exports cannot retain clickable overlays. Export a readable source cue/end c
 
 ## 9. Playback and export
 
-Browser preview is immediate once a valid plan and assets exist. Reuse the same scene engine for export in a dedicated render route. Default draft output: 720 × 1280 at 30 fps; final: 1080 × 1920 at 30 fps. Step exact timestamps in Chromium and pipe frames to native FFmpeg with bounded buffering. Encode H.264 MP4 with a broadly compatible pixel format; add AAC only if an optional audio track exists.
+Browser preview is immediate once a valid plan and assets exist. Reuse the same scene engine for export in a dedicated render route. Default draft output: 1280 × 720 at 30 fps; final: 1920 × 1080 at 30 fps. Step exact timestamps in Chromium and pipe frames to native FFmpeg with bounded buffering. Encode H.264 MP4 with a broadly compatible pixel format; add AAC only if an optional audio track exists.
 
 Do not retain an entire film's decoded frames. Do not use live screen recording as the correctness path. Wait for fonts, textures and images; disable interaction during frame capture; check first/last frames, chapter boundaries, duration and text safe areas in the actual output.
 
@@ -203,13 +195,13 @@ First install requires network access for dependencies unless a complete offline
 
 Never substitute the builder's results for a new uploaded person's results. On API failure preserve analysis and show a retry or explicitly selected saved example.
 
-Store original raw input only in ephemeral browser memory. Persist plans and creative assets locally with a delete-project action; do not persist screenshots or personal summaries by default without clear user choice. Server caches containing derived ancestry are private local files excluded from Git. Log opaque job IDs, stages, timings and counts; avoid raw input hashes as analytics identifiers.
+Store original raw input only in ephemeral browser memory. Persist plans and creative assets locally with a delete-project action; do not persist personal summaries by default without clear user choice. Server caches containing derived ancestry are private local files excluded from Git. Log opaque job IDs, stages, timings and counts; avoid raw input hashes as analytics identifiers.
 
 Bind the server to localhost. Keep API keys server-only, outside Vite public environment variables. Restrict browser origins and local render/file routes; never expose arbitrary filesystem reads. Use typed success/error envelopes, timeouts and idempotent stage IDs.
 
 Cache keys include model/version, complete inputs/settings, prompt version, evidence version and asset/basis IDs where relevant. Cache reuse must not cross users accidentally. Validate structured responses; retry schema failures once, then surface a typed error. All paid calls go through one adapter with spend reservations, bounded concurrency, caps and a global kill switch.
 
-Initial configurable policy for both input tiers: six initial image calls, at most two repair images per episode and one repair per scene, initial image concurrency two; bounded research queries and model outputs; one repair pass per failed structured stage. IMAGE.md and AGENT.md define image auditing and retry behavior. Set per-run/global dollar limits using account pricing; reserve budget before parallel calls. Treat credit expiry in RULES as an account fact to verify, not an assumption about free post-event calls.
+Initial configurable policy: six initial image calls, at most two repair images per episode and one repair per scene, initial image concurrency two; bounded research queries and model outputs; one repair pass per failed structured stage. IMAGE.md and AGENT.md define image auditing and retry behavior. Set per-run/global dollar limits using account pricing; reserve budget before parallel calls. Treat credit expiry in RULES as an account fact to verify, not an assumption about free post-event calls.
 
 ## 11. Repository organization
 
@@ -236,7 +228,7 @@ Large original datasets stay outside Git, in ignored `dataset/` staging or exter
 
 ## 12. Build order and completion gates
 
-These are dependency and acceptance gates, not separate time allocations. Use ABOUT's 5–6 hour schedule to overlap independent work. Scientific gates apply to the raw-analysis branch; a missing bundle does not block the eligible screenshot/context or labelled replay paths. Do not mark scientific phases complete when taking that fallback.
+These are dependency and acceptance gates, not separate time allocations. Use ABOUT's 5–6 hour schedule to overlap independent work. Scientific gates apply to the raw-analysis branch; a missing bundle does not block the labelled replay path. Do not mark scientific phases complete when taking that fallback.
 
 ### Phase 0 — freeze contracts and prove the riskiest assumptions
 
@@ -262,9 +254,9 @@ Build the six scene types, chapter structure, typography, geography and evidence
 
 Exit: a polished 90–150 second film plays, explains “why,” and exports correctly on the judge baseline machine.
 
-### Phase 4 — live agents and screenshot branch
+### Phase 4 — live agents
 
-Add extraction/correction, bounded research, interpretation, director planning, live historical image generation for both tiers, reviewed asset selection and auditors. Show real stage progress and cache provenance. Test a failed image call, invalid JSON, unsupported health panel and missing citation.
+Add bounded research, interpretation, director planning, live historical image generation, reviewed asset selection and auditors. Show real stage progress and cache provenance. Test a failed image call, invalid JSON and missing citation.
 
 Exit: a new input produces a genuinely new reviewed film; failed services leave a usable project.
 
@@ -272,15 +264,15 @@ Exit: a new input produces a genuinely new reviewed film; failed services leave 
 
 Run fresh-clone installation on supported systems, with and without a key. Include ready `/demo` files, README diagrams, methodology evidence and a short recorded walkthrough. Verify repo public access, licenses, secrets, all required tests and the v1.0-demo tag. Confirm official submission timezone and credit expiry.
 
-Scope cuts if time runs short: optional voiceover, G25 prediction, experimental screenshot proxy modeling, SAM transitions, extra terrain detail, hosted export and hosted deployment. Live imagery remains the keyed target; reviewed assets handle failures. Keep numerical correctness, film quality, evidence access, local installation and truthful demo labeling. If scientific gates cannot pass within the delivery window, disable personal raw analysis and explicitly report that limitation under ABOUT.
+Scope cuts if time runs short: optional voiceover, G25 prediction, SAM transitions, extra terrain detail, hosted export and hosted deployment. Live imagery remains the keyed target; reviewed assets handle failures. Keep numerical correctness, film quality, evidence access, local installation and truthful demo labeling. If scientific gates cannot pass within the delivery window, disable personal raw analysis and explicitly report that limitation under ABOUT.
 
 ## 13. Testing and acceptance
 
 Honor RULES: TDD and at least 80% coverage. Apply explicit thresholds to first-party TS source and Python research logic; exclude generated/vendored assets, not inconvenient application code. Critical numerical and privacy behavior requires targeted tests regardless of aggregate coverage.
 
-Required tests: malformed vendor files; no-calls, strand/build errors and duplicate SNPs; ZIP bounds; low overlap; projection parity; constrained-fit invariants; unstable/poor-fit handling; basis mismatch; screenshot hierarchy; health rejection; schema repair; evidence references; auditor blocking; cancellation/resume; budget concurrency; no raw genotype network requests; deterministic scene seeks; export duration/dimensions and boundary frames.
+Required tests: malformed vendor files; no-calls, strand/build errors and duplicate SNPs; ZIP bounds; low overlap; projection parity; constrained-fit invariants; unstable/poor-fit handling; basis mismatch; schema repair; evidence references; auditor blocking; cancellation/resume; budget concurrency; no raw genotype network requests; deterministic scene seeks; export duration/dimensions and boundary frames.
 
-Integration-milestone and pre-submission end-to-end run: safe raw fixture → verified findings → director plan → audit → interactive playback → evidence drawer → local MP4. Repeat screenshot path and saved-demo mode. Review on a real phone/browser as well as desktop. Check keyboard access and reduced-motion UI.
+Integration-milestone and pre-submission end-to-end run: safe raw fixture → verified findings → director plan → audit → interactive playback → evidence drawer → local MP4. Repeat saved-demo mode. Review on a real phone/browser as well as desktop. Check keyboard access and reduced-motion UI.
 
 Publish measured hardware/browser versions, cold/warm timings, peak memory, render times and failure cases. The earlier 1–2 second parsing and sub-100 ms projection numbers are hypotheses, not acceptance promises. Prioritize responsive UI and visible progress over unsupported benchmark claims.
 

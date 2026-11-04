@@ -3,8 +3,8 @@
 import type { ProgressEvent } from "../contracts/index.ts";
 
 const STEPS = [
-  { step: 1, title: "Reading your results" },
-  { step: 2, title: "Extracting composition" },
+  { step: 1, title: "Analysed on your device" },
+  { step: 2, title: "Fitting era sources" },
   { step: 3, title: "Selecting your citations" },
   { step: 4, title: "Profiling reference populations" },
   { step: 5, title: "Directing your film" },

@@ -17,17 +17,25 @@ Two skills were used as the drawing method, both MIT licensed:
 
 Open any `.html` file directly in a browser. PNG previews are in `previews/`.
 
+Each schematic page has a **plain-language walkthrough** under the drawing. For every step
+it gives what the step gets, does, hands over, why a Muse model (or no model) is used there
+and which guard applies, plus a "critical view" of what Muse is and is not trusted with.
+The architecture and input pages also list the genomic datasets (AADR, EGDP, SGDP,
+Franco-Cantabrian) and why they are not in the repository. Text lives in
+`walk-content.mjs`, dataset rows and source links in `datasets.mjs`, layout in
+`walk-render.mjs`.
+
 ## Index
 
 | File | Type | What it shows | Source docs |
 | --- | --- | --- | --- |
 | `01-system-architecture.html` | Architecture | Browser (React app, in-memory ancestry worker, reel engine), local Hono server (API, orchestrator, the single Muse adapter, local cache), hosted Muse Spark and Muse Image. Raw genotypes never cross the browser boundary. | STACK §3, §5, §10; RULES privacy |
 | `02-input-to-evidence.html` | Flowchart | Screenshot tier (gatekeeper, extractor, user correction, typed rejections) and raw tier (browser worker: parse, QC, PCA-25, era fits), both ending in one `EvidenceRecord`. | STACK §5; `pipeline.ts`, `app.ts` |
-| `03-evidence-to-film.html` | Process | Profiler, interpretation, director, narrative and compliance audits with the single repair loop, then deterministic atlas scenes and reviewed images. | AGENTS graph; DIRECTOR; `pipeline.ts` |
+| `03-evidence-to-film.html` | Process | Interpretation, profiler, director, narrative and compliance audits (run in parallel) with the single repair loop, then deterministic atlas scenes and reviewed images. | AGENTS graph; DIRECTOR; `pipeline.ts` |
 | `04-agent-swimlane.html` | Swimlane | Who hands what to whom: orchestrator, Spark workers, Spark auditors, deterministic code. | AGENTS runtime role registry |
 | `05-muse-call-sequence.html` | Sequence | What one `callJson` goes through: kill switch, run cap, sha256 cache, Meta API with JSON schema, Zod validation and one retry, cache write, cost log, typed result. | RULES models/budget; `client.ts` |
-| `06-image-agent-state.html` | State machine | HistoricalImageAgent states from AGENT.md. The repair state is dashed: `images.ts` v1 goes straight from a failed audit to fallback. | AGENT.md; IMAGE.md; `images.ts` |
-| `07-muse-model-map.html` | Tree | Which Muse model runs which stage, at which effort (temperature and token caps from `models.ts`), and that Wonder is development only. | STACK §6; `models.ts` |
+| `06-image-agent-state.html` | State machine | HistoricalImageAgent states from AGENT.md. Audit, one repair, re-audit, then approved or fallback, as `images.ts` now implements it. | AGENT.md; IMAGE.md; `images.ts` |
+| `07-muse-model-map.html` | Tree | Which Muse model runs which stage, at which effort (temperature and token caps from `models.ts`; high effort is 32,768 tokens), and that Wonder is development only. | STACK §6; `models.ts` |
 | `anatomy/pocketdna-bench.html` | Isometric figure | The bench: a sealed analyser releases an evidence card, one lamp lights for every Spark stage, two stamps are the audits, a reel winds the film. Readout and dial count paid calls. Hover or use arrow keys. Light theme: `pocketdna-bench-light.html`. | ABOUT; AGENTS; `pipeline.ts` |
 
 ## Skin

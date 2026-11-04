@@ -49,7 +49,7 @@ SAM 3.1 is available through Meta's hosted API for image/video detection, segmen
 | Track an object in existing footage | Optional SAM 3.1; useful only if that footage is actually part of the film |
 | Find “the territory of the Natufians” in satellite imagery | Not a valid segmentation task; research historical geography instead |
 | Identify ethnicity from people in images | Not an atlas task; never use appearance to assign group identity |
-| Convert a historical-map screenshot into a modern geographic layer | Optional assisted digitization, requiring rights, legend interpretation, georeferencing and independent validation |
+| Convert a historical-map image into a modern geographic layer | Optional assisted digitization, requiring rights, legend interpretation, georeferencing and independent validation |
 | Create terrain elevation, borders or routes | Geographic datasets and deterministic processing, not Muse Image or SAM |
 
 **Recommendation:** ship the globe and vector animation first. Add one memorable image-to-map transition using SAM only after the full local export path works. Segmentation does not animate objects or create depth; the compositor supplies motion. An object ID tracked in a video is not evidence of a historical group's continuity.
@@ -138,7 +138,7 @@ Named populations such as Druze, Bedouin, Sardinian, Maya or Orcadian require en
 
 Use amber fills at restrained opacity with readable terrain beneath. Use dashed contours or stippling for approximate extent, distinct point symbols for sites and a legend for each semantic layer. Overlapping distributions may coexist; they need not partition the world.
 
-Aesthetic blur is not a quantified uncertainty interval. Label it as an approximate distribution unless a spatial uncertainty model actually exists. Use stable colours for entities within a scene; pair colour with labels and patterns. Limit simultaneous labels to what remains readable in portrait orientation.
+Aesthetic blur is not a quantified uncertainty interval. Label it as an approximate distribution unless a spatial uncertainty model actually exists. Use stable colours for entities within a scene; pair colour with labels and patterns. Limit simultaneous labels to what remains readable in landscape orientation.
 
 ## 7. Research and geometry verification
 
@@ -292,7 +292,7 @@ timing and director handoff. Do not emit executable code or private reasoning.
 ```text
 Resolve {{entity_label}} for {{date_interval}} in {{geographic_scope}}.
 Narrative purpose: {{approved_claim}}.
-Input evidence class: {{raw_genetic_result_or_provider_report_or_context}}.
+Input evidence class: {{raw_genetic_result_or_context}}.
 
 Find primary or specialist institutional sources for the entity's definition,
 locations and dates. Open the relevant passages, figures or datasets.
@@ -323,7 +323,7 @@ unknown. Do not infer migration speed, population count or personal genealogy.
 ### ATLAS-SHOT-01 — cinematic map plan
 
 ```text
-Plan one portrait atlas shot using only {{approved_features_and_claims}}.
+Plan one landscape atlas shot using only {{approved_features_and_claims}}.
 Available terrain: {{terrain_bundle_and_supported_zoom_ranges}}.
 Allowed presets: {{preset_catalog}}. Duration budget: {{seconds}}.
 Caption-safe layout: {{layout_contract}}.
@@ -344,7 +344,7 @@ Site/region: {{verified_place}}. Interval: {{verified_interval}}.
 Purpose and claim limit: {{contextual_claim}}.
 Evidence brief: {{historical_brief_id}}.
 Outgoing map shot: {{camera_direction_palette_and_transition}}.
-Required image framing: {{portrait_safe_regions_and_subject_position}}.
+Required image framing: {{safe_regions_and_subject_position}}.
 Optional cutout target: {{visible_object_or_none}}.
 
 Apply IMAGE.md's historical sourcing, generation and audit workflow. Return
@@ -373,7 +373,7 @@ Audit {{scene_package}} against {{evidence_pack}} and inspect {{preview_frames}}
 Check entity identity, dates, geography, route semantics, source precision,
 terrain alignment, labels, uncertainty and personal-ancestry implications.
 Check whether motion suggests more than the sources support. Inspect globe
-occlusion, map/image continuity and portrait caption clearance.
+occlusion, map/image continuity and caption clearance.
 
 Return pass, revise or fallback with concrete issues, source IDs and minimal
 corrections. Do not certify history from attractive pixels. Do not interpret
@@ -449,11 +449,11 @@ The earlier model-page pricing snapshot records SAM image processing at $2.50 pe
 
 Use a shared semaphore and budget reservation before paid requests. Record attempts, hashes, settings and known/uncertain billing outcomes. A timeout does not prove the provider did no work. Bound retries, respect cancellation and fall back to a plain image transition when SAM fails. Do not create a separate mandatory Modal/Baseten deployment.
 
-AtlasAgent receives only approved contextual claims and scene identifiers, not DNA files, user names, personal coordinates or screenshots. Personal episode selections may still be sensitive: keep manifests private by default, provide deletion, and commit only deliberately prepared anonymized demo assets. Do not send exact contemporary locations of private individuals or sensitive sites to public mapping services.
+AtlasAgent receives only approved contextual claims and scene identifiers, not DNA files, user names or personal coordinates. Personal episode selections may still be sensitive: keep manifests private by default, provide deletion, and commit only deliberately prepared anonymized demo assets. Do not send exact contemporary locations of private individuals or sensitive sites to public mapping services.
 
 ## 14. Build order and acceptance
 
-1. Prove a single deterministic globe scene with bundled assets, 9:16 captions, SVG fallback and local MP4 export.
+1. Prove a single deterministic globe scene with bundled assets, 16:9 captions, SVG fallback and local MP4 export.
 2. Add one detailed regional mesh and a controlled globe-to-region transition. Verify geography and terrain alignment.
 3. Create a small reviewed gazetteer, a dated-site layer and one sourced distribution. Implement evidence drawers and geometry validation.
 4. Add route/corridor semantics and camera presets. Test antimeridian handling, BCE/CE conversion and unsupported-movement rejection.
@@ -462,7 +462,7 @@ AtlasAgent receives only approved contextual claims and scene identifiers, not D
 7. Add optional SAM cutouts only if they improve that sequence. Test no matches, multiple matches, bad edges and mask/source size mismatch.
 8. Benchmark preview and export, freeze demo assets, document the one-command supported-platform path and run offline replay.
 
-Acceptance requires: sourced geographic meaning; no invented polygons or routes; explicit uncertainty; no genetic-to-territorial inference; real terrain detail within documented limits; legible 9:16 labels; deterministic seeking; aligned captions and image transitions; complete source/rights manifest; bounded paid calls; and an honest no-key fallback.
+Acceptance requires: sourced geographic meaning; no invented polygons or routes; explicit uncertainty; no genetic-to-territorial inference; real terrain detail within documented limits; legible 16:9 labels; deterministic seeking; aligned captions and image transitions; complete source/rights manifest; bounded paid calls; and an honest no-key fallback.
 
 ## 15. Research sources
 

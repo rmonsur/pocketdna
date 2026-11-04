@@ -8,7 +8,7 @@ Assign **HistoricalImageAgent** responsibility for creating the episode's histor
 
 This is an application agent contract, not a repository-wide coding-agent instruction file. The singular filename is intentional. It specifies work to implement; no background agent has been deployed by this document.
 
-Apply RULES.md's ancestry-only, no-war and privacy constraints. IMAGE.md and STACK.md share live generation for both tiers: six initial images, up to two episode-wide repairs, at most one repair per scene and initial concurrency two. Reviewed assets support replay and failures. Stack and bioinformatics boundaries remain applicable. A user's ancestry evidence controls narrative eligibility; it never serves as a costume, face or personality generator.
+Apply RULES.md's ancestry-only, no-war and privacy constraints. IMAGE.md and STACK.md share the live generation policy: six initial images, up to two episode-wide repairs, at most one repair per scene and initial concurrency two. Reviewed assets support replay and failures. Stack and bioinformatics boundaries remain applicable. A user's ancestry evidence controls narrative eligibility; it never serves as a costume, face or personality generator.
 
 ## Runtime ownership
 
@@ -122,7 +122,7 @@ No additional end-user confirmation is needed for ordinary image generation afte
 
 1. Add mode selection, typed scene/brief/manifest contracts and the agent state machine.
 2. Build one complete reviewed historical brief and an anonymized replay fixture during the hackathon. Record asset provenance and project-created work.
-3. Implement a server-side Muse Image capability smoke test: portrait request, reference input, output decoding and targeted edit. Keep tests behind explicit live configuration so normal test runs spend no credits.
+3. Implement a server-side Muse Image capability smoke test: landscape request, reference input, output decoding and targeted edit. Keep tests behind explicit live configuration so normal test runs spend no credits.
 4. Add prompt compilation and the evidence gate. Unit-test unresolved variables and prohibited personal-data fields.
 5. Integrate independent visual review and bounded repair. Use fixture cases with obvious historical mismatch and anatomy/crop defects; model review is a quality gate, not a guarantee.
 6. Add budget reservation, duplicate suppression, cancellation, timeout handling and reference-fetch safeguards.
@@ -131,7 +131,7 @@ No additional end-user confirmation is needed for ordinary image generation afte
 
 ## Acceptance checks
 
-- Raw-DNA and screenshot flows both reach live image generation when enabled, with their distinct claim limits preserved.
+- The raw-DNA flow reaches live image generation when enabled, with its claim limits preserved.
 - Every generated scene has an inspectable prompt, evidence brief, audit and manifest.
 - No unreviewed image becomes a finished scene; no evidence-poor scene gains invented certainty.
 - Sources, continuity anchors and factual claims retain distinct roles.

@@ -47,6 +47,37 @@
       margin-bottom: 1.5rem;
     }
     svg { width: 100%; min-width: 1240px; display: block; }
+
+    .walk { margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 2rem; }
+    .walk h2 { font-family: var(--font-serif); font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+    .walk h3 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: -0.005em; }
+    .walk p.lead { color: #D4D4D4; font-size: 1rem; line-height: 1.65; max-width: 62rem; margin-bottom: 1.25rem; }
+    .walk .eyebrow { margin-bottom: 0.6rem; }
+    .critical { border: 1px solid var(--color-accent); background: rgba(238,176,87,0.06); border-radius: 6px; padding: 1rem 1.25rem; margin: 0 0 1.75rem; max-width: 62rem; }
+    .critical .eyebrow { color: var(--color-accent); }
+    .critical ul { margin-left: 1.1rem; color: #E5E5E5; font-size: 0.92rem; line-height: 1.6; }
+    .critical li + li { margin-top: 0.35rem; }
+    ol.steps { list-style: none; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 34rem), 1fr)); }
+    li.step { background: #18181B; border: 1px solid rgba(255,255,255,0.16); border-radius: 6px; padding: 1.1rem 1.25rem 1.2rem; }
+    .step header { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .step .num { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-muted); border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; min-width: 1.7rem; height: 1.7rem; display: inline-flex; align-items: center; justify-content: center; }
+    .chip { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; padding: 0.22rem 0.5rem; border: 1px solid rgba(255,255,255,0.3); color: var(--color-muted); }
+    .chip.muse { color: var(--color-accent); border-color: var(--color-accent); }
+    .chip.user { color: #C8F45B; border-color: rgba(200,244,91,0.6); }
+    .step dl { display: grid; grid-template-columns: 6.2rem 1fr; gap: 0.5rem 0.9rem; font-size: 0.88rem; line-height: 1.55; }
+    .step dt { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); padding-top: 0.2rem; }
+    .step dd { color: #E5E5E5; }
+    .step dt.why, .step dt.why + dd { color: var(--color-accent); }
+    .step dt.why + dd { color: #F3D9AE; }
+    .walk table { border-collapse: collapse; width: 100%; font-size: 0.86rem; line-height: 1.5; }
+    .walk th, .walk td { text-align: left; vertical-align: top; padding: 0.6rem 0.8rem; border-top: 1px solid rgba(255,255,255,0.16); }
+    .walk th { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); font-weight: 500; }
+    .walk td a { color: #C8F45B; }
+    .walk td .todo { color: var(--color-muted); font-style: italic; }
+    .datasets { margin-top: 2.25rem; overflow-x: auto; }
+    .datasets .note { color: #D4D4D4; font-size: 0.9rem; line-height: 1.6; max-width: 62rem; margin-bottom: 0.9rem; }
+    @media (max-width: 640px) { .step dl { grid-template-columns: 1fr; } .step dt { padding-top: 0.5rem; } }
+
     @media print {
       .diagram-container { overflow-x: visible; }
       svg { min-width: 0; }
@@ -121,11 +152,11 @@
 <rect x="776" y="168" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
 <text x="794" y="177" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
 <text x="848" y="196" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Generating</text>
-<text x="848" y="212" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">muse-image · 9:16 · png</text>
+<text x="848" y="212" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">muse-image · 16:9 · jpeg</text>
 <rect x="536" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
-<rect x="536" y="336" width="160" height="64" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
-<rect x="544" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
-<text x="562" y="353" fill="#8A8A8A" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+<rect x="536" y="336" width="160" height="64" rx="8" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="544" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+<text x="562" y="353" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
 <text x="616" y="372" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Repairing</text>
 <text x="616" y="388" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">HIST-REPAIR-01 · ≤1/scene</text>
 <rect x="768" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
@@ -133,7 +164,7 @@
 <rect x="776" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
 <text x="794" y="353" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
 <text x="848" y="372" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Auditing</text>
-<text x="848" y="388" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">HIST-AUDIT-01 · Spark vision</text>
+<text x="848" y="388" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">Spark medium · sees image</text>
 <rect x="984" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
 <rect x="984" y="336" width="160" height="64" rx="8" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
 <rect x="992" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(238,176,87,0.5)" stroke-width="0.8"/>
@@ -145,7 +176,7 @@
 <rect x="992" y="456" width="36" height="12" rx="2" fill="transparent" stroke="rgba(163,163,163,0.5)" stroke-width="0.8"/>
 <text x="1010" y="465" fill="#A3A3A3" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
 <text x="1064" y="484" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Fallback</text>
-<text x="1064" y="500" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">reviewed plate · honest label</text>
+<text x="1064" y="500" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">reviewed plate · labelled</text>
 <rect x="120" y="336" width="160" height="64" rx="8" fill="#0A0908"/>
 <rect x="120" y="336" width="160" height="64" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
 <rect x="128" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
@@ -159,27 +190,35 @@
 <text x="192" y="548" fill="#FFFFFF" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="start">Any state → cancelled / failed on cancel, uncertain timeout or exhausted budget.</text>
 <path d="M 184,544 Q 176,470 200,404" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
 <circle cx="200" cy="400" r="2" fill="#FFFFFF"/>
-<text x="1200" y="572" fill="#FFFFFF" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">images.ts v1 skips repair: a failed audit goes straight to fallback; AGENT.md allows one repair per scene.</text>
-<path d="M 676,566 Q 640,500 604,404" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="1200" y="572" fill="#FFFFFF" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">Repair is live: one edit per scene, two per episode, re-audit required; otherwise fallback.</text>
+<path d="M 756,566 Q 700,500 604,404" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
 <circle cx="600" cy="400" r="2" fill="#FFFFFF"/>
 <line x1="40" y1="596" x2="1200" y2="596" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
 <text x="40" y="612" fill="#A3A3A3" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.18em">LEGEND</text>
 <rect x="40" y="628" width="14" height="10" rx="2" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
 <text x="60" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Agent state</text>
 <rect x="141.2" y="628" width="14" height="10" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="161.2" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Specified, not yet in code</text>
-<rect x="320.4" y="628" width="14" height="10" rx="2" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
-<text x="340.4" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Approved asset</text>
-<rect x="437.2" y="628" width="14" height="10" rx="2" fill="rgba(255,255,255,0.05)" stroke="#A3A3A3" stroke-width="1"/>
-<text x="457.2" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Honest substitute</text>
-<line x1="569.6" y1="632" x2="597.6" y2="632" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
-<text x="605.6" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Transition</text>
-<line x1="681.6" y1="632" x2="709.6" y2="632" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
-<text x="717.6" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Repair loop</text>
-<line x1="798.8000000000001" y1="632" x2="826.8000000000001" y2="632" stroke="#EEB057" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-<text x="834.8000000000001" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Happy path</text>
+<text x="161.2" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Closed state (cancel / failure)</text>
+<rect x="346.4" y="628" width="14" height="10" rx="2" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
+<text x="366.4" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Approved asset</text>
+<rect x="463.2" y="628" width="14" height="10" rx="2" fill="rgba(255,255,255,0.05)" stroke="#A3A3A3" stroke-width="1"/>
+<text x="483.2" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Honest substitute</text>
+<line x1="595.6" y1="632" x2="623.6" y2="632" stroke="#A3A3A3" stroke-width="1.2" marker-end="url(#arrow)"/>
+<text x="631.6" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Transition</text>
+<line x1="707.6" y1="632" x2="735.6" y2="632" stroke="#A3A3A3" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<text x="743.6" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Repair loop</text>
+<line x1="824.8000000000001" y1="632" x2="852.8000000000001" y2="632" stroke="#EEB057" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<text x="860.8000000000001" y="636" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Happy path</text>
       </svg>
     </div>
+    <section class="walk" aria-labelledby="walk-h">
+<p class="eyebrow">Plain-language walkthrough</p>
+<h2 id="walk-h">One scene, from brief to approved picture</h2>
+<p class="lead">A scene is never taken on faith. Muse Image makes a candidate, a different Muse Spark call inspects the actual picture, and only a pass is shown. One targeted repair is allowed, then a reviewed fallback image takes over so the film always plays. This is the image version of the same rule as the script: the generator never grades itself.</p>
+<aside class="critical"><p class="eyebrow">The critical view: what Muse is and is not trusted with</p><ul><li>The pictures are illustration. The prompt calls them reconstructions and the subjects fictional inhabitants of a documented setting, never portraits of the viewer's ancestors and never derived from the viewer's DNA.</li><li>Muse Image is asked to verify period and regional details with its own search, and the prompt says search supports reconstruction but does not establish provenance.</li><li>Repairs are bounded: one per scene, two per episode. The re-audit must pass, otherwise the scene is replaced by a labelled fallback.</li></ul></aside>
+<ol class="steps"><li class="step"><header><span class="num">1</span><h3>Queued</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>A scene target from an approved beat.</dd><dt>Does</dt><dd>Validates the scene and the mode.</dd><dt>Hands over</dt><dd>A valid job to the brief step.</dd><dt class="why">Why no model</dt><dd>Bad input should fail before money is spent.</dd><dt>Guard</dt><dd>Cancellation prevents any late result entering the film.</dd></dl></li><li class="step"><header><span class="num">2</span><h3>Researching</h3><span class="chip code">No model, cited records</span></header><dl><dt>Gets</dt><dd>The beat's cited record: place, date, reference family, publication and DOI.</dd><dt>Does</dt><dd>Assembles the scene brief from that record and from the reviewed gazetteer.</dd><dt>Hands over</dt><dd>A complete brief. A missing required field stops the scene.</dd><dt class="why">Why no model</dt><dd>The facts in a picture should come from the record, not a model's recollection.</dd><dt>Guard</dt><dd>Present-day labels get an ordinary everyday scene with no costume or ethnic styling inferred.</dd></dl></li><li class="step"><header><span class="num">3</span><h3>Prompt ready</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>The brief.</dd><dt>Does</dt><dd>Compiles the HIST-IMAGE-01 prompt with every placeholder filled: setting, purpose, action, light, mood, composition and an exclusion list.</dd><dt>Hands over</dt><dd>The final prompt.</dd><dt class="why">Why no model</dt><dd>A fixed template keeps style, safety and the quiet caption area consistent across scenes.</dd><dt>Guard</dt><dd>Excludes battle, weapons as a subject, politics, text, logos, maps and percentages. The left 45 percent of frame stays quiet for captions.</dd></dl></li><li class="step"><header><span class="num">4</span><h3>Generating</h3><span class="chip muse">Muse Image 1.0</span></header><dl><dt>Gets</dt><dd>The prompt, at 1536 by 1024.</dd><dt>Does</dt><dd>Paints one cinematic 16:9 candidate. The prompt asks it to check period details with its own search first.</dd><dt>Hands over</dt><dd>Picture bytes, hashed, to the audit.</dd><dt class="why">Why Muse</dt><dd>It can draw a specific place and century. Costs $0.01 per image and is capped at six scenes, two at a time.</dd><dt>Guard</dt><dd>A candidate is not an approved asset.</dd></dl></li><li class="step"><header><span class="num">5</span><h3>Auditing</h3><span class="chip muse">Muse Spark 1.3 · medium effort</span></header><dl><dt>Gets</dt><dd>The actual image and the brief.</dd><dt>Does</dt><dd>Compares picture to brief: dates, objects, clothing, landscape, spectacle, text or logos, defects and the caption zone.</dd><dt>Hands over</dt><dd>A verdict: pass, repair with an edit instruction, or fallback. Issues are listed by region and severity.</dd><dt class="why">Why Muse</dt><dd>Seeing what is wrong in a picture is a vision judgement the generator cannot be trusted to make about itself.</dd><dt>Guard</dt><dd>Told not to estimate ancestry or traits from the people shown, and not to certify details too small to inspect.</dd></dl></li><li class="step"><header><span class="num">6</span><h3>Repairing</h3><span class="chip muse">Muse Image 1.0 edit</span></header><dl><dt>Gets</dt><dd>The candidate, attached as a reference, and the auditor's edit instruction.</dd><dt>Does</dt><dd>Changes only the flagged error and preserves everything else, including the quiet caption area. If unsure it removes the object.</dd><dt>Hands over</dt><dd>A repaired candidate, which goes back to Spark for a second audit.</dd><dt class="why">Why Muse</dt><dd>A scoped fix is cheaper and safer than a fresh gamble.</dd><dt>Guard</dt><dd>HIST-REPAIR-01, at most one per scene and two per episode. If the re-audit is not a pass, the scene falls back.</dd></dl></li><li class="step"><header><span class="num">7</span><h3>Approved</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>A passed image.</dd><dt>Does</dt><dd>Writes the file with a manifest: prompt, hash, every attempt and every audit verdict.</dd><dt>Hands over</dt><dd>The reviewed asset to the film.</dd><dt class="why">Why no model</dt><dd>A provenance trail lets anyone see how a picture was made and checked.</dd><dt>Guard</dt><dd>Labelled live, cache or replay in the viewer.</dd></dl></li><li class="step"><header><span class="num">8</span><h3>Fallback</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>A failed or exhausted scene.</dd><dt>Does</dt><dd>Uses a reviewed plate and says so honestly.</dd><dt>Hands over</dt><dd>A usable asset so the film is never blocked.</dd><dt class="why">Why no model</dt><dd>A hanging spinner is worse than a plain honest image.</dd><dt>Guard</dt><dd>Never silently substituted.</dd></dl></li><li class="step"><header><span class="num">9</span><h3>Cancelled or failed</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>A cancel, an uncertain timeout or an exhausted budget.</dd><dt>Does</dt><dd>Stops the scene from any state.</dd><dt>Hands over</dt><dd>Nothing enters the film late.</dd><dt class="why">Why no model</dt><dd>A cancelled job must stay cancelled.</dd><dt>Guard</dt><dd>Reachable from every state.</dd></dl></li></ol>
+
+</section>
   </div>
 </body>
 </html>

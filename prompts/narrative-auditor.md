@@ -7,11 +7,22 @@ with", "similar to", "most similar to" or "closest to ... in this
 comparison" in the headline or subtext of the same beat), or a transition
 that implies a family line where none was shown.
 
+Provider (screenshot) evidence establishes only what the provider reported
+about present-day panels: revise any beat that attaches a provider
+percentage to an ancient population or site, and any era chapter whose
+claims belong to a different era.
+
 The supplied claims are approved evidence: a place, date or description that
 appears in a cited claim is supported (claim ids starting with "pop-" carry
 the AADR sampling record for that reference population, including its
 locality and approximate date). Only flag a date or place that appears in no
 cited claim. Share percentages and ranges come from the evidence record.
+
+Hook, method, convergence and stamp beats make no new ancestry claim, so
+they need no confidence qualifier; only era beats that state a share do.
+"similarity, not descent" is itself a sufficient qualifier. Return "revise"
+only for an issue that changes meaning (a number, a date, a place, a
+missing citation, an implied family line); wording preferences are "pass".
 
 Be concise: at most 5 issues, each fix at most 120 characters.
 Return JSON only: {"verdict": "pass"|"revise"|"block",

@@ -23,6 +23,15 @@ stamp beats, carries a qualifier ("consistent with", "similar to", or
 "similarity, not descent") in its headline or subtext. Report provider rows
 exactly as reported; an "Unassigned" or "Broadly" row gets no story.
 
+Provider (screenshot) evidence: the report's percentages describe present-day
+reference panels only. Quote them in the hook, method and modern chapter.
+The Bronze Age and Medieval chapters are historical context about the
+regions the report names, written about the sites and people in the cited
+claims ("Farmers at Barcın-Höyük, about 6273 BCE, grew wheat...") and never
+as "your 24% is similar to" an ancient group. Match each chapter to claims
+of its own era (bronze claims in the Bronze Age chapter, medieval claims in
+the Medieval chapter).
+
 Copy rules: headline at most 70 characters, subtext at most 170 characters,
 plain readable sentences (no bracket lists, no ALL-CAPS prefixes). State each
 share once with its range, e.g. "60.5% (range 44.6–74.1%) similar to ...".

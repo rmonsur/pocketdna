@@ -47,6 +47,37 @@
       margin-bottom: 1.5rem;
     }
     svg { width: 100%; min-width: 1280px; display: block; }
+
+    .walk { margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 2rem; }
+    .walk h2 { font-family: var(--font-serif); font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+    .walk h3 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: -0.005em; }
+    .walk p.lead { color: #D4D4D4; font-size: 1rem; line-height: 1.65; max-width: 62rem; margin-bottom: 1.25rem; }
+    .walk .eyebrow { margin-bottom: 0.6rem; }
+    .critical { border: 1px solid var(--color-accent); background: rgba(238,176,87,0.06); border-radius: 6px; padding: 1rem 1.25rem; margin: 0 0 1.75rem; max-width: 62rem; }
+    .critical .eyebrow { color: var(--color-accent); }
+    .critical ul { margin-left: 1.1rem; color: #E5E5E5; font-size: 0.92rem; line-height: 1.6; }
+    .critical li + li { margin-top: 0.35rem; }
+    ol.steps { list-style: none; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 34rem), 1fr)); }
+    li.step { background: #18181B; border: 1px solid rgba(255,255,255,0.16); border-radius: 6px; padding: 1.1rem 1.25rem 1.2rem; }
+    .step header { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .step .num { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-muted); border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; min-width: 1.7rem; height: 1.7rem; display: inline-flex; align-items: center; justify-content: center; }
+    .chip { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; padding: 0.22rem 0.5rem; border: 1px solid rgba(255,255,255,0.3); color: var(--color-muted); }
+    .chip.muse { color: var(--color-accent); border-color: var(--color-accent); }
+    .chip.user { color: #C8F45B; border-color: rgba(200,244,91,0.6); }
+    .step dl { display: grid; grid-template-columns: 6.2rem 1fr; gap: 0.5rem 0.9rem; font-size: 0.88rem; line-height: 1.55; }
+    .step dt { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); padding-top: 0.2rem; }
+    .step dd { color: #E5E5E5; }
+    .step dt.why, .step dt.why + dd { color: var(--color-accent); }
+    .step dt.why + dd { color: #F3D9AE; }
+    .walk table { border-collapse: collapse; width: 100%; font-size: 0.86rem; line-height: 1.5; }
+    .walk th, .walk td { text-align: left; vertical-align: top; padding: 0.6rem 0.8rem; border-top: 1px solid rgba(255,255,255,0.16); }
+    .walk th { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); font-weight: 500; }
+    .walk td a { color: #C8F45B; }
+    .walk td .todo { color: var(--color-muted); font-style: italic; }
+    .datasets { margin-top: 2.25rem; overflow-x: auto; }
+    .datasets .note { color: #D4D4D4; font-size: 0.9rem; line-height: 1.6; max-width: 62rem; margin-bottom: 0.9rem; }
+    @media (max-width: 640px) { .step dl { grid-template-columns: 1fr; } .step dt { padding-top: 0.5rem; } }
+
     @media print {
       .diagram-container { overflow-x: visible; }
       svg { min-width: 0; }
@@ -121,8 +152,8 @@
 <rect x="536" y="192" width="128" height="64" rx="6" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
 <rect x="544" y="200" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
 <text x="562" y="209" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">SPARK</text>
-<text x="600" y="228" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Profile + cite</text>
-<text x="600" y="244" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">high · gazetteer</text>
+<text x="600" y="228" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Cite + profile</text>
+<text x="600" y="244" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">high · index · records</text>
 <rect x="712" y="192" width="128" height="64" rx="6" fill="#0A0908"/>
 <rect x="712" y="192" width="128" height="64" rx="6" fill="#18181B" stroke="#FFFFFF" stroke-width="1"/>
 <rect x="720" y="200" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
@@ -146,7 +177,7 @@
 <rect x="896" y="296" width="36" height="12" rx="2" fill="transparent" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
 <text x="914" y="305" fill="#FFFFFF" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">SPARK</text>
 <text x="952" y="324" fill="#FFFFFF" font-size="12" font-weight="600" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">Visual auditor</text>
-<text x="952" y="340" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">pass · fallback</text>
+<text x="952" y="340" fill="#A3A3A3" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">medium · pass/repair</text>
 <rect x="1064" y="384" width="128" height="64" rx="6" fill="#0A0908"/>
 <rect x="1064" y="384" width="128" height="64" rx="6" fill="rgba(238,176,87,0.10)" stroke="#EEB057" stroke-width="1"/>
 <rect x="1072" y="392" width="32" height="12" rx="2" fill="transparent" stroke="rgba(238,176,87,0.5)" stroke-width="0.8"/>
@@ -170,6 +201,14 @@
 <text x="694.8" y="532" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Render gate</text>
       </svg>
     </div>
+    <section class="walk" aria-labelledby="walk-h">
+<p class="eyebrow">Plain-language walkthrough</p>
+<h2 id="walk-h">Four kinds of actor, and what travels between them</h2>
+<p class="lead">The lanes are the point. The orchestrator schedules but writes nothing. The workers write but never judge. The auditors judge but never write. Deterministic code assembles but never invents. Each arrow carries a typed object, so a hand-off is a contract that code validates, not a chat message the next agent has to interpret.</p>
+<aside class="critical"><p class="eyebrow">The critical view: what Muse is and is not trusted with</p><ul><li>Muse Spark appears in two lanes, as a writer and as a judge, but never in both roles on the same output. That separation is the main defence against a model approving its own mistake.</li><li>Only the orchestrator knows how much money has been spent. Each call is told the running total so the $5 cap holds across the entire job.</li><li>Where the diagram shows a loop, the loop is bounded: one script revision, one image repair per scene.</li></ul></aside>
+<ol class="steps"><li class="step"><header><span class="num">1</span><h3>Route and budget</h3><span class="chip code">No model, orchestrator</span></header><dl><dt>Gets</dt><dd>The mode (screenshot or raw), the key, the cap and the kill switch.</dd><dt>Does</dt><dd>Chooses the road, stamps each call with the money spent so far, and decides what runs next from the previous result.</dd><dt>Hands over</dt><dd>Dispatches work to the Spark workers and passes each result forward.</dd><dt class="why">Why no model</dt><dd>Control flow should be predictable and testable. Muse is the crew, not the producer.</dd><dt>Guard</dt><dd>Kill switch, per-run cap, rate limit on paid jobs.</dd></dl></li><li class="step"><header><span class="num">2</span><h3>Gate and extract</h3><span class="chip muse">Muse Spark 1.3 · low, then medium</span></header><dl><dt>Gets</dt><dd>A screenshot.</dd><dt>Does</dt><dd>Gatekeeper decides accept or reject, extractor reads the numbers.</dd><dt>Hands over</dt><dd>Draft shares to the user for confirmation, then an EvidenceRecord onward.</dd><dt class="why">Why Muse</dt><dd>Reading and classifying images is a vision job.</dd><dt>Guard</dt><dd>Health panels stop here with R1.</dd></dl></li><li class="step"><header><span class="num">3</span><h3>Cite and profile</h3><span class="chip muse">Muse Spark 1.3 · high effort</span></header><dl><dt>Gets</dt><dd>The evidence, the citation index and the closest reference records.</dd><dt>Does</dt><dd>Interpretation picks sourced claims. The profiler writes plain-language cards for reference populations.</dd><dt>Hands over</dt><dd>Claims and profiles to the director.</dd><dt class="why">Why Muse</dt><dd>Grounded explanation is language work that needs both the data and the sources in view.</dd><dt>Guard</dt><dd>Must use only supplied records and index entries.</dd></dl></li><li class="step"><header><span class="num">4</span><h3>Director</h3><span class="chip muse">Muse Spark 1.3 · high effort</span></header><dl><dt>Gets</dt><dd>Evidence, claims, profiles, approved asset ids and any repair notes.</dd><dt>Does</dt><dd>Writes the full timed script.</dd><dt>Hands over</dt><dd>A ReelPlan draft to the auditors. On a rewrite it receives their merged issues.</dd><dt class="why">Why Muse</dt><dd>Creative structure and wording under evidence constraints.</dd><dt>Guard</dt><dd>Schema-validated. Cannot approve itself.</dd></dl></li><li class="step"><header><span class="num">5</span><h3>Two auditors</h3><span class="chip muse">Muse Spark 1.3 · high effort, two calls</span></header><dl><dt>Gets</dt><dd>The draft plan, in separate calls with separate instructions.</dd><dt>Does</dt><dd>One checks truth against the evidence, the other enforces the ancestry-only rules.</dd><dt>Hands over</dt><dd>Pass, revise or block with issues. Issues travel back to the director once. Both passing releases the plan to the image step (the amber arrow).</dd><dt class="why">Why Muse</dt><dd>Judging meaning, not matching words.</dd><dt>Guard</dt><dd>A second failure ends the job with R4.</dd></dl></li><li class="step"><header><span class="num">6</span><h3>Image agent</h3><span class="chip muse">Muse Image 1.0</span></header><dl><dt>Gets</dt><dd>Scene briefs built from cited records.</dd><dt>Does</dt><dd>Paints candidates, and applies a single targeted edit when told to.</dd><dt>Hands over</dt><dd>Each candidate picture to the visual auditor.</dd><dt class="why">Why Muse</dt><dd>Visual reconstruction of a place and century.</dd><dt>Guard</dt><dd>Cannot approve its own candidate.</dd></dl></li><li class="step"><header><span class="num">7</span><h3>Visual auditor</h3><span class="chip muse">Muse Spark 1.3 · medium effort</span></header><dl><dt>Gets</dt><dd>The actual image and the scene brief.</dd><dt>Does</dt><dd>Looks for anachronisms, text in frame, battle or political content, rendering defects and a cluttered caption area.</dd><dt>Hands over</dt><dd>Pass, repair (with an edit instruction) or fallback. A repair goes back to the image agent. A pass goes on.</dd><dt class="why">Why Muse</dt><dd>Judging a picture is vision work, and a beautiful image can still be wrong.</dd><dt>Guard</dt><dd>One repair per scene and two per episode, then reviewed fallback.</dd></dl></li><li class="step"><header><span class="num">8</span><h3>Assemble the film</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>The approved plan and approved images.</dd><dt>Does</dt><dd>Adds the deterministic globe scenes and plays the film from a clock.</dd><dt>Hands over</dt><dd>The finished episode to the page.</dd><dt class="why">Why no model</dt><dd>The last step should only assemble what was approved.</dd><dt>Guard</dt><dd>No new claims after approval.</dd></dl></li></ol>
+
+</section>
   </div>
 </body>
 </html>

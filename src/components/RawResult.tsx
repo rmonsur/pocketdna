@@ -1,12 +1,28 @@
-/** Raw result: native PCA-25 coordinates + era mixture fits (experimental). */
+/** On-device result: deep ancestry across three periods, with breakdowns and closest genetic distances. */
 
 import type { RawRunResult } from "../lib/rawAnalysis";
 
 const ERA_TITLE: Record<string, string> = {
-  bronze: "Bronze Age sources",
-  middle: "Middle Ages sources",
-  modern: "Modern reference populations",
+  bronze: "Bronze Age",
+  middle: "Middle Ages",
+  modern: "Modern period",
 };
+
+const MIN_SHOWN_SHARE = 0.01;
+const MAX_ROWS = 6;
+
+/** Two samples from one panel family share a label; number them so rows never read as duplicates. */
+function numbered(labels: string[]): string[] {
+  const counts = new Map<string, number>();
+  for (const l of labels) counts.set(l, (counts.get(l) ?? 0) + 1);
+  const seen = new Map<string, number>();
+  return labels.map((l) => {
+    if ((counts.get(l) ?? 0) < 2) return l;
+    const n = (seen.get(l) ?? 0) + 1;
+    seen.set(l, n);
+    return `${l} (individual ${n})`;
+  });
+}
 
 export function RawResult({
   result,
@@ -18,15 +34,10 @@ export function RawResult({
   return (
     <div className="flex w-full max-w-[560px] flex-col gap-5 rounded-2xl bg-surface-translucent p-6 shadow-xl backdrop-blur-xl lg:p-8">
       <div>
-        <p className="text-[11px] font-bold uppercase tracking-wider text-bio-lime">Experimental · analysed on this device</p>
-        <h2 className="pt-1 text-2xl font-light text-text-primary">Your PCA-25 coordinates</h2>
-        <p className="pt-1 font-mono text-[12px] leading-relaxed text-text-muted">
-          {result.coordinates.slice(0, 5).map((v) => v.toFixed(4)).join(", ")} …
-        </p>
-        <p className="pt-2 text-[13px] text-on-surface">
-          {result.usableMarkers.toLocaleString()} usable markers ({(result.callRate * 100).toFixed(1)}% of the{" "}
-          {result.basisId} basis) · {result.harmonization.direct.toLocaleString()} direct +{" "}
-          {result.harmonization.complement.toLocaleString()} strand-complemented calls
+        <p className="text-[11px] font-bold uppercase tracking-wider text-bio-lime">Analysed on this device</p>
+        <h2 className="pt-1 text-2xl font-light text-text-primary">Your deep ancestry across three periods</h2>
+        <p className="pt-1 text-[13px] text-text-muted">
+          How much of your DNA looks like each reference group, with a likely range, and the groups you sit closest to.
         </p>
       </div>
 
@@ -36,17 +47,23 @@ export function RawResult({
             {ERA_TITLE[era.era] ?? era.era}
           </h3>
           <ul className="flex flex-col gap-1">
-            {era.shares.filter((s) => s.weight >= 0.01).slice(0, 6).map((s) => (
+            {numbered(era.shares.filter((s) => s.weight >= MIN_SHOWN_SHARE).slice(0, MAX_ROWS).map((s) => s.label)).map((label, i) => {
+              const s = era.shares.filter((x) => x.weight >= MIN_SHOWN_SHARE).slice(0, MAX_ROWS)[i];
+              return (
               <li key={s.source_id} className="flex items-baseline justify-between gap-3 text-[13px] text-on-surface">
-                <span>{s.label}</span>
+                <span>{label}</span>
                 <span className="font-mono text-[12px] text-text-muted">
                   {(s.weight * 100).toFixed(1)}% ({(s.low * 100).toFixed(1)}–{(s.high * 100).toFixed(1)})
                 </span>
               </li>
-            ))}
+              );
+            })}
           </ul>
-          <p className="pt-1 text-[12px] text-text-muted">
-            Closest panel sources: {[...new Set(era.closest.map((c) => c.label))].join(" · ")}
+          <p className="pt-1.5 text-[12px] text-text-muted">
+            Closest genetic distances:{" "}
+            {[...new Map(era.closest.map((c) => [c.label, c])).values()]
+              .map((c) => `${c.label} (${c.distance.toFixed(3)})`)
+              .join(" · ")}
           </p>
         </section>
       ))}
@@ -59,17 +76,8 @@ export function RawResult({
         Generate your episode
       </button>
       <p className="-mt-2 text-center text-[12px] text-text-muted">
-        Sends only this derived summary (era fits and counts) to the film agents — never your genotypes or coordinates.
+        Only this summary goes to the film agents. Your DNA file stays on this device.
       </p>
-
-      <section>
-        <h3 className="pb-1 text-[11px] font-bold uppercase tracking-wider text-archival-amber">Limitations</h3>
-        <ul className="list-disc pl-4 text-[12px] leading-relaxed text-text-muted">
-          {result.limitations.map((l) => (
-            <li key={l}>{l}</li>
-          ))}
-        </ul>
-      </section>
     </div>
   );
 }

@@ -261,3 +261,86 @@ Reel content pass 2: repairs, replay package, provider path, no sample codes (20
   present-day fallback names read "Present-day X people from Country".
   npm test 20/20; tsc clean. Asset route no longer requires the in-memory
   job so images survive a server restart.
+- Provider job 28bc793c-965 (screenshot fixture, corrected rows): done;
+  narrative + compliance pass first round with the two audits concurrent;
+  4 globe scenes (cited sites for ancient chapters, resolved panel
+  populations for the modern chapter); images 1/3 approved after one
+  repair, 1 repair failed re-audit, 1 repair request exceeded the episode
+  allowance of two; both fell back to plates as specified. Copy defect
+  observed: director tied provider percentages to ancient sites; prompts
+  tightened (director, compliance, narrative) and rerun below.
+- Provider job 5a777ce1-f28 (prompts tightened): done; narrative +
+  compliance pass first round; ancient chapters now read as context
+  ("Yamnaya herders near Lopatino, Russia, about 3018 BCE kept herds") with
+  no provider percentage attached; 3 globe scenes; images 2/2 approved for
+  the beats that carried atlas scenes (bronze repaired once and re-audited
+  pass); the director's extra "early" context beat set no era and so drew
+  no globe or image. Cost $0.22. Cached extraction reused; no new vision
+  calls on the fixture screenshot.
+- pkill of the scratch file server and tab cleanup at session end; the API
+  server on :8000 is the session's own tsx process.
+- Browser check of the provider path (fixture screenshot, cached extraction
+  and model calls): correction table -> job -> "Live episode"; Bronze Age
+  beat showed the Lopatino/Esperstedt globe, then the repaired steppe image
+  with context copy only. Chrome, 2026-11-05.
+
+Export package: pregenerated video + model-call trace (2026-11-05)
+-----------------------------------------------------------------
+- Found that the previous scripts/export.mjs captured the landing page
+  (hero + upload card), not the reel; the old pocketdna.mp4 is not a film.
+  Added /reel (full-bleed, ?job=<id>, ?static=1&t=) and --job to the exporter.
+- Added per-job model-call tracing (AsyncLocalStorage in the muse adapter):
+  agent, model, kind, effort, cached, tokens, usd, duration, status. No
+  prompts, images or personal payloads. Terminal jobs persist to
+  .local/episodes/<id>/job.json; /api/jobs/:id falls back to it; new
+  /api/jobs/:id/trace. tsc clean; npm test 20/20.
+- Raw job 8c44db5a-6c0 (traced): done; audits pass first round; 4 globe
+  scenes; images 2/3 approved (bronze fell back after its one repair);
+  13 model calls, $0.16 this run with cache hits marked. Exported below.
+
+Cosmetic pass: raw-only input, plain-language result card and drawer (2026-11-05)
+--------------------------------------------------------------------------------
+- Client: screenshot toggle and correction step removed (UploadCard,
+  useDropzone, Landing, Hero; CorrectionTable.tsx deleted); the server's
+  screenshot routes remain as unexposed code with their tests. Result card
+  now reads "Your deep ancestry across three periods" with breakdowns and
+  closest genetic distances; coordinates, marker counts and the limitations
+  block removed; present-day labels lose underscores; duplicate family rows
+  are numbered "(individual n)". Evidence drawer rewritten at grade-8 level:
+  "What we found", "Their story", "Why we think so", "This chapter",
+  "Sources"; limitations block removed. Claims carry an optional "story";
+  the population profiler writes a 2-3 sentence story per population; the
+  replay fixture's three claims carry hand-written stories.
+- Docs: README.md, AGENTS.md and ten docs edited by a delegated pass to
+  remove the screenshot input path; grep for "screenshot" over those files
+  is empty (docs/POPLIST.md untouched; qa-logs and this log keep history).
+- npx tsc --noEmit clean; npm test 20/20 (story field added to profile
+  fixtures). Browser check: landing without toggle, new hero copy, replay
+  drawer shows "Their story" for the Yamnaya claim, result card as specified.
+
+Landscape film, nav cleanup, docs pass 2 (2026-11-05)
+-----------------------------------------------------
+- Film is now 16:9: ReelViewport aspect prop (phone preview in-app,
+  landscape stage for export), ReelGlobe right-anchored in landscape,
+  /reel?aspect=landscape, exporter defaults to 1920x1080. Muse images now
+  generated at 1536x1024 with the left 45% kept quiet for the caption card
+  (HIST-IMAGE-01-v2-landscape); visual auditor updated to match.
+- Replay assets rebuilt in landscape via scripts/build-replay-assets.ts:
+  3/3 passed audit first time, $0.061.
+- Header: Atlas and Library links removed (routes remain reachable by URL).
+- Diagrams: build-diagrams.mjs strings updated (16:9, jpeg) and the seven
+  HTML diagrams regenerated; PNG previews under diagram/previews were not
+  regenerated (no generator found in the repo).
+- Docs pass 2 (delegated): 9:16 / vertical / portrait film wording replaced
+  by 16:9 landscape in README and seven docs; remaining hits are "portrait
+  of ancestors" and "vertical exaggeration" senses only.
+- Job da5d5bde-855 (stories, portrait images): audits blocked after the one
+  revise round because the narrative auditor demanded a qualifier on the
+  convergence beat that already said "similarity, not descent". Both
+  auditor prompts now exempt hook/method/convergence/stamp beats and treat
+  "similarity, not descent" as sufficient; rerun below with landscape images.
+- The old root pocketdna.mp4 (a landing-page capture, not a film) is
+  untracked from git; deleting the file itself was blocked for the session
+  and is left to the builder.
+- 2026-11-05 README rewrite: judge setup on top, architecture and model-map diagrams embedded. Checks run: npm test (20 of 20 test files pass, offline); local server smoke test with KILL_PAID_CALLS=1 on port 8123 (/api/health, /api/replay, index, /api/bundle/manifest.json all 200). Not run: fresh clone on a clean machine, live Muse run, npm run serve build step.
+- 2026-11-05 diagram refresh: added plain-language Muse walkthroughs and dataset table to all seven diagram pages (diagram/walk-*.mjs, datasets.mjs); corrected 03 stage order (interpretation before profiler, audits parallel), 06 (image repair is implemented, visual auditor medium effort), 07 (high effort 32768 tokens); re-rendered diagram/previews/01-07 at 2x with Playwright. Checks run: verify-geometry.py 0 findings on all seven; self_check.py OK on all seven; headless Chrome console errors 0 and no sideways overflow on all seven. Not run: anatomy bench re-render (unchanged), mobile-width visual review of the walkthrough cards.

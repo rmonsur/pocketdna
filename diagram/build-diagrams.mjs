@@ -8,6 +8,8 @@
  */
 
 import { writeFileSync } from "node:fs";
+import { renderWalkthrough, WALK_CSS } from "./walk-render.mjs";
+import { WALK } from "./walk-content.mjs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -157,7 +159,7 @@ function legend({ y, x0 = 40, x1, items }) {
   return out.join("\n");
 }
 
-function page({ slug, type, title, desc, width, height, body, maxWidth = 1280 }) {
+function page({ slug, type, title, desc, width, height, body, maxWidth = 1280, walk = null }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -207,6 +209,7 @@ function page({ slug, type, title, desc, width, height, body, maxWidth = 1280 })
       margin-bottom: 1.5rem;
     }
     svg { width: 100%; min-width: ${width}px; display: block; }
+${WALK_CSS}
     @media print {
       .diagram-container { overflow-x: visible; }
       svg { min-width: 0; }
@@ -231,6 +234,7 @@ function page({ slug, type, title, desc, width, height, body, maxWidth = 1280 })
 ${body}
       </svg>
     </div>
+    ${walk === null ? "" : renderWalkthrough(walk)}
   </div>
 </body>
 </html>
@@ -299,7 +303,7 @@ function architecture() {
       { kind: "arrow", dashed: true, text: "Return / stream" },
     ] }),
   ].join("\n");
-  return page({ slug: "architecture", type: "Architecture", title: "How PocketDNA runs on one laptop", width: W, height: H, body,
+  return page({ slug: "architecture", walk: WALK.architecture, type: "Architecture", title: "How PocketDNA runs on one laptop", width: W, height: H, body,
     desc: "Architecture diagram showing the browser app and its in-memory ancestry worker, the local Hono server with the pipeline orchestrator and the single Muse adapter, and the hosted Muse Spark and Muse Image models behind it." });
 }
 
@@ -350,7 +354,7 @@ function inputEvidence() {
       { kind: "arrow", dashed: true, text: "Unreadable" },
     ] }),
   ].join("\n");
-  return page({ slug: "input-evidence", type: "Flowchart", title: "Two inputs, one EvidenceRecord", width: W, height: H, body,
+  return page({ slug: "input-evidence", walk: WALK.input, type: "Flowchart", title: "Two inputs, one EvidenceRecord", width: W, height: H, body,
     desc: "Flowchart showing a screenshot passing Spark gatekeeper, extractor and user correction, and a raw DNA export analysed entirely in the browser worker, both ending in one discriminated EvidenceRecord." });
 }
 
@@ -376,11 +380,11 @@ function evidenceFilm() {
     label(784, 340, "ASSETS"),
 
     node({ x: 40, y: 136, kind: "input", tag: "V1", name: "EvidenceRecord", subs: ["provider | raw"] }),
-    node({ x: 240, y: 136, kind: "backend", tag: "SPARK HI", name: "Population profiler", subs: ["raw only · gazetteer"] }),
-    node({ x: 440, y: 136, kind: "backend", tag: "SPARK HI", name: "Interpretation", subs: ["cited claims · index"] }),
+    node({ x: 240, y: 136, kind: "backend", tag: "SPARK HI", name: "Interpretation", subs: ["cited claims · index"] }),
+    node({ x: 440, y: 136, kind: "backend", tag: "SPARK HI", name: "Population profiler", subs: ["both tiers · reference cards"] }),
     node({ x: 640, y: 136, kind: "backend", tag: "SPARK HI", name: "Director", subs: ["ReelPlan v1 · 7–9 beats"] }),
-    node({ x: 840, y: 136, kind: "backend", tag: "SPARK HI", name: "Narrative auditor", subs: ["captions · numbers · cuts"] }),
-    node({ x: 1040, y: 136, kind: "backend", tag: "SPARK HI", name: "Compliance auditor", subs: ["ancestry-only firewall"] }),
+    node({ x: 840, y: 136, kind: "backend", tag: "SPARK HI", name: "Narrative auditor", subs: ["parallel · captions · cuts"] }),
+    node({ x: 1040, y: 136, kind: "backend", tag: "SPARK HI", name: "Compliance auditor", subs: ["parallel · ancestry-only"] }),
     node({ x: 1040, y: 328, kind: "store", tag: "CODE", name: "Atlas scenes", subs: ["gazetteer only · d3-geo"] }),
     node({ x: 816, y: 328, kind: "backend", tag: "IMAGE", name: "Illustrate scenes", subs: ["muse-image + visual audit"] }),
     node({ x: 592, y: 328, kind: "focal", tag: "DONE", name: "Film ready", subs: ["ReelPlan + assets · SSE"] }),
@@ -398,7 +402,7 @@ function evidenceFilm() {
       { kind: "arrow", style: "accent", text: "Render gate" },
     ] }),
   ].join("\n");
-  return page({ slug: "evidence-film", type: "Process", title: "From evidence to an audited film", width: W, height: H, body,
+  return page({ slug: "evidence-film", walk: WALK.film, type: "Process", title: "From evidence to an audited film", width: W, height: H, body,
     desc: "Process diagram showing Spark profiling, interpretation and direction, the narrative and compliance audits with one repair loop, then deterministic atlas scenes and reviewed images before the film is ready." });
 }
 
@@ -442,11 +446,11 @@ function swimlane() {
 
     node({ x: 184, y: 96, w: 128, kind: "backend", tag: "ORCH", name: "Route + budget", subs: ["mode · cap $5 · kill"] }),
     node({ x: 360, y: 192, w: 128, kind: "backend", tag: "SPARK", name: "Gate + extract", subs: ["low · medium"] }),
-    node({ x: 536, y: 192, w: 128, kind: "backend", tag: "SPARK", name: "Profile + cite", subs: ["high · gazetteer"] }),
+    node({ x: 536, y: 192, w: 128, kind: "backend", tag: "SPARK", name: "Cite + profile", subs: ["high · index · records"] }),
     node({ x: 712, y: 192, w: 128, kind: "backend", tag: "SPARK", name: "Director", subs: ["high · ReelPlan"] }),
     node({ x: 712, y: 288, w: 128, kind: "backend", tag: "SPARK", name: "Two auditors", subs: ["narrative · rules"] }),
     node({ x: 888, y: 192, w: 128, kind: "backend", tag: "IMAGE", name: "Image agent", subs: ["6 scenes · conc 2"] }),
-    node({ x: 888, y: 288, w: 128, kind: "backend", tag: "SPARK", name: "Visual auditor", subs: ["pass · fallback"] }),
+    node({ x: 888, y: 288, w: 128, kind: "backend", tag: "SPARK", name: "Visual auditor", subs: ["medium · pass/repair"] }),
     node({ x: 1064, y: 384, w: 128, kind: "focal", tag: "CODE", name: "Assemble film", subs: ["atlas · t-driven"] }),
 
     callout({ x: 420, y: 120, anchor: "start", text: "Every step pushes a progress event; the browser follows it over SSE.", leader: "M 412,116 Q 380,112 316,104", dot: [312, 104] }),
@@ -459,7 +463,7 @@ function swimlane() {
       { kind: "arrow", style: "accent", text: "Render gate" },
     ] }),
   );
-  return page({ slug: "agents", type: "Swimlane", title: "Who hands what to whom", width: W, height: H, body: body.join("\n"),
+  return page({ slug: "agents", walk: WALK.swimlane, type: "Swimlane", title: "Who hands what to whom", width: W, height: H, body: body.join("\n"),
     desc: "Swimlane diagram of the PocketDNA runtime roles: the orchestrator dispatches work, Spark workers extract, cite and direct, Spark auditors gate the plan and images, and deterministic code assembles the film." });
 }
 
@@ -533,7 +537,7 @@ function museSequence() {
       { kind: "arrow", style: "accent", text: "Validated result" },
     ] }),
   ].join("\n");
-  return page({ slug: "muse-call", type: "Sequence", title: "What one Muse call goes through", width: W, height: H, body, maxWidth: 1160,
+  return page({ slug: "muse-call", walk: WALK.call, type: "Sequence", title: "What one Muse call goes through", width: W, height: H, body, maxWidth: 1160,
     desc: "Sequence diagram of callJson in the Muse adapter: kill switch and run cap, content-addressed cache lookup, Meta API chat completion with a JSON schema, Zod validation with one retry, cache write, cost log append and a typed result." });
 }
 
@@ -570,11 +574,11 @@ function imageAgentState() {
     state(120, 160, "backend", "Queued", "validate scene · mode"),
     state(336, 160, "backend", "Researching", "brief · sources · dates"),
     state(552, 160, "backend", "Prompt ready", "HIST-IMAGE-01 compiled"),
-    state(768, 160, "backend", "Generating", "muse-image · 9:16 · png"),
-    state(536, 336, "optional", "Repairing", "HIST-REPAIR-01 · ≤1/scene"),
-    state(768, 336, "backend", "Auditing", "HIST-AUDIT-01 · Spark vision"),
+    state(768, 160, "backend", "Generating", "muse-image · 16:9 · jpeg"),
+    state(536, 336, "backend", "Repairing", "HIST-REPAIR-01 · ≤1/scene"),
+    state(768, 336, "backend", "Auditing", "Spark medium · sees image"),
     state(984, 336, "focal", "Approved", "manifest · hash · label"),
-    state(984, 448, "store", "Fallback", "reviewed plate · honest label"),
+    state(984, 448, "store", "Fallback", "reviewed plate · labelled"),
     state(120, 336, "optional", "Cancelled / failed", "no late result enters"),
     `<circle cx="1196" cy="368" r="8" fill="none" stroke="${T.ink}" stroke-width="1"/>`,
     `<circle cx="1196" cy="368" r="5" fill="${T.ink}"/>`,
@@ -582,11 +586,11 @@ function imageAgentState() {
     `<circle cx="1196" cy="480" r="5" fill="${T.ink}"/>`,
 
     callout({ x: 192, y: 548, anchor: "start", text: "Any state → cancelled / failed on cancel, uncertain timeout or exhausted budget.", leader: "M 184,544 Q 176,470 200,404", dot: [200, 400] }),
-    callout({ x: 1200, y: 572, text: "images.ts v1 skips repair: a failed audit goes straight to fallback; AGENT.md allows one repair per scene.", leader: "M 676,566 Q 640,500 604,404", dot: [600, 400] }),
+    callout({ x: 1200, y: 572, text: "Repair is live: one edit per scene, two per episode, re-audit required; otherwise fallback.", leader: "M 756,566 Q 700,500 604,404", dot: [600, 400] }),
 
     legend({ y: 596, x1: 1200, items: [
       { kind: "swatch", treat: "backend", text: "Agent state" },
-      { kind: "swatch", treat: "optional", text: "Specified, not yet in code" },
+      { kind: "swatch", treat: "optional", text: "Closed state (cancel / failure)" },
       { kind: "swatch", treat: "focal", text: "Approved asset" },
       { kind: "swatch", treat: "store", text: "Honest substitute" },
       { kind: "arrow", text: "Transition" },
@@ -594,7 +598,7 @@ function imageAgentState() {
       { kind: "arrow", style: "accent", text: "Happy path" },
     ] }),
   ].join("\n");
-  return page({ slug: "image-agent", type: "State machine", title: "One historical scene, from job to asset", width: W, height: H, body, maxWidth: 1240,
+  return page({ slug: "image-agent", walk: WALK.image, type: "State machine", title: "One historical scene, from job to asset", width: W, height: H, body, maxWidth: 1240,
     desc: "State machine for the HistoricalImageAgent: queued, researching, prompt ready, generating, auditing, an optional single repair, then approved or fallback, with cancellation and failure reachable from any state." });
 }
 
@@ -623,10 +627,10 @@ function modelMap() {
     node({ x: 1000, y: 192, kind: "optional", tag: "DEV", name: "Muse Wonder", subs: ["dev + research only"] }),
     node({ x: 64, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "Low", subs: ["temp 0.2 · 1024 tok", "gatekeeper"] }),
     node({ x: 288, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "Medium", subs: ["temp 0.4 · 2048 tok", "extractor · visual auditor"] }),
-    node({ x: 512, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "High", subs: ["temp 0.7 · 8192 tok", "profiler · interpretation", "director · two auditors"] }),
-    node({ x: 720, y: 320, w: 200, h: 112, kind: "backend", tag: "TOOL", name: "Historical scenes", subs: ["HIST-IMAGE-01 · 9:16", "≤6 per episode · conc 2", "audited by Spark vision"] }),
+    node({ x: 512, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "High", subs: ["temp 0.7 · 32768 tok", "profiler · interpretation", "director · two auditors"] }),
+    node({ x: 720, y: 320, w: 200, h: 112, kind: "backend", tag: "TOOL", name: "Historical scenes", subs: ["HIST-IMAGE-01 · 16:9", "≤6 per episode · conc 2", "audited by Spark vision"] }),
 
-    callout({ x: 1160, y: 36, text: "One gate for every paid call: kill switch · $5 cap · sha256 cache · schema + Zod · retry once · cost log.", leader: "M 596,40 Q 620,40 640,52", dot: [640, 56] }),
+    callout({ x: 1160, y: 36, text: "One gate for every paid call: kill switch · $5 cap · sha256 cache · schema + Zod · retry once · cost log.", leader: "M 676,42 Q 652,42 640,52", dot: [640, 56] }),
 
     legend({ y: 464, x1: 1160, items: [
       { kind: "swatch", treat: "focal", text: "Server-only adapter" },
@@ -635,7 +639,7 @@ function modelMap() {
       { kind: "swatch", treat: "optional", text: "Not a runtime dependency" },
     ] }),
   ].join("\n");
-  return page({ slug: "model-map", type: "Tree", title: "Which Muse model does what, at which effort", width: W, height: H, body, maxWidth: 1200,
+  return page({ slug: "model-map", walk: WALK.models, type: "Tree", title: "Which Muse model does what, at which effort", width: W, height: H, body, maxWidth: 1200,
     desc: "Tree showing the server-only Muse adapter above Muse Spark, Muse Image and the development-only Muse Wonder, with Spark's low, medium and high effort tiers mapped to the pipeline stages that use them." });
 }
 

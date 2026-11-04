@@ -29,6 +29,7 @@ export const ProfileSchema = z.object({
   where: z.string(),
   why_similar: z.string().min(1),
   caution: z.string(),
+  story: z.string().default(""),
 });
 
 export type PopulationProfile = z.infer<typeof ProfileSchema>;
@@ -43,7 +44,7 @@ export const PROFILE_OUTPUT_SCHEMA: Record<string, unknown> = {
       type: "array",
       items: {
         type: "object",
-        required: ["source_id", "name", "who", "where", "why_similar", "caution"],
+        required: ["source_id", "name", "who", "where", "why_similar", "caution", "story"],
         properties: {
           source_id: { type: "string" },
           name: { type: "string" },
@@ -51,6 +52,7 @@ export const PROFILE_OUTPUT_SCHEMA: Record<string, unknown> = {
           where: { type: "string" },
           why_similar: { type: "string" },
           caution: { type: "string" },
+          story: { type: "string" },
         },
       },
     },
@@ -154,6 +156,7 @@ export function profileToClaim(profile: PopulationProfile, record: GazetteerEntr
       doi: record?.doi ?? AADR_DOI,
     },
     detail: [profile.where, profile.why_similar, profile.caution].filter((p) => p !== "").join(" "),
+    story: profile.story.trim() === "" ? null : profile.story.trim(),
   });
 }
 

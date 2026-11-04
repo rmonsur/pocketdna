@@ -1,0 +1,642 @@
+{
+  "version": 1,
+  "exportedAt": "2026-11-04T21:43:43.537Z",
+  "mode": "live",
+  "duration_s": 120,
+  "fps": 12,
+  "frames": 1440,
+  "size": "1080x1920",
+  "sound": "silent",
+  "citations": [
+    {
+      "id": "pop-irn-shahr-i-sokhta-ba2",
+      "authors": "Lazaridis, Reich et al.",
+      "year": 2022,
+      "venue": "Science",
+      "doi": "10.1126/science.abm4247"
+    },
+    {
+      "id": "pop-wales-n",
+      "authors": "Brace, Barnes et al.",
+      "year": 2019,
+      "venue": "Nat Ecol Evol",
+      "doi": "10.1038/s41559-019-0871-9"
+    },
+    {
+      "id": "pop-dinka",
+      "authors": "Meyer, P et al.",
+      "year": 2012,
+      "venue": "Science",
+      "doi": "10.1126/science.1224344"
+    },
+    {
+      "id": "pop-l8630",
+      "authors": "Kumar, Fu et al.",
+      "year": 2021,
+      "venue": "Mol Biol Evol",
+      "doi": "10.1093/molbev/msab216"
+    },
+    {
+      "id": "pop-r11759",
+      "authors": "Moots, Pinhasi et al.",
+      "year": 2023,
+      "venue": "Nat Ecol Evol",
+      "doi": "10.1038/s41559-023-02143-4"
+    },
+    {
+      "id": "pop-mala",
+      "authors": "Mallick, Reich et al.",
+      "year": 2016,
+      "venue": "Nature",
+      "doi": "10.1038/nature18964"
+    },
+    {
+      "id": "pop-brahui",
+      "authors": "Byrska, Bishop et al.",
+      "year": 2022,
+      "venue": "Zody Cell",
+      "doi": "10.1016/j.cell.2022.08.004"
+    },
+    {
+      "id": "pop-madiga",
+      "authors": "Mallick, Reich et al.",
+      "year": 2016,
+      "venue": "Nature",
+      "doi": "10.1038/nature18964"
+    },
+    {
+      "id": "c-bronze-allentoft2015",
+      "authors": "Allentoft et al.",
+      "year": 2015,
+      "venue": "Nature",
+      "doi": "10.1038/nature14507"
+    },
+    {
+      "id": "c-farming-lazaridis2016",
+      "authors": "Lazaridis et al.",
+      "year": 2016,
+      "venue": "Nature",
+      "doi": "10.1038/nature19310"
+    },
+    {
+      "id": "c-pca-patterson2006",
+      "authors": "Patterson, Price & Reich",
+      "year": 2006,
+      "venue": "PLoS Genetics",
+      "doi": "10.1371/journal.pgen.0020190"
+    },
+    {
+      "id": "c-pca-patterson2006",
+      "authors": "Patterson, Price & Reich",
+      "year": 2006,
+      "venue": "PLoS Genetics",
+      "doi": "10.1371/journal.pgen.0020190"
+    }
+  ],
+  "evidenceKind": "raw",
+  "limitations": [
+    "Experimental PocketDNA PCA-25 coordinates; not Global25 and not comparable to it.",
+    "Consumer-mask validation: coordinates from chip-density data shift ~0.3 SD (p95) vs full-marker scores.",
+    "Era panels are experimental: bronze coverage is sparse (20 sources); panel sparsity limits fit precision.",
+    "Bootstrap ranges resample chromosomes; they describe fit stability, not confidence in ancestry."
+  ],
+  "job_id": "8c44db5a-6c0",
+  "beats": [
+    {
+      "id": "b-hook",
+      "kind": "hook",
+      "era": null,
+      "tStart": 0,
+      "tEnd": 14,
+      "headline": "What links your DNA to South Asia today?",
+      "subtext": "36.1% (range 0–45.2%) similar to present-day Mala people from India. This film shows similarity, not descent, across three times.",
+      "claimIds": [
+        "pop-mala",
+        "c-pca-patterson2006"
+      ],
+      "globe": [],
+      "image": {
+        "mode": "cache",
+        "audit": "pass",
+        "place": "Rabat, Uzbekistan"
+      }
+    },
+    {
+      "id": "b-method",
+      "kind": "method",
+      "era": null,
+      "tStart": 14,
+      "tEnd": 28,
+      "headline": "How we compare your DNA to reference panels",
+      "subtext": "Experimental PCA with 47115 markers. 20.9% (range 0–28.4%) similar to Brahui people from Pakistan means present-day panels only, similarity not descent.",
+      "claimIds": [
+        "pop-brahui",
+        "c-pca-patterson2006"
+      ],
+      "globe": [],
+      "image": null
+    },
+    {
+      "id": "b-bronze",
+      "kind": "era",
+      "era": "bronze",
+      "tStart": 28,
+      "tEnd": 48,
+      "headline": "Consistent with Bronze Age life at Shahr-i Sokhta, about 2742 BCE",
+      "subtext": "Bronze Age people from Shahr-i Sokhta about 2742 BCE traded with Indus neighbours. Early farmers at Ogof-Yr-Ychen about 3265 BCE kept cattle. Dots show similarity.",
+      "claimIds": [
+        "pop-irn-shahr-i-sokhta-ba2",
+        "pop-wales-n",
+        "c-bronze-allentoft2015",
+        "c-farming-lazaridis2016"
+      ],
+      "globe": [
+        {
+          "label": "Indus Valley Civilization (3100–2000 BC)",
+          "place": "Shahr-i Sokhta, Iran",
+          "dateText": "about 2742 BCE"
+        },
+        {
+          "label": "European Farmer (6300–2800 BC)",
+          "place": "Ogof-Yr-Ychen, United Kingdom",
+          "dateText": "about 3265 BCE"
+        },
+        {
+          "label": "Sub-Saharan African",
+          "place": "Aweil, South Sudan",
+          "dateText": "present-day"
+        }
+      ],
+      "image": null
+    },
+    {
+      "id": "b-middle",
+      "kind": "era",
+      "era": "middle",
+      "tStart": 48,
+      "tEnd": 68,
+      "headline": "Most similar to people buried near Rabat, Uzbekistan, about 50 BCE",
+      "subtext": "People near Rabat about 50 BCE lived on Silk Road oasis towns. People at Kerkouene about 641 BCE lived in a Punic harbor city. Dots show similarity.",
+      "claimIds": [
+        "pop-l8630",
+        "pop-r11759",
+        "c-pca-patterson2006"
+      ],
+      "globe": [
+        {
+          "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+          "place": "Rabat, Uzbekistan",
+          "dateText": "about 50 BCE"
+        },
+        {
+          "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+          "place": "Rabat, Uzbekistan",
+          "dateText": "about 50 BCE"
+        },
+        {
+          "label": "North African (AD 580–1160)",
+          "place": "Kerkouene, Tunisia",
+          "dateText": "about 641 BCE"
+        },
+        {
+          "label": "Sub-Saharan African",
+          "place": "Aweil, South Sudan",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Arabian Peninsula",
+          "place": "Israel",
+          "dateText": "present-day"
+        }
+      ],
+      "image": {
+        "mode": "cache",
+        "audit": "pass",
+        "place": "Rabat, Uzbekistan"
+      }
+    },
+    {
+      "id": "b-modern",
+      "kind": "era",
+      "era": "modern",
+      "tStart": 68,
+      "tEnd": 90,
+      "headline": "Most similar to present-day Mala people living today",
+      "subtext": "36.1% (range 0–45.2%) similar to Mala people from India and 20.9% (range 0–28.4%) similar to Brahui people from Pakistan living today. Dots show similarity.",
+      "claimIds": [
+        "pop-mala",
+        "pop-brahui",
+        "c-pca-patterson2006"
+      ],
+      "globe": [
+        {
+          "label": "Mala",
+          "place": "Vishakapatman, India",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Brahui",
+          "place": "Pakistan",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Madiga",
+          "place": "Vishakapatman, India",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Khonda Dora",
+          "place": "India",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Gelao",
+          "place": "Longlin, China",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Kubachinian",
+          "place": "Dakhadaevsky District, Russia",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Newar",
+          "place": "Kathmandu, Nepal",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Kalash",
+          "place": "Pakistan",
+          "dateText": "present-day"
+        }
+      ],
+      "image": {
+        "mode": "cache",
+        "audit": "pass",
+        "place": "Vishakapatman, India"
+      }
+    },
+    {
+      "id": "b-convergence",
+      "kind": "convergence",
+      "era": null,
+      "tStart": 90,
+      "tEnd": 106,
+      "headline": "Your result ends here, consistent with similarity",
+      "subtext": "your result ends here. Past times are context only. All dots show similarity, not descent, across eras.",
+      "claimIds": [
+        "c-pca-patterson2006"
+      ],
+      "globe": [
+        {
+          "label": "Indus Valley Civilization (3100–2000 BC)",
+          "place": "Shahr-i Sokhta, Iran",
+          "dateText": "about 2742 BCE"
+        },
+        {
+          "label": "European Farmer (6300–2800 BC)",
+          "place": "Ogof-Yr-Ychen, United Kingdom",
+          "dateText": "about 3265 BCE"
+        },
+        {
+          "label": "Sub-Saharan African",
+          "place": "Aweil, South Sudan",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+          "place": "Rabat, Uzbekistan",
+          "dateText": "about 50 BCE"
+        },
+        {
+          "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+          "place": "Rabat, Uzbekistan",
+          "dateText": "about 50 BCE"
+        },
+        {
+          "label": "North African (AD 580–1160)",
+          "place": "Kerkouene, Tunisia",
+          "dateText": "about 641 BCE"
+        },
+        {
+          "label": "Mala",
+          "place": "Vishakapatman, India",
+          "dateText": "present-day"
+        },
+        {
+          "label": "Brahui",
+          "place": "Pakistan",
+          "dateText": "present-day"
+        }
+      ],
+      "image": null
+    },
+    {
+      "id": "b-stamp",
+      "kind": "stamp",
+      "era": null,
+      "tStart": 106,
+      "tEnd": 120,
+      "headline": "Similar to South Asia today, similarity not descent",
+      "subtext": "You are most similar to present-day Mala and Brahui groups living today, consistent with shared structure. Experimental model, not proof of descent.",
+      "claimIds": [
+        "pop-mala",
+        "pop-brahui",
+        "c-pca-patterson2006"
+      ],
+      "globe": [],
+      "image": null
+    }
+  ],
+  "pipeline": [
+    {
+      "step": 1,
+      "title": "Analysed on your device",
+      "model": "browser-worker",
+      "status": "done",
+      "artifact": "PCA-25 projection (on-device)"
+    },
+    {
+      "step": 2,
+      "title": "Fitting era sources",
+      "model": "browser-worker",
+      "status": "done",
+      "artifact": "era mixtures with bootstrap ranges"
+    },
+    {
+      "step": 3,
+      "title": "Selecting your citations",
+      "model": "muse-spark-1.3",
+      "status": "running",
+      "artifact": ""
+    },
+    {
+      "step": 3,
+      "title": "Selecting your citations",
+      "model": "muse-spark-1.3",
+      "status": "done",
+      "artifact": "4 citations grounded"
+    },
+    {
+      "step": 4,
+      "title": "Profiling reference populations",
+      "model": "muse-spark-1.3",
+      "status": "running",
+      "artifact": ""
+    },
+    {
+      "step": 4,
+      "title": "Profiling reference populations",
+      "model": "muse-spark-1.3",
+      "status": "done",
+      "artifact": "8 populations explained"
+    },
+    {
+      "step": 5,
+      "title": "Directing your film",
+      "model": "muse-spark-1.3",
+      "status": "running",
+      "artifact": ""
+    },
+    {
+      "step": 5,
+      "title": "Directing your film",
+      "model": "muse-spark-1.3",
+      "status": "done",
+      "artifact": "7 beats, 120s"
+    },
+    {
+      "step": 6,
+      "title": "Auditing",
+      "model": "muse-spark-1.3",
+      "status": "running",
+      "artifact": ""
+    },
+    {
+      "step": 6,
+      "title": "Auditing",
+      "model": "muse-spark-1.3",
+      "status": "done",
+      "artifact": "narrative + compliance pass"
+    },
+    {
+      "step": 7,
+      "title": "Illustrating scenes",
+      "model": "muse-image-1.0",
+      "status": "running",
+      "artifact": "4 globe scenes from reference records"
+    },
+    {
+      "step": 7,
+      "title": "Illustrating scenes",
+      "model": "muse-image-1.0",
+      "status": "done",
+      "artifact": "2 reviewed images (0 repaired), 1 on fallback plates"
+    },
+    {
+      "step": 8,
+      "title": "Film ready",
+      "model": "engine",
+      "status": "done",
+      "artifact": "7 beats, cited, $0.16 this run"
+    }
+  ],
+  "modelCalls": [
+    {
+      "at": "2026-11-04T21:22:32.130Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "interpretation",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "high",
+      "cached": false,
+      "input_tokens": 2780,
+      "output_tokens": 6370,
+      "usd": 0.0305,
+      "duration_ms": 69469,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:22:32.134Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "population-profiler",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "high",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 1,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:25:44.910Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "director",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "high",
+      "cached": false,
+      "input_tokens": 4793,
+      "output_tokens": 18922,
+      "usd": 0.0864,
+      "duration_ms": 192775,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:28.584Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "narrative-auditor",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "high",
+      "cached": false,
+      "input_tokens": 4493,
+      "output_tokens": 4410,
+      "usd": 0.0244,
+      "duration_ms": 43673,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.520Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "compliance",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "high",
+      "cached": false,
+      "input_tokens": 1395,
+      "output_tokens": 4388,
+      "usd": 0.0204,
+      "duration_ms": 45607,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.538Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "historical-image",
+      "model": "muse-image-1.0",
+      "kind": "image",
+      "effort": "high",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 12,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.538Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "historical-image",
+      "model": "muse-image-1.0",
+      "kind": "image",
+      "effort": "high",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 6,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.563Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "visual-auditor",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "medium",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 24,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.563Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "visual-auditor",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "medium",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 9,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.574Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "historical-image-repair",
+      "model": "muse-image-1.0",
+      "kind": "image",
+      "effort": "high",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 9,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.584Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "historical-image",
+      "model": "muse-image-1.0",
+      "kind": "image",
+      "effort": "high",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 10,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.584Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "visual-auditor",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "medium",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 8,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "at": "2026-11-04T21:26:30.590Z",
+      "job_id": "8c44db5a-6c0",
+      "agent": "visual-auditor",
+      "model": "muse-spark-1.3",
+      "kind": "chat",
+      "effort": "medium",
+      "cached": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd": 0,
+      "duration_ms": 5,
+      "status": "ok",
+      "error": null
+    }
+  ],
+  "modelCostUsd": 0.1617
+}

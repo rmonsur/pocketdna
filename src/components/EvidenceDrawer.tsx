@@ -1,5 +1,6 @@
 /** Evidence drawer (DESIGN 5): bottom sheet over the reel. Pauses playback,
- * explains what/why/context/sources/limitations, restores focus on close. */
+ * explains what we found, the story of the people involved, why we think so
+ * and the sources, in plain language. Restores focus on close. */
 
 import { useEffect, useRef } from "react";
 import type { Beat, Claim, EvidenceRecord } from "../contracts/index";
@@ -14,8 +15,10 @@ interface Props {
 const ERA_LABEL: Record<string, string> = {
   bronze: "Bronze Age chapter",
   middle: "Middle Ages chapter",
-  modern: "Modern Period chapter",
+  modern: "Modern period chapter",
 };
+
+const MAX_ROWS = 6;
 
 function Section({ title, children }: { title: string; children: React.ReactNode }): React.JSX.Element {
   return (
@@ -24,6 +27,12 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <div className="text-[13px] leading-relaxed text-on-surface">{children}</div>
     </section>
   );
+}
+
+/** "Antiquity-era people near Rabat: They lived..." -> the name before the colon; null for a plain sentence. */
+function claimName(claim: Claim): string | null {
+  const colon = claim.text.indexOf(":");
+  return colon > 0 && colon < 80 ? claim.text.slice(0, colon) : null;
 }
 
 export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): React.JSX.Element {
@@ -55,6 +64,7 @@ export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): Reac
   }
 
   const eraFit = evidence.kind === "raw" && beat.era !== undefined ? evidence.epochs.find((x) => x.era === beat.era) : undefined;
+  const stories = claims.filter((c) => c.story !== null);
 
   return (
     <div
@@ -68,7 +78,7 @@ export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): Reac
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[11px] font-bold uppercase tracking-wider text-bio-lime">
-            {evidence.kind === "raw" ? "Measured · bootstrap ranges" : "Provider reported"}
+            {evidence.kind === "raw" ? "Measured from your DNA" : "From your report"}
           </p>
           <h2 id="evidence-drawer-title" className="pt-0.5 text-lg font-light leading-snug text-text-primary">
             {beat.headline}
@@ -87,15 +97,12 @@ export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): Reac
         </button>
       </div>
 
-      <Section title="What your report says">
+      <Section title="What we found">
         {evidence.kind === "provider" ? (
           <>
-            <p className="pb-1.5">
-              {evidence.vendor} reports this composition. These are the provider's own labels and percentages — PocketDNA
-              does not recompute them.
-            </p>
+            <p className="pb-1.5">These are the groups your report lists, exactly as it reports them.</p>
             <ul className="flex flex-col gap-0.5">
-              {evidence.shares.slice(0, 6).map((s) => (
+              {evidence.shares.slice(0, MAX_ROWS).map((s) => (
                 <li key={s.id} className="flex justify-between gap-3">
                   <span>{s.label}</span>
                   <span className="font-mono text-[12px] text-text-muted">{(s.weight * 100).toFixed(1)}%</span>
@@ -106,11 +113,11 @@ export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): Reac
         ) : eraFit !== undefined ? (
           <>
             <p className="pb-1.5">
-              Model fit for this chapter, from {evidence.usableMarkers.toLocaleString()} usable markers. Ranges are
-              bootstrap intervals, not confidence claims.
+              For this chapter, your DNA was compared with these groups. Each line shows how much of your DNA looks like
+              that group, as a likely range. It means similarity, not proof of who your ancestors were.
             </p>
             <ul className="flex flex-col gap-0.5">
-              {eraFit.shares.slice(0, 6).map((s) => (
+              {eraFit.shares.slice(0, MAX_ROWS).map((s) => (
                 <li key={s.id} className="flex justify-between gap-3">
                   <span>{s.label}</span>
                   <span className="font-mono text-[12px] text-text-muted">
@@ -121,11 +128,24 @@ export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): Reac
             </ul>
           </>
         ) : (
-          <p>{beat.headline}. This beat is editorial framing; it carries no measured finding of its own.</p>
+          <p>{beat.headline}. This part of the film sets the scene; it does not carry a measurement of its own.</p>
         )}
       </Section>
 
-      <Section title="Why it reports that">
+      {stories.length > 0 && (
+        <Section title="Their story">
+          <div className="flex flex-col gap-2.5">
+            {stories.map((c) => (
+              <div key={c.id}>
+                {claimName(c) !== null && <p className="text-[12px] font-semibold text-text-primary">{claimName(c)}</p>}
+                <p>{c.story}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Section title="Why we think so">
         {claims.length > 0 ? (
           claims.map((c) => (
             <p key={c.id} className="pb-1.5">
@@ -136,13 +156,13 @@ export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): Reac
         ) : (
           <p>
             {evidence.kind === "provider"
-              ? "Ancestry composition panels compare your DNA against the provider's reference panels. PocketDNA reads the panel as published; it cannot re-derive it from a screenshot."
-              : "This chapter is historical context around the measured chapters, not a separate measurement."}
+              ? "Your DNA company compared your sample with its own reference groups. PocketDNA shows what it reported."
+              : "This chapter is history around the measured chapters, not a separate measurement."}
           </p>
         )}
       </Section>
 
-      <Section title="Historical context">
+      <Section title="This chapter">
         <p>
           {beat.era !== undefined ? `${ERA_LABEL[beat.era]}. ` : ""}
           {beat.subtext}
@@ -172,21 +192,8 @@ export function EvidenceDrawer({ claims, evidence, beat, onClose }: Props): Reac
             ))}
           </ul>
         ) : (
-          <p>No citation is attached to this beat; treat its line as narration, not evidence.</p>
+          <p>No source is attached to this part; treat its line as narration, not evidence.</p>
         )}
-      </Section>
-
-      <Section title="Limitations">
-        <ul className="list-disc pl-4">
-          {evidence.limitations.map((l) => (
-            <li key={l}>{l}</li>
-          ))}
-          <li>
-            {evidence.kind === "provider"
-              ? "Provider percentages change as reference panels are updated; a screenshot freezes one version."
-              : "Ancient reference samples are uneven across regions and periods, so fits are coarse."}
-          </li>
-        </ul>
       </Section>
     </div>
   );

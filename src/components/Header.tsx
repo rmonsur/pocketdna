@@ -12,14 +12,6 @@ export function Header(): React.JSX.Element {
             Pocket<span className="font-medium text-archival-amber">DNA</span>
           </span>
         </Link>
-        <nav className="flex items-center gap-5">
-          <Link to="/atlas" className="text-sm text-text-muted transition-colors hover:text-on-surface">
-            Atlas
-          </Link>
-          <Link to="/library" className="text-sm text-text-muted transition-colors hover:text-on-surface">
-            Library
-          </Link>
-        </nav>
       </div>
     </header>
   );

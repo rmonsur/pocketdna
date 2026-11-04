@@ -76,6 +76,8 @@ export const ClaimSchema = z.object({
     doi: z.string().nullable(),
   }),
   detail: z.string().nullable(),
+  /** Two or three plain-language sentences about a reference population: who they were, how they came to be, why they mattered. */
+  story: z.string().nullable().default(null),
 });
 
 export type Claim = z.infer<typeof ClaimSchema>;

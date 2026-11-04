@@ -1,4 +1,4 @@
-/** 9:16 documentary viewport (mockup right column). Same frameAt(t) as export. */
+/** Documentary viewport (mockup right column): phone preview in the app, landscape 16:9 for export. Same frameAt(t) as export. */
 
 import { useEffect, useRef, useState } from "react";
 import type { ViewingBundle } from "../contracts/index";
@@ -39,7 +39,23 @@ function ramp(progress: number, start: number, end: number): number {
   return Math.min(Math.max((progress - start) / (end - start), 0), 1);
 }
 
-export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.Element {
+export type ReelAspect = "portrait" | "landscape";
+
+interface ReelViewportProps {
+  bundle: ViewingBundle;
+  /** Export/share mode: fill the viewport with no phone bezel or caption below. */
+  fullBleed?: boolean;
+  /** Phone-shaped preview stage (default) or landscape 16:9 stage for the exported film. */
+  aspect?: ReelAspect;
+}
+
+/** Design sizes of the stage; full-bleed mode scales them to the viewport. */
+const STAGE_HEIGHT = 670;
+const STAGE_WIDTHS: Record<ReelAspect, number> = { portrait: 375, landscape: Math.round((STAGE_HEIGHT * 16) / 9) };
+
+export function ReelViewport({ bundle, fullBleed = false, aspect = "portrait" }: ReelViewportProps): React.JSX.Element {
+  const STAGE_WIDTH = STAGE_WIDTHS[aspect];
+  const landscape = aspect === "landscape";
   const { plan, evidence, claims, assets } = bundle;
   const params = new URLSearchParams(window.location.search);
   const staticT = params.get("static") === "1" && params.get("t") !== null ? Number(params.get("t")) : undefined;
@@ -107,10 +123,25 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
     await navigator.clipboard?.writeText(window.location.href);
   }
 
+  const [stageScale, setStageScale] = useState(1);
+  useEffect(() => {
+    if (!fullBleed) return;
+    const fit = (): void => setStageScale(Math.min(window.innerHeight / STAGE_HEIGHT, window.innerWidth / STAGE_WIDTH));
+    fit();
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
+  }, [fullBleed]);
+
   return (
-    <div className="flex w-full flex-col items-center">
-      <div className="relative h-[670px] w-full max-w-[375px] rounded-[36px] bg-background-obsidian p-3 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.9)]">
-        <div className="relative flex h-full flex-col justify-between overflow-clip rounded-[28px] bg-surface-charcoal select-none">
+    <div
+      className={fullBleed ? "relative overflow-hidden" : "flex w-full flex-col items-center"}
+      style={fullBleed ? { width: STAGE_WIDTH * stageScale, height: STAGE_HEIGHT * stageScale } : undefined}
+    >
+      <div
+        className={fullBleed ? "absolute left-0 top-0 origin-top-left bg-black" : "relative h-[670px] w-full max-w-[375px] rounded-[36px] bg-background-obsidian p-3 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.9)]"}
+        style={fullBleed ? { width: STAGE_WIDTH, height: STAGE_HEIGHT, transform: `scale(${stageScale})` } : undefined}
+      >
+        <div className={`relative flex h-full flex-col justify-between overflow-clip bg-surface-charcoal select-none ${fullBleed ? "" : "rounded-[28px]"}`}>
           <div
             className="absolute inset-0"
             style={{ background: PLATES[beat.assetId] ?? PLATES["asset-stamp-dark"], opacity: frame.sceneAlpha }}
@@ -124,10 +155,16 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
             />
           )}
           {atlas !== undefined && globeAlpha > 0 && (
-            <ReelGlobe scene={atlas} beatProgress={frame.beatProgress} alpha={globeAlpha * frame.sceneAlpha} />
+            <ReelGlobe scene={atlas} beatProgress={frame.beatProgress} alpha={globeAlpha * frame.sceneAlpha} layout={aspect} />
           )}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background-obsidian/85 via-transparent to-background-obsidian/95" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background-obsidian via-background-obsidian/30 to-transparent" />
+          {landscape ? (
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background-obsidian/90 via-background-obsidian/35 to-transparent" />
+          ) : (
+            <>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background-obsidian/85 via-transparent to-background-obsidian/95" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background-obsidian via-background-obsidian/30 to-transparent" />
+            </>
+          )}
           {atlas === undefined && beat.mapPaths.length > 0 && <MapOverlay origin={[60, 47]} paths={beat.mapPaths} />}
           {imageAlpha > 0.05 && asset !== undefined && (
             <span className="absolute bottom-24 left-5 z-10 max-w-[80%] truncate rounded-full bg-black/55 px-2 py-0.5 font-mono text-[10px] text-white/70">
@@ -147,7 +184,7 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
             </div>
           )}
 
-          <div className="relative z-20 flex flex-col gap-3 p-4">
+          <div className={`relative z-20 flex flex-col gap-3 p-4 ${landscape ? "max-w-[56%]" : ""}`}>
             <div className="flex items-center justify-between gap-2 text-xs">
               <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
                 {eraBeats.map((b) => {
@@ -190,7 +227,7 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
             </div>
           </div>
 
-          <div className="relative z-20 flex flex-col items-start gap-4 px-5">
+          <div className={`relative z-20 flex flex-col items-start gap-4 px-5 ${landscape ? "max-w-[56%]" : ""}`}>
             <div className="inline-flex items-center gap-2 rounded-full bg-surface-charcoal/90 px-3 py-1 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-bio-lime" />
               <span className="font-mono text-[11px] font-semibold uppercase text-on-surface-variant">
@@ -210,14 +247,14 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
               <span className="flex items-center gap-1.5 pb-1">
                 <span className="text-[11px] font-bold uppercase tracking-widest text-archival-amber">{beat.category}</span>
               </span>
-              <span className="block text-[26px] font-light leading-tight text-text-primary group-hover:text-archival-amber">
+              <span className={`block font-light leading-tight text-text-primary group-hover:text-archival-amber ${landscape ? "text-[30px]" : "text-[26px]"}`}>
                 {beat.headline}
               </span>
               <span className="block pt-1 text-[13px] leading-snug text-text-muted">{beat.subtext}</span>
             </button>
           </div>
 
-          <div className="relative z-20 flex flex-col gap-3 bg-gradient-to-t from-background-obsidian via-background-obsidian/90 to-transparent p-4">
+          <div className={`relative z-20 flex flex-col gap-3 p-4 ${landscape ? "max-w-[56%]" : "bg-gradient-to-t from-background-obsidian via-background-obsidian/90 to-transparent"}`}>
             <Waveform />
             <div className="flex items-center justify-between pt-1">
               <button
@@ -233,7 +270,7 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
                 onClick={() => void share()}
                 className="flex min-h-10 items-center gap-1.5 rounded-full bg-surface-charcoal px-3 text-xs text-on-surface transition-colors hover:bg-surface-container"
               >
-                <span>Export 9:16</span>
+                <span>Share film</span>
               </button>
             </div>
           </div>
@@ -242,9 +279,11 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
           )}
         </div>
       </div>
-      <p className="max-w-xs pt-4 text-center text-sm text-text-muted">
-        Interactive documentary viewport. Tap any stat overlay in the reel to explore archaeological citations.
-      </p>
+      {!fullBleed && (
+        <p className="max-w-xs pt-4 text-center text-sm text-text-muted">
+          Interactive documentary viewport. Tap any stat overlay in the reel to explore archaeological citations.
+        </p>
+      )}
     </div>
   );
 }

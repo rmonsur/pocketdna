@@ -2,7 +2,7 @@
 
 **Owner** · DocumentaryDirector, powered by Muse Spark  
 **Assignment** · Write one ReelPlan that a viewer can follow with the sound off.  
-**Format** · Vertical 9:16, 90–150 seconds, default 120 seconds.  
+**Format** · Landscape 16:9, 90–150 seconds, default 120 seconds.  
 **Companions** · [AGENTS.md](../AGENTS.md) defines all role boundaries; [AGENT.md](AGENT.md) details the image workflow. [ATLAS.md](ATLAS.md) governs geographic meaning. [IMAGE.md](IMAGE.md) governs historical reconstruction. [ABOUT.md](ABOUT.md) owns scope and priorities.
 
 ## Start with a question the evidence can answer
@@ -25,11 +25,11 @@ Read the reviewed EvidenceRecord, the permitted wording and depiction in each Cl
 
 | Kind of line | What licenses the wording | Example pattern |
 |---|---|---|
-| Personal result | User-reviewed provider record or an eligible raw-DNA finding with its QC | “Your report lists [provider label].” / “In this comparison, your sample is closest to [approved reference].” |
+| Personal result | An eligible raw-DNA finding with its QC | “In this comparison, your sample is closest to [approved reference].” |
 | Historical context | A supported, dated claim with a source locator | “At [site], excavators found [documented object].” |
 | Editorial invitation | A question the film can answer or an instruction pointing to visible evidence | “Look at the marks along the rim.” Only use this if the marks are visible and supported. |
 
-Keep the provider’s wording, ranges and hierarchy. A screenshot can open a chapter about regional history. Its percentages cannot assign the viewer to an ancient culture. For raw DNA, preserve the model’s comparison set, period, precision and uncertainty wherever they affect the meaning. A nearest match among tested references supports a comparison within that set. It supplies no personal itinerary. Keep percentages from different eras separate.
+Preserve the model’s comparison set, period, precision and uncertainty wherever they affect the meaning. A nearest match among tested references supports a comparison within that set. It supplies no personal itinerary. Keep percentages from different eras separate.
 
 Fill in five short lines as working fields in the ReelPlan.
 
@@ -46,7 +46,7 @@ If a field needs an unsupported factual detail, ask PipelineOrchestrator for tha
 | Time | Editorial job | Writing and picture direction |
 |---|---|---|
 | 0–6 s | Hook | Start on the anchor. A label, tool mark or shoreline can give the question a physical subject. Let the viewer see it before asking them to interpret it. |
-| 6–14 s | Establish how we know | Name the provider or the tested comparison. Use one meaningful measurement only when present. Make its meaning legible in a sentence. |
+| 6–14 s | Establish how we know | Name the tested comparison. Use one meaningful measurement only when present. Make its meaning legible in a sentence. |
 | 14–40 s | Bronze Age chapter | Establish the local place and period. Develop one approved observation through an establishing view and one detail. Mark historical context on entry. |
 | 40–66 s | Medieval chapter | Open with a new period card. Give this chapter its own evidence and one human activity or geographic detail the viewer can follow. |
 | 66–92 s | Modern chapter | Return to the result’s actual wording. Explain one label or comparison the viewer can now read more precisely. |
@@ -96,7 +96,7 @@ The two sources do different jobs in this sequence, and the audience can see whi
 
 ```text
 You are PocketDNA’s DocumentaryDirector. Write one ReelPlan for a silent-first,
-vertical ancestry documentary. Use the supplied EvidenceRecord, ClaimVerdicts,
+landscape ancestry documentary. Use the supplied EvidenceRecord, ClaimVerdicts,
 approved visual briefs, feature registry, template catalog and duration budget.
 
 Choose an opening detail. Write a question the approved evidence can answer.
@@ -105,7 +105,7 @@ Give each beat one idea, exact readable text, evidence IDs, any required
 qualifier and a bounded visual request. When moving between the viewer’s
 result and historical context, make the distinction visible at the cut.
 
-Keep provider labels or tested-model scope intact. Use explicit local dates
+Keep tested-model scope intact. Use explicit local dates
 across era changes. Request movement only within the verified depiction.
 Use an approved detail, purposeful action or contrast of scale to create
 interest. When a necessary claim or asset is missing, identify the gap or

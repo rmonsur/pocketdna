@@ -51,7 +51,7 @@ assert.equal(sceneBriefs(ReelPlanSchema.parse({ ...plan, beats: plan.beats.map((
 assert.deepEqual(splitPublication("KumarFuMolBiolEvol2021"), { authors: "Kumar, Fu et al.", venue: "Mol Biol Evol" });
 assert.equal(claimId("San (Khomani)"), "pop-san-khomani-");
 const claim = profileToClaim(
-  { source_id: "L8630", name: "People near Rabat", who: "Lived around 50 BCE.", where: "Rabat.", why_similar: "Similar to.", caution: "Two samples." },
+  { source_id: "L8630", name: "People near Rabat", who: "Lived around 50 BCE.", where: "Rabat.", why_similar: "Similar to.", caution: "Two samples.", story: "They farmed an oasis. Traders passed through. Their town grew." },
   {
     id: "L8630", label: "x", eras: ["middle"], groupId: "Uzbekistan_Antiquity", locality: "Rabat", country: "Uzbekistan",
     lat: 38.1, lon: 67.3, dateText: "about 50 BCE", publication: "KumarFuMolBiolEvol2021", doi: "10.1093/molbev/msab216", individuals: 2, match: "sample",
@@ -61,7 +61,9 @@ assert.equal(claim.id, "pop-l8630");
 assert.equal(claim.source.year, 2021);
 assert.equal(claim.source.doi, "10.1093/molbev/msab216");
 assert.equal(claim.class, "context");
-const orphan = profileToClaim({ source_id: "Q", name: "Q", who: "w", where: "", why_similar: "y", caution: "" }, undefined);
+assert.equal(claim.story, "They farmed an oasis. Traders passed through. Their town grew.", "profile story travels on the claim");
+const orphan = profileToClaim({ source_id: "Q", name: "Q", who: "w", where: "", why_similar: "y", caution: "", story: "  " }, undefined);
+assert.equal(orphan.story, null, "blank story becomes null");
 assert.equal(orphan.source.doi, "10.7910/DVN/FFIDCW", "unmatched sources cite the AADR dataset");
 
 /* Adapter: parses the Responses API image item; kill switch and budget stop before any network call. */

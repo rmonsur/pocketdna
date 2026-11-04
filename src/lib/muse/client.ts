@@ -4,6 +4,7 @@
  * content-addressed cache, per-call cost log, kill switch. Never import from app code.
  */
 
+import { AsyncLocalStorage } from "node:async_hooks";
 import { createHash } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -22,8 +23,44 @@ const CHAT_TIMEOUT_MS = 300_000;
 /** Recorded pricing snapshot (IMAGE.md): $0.01 per returned image, grounding included. */
 export const IMAGE_USD_PER_IMAGE = 0.01;
 const IMAGE_TIMEOUT_MS = 180_000;
-/** Live-verified: the Responses API rejected "1080x1920" as an unknown value; 1024x1536 is the accepted portrait size. */
+/** Live-verified: the Responses API rejected "1080x1920" as an unknown value; 1024x1536 / 1536x1024 are the accepted sizes. */
 export const IMAGE_PORTRAIT_SIZE = "1024x1536";
+export const IMAGE_LANDSCAPE_SIZE = "1536x1024";
+
+/** Per-job call trace (agent, model, tokens, cost, cache, duration); never prompts, images or personal payloads. */
+export interface TraceContext {
+  jobId: string;
+  dir: string;
+}
+
+export const traceStorage = new AsyncLocalStorage<TraceContext>();
+
+export interface TraceEntry {
+  at: string;
+  job_id: string;
+  agent: string;
+  model: string;
+  kind: "chat" | "image";
+  effort: string | null;
+  cached: boolean;
+  input_tokens: number;
+  output_tokens: number;
+  usd: number;
+  duration_ms: number;
+  status: "ok" | "error";
+  error: string | null;
+}
+
+export function recordTrace(entry: Omit<TraceEntry, "at" | "job_id">): void {
+  const ctx = traceStorage.getStore();
+  if (ctx === undefined) return;
+  try {
+    mkdirSync(ctx.dir, { recursive: true });
+    appendFileSync(join(ctx.dir, "trace.jsonl"), JSON.stringify({ at: new Date().toISOString(), job_id: ctx.jobId, ...entry }) + "\n");
+  } catch {
+    /* trace is diagnostics only */
+  }
+}
 
 export class KillSwitchEngaged extends Error {}
 export class BudgetExceeded extends Error {}
@@ -179,6 +216,26 @@ export interface CallJsonOpts<T> {
 }
 
 export async function callJson<T>(opts: CallJsonOpts<T>): Promise<CallResult<T>> {
+  const started = Date.now();
+  try {
+    const result = await callJsonInner(opts);
+    recordTrace({
+      agent: opts.agent, model: opts.model, kind: "chat", effort: opts.effort ?? "medium", cached: result.cached,
+      input_tokens: result.inputTokens, output_tokens: result.outputTokens, usd: Number(result.costUsd.toFixed(4)),
+      duration_ms: Date.now() - started, status: "ok", error: null,
+    });
+    return result;
+  } catch (err) {
+    recordTrace({
+      agent: opts.agent, model: opts.model, kind: "chat", effort: opts.effort ?? "medium", cached: false,
+      input_tokens: 0, output_tokens: 0, usd: 0, duration_ms: Date.now() - started, status: "error",
+      error: err instanceof Error ? `${err.name}: ${err.message.slice(0, 160)}` : "unknown",
+    });
+    throw err;
+  }
+}
+
+async function callJsonInner<T>(opts: CallJsonOpts<T>): Promise<CallResult<T>> {
   if (killed()) throw new KillSwitchEngaged("KILL_PAID_CALLS is set; refusing paid call");
   const cap = opts.runSpendCapUsd ?? 5.0;
   if ((opts.runSpentUsd ?? 0) >= cap) throw new BudgetExceeded(`run cap $${cap.toFixed(2)} reached`);
@@ -311,13 +368,32 @@ function imageCachePut(key: string, format: string, bytes: Uint8Array): void {
  * the exact compiled prompt, model and settings.
  */
 export async function callImage(opts: CallImageOpts): Promise<ImageResult> {
+  const started = Date.now();
+  try {
+    const result = await callImageInner(opts);
+    recordTrace({
+      agent: opts.agent, model: opts.model, kind: "image", effort: opts.reasoningStrength ?? "high", cached: result.cached,
+      input_tokens: 0, output_tokens: 0, usd: result.costUsd, duration_ms: Date.now() - started, status: "ok", error: null,
+    });
+    return result;
+  } catch (err) {
+    recordTrace({
+      agent: opts.agent, model: opts.model, kind: "image", effort: opts.reasoningStrength ?? "high", cached: false,
+      input_tokens: 0, output_tokens: 0, usd: 0, duration_ms: Date.now() - started, status: "error",
+      error: err instanceof Error ? `${err.name}: ${err.message.slice(0, 160)}` : "unknown",
+    });
+    throw err;
+  }
+}
+
+async function callImageInner(opts: CallImageOpts): Promise<ImageResult> {
   if (killed()) throw new KillSwitchEngaged("KILL_PAID_CALLS is set; refusing paid call");
   const cap = opts.runSpendCapUsd ?? 5.0;
   if ((opts.runSpentUsd ?? 0) + IMAGE_USD_PER_IMAGE > cap) throw new BudgetExceeded(`run cap $${cap.toFixed(2)} reached`);
   const format = opts.format ?? "jpeg";
   const tool = {
     type: "image_generation",
-    size: opts.size ?? IMAGE_PORTRAIT_SIZE,
+    size: opts.size ?? IMAGE_LANDSCAPE_SIZE,
     output_format: format,
     reasoning_strength: opts.reasoningStrength ?? "high",
     enable_web_search: true,

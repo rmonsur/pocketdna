@@ -75,6 +75,11 @@ function mulberry32(seed: number): () => number {
   };
 }
 
+/** Panel family label for display; present-day groups are keyed by name, so underscores become spaces. */
+function readableLabel(source: EraPanelSource): string {
+  return source.era_group.replace(/_/g, " ");
+}
+
 const LIMITATIONS = [
   "Experimental PocketDNA PCA-25 coordinates; not Global25 and not comparable to it.",
   "Consumer-mask validation: coordinates from chip-density data shift ~0.3 SD (p95) vs full-marker scores.",
@@ -105,7 +110,7 @@ export function analyzeRaw(
     const closest = sources
       .map((s, i) => ({
         source_id: s.source_id,
-        label: s.era_group,
+        label: readableLabel(s),
         distance: Math.hypot(...s.centroid.map((v, j) => v - coordinates[j])),
         index: i,
       }))
@@ -157,7 +162,7 @@ export function analyzeRaw(
           const values = reps.map((w) => w[i]).sort((a, b) => a - b);
           const pct = (p: number): number =>
             values.length === 0 ? fit.weights[i] : values[Math.min(values.length - 1, Math.floor(p * values.length))];
-          return { source_id: s.source_id, label: s.era_group, weight: fit.weights[i], low: pct(0.05), high: pct(0.95) };
+          return { source_id: s.source_id, label: readableLabel(s), weight: fit.weights[i], low: pct(0.05), high: pct(0.95) };
         })
         .sort((a, b) => b.weight - a.weight),
     })),

@@ -19,9 +19,14 @@ function flag(name, fallback) {
 }
 const url = flag("url", "http://localhost:5173");
 const out = flag("out", "pocketdna.mp4");
+/* --job <id>: export a finished live episode (persisted on the server) instead of the saved replay. */
+const jobId = flag("job", null);
 const fps = Number(flag("fps", "30"));
-const width = Number(flag("width", "540"));
-const height = Number(flag("height", "960"));
+/* --aspect landscape (default): 1920x1080 film; --aspect portrait keeps the phone-preview framing. */
+const aspect = flag("aspect", "landscape") === "portrait" ? "portrait" : "landscape";
+const width = Number(flag("width", aspect === "landscape" ? "960" : "540"));
+const height = Number(flag("height", aspect === "landscape" ? "540" : "960"));
+const outputSize = aspect === "landscape" ? "1920x1080" : "1080x1920";
 
 function need(cmd, hint) {
   const probe = spawnSync(cmd, ["-version"], { stdio: "ignore" });
@@ -40,18 +45,30 @@ try {
   process.exit(2);
 }
 
+const sourcePath = jobId === null ? "/api/replay" : `/api/jobs/${jobId}`;
 let replayRes;
 try {
-  replayRes = await fetch(`${url}/api/replay`);
+  replayRes = await fetch(`${url}${sourcePath}`);
 } catch {
-  console.error(`cannot reach ${url}/api/replay (start the app first)`);
+  console.error(`cannot reach ${url}${sourcePath} (start the app first)`);
   process.exit(2);
 }
 if (!replayRes.ok) {
-  console.error(`cannot reach ${url}/api/replay (start the app first)`);
+  console.error(`cannot reach ${url}${sourcePath} (start the app first)`);
   process.exit(2);
 }
-const replay = (await replayRes.json()).data;
+const source = (await replayRes.json()).data;
+const replay = jobId === null ? source : { mode: "live", plan: source.reel, evidence: source.evidence, claims: source.claims, assets: source.assets, events: source.events };
+if (jobId !== null && (source.state !== "done" || source.reel === null)) {
+  console.error(`job ${jobId} is ${source.state}; only finished episodes export`);
+  process.exit(2);
+}
+let trace = null;
+if (jobId !== null) {
+  const traceRes = await fetch(`${url}/api/jobs/${jobId}/trace`);
+  if (traceRes.ok) trace = (await traceRes.json()).data.calls;
+}
+const jobQuery = jobId === null ? "" : `&job=${encodeURIComponent(jobId)}`;
 const duration = replay.plan.duration_s;
 const frames = Math.floor(duration * fps);
 
@@ -63,7 +80,9 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width, height } });
 for (let i = 0; i < frames; i += 1) {
   const t = (i / fps).toFixed(3);
-  await page.goto(`${url}/?static=1&t=${t}`, { waitUntil: "networkidle" });
+  await page.goto(`${url}/reel?static=1&t=${t}&aspect=${aspect}${jobQuery}`, { waitUntil: "networkidle" });
+  await page.waitForSelector('[data-reel-ready="1"]', { timeout: 30000 });
+  await page.evaluate(() => Promise.all([...document.images].filter((img) => !img.complete).map((img) => new Promise((r) => { img.onload = r; img.onerror = r; }))));
   await page.screenshot({ path: join(tmp, `f${String(i).padStart(5, "0")}.png`) });
   if (i % fps === 0) console.log(`frame ${i}/${frames} (t=${t}s)`);
 }
@@ -71,7 +90,7 @@ await browser.close();
 
 const encode = spawnSync(
   "ffmpeg",
-  ["-y", "-framerate", String(fps), "-i", join(tmp, "f%05d.png"), "-vf", "scale=1080:1920",
+  ["-y", "-framerate", String(fps), "-i", join(tmp, "f%05d.png"), "-vf", `scale=${outputSize.replace("x", ":")}`,
    "-c:v", "libx264", "-pix_fmt", "yuv420p", out],
   { stdio: "inherit" },
 );
@@ -87,13 +106,19 @@ const manifest = {
   duration_s: duration,
   fps,
   frames,
-  size: "1080x1920",
+  size: outputSize,
+  aspect,
   sound: "silent",
   citations: replay.claims.map((c) => ({
     id: c.id, authors: c.source.authors, year: c.source.year, venue: c.source.venue, doi: c.source.doi,
   })),
   evidenceKind: replay.evidence.kind,
   limitations: replay.evidence.limitations,
+  job_id: jobId,
+  beats: replay.plan.beats.map((b) => ({ id: b.id, kind: b.kind, era: b.era ?? null, tStart: b.tStart, tEnd: b.tEnd, headline: b.headline, subtext: b.subtext, claimIds: b.claimIds, globe: b.atlas ? b.atlas.markers.map((m) => ({ label: m.label, place: m.place, dateText: m.dateText })) : [], image: replay.assets && replay.assets[b.id] ? { mode: replay.assets[b.id].mode, audit: replay.assets[b.id].audit, place: replay.assets[b.id].place } : null })),
+  pipeline: replay.events ? replay.events.map((e) => ({ step: e.step, title: e.title, model: e.model, status: e.status, artifact: e.artifact })) : [],
+  modelCalls: trace,
+  modelCostUsd: trace ? Number(trace.reduce((sum, c) => sum + (c.usd || 0), 0).toFixed(4)) : null,
 };
 const manifestPath = `${out}.manifest.json`;
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");

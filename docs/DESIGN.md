@@ -25,7 +25,7 @@ Amber is an emphasis color; page backgrounds and cards stay dark. Lime identifie
 
 ## Layout and controls
 
-Preserve a generous headline, upload card, clear generation action and large portrait preview. Use a responsive grid on desktop; stack upload and player on mobile. Use full-bleed imagery inside the 9:16 film. Keep page controls outside its export-safe region.
+Preserve a generous headline, upload card, clear generation action and large film preview. Use a responsive grid on desktop; stack upload and player on mobile. Use full-bleed imagery inside the 16:9 film. Keep page controls outside its export-safe region.
 
 Use accessible shadcn/ui/Radix primitives where appropriate, with licenses recorded. Reuse one component system and token scale. Main panels use restrained glass blur (4–12 px), subtle hairline borders and moderate shadows; avoid opaque white cards and excessive glow. Primary buttons use lime, dark text and generous touch targets. Secondary buttons use dark surfaces and white text.
 

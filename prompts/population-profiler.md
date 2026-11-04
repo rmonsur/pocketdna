@@ -16,8 +16,15 @@ Fields (grade-8 reading level, no jargon, no sample codes in prose):
   descent, not identity, not a route.
 - "caution": one short limit (sparse panel, single sample, broad family label,
   date only approximate, etc.).
+- "story": a 2-3 sentence short story about this population for a curious
+  viewer: who they were, how they came to be in that place and time, and why
+  they mattered. Plain words a 13-year-old understands. Ground it in the
+  record's place and date plus well-established, widely published history of
+  that region and period; say "probably" where scholars are unsure. No
+  battles, conquests, politics or modern nations as heirs; no genetics
+  jargon; never a claim about the viewer.
 
 Ancestry only. No health, traits, appearance, personality, politics, war or
 modern nations as heirs. Return JSON only:
 {"profiles": [{"source_id": str, "name": str, "who": str, "where": str,
-"why_similar": str, "caution": str}]}
+"why_similar": str, "caution": str, "story": str}]}

@@ -1,4 +1,4 @@
-/** Landing (mockup asymmetric grid): story left, 9:16 viewport right. */
+/** Landing (mockup asymmetric grid): story left, film preview right. */
 
 import { useEffect, useRef, useState } from "react";
 import { Footer } from "../components/Footer";
@@ -12,10 +12,9 @@ import { UploadCard } from "../components/UploadCard";
 import { REPLAY } from "../contracts/fixtures";
 import { REPLAY_ASSETS } from "../contracts/replayAssets";
 import type { ProgressEvent, ViewingBundle } from "../contracts/index";
-import { ApiError, createJob, createRawEpisode, extractPreview, getJob, subscribeJob, type ExtractedShares } from "../lib/api";
+import { ApiError, createRawEpisode, getJob, subscribeJob } from "../lib/api";
 import { statusFromEvents, type GenerationStatusProps } from "../lib/generationStatus";
 import { runRawAnalysis, type RawRunResult } from "../lib/rawAnalysis";
-import { CorrectionTable } from "../components/CorrectionTable";
 import { RawResult } from "../components/RawResult";
 
 /** A finished on-device analysis, kept with its file so the CTA can continue into episode generation. */
@@ -27,8 +26,6 @@ interface RawReady {
 type Phase =
   | { kind: "idle" }
   | { kind: "processing"; jobId: string; events: ProgressEvent[] }
-  | { kind: "extracting" }
-  | { kind: "correct"; file: File; extracted: ExtractedShares }
   | { kind: "raw-processing"; step: string }
   | { kind: "raw-result"; ready: RawReady }
   | { kind: "error"; notice: NoticeKind; message: string; resume: RawReady | null };
@@ -106,23 +103,13 @@ export function Landing(): React.JSX.Element {
     }
   }
 
-  async function generate(file: File, tab: "screenshot" | "raw"): Promise<void> {
-    if (tab === "raw") {
-      /* Second press on an analysed file continues into the episode instead of re-analysing. */
-      if (phase.kind === "raw-result" && phase.ready.file === file) {
-        await generateEpisode(phase.ready);
-        return;
-      }
-      await generateRaw(file);
+  async function generate(file: File): Promise<void> {
+    /* Second press on an analysed file continues into the episode instead of re-analysing. */
+    if (phase.kind === "raw-result" && phase.ready.file === file) {
+      await generateEpisode(phase.ready);
       return;
     }
-    setPhase({ kind: "extracting" });
-    try {
-      const extracted = await extractPreview(file);
-      setPhase({ kind: "correct", file, extracted });
-    } catch (err) {
-      setPhase(errorPhase(err, "extraction failed"));
-    }
+    await generateRaw(file);
   }
 
   function watchJob(jobId: string): void {
@@ -138,15 +125,6 @@ export function Landing(): React.JSX.Element {
         void finish(jobId);
       },
     );
-  }
-
-  async function startJob(file: File, corrected?: ExtractedShares): Promise<void> {
-    try {
-      const created = await createJob(file, corrected);
-      watchJob(created.job_id);
-    } catch (err) {
-      setPhase(errorPhase(err, "upload failed"));
-    }
   }
 
   async function generateEpisode(ready: RawReady): Promise<void> {
@@ -177,7 +155,7 @@ export function Landing(): React.JSX.Element {
     setPhase(phase.kind === "error" && phase.resume !== null ? { kind: "raw-result", ready: phase.resume } : { kind: "idle" });
   }
 
-  const busy = phase.kind === "processing" || phase.kind === "raw-processing" || phase.kind === "extracting";
+  const busy = phase.kind === "processing" || phase.kind === "raw-processing";
   const status = viewportStatus(phase);
 
   return (
@@ -193,19 +171,11 @@ export function Landing(): React.JSX.Element {
               <Hero />
               <UploadCard
                 onWatchReplay={watchReplay}
-                onGenerate={(file, tab) => void generate(file, tab)}
+                onGenerate={(file) => void generate(file)}
                 busy={busy}
                 analysed={phase.kind === "raw-result" ? phase.ready.file : null}
               />
               {phase.kind === "processing" && <ProcessingLog events={phase.events} />}
-              {phase.kind === "extracting" && <p className="text-sm text-text-muted" role="status">Reading your screenshot…</p>}
-              {phase.kind === "correct" && (
-                <CorrectionTable
-                  initial={phase.extracted}
-                  onConfirm={(corrected) => void startJob(phase.file, corrected)}
-                  onCancel={() => setPhase({ kind: "idle" })}
-                />
-              )}
               {phase.kind === "raw-processing" && (
                 <p className="text-sm text-text-muted" role="status">{phase.step}…</p>
               )}

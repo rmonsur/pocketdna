@@ -35,8 +35,8 @@ const beats = [
   },
   {
     id: "b2", kind: "method" as const, tStart: 6, tEnd: 14,
-    category: "How We Know", headline: "Your report, compared against thousands of ancient genomes.",
-    subtext: "Vendor percentages are matched to dated ancient samples. Every claim binds to a paper.",
+    category: "How We Know", headline: "Your DNA, compared against thousands of ancient genomes.",
+    subtext: "Your file is analysed on your device and matched to dated ancient samples. Every claim binds to a paper.",
     evidenceClass: "editorial" as const, claimIds: [], assetId: "asset-method-panel",
     coords: null, mapPaths: [],
   },
@@ -64,7 +64,7 @@ const beats = [
   {
     id: "b5", kind: "era" as const, era: "modern" as const, tStart: 66, tEnd: 92,
     category: "Recent Biogeographical Ancestry", headline: "25.8% Northwest European",
-    subtext: "Shown as your report words it. Tap to inspect the source.",
+    subtext: "Compared with present-day groups from the British Isles. Tap to inspect the source.",
     evidenceClass: "personal" as const, claimIds: ["leslie2015"], assetId: "asset-harbor",
     coords: "51°30'N 0°07'W · WESTERN EUROPE",
     mapPaths: [{ to: [50, 36] as [number, number], label: "British Isles" }],
@@ -139,18 +139,24 @@ export const REPLAY: ReplayBundle = {
       class: "context",
       source: { authors: "Haak et al.", year: 2015, venue: "Nature 522, 207–211", doi: "10.1038/nature14317" },
       detail: "Replay illustration of the fit card; live mode recomputes from your file.",
+      story:
+        "The Yamnaya were herders who lived on the grasslands north of the Black and Caspian Seas about 5,000 years ago. They kept cattle and sheep, used wagons, and moved with their herds across huge distances. Their descendants spread far into Europe and Asia, which is why so many people today carry a trace of them.",
     },
     {
       id: "margaryan2020", text: "Viking Age Scandinavians settled widely across Europe.",
       class: "context",
       source: { authors: "Margaryan et al.", year: 2020, venue: "Nature 585, 390–396", doi: "10.1038/s41586-020-2688-8" },
       detail: "Replay illustration of the fit card; live mode recomputes from your file.",
+      story:
+        "Between about 750 and 1050 CE, people from Scandinavia sailed, traded and settled across the North Sea and far beyond. Towns like Sigtuna grew up as trading and crafting centres on the Baltic. Their journeys left genetic traces in Britain, Ireland and along the rivers of eastern Europe.",
     },
     {
       id: "leslie2015", text: "Fine-scale genetic structure of the British Isles.",
       class: "context",
       source: { authors: "Leslie et al.", year: 2015, venue: "Nature 519, 309–314", doi: "10.1038/nature14230" },
-      detail: "Provider percentage shown as reported; screenshot claims never imply SNP analysis.",
+      detail: "Shown as the saved episode reports it; live mode recomputes from your file.",
+      story:
+        "People across the British Isles today still show faint regional patterns in their DNA, shaped by thousands of years of farming villages, Roman roads, and later Anglo-Saxon and Norse settlers. The 2015 study that mapped these patterns found that most regions blended slowly rather than being replaced.",
     },
   ],
 };

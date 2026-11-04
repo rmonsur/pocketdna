@@ -47,6 +47,37 @@
       margin-bottom: 1.5rem;
     }
     svg { width: 100%; min-width: 1160px; display: block; }
+
+    .walk { margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 2rem; }
+    .walk h2 { font-family: var(--font-serif); font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+    .walk h3 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: -0.005em; }
+    .walk p.lead { color: #D4D4D4; font-size: 1rem; line-height: 1.65; max-width: 62rem; margin-bottom: 1.25rem; }
+    .walk .eyebrow { margin-bottom: 0.6rem; }
+    .critical { border: 1px solid var(--color-accent); background: rgba(238,176,87,0.06); border-radius: 6px; padding: 1rem 1.25rem; margin: 0 0 1.75rem; max-width: 62rem; }
+    .critical .eyebrow { color: var(--color-accent); }
+    .critical ul { margin-left: 1.1rem; color: #E5E5E5; font-size: 0.92rem; line-height: 1.6; }
+    .critical li + li { margin-top: 0.35rem; }
+    ol.steps { list-style: none; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 34rem), 1fr)); }
+    li.step { background: #18181B; border: 1px solid rgba(255,255,255,0.16); border-radius: 6px; padding: 1.1rem 1.25rem 1.2rem; }
+    .step header { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .step .num { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-muted); border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; min-width: 1.7rem; height: 1.7rem; display: inline-flex; align-items: center; justify-content: center; }
+    .chip { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; padding: 0.22rem 0.5rem; border: 1px solid rgba(255,255,255,0.3); color: var(--color-muted); }
+    .chip.muse { color: var(--color-accent); border-color: var(--color-accent); }
+    .chip.user { color: #C8F45B; border-color: rgba(200,244,91,0.6); }
+    .step dl { display: grid; grid-template-columns: 6.2rem 1fr; gap: 0.5rem 0.9rem; font-size: 0.88rem; line-height: 1.55; }
+    .step dt { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); padding-top: 0.2rem; }
+    .step dd { color: #E5E5E5; }
+    .step dt.why, .step dt.why + dd { color: var(--color-accent); }
+    .step dt.why + dd { color: #F3D9AE; }
+    .walk table { border-collapse: collapse; width: 100%; font-size: 0.86rem; line-height: 1.5; }
+    .walk th, .walk td { text-align: left; vertical-align: top; padding: 0.6rem 0.8rem; border-top: 1px solid rgba(255,255,255,0.16); }
+    .walk th { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); font-weight: 500; }
+    .walk td a { color: #C8F45B; }
+    .walk td .todo { color: var(--color-muted); font-style: italic; }
+    .datasets { margin-top: 2.25rem; overflow-x: auto; }
+    .datasets .note { color: #D4D4D4; font-size: 0.9rem; line-height: 1.6; max-width: 62rem; margin-bottom: 0.9rem; }
+    @media (max-width: 640px) { .step dl { grid-template-columns: 1fr; } .step dt { padding-top: 0.5rem; } }
+
     @media print {
       .diagram-container { overflow-x: visible; }
       svg { min-width: 0; }
@@ -168,6 +199,14 @@
 <text x="776" y="752" fill="#A3A3A3" font-size="8.5" font-family="'Inter', system-ui, sans-serif">Validated result</text>
       </svg>
     </div>
+    <section class="walk" aria-labelledby="walk-h">
+<p class="eyebrow">Plain-language walkthrough</p>
+<h2 id="walk-h">What happens inside one Muse call</h2>
+<p class="lead">Every one of the agents in the other diagrams makes its calls this way. The model is treated as a capable but untrusted contractor: the adapter checks the budget before asking, reuses a saved answer when it can, forces the answer into a strict shape, and logs the cost afterward. Muse's own contribution is a single step in the middle. Everything around it is guard rails.</p>
+<aside class="critical"><p class="eyebrow">The critical view: what Muse is and is not trusted with</p><ul><li>The model is the only part of the system that can return something unexpected. The adapter therefore treats its output as untrusted until it passes validation.</li><li>A saved answer costs nothing and returns instantly. That makes repeat runs and demos cheap and repeatable.</li><li>High effort is not free thinking. Spark counts its reasoning as output tokens, which is why the high tier has a 32,768 token ceiling and the cost log records every one.</li></ul></aside>
+<ol class="steps"><li class="step"><header><span class="num">1</span><h3>A stage asks</h3><span class="chip code">Pipeline stage</span></header><dl><dt>Gets</dt><dd>Its own inputs.</dd><dt>Does</dt><dd>Calls the adapter with the agent name, model, effort, prompt, optional images, and the JSON schema and validator for the answer.</dd><dt>Hands over</dt><dd>The request to the adapter.</dd><dt class="why">Why no model</dt><dd>Each stage describes what it needs and leaves the how to one shared module.</dd><dt>Guard</dt><dd>Prompts live in versioned files in the prompts folder.</dd></dl></li><li class="step"><header><span class="num">2</span><h3>Kill switch and run cap</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>The request and the money already spent this run.</dd><dt>Does</dt><dd>Refuses immediately if paid calls are switched off, or if this call could push the run over $5.</dd><dt>Hands over</dt><dd>Either continues, or throws a typed error before any money moves.</dd><dt class="why">Why no model</dt><dd>Cost safety must come before the call, not after.</dd><dt>Guard</dt><dd>The check happens first, so a runaway loop cannot spend.</dd></dl></li><li class="step"><header><span class="num">3</span><h3>Cache key</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>The exact request.</dd><dt>Does</dt><dd>Fingerprints it with sha256 and looks in the local cache folder.</dd><dt>Hands over</dt><dd>A saved answer, or a miss.</dd><dt class="why">Why no model</dt><dd>The same question should not be paid for twice.</dd><dt>Guard</dt><dd>Keys cover the model and the full prompt, so a changed prompt is a miss.</dd></dl></li><li class="step"><header><span class="num">4</span><h3>Cache hit</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>A saved, already validated answer.</dd><dt>Does</dt><dd>Returns it with cost zero and marks the call as cached in the log.</dd><dt>Hands over</dt><dd>The typed result straight to the stage.</dd><dt class="why">Why no model</dt><dd>Free, instant and identical on replay.</dd><dt>Guard</dt><dd>Only validated answers are ever saved.</dd></dl></li><li class="step"><header><span class="num">5</span><h3>Ask Muse</h3><span class="chip muse">Muse Spark 1.3 (or Muse Image 1.0 for pictures)</span></header><dl><dt>Gets</dt><dd>The role instruction, the evidence or image, the response schema, and settings chosen by effort: low 0.2 and 1,024 tokens, medium 0.4 and 2,048, high 0.7 and 32,768.</dd><dt>Does</dt><dd>This is where the model reads, reasons and writes its structured answer. Pictures take a parallel route, priced at $0.01 per image.</dd><dt>Hands over</dt><dd>A raw completion back to the adapter.</dd><dt class="why">Why Muse</dt><dd>This is the one step that needs intelligence. Matching effort to the task keeps simple calls cheap and gives hard ones room.</dd><dt>Guard</dt><dd>The schema is sent with the request so the model is asked for the right shape.</dd></dl></li><li class="step"><header><span class="num">6</span><h3>Validate and retry once</h3><span class="chip code">No model, then Muse once</span></header><dl><dt>Gets</dt><dd>The completion.</dd><dt>Does</dt><dd>Checks it against the Zod validator. If it fails, asks Muse again with the validation error attached so it can correct itself.</dd><dt>Hands over</dt><dd>A validated object, or a typed error after the second failure.</dd><dt class="why">Why no model</dt><dd>Models sometimes return near-valid output. One informed retry fixes most of it, and a hard stop prevents loops.</dd><dt>Guard</dt><dd>Never rendered raw. Exactly one retry.</dd></dl></li><li class="step"><header><span class="num">7</span><h3>Save and log</h3><span class="chip code">No model</span></header><dl><dt>Gets</dt><dd>The validated answer and the usage figures.</dd><dt>Does</dt><dd>Writes the answer to the cache and appends a cost row: agent, model, effort, tokens, dollars, duration, status.</dd><dt>Hands over</dt><dd>The typed result to the stage.</dd><dt class="why">Why no model</dt><dd>A real record of what each model call cost is how a run can be audited afterward.</dd><dt>Guard</dt><dd>Logs hold no prompts, pictures or personal data. The log is also what the exported evidence manifest reads.</dd></dl></li></ol>
+
+</section>
   </div>
 </body>
 </html>

@@ -15,7 +15,14 @@ interface Props {
   beatProgress: number;
   /** 0..1 opacity of the whole globe layer. */
   alpha: number;
+  /** Portrait: centred in the upper half. Landscape: anchored to the right of the caption card. */
+  layout?: "portrait" | "landscape";
 }
+
+const LAYOUT_CLASS: Record<"portrait" | "landscape", string> = {
+  portrait: "absolute left-1/2 top-[33%] w-[112%] max-w-none -translate-x-1/2 -translate-y-1/2",
+  landscape: "absolute right-[4%] top-1/2 h-[118%] w-auto max-w-none -translate-y-1/2",
+};
 
 const SIZE = 600;
 const RADIUS = 185;
@@ -32,7 +39,7 @@ function quantize(value: number): number {
   return Math.round(value / ROTATION_QUANTUM_DEG) * ROTATION_QUANTUM_DEG;
 }
 
-export function ReelGlobe({ scene, beatProgress, alpha }: Props): React.JSX.Element {
+export function ReelGlobe({ scene, beatProgress, alpha, layout = "portrait" }: Props): React.JSX.Element {
   const camera = cameraAt(scene, beatProgress);
   const rotate: [number, number, number] = [quantize(camera.rotate[0]), quantize(camera.rotate[1]), 0];
   const scale = RADIUS * camera.zoom;
@@ -49,7 +56,7 @@ export function ReelGlobe({ scene, beatProgress, alpha }: Props): React.JSX.Elem
   return (
     <svg
       viewBox={`0 0 ${SIZE} ${SIZE}`}
-      className="absolute left-1/2 top-[33%] w-[112%] max-w-none -translate-x-1/2 -translate-y-1/2"
+      className={LAYOUT_CLASS[layout]}
       style={{ opacity: alpha }}
       aria-label={scene.legend}
       role="img"

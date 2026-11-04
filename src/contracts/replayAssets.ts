@@ -15,7 +15,7 @@ export const REPLAY_ASSETS: SceneAssets = {
     "url": "/assets/replay/b4.jpeg",
     "mode": "replay",
     "label": "Illustrative historical reconstruction · Varnhem, Sweden, about 1050 CE",
-    "audit": "repaired",
+    "audit": "pass",
     "place": "Varnhem, Sweden",
     "dateText": "about 1050 CE"
   },
@@ -23,7 +23,7 @@ export const REPLAY_ASSETS: SceneAssets = {
     "url": "/assets/replay/b5.jpeg",
     "mode": "replay",
     "label": "Illustrative historical reconstruction · Kent, United Kingdom, present-day",
-    "audit": "repaired",
+    "audit": "pass",
     "place": "Kent, United Kingdom",
     "dateText": "present-day"
   },

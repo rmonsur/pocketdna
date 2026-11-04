@@ -1,130 +1,329 @@
 # PocketDNA
 
-Finding Your Roots for everyone: turn ancestry evidence into a cited micro documentary. The agreed release target is 90–150 seconds, silent-first.
+**Finding Your Roots for everyone.** Drop an ancestry result and get a cited, two-minute
+documentary about where your story fits in human history, written, directed, illustrated and
+audited end to end by Meta's Muse models.
 
-Meta Global AI Developer Hackathon, Oct 26 - Nov 4, 2026. Indie track. All code in this repo was built during the event window. A prior concept (DNAless) informed the idea; no old code, prompts, or assets are reused.
+Meta Global AI Developer Hackathon, Oct 26 - Nov 4, 2026. Solo, Indie Developer track.
+Everything in this repository was built during the event window. A prior concept (DNAless)
+informed the idea; no old code, prompts or assets are reused.
 
-## Run the target app (judge path)
+---
+
+## Judges: run it in 2 minutes
+
+You need Node 20 or newer and a browser. No Python, no GPU, no database, no hosted account.
 
 ```sh
+git clone <this repo> pocketdna && cd pocketdna
 npm install
-npm run serve   # builds, then serves app + API on http://localhost:8000
+npm run serve        # builds, then serves app + API at http://localhost:8000
 ```
 
-Open http://localhost:8000. Watch the saved episode with no key, upload an
-ancestry screenshot (needs `META_API_KEY` in `.env`), or drop a raw
-23andMe/AncestryDNA `.txt` export — raw files are analysed in your browser
-(experimental PocketDNA PCA-25) and never leave the device. For development,
-`npm run dev:api` (port 8000) plus `npm run dev` (port 5173) gives hot reload.
+Open **http://localhost:8000**. That is the whole setup.
 
-## Implementation status
+### What you can do, by how much you want to set up
 
-The reconciled release specification starts at [docs/ABOUT.md](docs/ABOUT.md); responsibilities are in [AGENTS.md](AGENTS.md). The target is React/Vite + Node/Hono with browser-local raw-DNA analysis, Muse Spark interpretation for both tiers, live Muse Image scenes, and one-command local startup/export. That migration is **pending**, not delivered by this documentation update.
-
-The instructions and model routing below describe the earlier Expo/FastAPI prototype, including its 30–60 second reel format and Python requirement. They are retained for development and have not been revalidated in this documentation pass. They do not override the target contracts or establish scientific release readiness. The final judge instructions must be replaced after fresh-clone verification.
-
-## Run the existing prototype
-
-Requirements: Python 3.12+, Node 20+, Chrome. Two terminals. Runs fully on your machine; no hosted deployment needed.
+| You have | Do this | What you see |
+| --- | --- | --- |
+| Nothing else | Click the small **Replay mode: saved episode, no upload or key needed.** link under the upload card | The saved 120-second film with its globe, reviewed historical scenes and a source drawer. Tap any claim to pause and open its citation. **No key, no network call, no cost.** |
+| A Meta Model API key | Copy the key into `.env` (below), restart, then upload `tests/fixtures/composition.png` (a 23andMe ancestry screenshot fixture) | A live run. The processing screen shows each Muse agent working: gatekeeper, extractor, you correct the numbers, then profiler, interpretation, director, both audits, and Muse Image scenes. |
+| Nothing, just want to see the live output | Open `demo/pocketdna-live-episode.mp4` and its `.manifest.json` | A 120-second export of one real live run on the builder's own raw 23andMe file, plus the exact beats, citations and one row per Muse call (model, effort, tokens, USD, duration). See [demo/EXPORT.md](demo/EXPORT.md). |
 
 ```sh
-# 1. Backend (FastAPI + NumPy engine)
-cd backend
-pip install -r requirements.txt
-cp .env.example .env            # add your Meta Model API key (see below); never commit .env
-python3 -m uvicorn api.main:app --port 8000
-
-# 2. Web app (Expo + React Native Web), in a second terminal
-cd app
-npm install
-npx expo start --web            # opens http://localhost:8081
+# .env  (git-ignored; never commit a real key)
+META_API_KEY=your-key-from-dev.meta.ai
 ```
 
-Then in the browser:
+Optional variables: `KILL_PAID_CALLS=1` refuses every paid call (the app degrades to typed
+errors and the replay, never a hang), `PORT` changes the port (default 8000),
+`POCKETDNA_LOCAL_DIR` moves the cache and cost log (default `.local/`).
 
-1. **Watch a sample Reel**: works with no key at all (fixture reel, every claim cited).
-2. **Raw DNA file**: upload `backend/pipeline/fixtures/mini-genome.txt` (synthetic 23andMe-format
-   export). The deterministic engine runs locally; interpretation runs on Meta open weights (see keys).
-3. **Screenshot**: upload a 23andMe or AncestryDNA ancestry-composition screenshot. Needs a Meta key.
+### Honest limits of the judge path
 
-### Keys (`backend/.env`, copied from `backend/.env.example`)
+- **Raw DNA files (`.txt` / `.zip` from 23andMe or AncestryDNA) need a reference bundle that
+  is not in git.** The PCA-25 reference arrays, era panels and gazetteer are built from
+  licensed AADR / SGDP / EGDP downloads and live in the git-ignored `dataset/` tree
+  ([dataset/README.md](dataset/README.md) explains the provenance and rebuild path). On a fresh
+  clone the browser raw-analysis route will report the bundle as missing. The saved live
+  episode in `demo/` shows what that path produces, and the code, the deterministic engine
+  and its tests are all in the repo.
+- **The screenshot route needs a Meta key.** Without one, the replay is the product demo.
+- The raw engine is labelled **experimental PocketDNA PCA-25** in the app. It is not Global25
+  and not a clinical result.
+- This build calls the hosted Meta Model API. It does not run Muse Glimmer / Spark Open.
 
-| Variable | Needed for | Where to get it |
-|---|---|---|
-| `META_API_KEY` | Screenshot tier (Muse Spark vision + agents) | dev.meta.ai |
-| `OPENWEIGHT_BASE_URL` | Raw-file tier (Muse Glimmer, open weights) | The project's Modal endpoint URL (in `.env.example` at submission) or your own `modal deploy backend/glimmer/serve.py` |
-| `BASETEN_API_KEY` + `OPEN_WEIGHT_PROVIDER=baseten` | Raw-file tier fallback via Muse Spark Open on Baseten | baseten.co |
-
-Never commit a real key. `backend/.env`, the dev cache, and the cost log are gitignored.
-`KILL_PAID_CALLS=1` refuses every paid call (the app then degrades to typed errors, never a hang).
-
-### Verify
+### Verify it works
 
 ```sh
-cd backend && python3 -m pytest -q      # engine, router, privacy invariant, orchestration (offline)
-cd app && npx tsc --noEmit              # strict TypeScript
+npm test            # 20 test files, Node's built-in runner, runs offline, no key
+npm run typecheck   # strict TypeScript
 ```
 
-## How it works
+At the time of writing: 20 of 20 test files pass, and the server serves the app, `/api/health`,
+`/api/replay` and the reference-bundle route on a local machine with paid calls killed. The
+append-only record of every check is [log.txt](log.txt).
 
-Two input tiers, one hero output (9:16 reel + evidence layer):
+---
 
-- **Tier 1, screenshot**: Muse Spark vision parses vendor percentages, then Spark agents cite, direct, pick scenes, and audit.
-- **Tier 2, raw 23andMe or AncestryDNA file**: deterministic NumPy engine (least-squares projection onto a precomputed AADR eigenspace, then 3-epoch constrained NNLS with bootstrap intervals). ALL interpretation runs on self-hosted Meta open weights (Muse Glimmer on Modal, Muse Spark Open on Baseten as fallback). Raw DNA never touches a hosted API; the router asserts this on every call and a test proves it.
+## What it does, in one picture
 
-Scientific honesty rule: the LLM never computes ancestry. The math is deterministic population genetics (validated against EIGENSOFT smartpca); Muse does interpretation, narrative, visuals, and cited grounding.
+People post the same DNA pie chart on Reddit and Facebook groups asking strangers "what does
+this mean?" A professional genealogist costs about $2,000 for the answer. PocketDNA gives
+everyone their own episode:
 
-Pipeline: gatekeeper (vendor, health-panel rejection) -> parse or engine -> citation binding against a builder-reviewed Reich Lab index -> reel direction (7 beats, 30-60 s) -> scene selection -> compliance audit (no reel renders without a pass) -> t-driven reel engine (every frame a pure function of time, so MP4 export is exact).
+1. **Drop your result.** A 23andMe or AncestryDNA screenshot, or the raw export.
+2. **The math is deterministic.** For raw files, ancestry is population genetics running in a
+   Web Worker in your browser: parse, quality-check, project onto a fixed reference basis,
+   fit each era separately. Your genotypes never leave the device. **The LLM never computes
+   ancestry.**
+3. **Muse does what only a model can.** Read the screenshot, research and cite, write the
+   story, direct a timed film, paint the scenes, and audit all of it.
+4. **A film plays.** Hook, method beat, Bronze Age, Middle Ages, Modern, convergence, source
+   stamp. Every claim is a button that opens its source.
 
-## Meta models used
+Ancestry only. No health, traits or personality. No modern nations as heirs. No battle
+imagery. A health panel is rejected up front with a typed message.
+
+---
+
+## Architecture
+
+[![PocketDNA system architecture](diagram/previews/01-system-architecture.png)](diagram/01-system-architecture.html)
+
+*Open [diagram/01-system-architecture.html](diagram/01-system-architecture.html) for the
+interactive original. Drawn from [docs/STACK.md](docs/STACK.md) and checked against the code.*
+
+How to read it:
+
+- **Browser zone.** The React app, the in-memory ancestry Web Worker (dashed amber: the one
+  place raw genotypes ever exist) and the deterministic reel engine that plays the film.
+- **One arrow leaves the browser.** It carries derived findings, never genotypes. Raw files
+  are held in browser memory and released on reset. Nothing is logged or sent to analytics.
+- **Local server zone.** A Hono server on one localhost origin: `/api/jobs` to start an
+  episode, server-sent events on `/api/jobs/:id/events` for live progress and cancellation,
+  `/api/raw-episodes` (strict Zod validation) for the browser's derived findings, and
+  `/api/bundle` for the public reference arrays.
+- **The orchestrator** sequences the agents and enforces the audit gates.
+- **One Muse adapter.** Every model call in the product goes through a single typed module
+  (`src/lib/muse/client.ts`). It owns the kill switch, a per-run cost cap, a sha256 response
+  cache, JSON-schema structured output, Zod validation with one retry, and a cost log.
+- **Muse zone.** Muse Spark for reading, reasoning and review. Muse Image for scenes.
+
+Why this shape: judges and users get one command and one port, and a privacy story that is a
+property of the architecture, not a promise. Python, PLINK and EIGENSOFT are offline research
+tools used to build and validate the reference bundle, never a runtime requirement.
+Full specification: [docs/STACK.md](docs/STACK.md).
+
+---
+
+## How Muse runs everything in the background
+
+[![Muse model map](diagram/previews/07-muse-model-map.png)](diagram/07-muse-model-map.html)
+
+*Open [diagram/07-muse-model-map.html](diagram/07-muse-model-map.html) for the original.*
+
+One adapter, three effort tiers. The tier is chosen per task so cheap steps stay cheap and
+the reasoning-heavy steps get the budget (settings from `src/lib/muse/models.ts`):
+
+| Effort | Temperature | Token cap | Used for |
+| --- | --- | --- | --- |
+| low | 0.2 | 1,024 | Gatekeeper: detect the vendor, reject health and unsupported panels |
+| medium | 0.4 | 2,048 | Extractor (read percentages, ranges and hierarchy from a screenshot) and the visual auditor that inspects each generated image |
+| high | 0.7 | 32,768 | Population profiler, interpretation with citations, director, narrative audit, compliance audit |
 
 | Model | Role |
-|---|---|
-| Muse Spark 1.3 | Tier 1 vision parsing, citation binding, reel direction, scene scoring, compliance audit, fixture visual QA |
-| Muse Glimmer (open weights, Modal GPU) | Every agent in the raw-file tier |
-| Muse Spark Open (Baseten) | One-line fallback for the open-weights path |
-| Muse Image | Pregenerated 9:16 historical scene library |
-| SAM 3.1 | 2.5D parallax masks over the scene library |
-| Muse Wonder | Hardest build-time passes (citation index) |
-| Muse Code | Wrote this codebase, including the bioinformatics engine |
+| --- | --- |
+| **Muse Spark 1.3** | Every text and vision stage above, including all three auditors. $1.25 in / $4.25 out per million tokens. |
+| **Muse Image 1.0** | Historical illustrations. Up to six scenes, two at a time, each audited by Spark and repaired at most once, with a reviewed fallback image if it still fails. |
+| **Muse Wonder** | Development and research assistant only. Not in the user's runtime path. |
+| **Muse Code** | Wrote the codebase during the event, including the browser ancestry engine. |
 
-## Screenshots
+### The agent crew, in order
 
-(added before submission: welcome, upload, processing log, reel, evidence sheet, library)
+The pipeline lives in `src/server/pipeline.ts`. The full role roster, inputs, outputs and
+authority limits are in [AGENTS.md](AGENTS.md).
+
+1. **Gatekeeper** (Spark, low) accepts a supported ancestry panel and rejects health reports.
+2. **Extractor** (Spark, medium) reads a screenshot into typed numbers. **You correct them**
+   before anything else runs, so a misread digit cannot reach the film.
+3. **Interpretation, then population profiler** (Spark, high) turn evidence into plain
+   language with a source locator on every claim, then into readable cards for the
+   closest reference populations. They cannot change a number or infer
+   traits or personal routes.
+4. **Director** (Spark, high) writes one complete, timed script: hook, method beat, three
+   era chapters, convergence, ending. Method: [docs/DIRECTOR.md](docs/DIRECTOR.md).
+5. **Narrative auditor** and **compliance auditor** (Spark, high) review the exact script.
+   One checks captions, numbers, qualifiers and source links. The other enforces ancestry-only,
+   privacy and imagery rules. If either fails, the director gets one repair; a second failure
+   stops with a typed error. **Nothing renders until both pass.**
+6. **Atlas scenes** are built deterministically from a gazetteer of cited, dated sites.
+   Geography never comes from a model's memory. Spec: [docs/ATLAS.md](docs/ATLAS.md).
+7. **Historical image agent** (Muse Image, audited by Spark) paints the scenes. States, tools
+   and acceptance checks: [docs/AGENT.md](docs/AGENT.md); prompts and provenance:
+   [docs/IMAGE.md](docs/IMAGE.md). Generated people are fictional inhabitants of a documented
+   setting, never portraits of the viewer's ancestors.
+8. **Reel assembler** (deterministic code) plays the approved plan. Every frame is a pure
+   function of time, so the preview and the MP4 export are identical.
+
+The separation is the point: **writers never grade their own work, and auditors never write.**
+
+### What every Muse call goes through
+
+Each call is: kill switch check, run-cap check, sha256 cache lookup (hit costs $0), POST with
+a JSON schema, Zod validation, one retry with the validation error fed back, cache write, and
+an appended cost-log row. A model response that fails validation is never rendered raw.
+Prompts live in versioned files under [prompts/](prompts/), not inline strings.
+
+Every diagram page also carries a plain-language walkthrough underneath it: for each
+step it says what the step receives, what it does, what it hands to the next agent, why a
+Muse model (or deliberately no model) is used there, and which guard limits it. Start with
+[diagram/03-evidence-to-film.html](diagram/03-evidence-to-film.html) to see the hand-offs
+between agents.
+
+---
+
+## Inputs and the science
+
+| Input | Handling |
+| --- | --- |
+| Screenshot (PNG/JPEG, up to 10 MB) | Sent for extraction with disclosure. You correct the extracted percentages. They are used only as the provider reported them. No personal ancient percentages are invented. |
+| Raw export (`.txt` / `.zip`, up to 50 MB) | Parsed, QC'd and analysed in a browser Web Worker. Projection into **PocketDNA PCA-25** with a fixed basis, then separate Bronze Age, Medieval and Modern fits with weights that sum to one. Poor coverage yields a limitation, not invented precision. |
+
+Percentages are never added across eras, and nothing implies a proven genealogical chain.
+A Python reference implementation was compared against the Reich Lab's smartpca (reported
+Procrustes similarity about 0.999, an implementation check rather than a projection-parity
+proof; see [docs/BIOINFORMATICS.md](docs/BIOINFORMATICS.md) for the metric definitions and
+the validation gates still required). References: AADR v66 (Reich Lab), SGDP, EGDP, with
+candidate populations catalogued in [docs/POPLIST.md](docs/POPLIST.md).
+
+---
+
+## Genomic datasets
+
+The ancestry engine is built from public reference data. **None of these files are in the
+repository because they are far too large for Git** (the largest genotype file is several
+gigabytes). The repo contains the compact derived arrays the browser needs, the scripts that
+rebuild them, and the documents that record provenance. Sizes below were measured on the
+builder's machine.
+
+| Dataset | Used for | Size on disk | Source |
+| --- | --- | --- | --- |
+| AADR v66.1, 1240K (Allen Ancient DNA Resource, Reich Lab, DOI 10.7910/DVN/FFIDCW) | Ancient source groups for the Bronze Age and Medieval fits; dated sampling sites behind citations and globe markers | about 6.6 GB genotypes, 74 MB markers, 13 MB annotations | _link to be added_ |
+| AADR v66.1, Human Origins | Present-day reference populations and the marker set of the PCA-25 basis | about 3.8 GB plus 1.8 GB compatibility genotypes | _link to be added_ |
+| EGDP (Estonian Biocentre Human Genome Diversity Panel, Pagani et al.) | Regional gaps in the modern reference set | about 131 MB | _link to be added_ |
+| SGDP (Simons Genome Diversity Project) | More modern reference individuals; cross-check | about 41 MB | _link to be added_ |
+| Franco-Cantabrian 190 (Flores-Bello et al.) | Western European regional detail | about 46 MB | _link to be added_ |
+| Builder's own 23andMe export | Test input for the demo episode; private, git-ignored | about 24 MB | not published |
+
+Provenance, identity checks and the rebuild path: [dataset/README.md](dataset/README.md),
+[docs/BIOINFORMATICS.md](docs/BIOINFORMATICS.md) and [docs/POPLIST.md](docs/POPLIST.md).
+The same table appears on the architecture and input diagrams; edit it once in
+`diagram/datasets.mjs`.
+
+---
+
+## Documentation map
+
+Start with [docs/ABOUT.md](docs/ABOUT.md). Specialist contracts override nothing silently.
+
+| Document | What it covers |
+| --- | --- |
+| [docs/ABOUT.md](docs/ABOUT.md) | Product scope, shared decisions, scientific and privacy boundaries, delivery plan |
+| [docs/RULES.md](docs/RULES.md) | Hackathon compliance, ancestry and privacy rules, engineering and budget gates |
+| [docs/STACK.md](docs/STACK.md) | Runtime architecture, contracts, installation, storage, export |
+| [AGENTS.md](AGENTS.md) | Build ownership and the complete runtime agent roster and handoffs |
+| [docs/AGENT.md](docs/AGENT.md) | Historical image agent state machine and acceptance checks |
+| [docs/IMAGE.md](docs/IMAGE.md) | Image briefs, prompts, generation and repair budget, provenance |
+| [docs/DIRECTOR.md](docs/DIRECTOR.md) | Script method, timed plan, caption readability |
+| [docs/ATLAS.md](docs/ATLAS.md) | Geographic research, globe rendering, map semantics |
+| [docs/BIOINFORMATICS.md](docs/BIOINFORMATICS.md) | PCA-25 method, QC, projection, fitting, validation gates |
+| [docs/DESIGN.md](docs/DESIGN.md) | Dark visual tokens, layout, controls, evidence interaction, error states |
+| [docs/POPLIST.md](docs/POPLIST.md) | Candidate population and sample catalogue with provenance |
+| [diagram/README.md](diagram/README.md) | Seven schematic diagrams plus an interactive isometric bench |
+
+All diagrams are self-contained HTML under [diagram/](diagram/). For example,
+[diagram/04-agent-swimlane.html](diagram/04-agent-swimlane.html) shows who hands what to whom
+and [diagram/05-muse-call-sequence.html](diagram/05-muse-call-sequence.html) shows one model
+call end to end.
+
+---
+
+## Local MP4 export
+
+The film is rendered deterministically, then stepped frame by frame by headless Chromium and
+encoded by FFmpeg. This is optional and not needed to judge the app.
+
+```sh
+npx playwright install chromium     # once; ffmpeg must be on PATH
+npm run serve
+npm run export -- --url http://localhost:8000 --out pocketdna.mp4
+```
+
+It writes a companion `pocketdna.mp4.manifest.json` with every beat, citation and Muse call.
+More: [demo/EXPORT.md](demo/EXPORT.md).
+
+---
+
+## Hackathon compliance at a glance
+
+- **Public repo, new work only.** Built Oct 26 - Nov 4. The README states what is reused (none).
+- **Banned categories avoided by construction.** Not an image analyzer: the screenshot is one
+  convenience input, and the product is the engine and the film. Not medical advice: health
+  panels are rejected. Not a personality analyzer: copy that infers traits is blocked by the
+  compliance auditor. Not political: migration and expansion language only.
+- **Privacy.** Raw genotypes stay in browser memory and out of logs. The builder's own export
+  is git-ignored since the 2026-11-05 security pass. Public demo inputs need redistribution
+  permission.
+- **Cost control.** Kill switch, per-run cap, cache and a cost log on every call.
+
+---
+
+## Repository layout
+
+```
+src/app/        Landing, reel player, library and atlas pages (React, Vite, strict TypeScript)
+src/server/     Hono API, job runner, pipeline, image agent, atlas scenes, gazetteer
+src/lib/muse/   The single Muse adapter and model/effort/pricing table
+src/features/   Browser ancestry engine (Web Worker) and reel features
+src/reel/       Deterministic time-driven film renderer
+src/contracts/  Zod schemas: EvidenceRecord, ReelPlan, manifests, replay fixtures
+prompts/        Versioned prompt files for every agent
+public/assets/  Reviewed replay images and manifest
+tests/          Offline test suite (Node test runner) and fixtures
+docs/           Reconciled specifications; start with ABOUT.md
+diagram/        Architecture, agent and model diagrams (HTML) and previews
+demo/           Saved live episode (MP4 plus evidence manifest) and fixtures
+dataset/        Git-ignored local reference-data staging; see its README
+research/       Offline scientific tooling (Python, EIGENSOFT) for the reference bundle
+app/, backend/  Earlier Expo/FastAPI prototype, kept for reference and not on the judge path
+```
+
+---
 
 ## Data rights
 
-- Builder's own DNA export: kept on disk for local testing but gitignored (`dataset/.gitignore`) since the 2026-11-05 security pass — committing and pushing it would publish sensitive genetic data.
-- Sample raw file in the repo is synthetic (`backend/pipeline/fixtures/mini-genome.txt`).
-- Shared screenshots: sent directly by group members with permission, PII redacted. Permission records kept.
-- Reference: AADR (Reich Lab, Harvard Dataverse, DOI 10.7910/DVN/FFIDCW), v66.0. Mallick et al. 2024, Scientific Data.
-- Reel clock pattern adapted from MengTo Skills html-reel (MIT, attributed).
+- The builder's own DNA export is kept on disk for local testing and is git-ignored.
+- Reference data: AADR v66.0 (Reich Lab, Harvard Dataverse, DOI 10.7910/DVN/FFIDCW; Mallick
+  et al. 2024, Scientific Data), SGDP and EGDP, cited in [docs/POPLIST.md](docs/POPLIST.md).
+  Large source files stay outside git.
+- Shared screenshots are used only with permission, PII removed.
+- The film clock pattern is adapted from MengTo Skills html-reel (MIT, attributed).
+- Diagrams use the MIT-licensed diagram-design and anatomy skills; see
+  [diagram/README.md](diagram/README.md).
 
-## Agent skills
+---
 
-Skills installed at user scope (`muse skills list --source user`) and used to build and
-review this project. Install any of them with `muse skills install <path-to-skill-dir> --scope user`.
+## Agent skills used to build and review this project
+
+Installed at user scope and used during development. Review records live in
+[muse-loop/qa-logs/](muse-loop/qa-logs/).
 
 | Skill | Source | Used for |
-|---|---|---|
-| [code-review](https://github.com/mattpocock/skills/tree/main/skills/engineering/code-review) | [mattpocock/skills](https://github.com/mattpocock/skills) — `skills/engineering/` | Two-axis review (Standards + Spec) of the working tree; findings in [2026-11-05-engineering-pass.md](muse-loop/qa-logs/2026-11-05-engineering-pass.md) |
-| [tdd](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) | [mattpocock/skills](https://github.com/mattpocock/skills) — `skills/engineering/` | Tests at public seams only (`tests/modelJson.test.ts`, `tests/extractor-rejection.test.ts`, boundary cases in `tests/server.test.ts`) |
-| [diagnosing-bugs](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) | [mattpocock/skills](https://github.com/mattpocock/skills) — `skills/engineering/` | Red-capable loop → fix for the extractor R1/R2 rejection bug and the reel-plan tiling defect |
-| [security-and-hardening](https://github.com/addyosmani/agent-skills/tree/main/skills/security-and-hardening) | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — `skills/` | Threat model + hardening: upload caps and content sniffing, localhost binding, fetch timeouts, security headers, generic error bodies, genome gitignore fix; see [2026-11-05-security-design-review.md](muse-loop/qa-logs/2026-11-05-security-design-review.md) |
-| [impeccable](https://github.com/pbakaus/impeccable/tree/main/plugin/skills/impeccable) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) — `plugin/skills/` | Design critique (two isolated assessments) + technical audit, scored 9/20 with findings in [2026-11-05-security-design-review.md](muse-loop/qa-logs/2026-11-05-security-design-review.md) |
-
-The Pocock `skills/engineering/` folder is a pack of sub-skills, not a single skill
-package, so its members are installed individually. Impeccable also ships a detector
-binary (`impeccable detect`) that runs against the live page.
-
-## Repo layout
-
-```
-app/        Expo + React Native Web (TypeScript strict). Web is the only surface.
-backend/    FastAPI api/, agents/, deterministic pipeline/, muse/ client, glimmer/ Modal GPU server
-shared/     JSON schemas shared app <-> backend
-demo/       Fixtures (sample reel, sample parse, gatekeeper rejection)
-docs/       Reconciled target specifications; start with ABOUT.md
-dataset/    Ignored local reference-data staging; start with its README.md
-AGENTS.md   Build ownership and runtime agent contracts
-```
+| --- | --- | --- |
+| code-review | [mattpocock/skills](https://github.com/mattpocock/skills) | Two-axis review of the working tree |
+| tdd | [mattpocock/skills](https://github.com/mattpocock/skills) | Tests at public seams (model JSON, extractor rejection, server boundaries) |
+| diagnosing-bugs | [mattpocock/skills](https://github.com/mattpocock/skills) | Extractor rejection bug and reel-plan tiling defect |
+| security-and-hardening | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | Upload caps, content sniffing, localhost binding, timeouts, headers, genome gitignore fix |
+| impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | Design critique and technical audit |
+| diagram-design, anatomy | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design), [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) | The diagrams in `diagram/` |

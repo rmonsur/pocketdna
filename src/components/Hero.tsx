@@ -8,7 +8,7 @@ export function Hero(): React.JSX.Element {
         <span className="font-normal italic text-archival-amber">Get a micro documentary about you.</span>
       </h1>
       <p className="max-w-2xl text-base font-light leading-relaxed text-on-surface-variant">
-        Drop your 23andMe or AncestryDNA raw genotype or DNA test screenshot. PocketDNA reconstructs your
+        Drop your 23andMe or AncestryDNA raw DNA export. PocketDNA analyses it on your device and turns your
         Bronze Age, Medieval, and Modern chapters into a cited, cinematic micro-documentary.
       </p>
     </div>

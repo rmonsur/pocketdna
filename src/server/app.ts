@@ -4,14 +4,14 @@
  */
 
 import { randomUUID } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
 import { z } from "zod";
 import { EvidenceRecordSchema, JobStatusSchema } from "../contracts/index.ts";
 import { REPLAY } from "../contracts/fixtures.ts";
-import { KillSwitchEngaged, ModelCallError } from "../lib/muse/client.ts";
+import { KillSwitchEngaged, ModelCallError, traceStorage } from "../lib/muse/client.ts";
 import { loadGazetteer } from "./gazetteer.ts";
 import { EPISODE_DIR } from "./images.ts";
 import { createJobRecord, jobs, type Job } from "./jobs.ts";
@@ -42,6 +42,52 @@ function err(code: string, message: string, status = 400): Response {
     status,
     headers: { "Content-Type": "application/json" },
   });
+}
+
+/** Terminal jobs are written to the private episode dir so a finished reel, its trace and export survive restarts. */
+function persistJob(job: Job): void {
+  try {
+    const dir = join(EPISODE_DIR, job.id);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, "job.json"), JSON.stringify(statusOf(job), null, 1));
+  } catch {
+    /* persistence is best effort */
+  }
+}
+
+function statusOf(job: Job): unknown {
+  return JobStatusSchema.parse({
+    job_id: job.id,
+    state: job.state,
+    rejection: job.rejection,
+    message: job.message,
+    reel: job.reel,
+    evidence: job.evidence,
+    claims: job.claims,
+    assets: job.assets,
+    events: job.events.map((e) => ({ job_id: job.id, ...e })),
+  });
+}
+
+function loadPersistedJob(jobId: string): unknown | null {
+  if (!/^[a-z0-9-]+$/i.test(jobId)) return null;
+  const path = join(EPISODE_DIR, jobId, "job.json");
+  if (!existsSync(path)) return null;
+  try {
+    return JobStatusSchema.parse(JSON.parse(readFileSync(path, "utf8")));
+  } catch {
+    return null;
+  }
+}
+
+/** Run a job inside its trace context and persist the terminal record whatever the outcome. */
+function runTraced(job: Job, work: () => Promise<void>): void {
+  const dir = join(EPISODE_DIR, job.id);
+  void traceStorage.run({ jobId: job.id, dir }, () =>
+    work()
+      .catch((failure: unknown) => failJob(job, failure))
+      .finally(() => persistJob(job)),
+  );
 }
 
 function failJob(job: Job, failure: unknown): void {
@@ -155,9 +201,7 @@ app.post("/api/jobs", async (c) => {
 
   const jobId = randomUUID().slice(0, 12);
   const job = createJobRecord(jobId);
-  void runScreenshotJob(job, Buffer.from(bytes).toString("base64"), mediaType, corrected).catch((failure: unknown) => {
-    failJob(job, failure);
-  });
+  runTraced(job, () => runScreenshotJob(job, Buffer.from(bytes).toString("base64"), mediaType, corrected));
   return ok({ job_id: jobId, state: job.state });
 });
 
@@ -212,27 +256,25 @@ app.post("/api/raw-episodes", async (c) => {
   const evidence = EvidenceRecordSchema.parse({ kind: "raw", ...parsed.data });
   const jobId = randomUUID().slice(0, 12);
   const job = createJobRecord(jobId);
-  void runRawEpisodeJob(job, evidence).catch((failure: unknown) => {
-    failJob(job, failure);
-  });
+  runTraced(job, () => runRawEpisodeJob(job, evidence));
   return ok({ job_id: jobId, state: job.state });
 });
 
 app.get("/api/jobs/:id", (c) => {
   const job = jobs.get(c.req.param("id"));
-  if (job === undefined) return err("NOT_FOUND", "unknown job", 404);
-  const status = JobStatusSchema.parse({
-    job_id: job.id,
-    state: job.state,
-    rejection: job.rejection,
-    message: job.message,
-    reel: job.reel,
-    evidence: job.evidence,
-    claims: job.claims,
-    assets: job.assets,
-    events: job.events.map((e) => ({ job_id: job.id, ...e })),
-  });
-  return ok(status);
+  if (job !== undefined) return ok(statusOf(job));
+  const persisted = loadPersistedJob(c.req.param("id"));
+  return persisted === null ? err("NOT_FOUND", "unknown job", 404) : ok(persisted);
+});
+
+/* Model-call trace for one job: agents, models, tokens, cost, cache hits, timings. No prompts or payloads. */
+app.get("/api/jobs/:id/trace", (c) => {
+  const jobId = c.req.param("id");
+  if (!/^[a-z0-9-]+$/i.test(jobId)) return err("NOT_FOUND", "unknown job", 404);
+  const path = join(EPISODE_DIR, jobId, "trace.jsonl");
+  if (!existsSync(path)) return err("NOT_FOUND", "no trace for this job", 404);
+  const calls = readFileSync(path, "utf8").split("\n").filter((l) => l.length > 0).map((l) => JSON.parse(l) as unknown);
+  return ok({ job_id: jobId, calls });
 });
 
 /* Reviewed scene images for one job: allowlisted file names only, served from the private episode dir. */

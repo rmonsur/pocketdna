@@ -20,7 +20,7 @@ Separate three deliverables:
 
 Do not describe a 25-dimensional PCA as the original G25, mix its coordinates with public G25 references, or claim the original pipeline is known. A 40-to-25 fitted regression is a supervised coordinate prediction model, not a recovery of the original PCA axes.
 
-Follow STACK.md's browser privacy architecture and ancestry-only scope. Screenshots contain provider percentages; they do not provide genotypes. Weighted sums of population coordinates are hypothetical population proxies, not measured personal coordinates. Keep such experiments outside the default scientific path.
+Follow STACK.md's browser privacy architecture and ancestry-only scope. Weighted sums of population coordinates are hypothetical population proxies, not measured personal coordinates. Keep such experiments outside the default scientific path.
 
 ## 2. What the earlier run establishes
 

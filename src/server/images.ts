@@ -13,14 +13,14 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import type { Beat, ReelPlan, SceneAsset, SceneAssets } from "../contracts/index.ts";
-import { callImage, callJson, readPrompt, IMAGE_USD_PER_IMAGE, type ImageResult } from "../lib/muse/client.ts";
+import { callImage, callJson, readPrompt, IMAGE_LANDSCAPE_SIZE, IMAGE_USD_PER_IMAGE, type ImageResult } from "../lib/muse/client.ts";
 import { IMAGE, SPARK } from "../lib/muse/models.ts";
 
 export const MAX_IMAGES_PER_EPISODE = 6;
 export const MAX_REPAIRS_PER_EPISODE = 2;
 export const IMAGE_CONCURRENCY = 2;
 export const EPISODE_DIR = join(process.cwd(), ".local", "episodes");
-const PROMPT_TEMPLATE_ID = "HIST-IMAGE-01-v1";
+const PROMPT_TEMPLATE_ID = "HIST-IMAGE-01-v2-landscape";
 const REPAIR_TEMPLATE_ID = "HIST-REPAIR-01-v1";
 const AUDIT_TEMPLATE_ID = "HIST-AUDIT-01-v2";
 
@@ -81,7 +81,7 @@ export function compileScenePrompt(brief: SceneBrief): string {
       ? `the publication ${brief.publication}${brief.doi !== null ? ` (doi ${brief.doi})` : ""}, excavation reports and museum object records for this place and period`
       : "excavation reports and museum object records for this place and period";
   return [
-    "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Portrait 9:16.",
+    "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Landscape 16:9, like a frame of a documentary film.",
     "This is an illustrative reconstruction, not an archival photograph and not a portrait of anyone's actual ancestors.",
     "",
     `SETTING: ${brief.place}, ${brief.dateText} (reference family: ${brief.family}).`,
@@ -91,7 +91,7 @@ export function compileScenePrompt(brief: SceneBrief): string {
     "",
     `Use your web and image search to verify period and regional visual details for ${brief.place} around ${brief.dateText}. Prioritize ${sources}. Do not substitute popular entertainment imagery. Where a detail is unknown, keep it visually nonspecific rather than inventing it. Search supports reconstruction; it does not establish provenance.`,
     "",
-    "COMPOSITION: medium-wide, low eye level, natural lens, focal subject slightly off centre. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 80% of frame width and between 12% and 72% of frame height. Keep the lower 22% visually quiet for captions.",
+    "COMPOSITION: wide cinematic frame, low eye level, natural lens, focal subject in the right two thirds of the frame. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 85% of frame height. Keep the left 45% of the frame visually quiet and uncluttered (open landscape, sky or soft background) because a caption card sits there.",
     "LIGHT: low warm sunlight from one side. Natural highlights, restrained earth palette, atmospheric depth, readable shadows and subtle cinematic grain.",
     "MOOD: dignified human agency through ordinary skilled work, travel or community. Beautiful without fantasy spectacle or idealized luxury.",
     "",
@@ -106,7 +106,7 @@ export function compileRepairPrompt(brief: SceneBrief, instruction: string): str
     "Edit the attached image. The historical review identified this visible error:",
     instruction.trim(),
     `Follow the approved setting: ${brief.place}, ${brief.dateText}. If the replacement is uncertain, remove the object and preserve a plausible background instead.`,
-    "Preserve the approved composition, lighting, faces, other objects and the quiet lower 22% for captions. Add nothing else. No text, lettering or labels.",
+    "Preserve the approved composition, lighting, faces, other objects and the quiet left 45% of the frame for captions. Add nothing else. No text, lettering or labels.",
   ].join("\n");
 }
 
@@ -171,7 +171,7 @@ export async function produceScene(target: SceneTarget, brief: SceneBrief, runSp
   const base = { beatId: brief.beatId, template: PROMPT_TEMPLATE_ID, auditTemplate: AUDIT_TEMPLATE_ID, brief, prompt, model: IMAGE };
   const attempts: Array<Record<string, unknown>> = [];
   try {
-    let image = await callImage({ agent: "historical-image", model: IMAGE, prompt, runSpentUsd });
+    let image = await callImage({ agent: "historical-image", model: IMAGE, prompt, size: IMAGE_LANDSCAPE_SIZE, runSpentUsd });
     let cost = image.costUsd;
     let { audit, costUsd: auditCost } = await auditImage(brief, image, runSpentUsd + cost);
     cost += auditCost;
@@ -184,6 +184,7 @@ export async function produceScene(target: SceneTarget, brief: SceneBrief, runSp
         agent: "historical-image-repair",
         model: IMAGE,
         prompt: repairPrompt,
+        size: IMAGE_LANDSCAPE_SIZE,
         references: [{ dataUrl: dataUrl(image.bytes, image.format), caption: "Reference A: the candidate to edit. Change only what the instruction names." }],
         runSpentUsd: runSpentUsd + cost,
       });

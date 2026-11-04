@@ -75,7 +75,7 @@ assert.equal(AuditOut.parse({ verdict: "pass", issues: [] }).repair, "", "repair
 assert.ok(MAX_REPAIRS_PER_EPISODE === 2, "AGENT.md: at most two repairs per episode");
 
 /* Names: two samples of one AADR group share a profile and never show as identical rows. */
-const profiles = [{ source_id: "L8630", name: "Antiquity-era people near Rabat", who: "w", where: "", why_similar: "y", caution: "" }];
+const profiles = [{ source_id: "L8630", name: "Antiquity-era people near Rabat", who: "w", where: "", why_similar: "y", caution: "", story: "" }];
 const grouped: Gazetteer = new Map([
   ["L8630", { ...entry("L8630", 38.1, 67.3), groupId: "Uzbekistan_Antiquity" }],
   ["L8002", { ...entry("L8002", 38.1, 67.3), groupId: "Uzbekistan_Antiquity" }],

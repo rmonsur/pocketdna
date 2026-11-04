@@ -4,11 +4,11 @@ Version: 1.1 · 4 November 2026 · Companions: [AGENT.md](AGENT.md), [AGENTS.md]
 
 ## Decision and scope
 
-Generate historical scene images on demand with Muse Image for both raw-DNA and screenshot episodes. This matches STACK.md's shared policy: six initial images, up to two episode-wide repairs, at most one repair per scene and initial concurrency two. Keep packaged, clearly labelled replay assets for the no-key judge demo and service failures. Live generation remains the normal keyed experience.
+Generate historical scene images on demand with Muse Image for raw-DNA episodes. This matches STACK.md's shared policy: six initial images, up to two episode-wide repairs, at most one repair per scene and initial concurrency two. Keep packaged, clearly labelled replay assets for the no-key judge demo and service failures. Live generation remains the normal keyed experience.
 
 This document stores the actual reusable prompt templates, visual direction, evidence requirements and delivery contract. AGENT.md assigns responsibility to the runtime HistoricalImageAgent. These are implementation specifications; creating these documents does not deploy an agent or generate images.
 
-Images illustrate historically grounded contexts selected by the documentary. They do not reconstruct an individual's ancestors, prove ethnic identity, establish a migration route, or recover appearance from DNA. Population affinities and archaeological cultures are different kinds of evidence. A screenshot cannot establish ancient ancestry components. Both input paths must preserve those limits when choosing scenes.
+Images illustrate historically grounded contexts selected by the documentary. They do not reconstruct an individual's ancestors, prove ethnic identity, establish a migration route, or recover appearance from DNA. Population affinities and archaeological cultures are different kinds of evidence. Scene choices must preserve those limits.
 
 ## Recorded Muse capabilities and proposed settings
 
@@ -19,7 +19,7 @@ The earlier specification records the interfaces below; this documentation pass 
 | Model / endpoint | `muse-image-1.0`, Responses API at `https://api.meta.ai/v1` |
 | Tools | Only `image_generation`; enable its `enable_web_search` and `enable_image_search`, disable `enable_shell` |
 | Quality | `reasoning_strength: high`; benchmark low separately |
-| Composition | `size: 1080x1920` requests aspect ratio, not guaranteed pixel dimensions; inspect and normalize the result |
+| Composition | `size: 1536x1024` requests aspect ratio, not guaranteed pixel dimensions; inspect and normalize the result |
 | Encoding | WebP |
 | References | Captioned reference-image inputs; targeted edits and conversational continuity |
 | State | Prefer `store: false`; retain the documented image-generation item for edit replay |
@@ -39,10 +39,10 @@ People are fictional inhabitants of an illustrated setting. Do not condition ski
 
 ### Composition contract
 
-- Portrait 9:16 delivery, with foreground, middle distance and background that support a modest camera move.
+- Landscape 16:9 delivery, with foreground, middle distance and background that support a modest camera move.
 - One clear action and one focal subject or small group per shot. Avoid crowded panoramas and complex hand interactions unless needed.
 - Place important faces and objects inside the central 80% of frame width and between 12% and 72% of frame height. Treat these as initial layout targets and preview against actual UI overlays.
-- Keep the bottom 22% visually quiet for captions and the top 10% available for chapter labels. Render all labels, percentages and citations in HTML, never into the image.
+- Keep the left 45% of the frame visually quiet for the caption card. Render all labels, percentages and citations in HTML, never into the image.
 - Leave useful scene detail beyond the planned crop; keep camera motion modest enough to avoid exposing missing content.
 - Prefer an establishing shot, a human activity shot and a material-detail shot as the visual vocabulary. A 90–150 second episode needs changing composition, not dozens of unrelated AI portraits.
 - Maps, borders, dates, routes, statistical charts and ancestry percentages are deterministic app graphics. Generated scenery is not geographic evidence.
@@ -112,7 +112,7 @@ For Muse Image; attach only reviewed visual references, with a caption before ea
 
 ```text
 Create one beautiful, cinematic, historically grounded reconstruction for
-PocketDNA. Portrait 9:16. This is an illustrative reconstruction, not an
+PocketDNA. Landscape 16:9. This is an illustrative reconstruction, not an
 archival photograph or a portrait of the user's actual ancestors.
 
 SETTING: {{site_or_bounded_region}}, {{date_interval}}, {{season_or_omit}}.
@@ -138,7 +138,7 @@ REFERENCE ROLES:
 COMPOSITION: {{shot_scale}}, {{camera_height}}, {{lens_character}},
 {{subject_position}}. One clear focal action. Layered foreground and distant
 terrain; tangible materials and credible scale. Keep crucial subjects inside
-the central 80% width, between 12% and 72% height. Quiet lower 22% for captions.
+the central 80% width, between 12% and 72% height. Quiet left 45% for the caption card.
 LIGHT: {{time_and_light_direction}}. Natural highlights, restrained earth
 palette, atmospheric depth, readable shadows and subtle cinematic grain.
 MOOD: dignified human agency and quiet courage through ordinary skilled work,
@@ -160,7 +160,7 @@ Reference A defines visual continuity only; sources B–D define the stated
 historical details. Do not copy reference A's accidental errors.
 
 Change only the shot and action to: {{new_shot_and_action}}.
-Maintain the 9:16 composition and caption-safe regions from HIST-IMAGE-01.
+Maintain the 16:9 composition and caption-safe regions from HIST-IMAGE-01.
 Fictional characters may recur within this same setting and time interval.
 Do not carry a face, costume or architectural style into a different era.
 Exclude {{local_anachronisms_and_rejected_details}}.
@@ -185,7 +185,7 @@ For a vision-capable reviewer, supplied the actual generated image:
 Compare this image with the supplied evidence brief and PocketDNA constraints.
 The image is a candidate, not proof. Review date/place consistency, structures,
 objects, costume, landscape, unsupported spectacle, prohibited battle content,
-anatomical/rendering defects, continuity, portrait crop and caption clearance.
+anatomical/rendering defects, continuity, crop and caption clearance.
 Check for visible claims the brief cannot support. Do not certify a detail
 that is too small or ambiguous to inspect. Do not estimate ancestry or traits.
 
@@ -214,7 +214,7 @@ These are precise research-first briefs, not assertions that all their details a
 |---|---|---|---|
 | ANATOLIA-NEOLITHIC | A single documented occupation phase at Barcın Höyük; do not blend it with Boncuklu or Çatalhöyük | Medium-wide, low eye level: one person engaged in a verified food-preparation activity near a supported domestic structure; warm side light and quiet foreground | House construction, vessel phase, available plants, tool form, clothing uncertainty; no later monumental stone setting |
 | NATUFIAN-CONTEXT | A specific Natufian site and phase, selected by the evidence brief | Tight detail of a documented processing tool and hands, with a restrained background; raking light reveals stone texture | Exact tool and plant evidence; do not insert pottery, metal, established farming or later village architecture by default |
-| STEPPE-CONTEXT | A locally documented steppe site/region and bounded phase appropriate to the narrative | Wide portrait landscape with a small group undertaking a supported daily activity; wind and low sunlight supply scale and energy | Date-specific transport and animal evidence; do not default to mounted warriors, chariots or decorative armour |
+| STEPPE-CONTEXT | A locally documented steppe site/region and bounded phase appropriate to the narrative | Wide landscape with a small group undertaking a supported daily activity; wind and low sunlight supply scale and energy | Date-specific transport and animal evidence; do not default to mounted warriors, chariots or decorative armour |
 | MEDIEVAL-CRAFT | One named settlement and century, not a generic “Middle Ages” composite | Three-quarter view of one craftsperson making an attested object; side-lit workshop and restrained tool arrangement | Craft technique, workshop layout, clothing and tools; no mixture of centuries or regions |
 | RECENT-REGIONAL | One documented locality and date interval chosen independently of assumed genetic identity | Human-scale scene of a supported everyday activity; natural colour and dignified framing | Contemporary/archival context and rights; no stereotyped “Druze,” “Bedouin,” “Sardinian” or other ethnic costume inferred from percentages |
 
@@ -241,7 +241,7 @@ Save a per-image manifest with episode/scene ID; brief version and hash; source 
 
 Keep a separate record of each attempt. A hash identifies saved bytes; it does not make generation reproducible. Cache by the approved brief, prompt, model, references and settings. Never silently relabel a cached image as freshly generated.
 
-Genotypes and raw DNA files remain in the browser. Send the image workflow only a minimal historical scene brief, without names, raw screenshots, DNA arrays or personal percentages. Prompts and scene choices can still reveal ancestry interests: keep session files private by default, offer deletion, and never commit personal episode manifests. Export only anonymized demonstration manifests deliberately selected for the repo. Provider retention settings are not a guarantee of zero infrastructure logging.
+Genotypes and raw DNA files remain in the browser. Send the image workflow only a minimal historical scene brief, without names, DNA arrays or personal percentages. Prompts and scene choices can still reveal ancestry interests: keep session files private by default, offer deletion, and never commit personal episode manifests. Export only anonymized demonstration manifests deliberately selected for the repo. Provider retention settings are not a guarantee of zero infrastructure logging.
 
 Recommended runtime outputs: `episode/briefs/`, `episode/prompts/`, `episode/images/` and an `episode/image-manifest.json`. These paths describe an explicit local export or private application cache, not automatic public-repo writes. Keep in-memory previews disposable and release object URLs and decoded image buffers when no longer needed.
 
@@ -251,4 +251,4 @@ Show concise progress: researching setting → generating scene → checking det
 
 Provide a documented no-key replay with reviewed demo images, saved prompts, evidence briefs and agent events. A live-mode button uses the judge's configured API key through the server. If unavailable, disclose replay or fallback mode. The demo must not pretend cached imagery was generated live.
 
-Acceptance requires: no unresolved prompt variables; inspected evidence records; rights recorded for supplied assets; no personal genotype material sent; portrait/caption preview checked; audit decision saved; bounded retries; accurate live/replay label; offline replay tested. Historical review reduces errors; it does not establish archaeological certainty.
+Acceptance requires: no unresolved prompt variables; inspected evidence records; rights recorded for supplied assets; no personal genotype material sent; caption preview checked; audit decision saved; bounded retries; accurate live/replay label; offline replay tested. Historical review reduces errors; it does not establish archaeological certainty.

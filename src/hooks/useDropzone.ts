@@ -1,11 +1,8 @@
-/** Minimal drag/drop + file state for the upload card (no form library). */
+/** Minimal drag/drop + file state for the upload card (raw DNA exports only). */
 
 import { useRef, useState } from "react";
 
-type Tab = "screenshot" | "raw";
-
 export function useDropzone() {
-  const [tab, setTab] = useState<Tab>("raw");
   const [file, setFile] = useState<File | null>(null);
   const [notice, setNotice] = useState("");
   const fileInput = useRef<HTMLInputElement>(null);
@@ -25,11 +22,6 @@ export function useDropzone() {
   };
 
   return {
-    tab,
-    setTab: (next: Tab) => {
-      setTab(next);
-      setNotice("");
-    },
     file,
     notice,
     setNotice,
@@ -38,7 +30,7 @@ export function useDropzone() {
     pickFile: () => {
       fileInput.current?.click();
     },
-    onFiles: (_currentTab: Tab) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onFiles: (e: React.ChangeEvent<HTMLInputElement>) => {
       const picked = e.target.files?.[0];
       if (picked !== undefined) {
         setFile(picked);
