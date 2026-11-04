@@ -231,11 +231,83 @@ function schema(name: string): Record<string, unknown> {
   return { name: name.replace(/-/g, "_"), strict: true, schema: OUTPUT_SCHEMAS[name] ?? { type: "object" } };
 }
 
-export async function runScreenshotJob(job: Job, b64: string, mediaType = "image/png"): Promise<void> {
+export const CorrectedSharesSchema = z.object({
+  vendor: z.string().min(1),
+  shares: z
+    .array(z.object({ id: z.string(), label: z.string().min(1), weight: z.number().min(0).max(1) }))
+    .min(1),
+});
+export type CorrectedShares = z.infer<typeof CorrectedSharesSchema>;
+
+export type ExtractResult =
+  | { kind: "ok"; vendor: string; shares: CorrectedShares["shares"]; omitted: string[] }
+  | { kind: "rejected"; code: "R1" | "R2"; message: string };
+
+/** Gatekeeper + extractor only, for the user correction step (STACK 5). */
+export async function extractComposition(b64: string, mediaType = "image/png"): Promise<ExtractResult> {
+  const imagePart = { type: "image_url", image_url: { url: `data:${mediaType};base64,${b64}` } };
+  const gate = await callJson({
+    agent: "gatekeeper", model: SPARK, effort: "low",
+    messages: [
+      { role: "system", content: readPrompt("gatekeeper") },
+      { role: "user", content: [imagePart] },
+    ],
+    jsonSchema: schema("gatekeeper"),
+    validate: (d) => GatekeeperOut.parse(d),
+  });
+  if (gate.data.route === "rejection") {
+    const code = gate.data.rejection ?? "R2";
+    return {
+      kind: "rejected",
+      code,
+      message: code === "R1" ? "PocketDNA reads ancestry only. We never interpret health data." : "Please upload the ancestry composition screen.",
+    };
+  }
+  const parsed = await callJson({
+    agent: "extractor", model: SPARK, effort: "medium",
+    messages: [
+      { role: "system", content: readPrompt("extractor") },
+      { role: "user", content: [imagePart] },
+    ],
+    jsonSchema: schema("extractor"),
+    validate: (d) => ExtractorOut.parse(d),
+    runSpentUsd: gate.costUsd,
+  });
+  if (!("shares" in parsed.data) || parsed.data.error !== null) {
+    const code = parsed.data.error ?? "R2";
+    return {
+      kind: "rejected",
+      code,
+      message: code === "R1" ? "PocketDNA reads ancestry only. We never interpret health data." : "That screenshot could not be read. Please upload the ancestry composition screen.",
+    };
+  }
+  return { kind: "ok", vendor: parsed.data.vendor, shares: parsed.data.shares, omitted: parsed.data.omitted };
+}
+
+export async function runScreenshotJob(
+  job: Job,
+  b64: string,
+  mediaType = "image/png",
+  corrected?: CorrectedShares,
+): Promise<void> {
   job.state = "running";
   let spent = 0;
   const imagePart = { type: "image_url", image_url: { url: `data:${mediaType};base64,${b64}` } };
   const index = loadIndex();
+
+  if (corrected !== undefined) {
+    /* User confirmed/corrected the extraction: skip both vision calls. */
+    pushEvent(job, 1, "Reading your results", SPARK, "done", "confirmed by you");
+    job.evidence = EvidenceRecordSchema.parse({
+      kind: "provider",
+      vendor: corrected.vendor,
+      shares: corrected.shares,
+      limitations: ["Screenshot findings only; no SNP analysis performed.", "Percentages confirmed or edited by you before generation."],
+    });
+    pushEvent(job, 2, "Extracting composition", SPARK, "done", `${corrected.shares.length} provider rows (user-confirmed)`);
+    await continueJob(job, index, spent);
+    return;
+  }
 
   pushEvent(job, 1, "Reading your results", SPARK, "running");
   const gate = await callJson({
@@ -292,6 +364,12 @@ export async function runScreenshotJob(job: Job, b64: string, mediaType = "image
   });
   job.evidence = evidence;
   pushEvent(job, 2, "Extracting composition", SPARK, "done", `${parsed.data.shares.length} provider rows`);
+  await continueJob(job, index, spent);
+}
+
+async function continueJob(job: Job, index: IndexEntry[], spent: number): Promise<void> {
+  const evidence = job.evidence;
+  if (evidence === null) throw new Error("continueJob requires evidence");
 
   pushEvent(job, 3, "Selecting your citations", SPARK, "running");
   const cited = await callJson({

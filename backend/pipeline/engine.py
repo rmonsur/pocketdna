@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 
 import numpy as np
-from scipy.optimize import nnls
+from scipy.optimize import minimize
 
 EPOCHS = ("bronze", "middle", "modern")
 
@@ -47,34 +47,50 @@ def load_panel(path: Path | None = None) -> dict:
 
 
 def encode(calls: dict[str, str], snps: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Alt-allele dosages over panel SNPs present in calls. Returns (dosage, row_index)."""
+    """Count valid panel ALT alleles; reject incompatible calls rather than guessing."""
     dosage: list[float] = []
     rows: list[int] = []
     for i, spec in enumerate(snps.tolist()):
-        rsid, _ref, alt = spec.split(":")
+        rsid, ref, alt = spec.split(":")
         geno = calls.get(rsid)
-        if geno is None:
+        if geno is None or len(geno) != 2 or any(base not in (ref, alt) for base in geno):
             continue
         dosage.append(float(geno.count(alt)))
         rows.append(i)
-    return np.array(dosage), np.array(rows)
+    return np.array(dosage), np.array(rows, dtype=int)
 
 
 def project(dosage: np.ndarray, rows: np.ndarray, panel: dict) -> np.ndarray:
-    """Least-squares projection (lsqproject-style) + missing-data shrinkage."""
+    """Solve on observed loci; do not apply an unvalidated coverage multiplier."""
     valid_v = panel["V"][rows]
     centered = dosage - panel["mean"][rows]
-    coords, _res, _rank, _sv = np.linalg.lstsq(valid_v, centered, rcond=None)
-    return coords * (len(panel["mean"]) / max(len(rows), 1))
+    coords, _res, rank, singular_values = np.linalg.lstsq(valid_v, centered, rcond=None)
+    if rank != valid_v.shape[1] or not len(singular_values) or singular_values[-1] <= singular_values[0] * 1e-10:
+        raise ValueError("projection is rank deficient or ill-conditioned")
+    return coords
 
 
-def fit_weights(coords: np.ndarray, centroids: np.ndarray, strength: float = 10.0) -> np.ndarray:
-    """Constrained NNLS: w >= 0, sum w = 1 (equality via augmented row)."""
-    mat = np.vstack([centroids.T, strength * np.ones((1, centroids.shape[0]))])
-    target = np.append(coords, strength)
-    weights, _res = nnls(mat, target)
-    total = weights.sum()
-    return weights / total if total > 0 else np.full_like(weights, 1 / len(weights))
+def fit_weights(coords: np.ndarray, centroids: np.ndarray) -> np.ndarray:
+    """Minimize squared residual with nonnegative weights that sum exactly to one."""
+    matrix = np.asarray(centroids, dtype=float)
+    target = np.asarray(coords, dtype=float)
+    if matrix.ndim != 2 or matrix.shape[0] == 0 or matrix.shape[1] != target.size:
+        raise ValueError("invalid mixture dimensions")
+    if not np.isfinite(matrix).all() or not np.isfinite(target).all():
+        raise ValueError("non-finite mixture inputs")
+    def objective(weights: np.ndarray) -> float:
+        residual = matrix.T @ weights - target
+        return float(0.5 * residual @ residual)
+    def jacobian(weights: np.ndarray) -> np.ndarray:
+        return matrix @ (matrix.T @ weights - target)
+    result = minimize(objective, np.full(matrix.shape[0], 1.0 / matrix.shape[0]),
+                      jac=jacobian, method="SLSQP", bounds=[(0.0, 1.0)] * matrix.shape[0],
+                      constraints={"type": "eq", "fun": lambda w: float(w.sum() - 1.0),
+                                   "jac": lambda w: np.ones_like(w)},
+                      options={"ftol": 1e-12, "maxiter": 1000})
+    if not result.success or not np.isfinite(result.x).all() or abs(result.x.sum() - 1.0) > 1e-8 or np.any(result.x < -1e-9):
+        raise ValueError("constrained mixture fit did not converge")
+    return result.x
 
 
 def closest(coords: np.ndarray, centroids: np.ndarray, labels: np.ndarray, k: int = 3) -> list[dict]:

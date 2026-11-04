@@ -60,7 +60,7 @@
       "id": "c-viking-margaryan2020",
       "claim": "Viking Age Scandinavians voyaged, traded, and settled widely, carrying Scandinavian ancestry across Europe.",
       "explainer": "Vikings sailed, traded, and settled far from home, leaving descendants across Europe.",
-      "source": {"authors": "Margaryan et al.", "year": 2020, "venue": "Nature", "doi": "10.1038/s41586-020-2682-5"},
+      "source": {"authors": "Margaryan et al.", "year": 2020, "venue": "Nature", "doi": "10.1038/s41586-020-2688-8"},
       "populations": ["norse", "medieval-scandinavian"],
       "epochs": ["middle"],
       "status": "seeded-offline — verify"

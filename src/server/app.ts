@@ -4,15 +4,29 @@
  */
 
 import { randomUUID } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
 import { JobStatusSchema } from "../contracts/index.ts";
 import { REPLAY } from "../contracts/fixtures.ts";
 import { KillSwitchEngaged, ModelCallError } from "../lib/muse/client.ts";
 import { createJobRecord, jobs, type Job } from "./jobs.ts";
-import { runScreenshotJob } from "./pipeline.ts";
+import { CorrectedSharesSchema, extractComposition, runScreenshotJob } from "./pipeline.ts";
 
 export const app = new Hono();
+
+/* Security headers on every response (security-and-hardening: Always Do). */
+app.use("*", async (c, next) => {
+  await next();
+  c.header("X-Content-Type-Options", "nosniff");
+  c.header("X-Frame-Options", "DENY");
+  c.header("Referrer-Policy", "no-referrer");
+  c.header(
+    "Content-Security-Policy",
+    "default-src 'self'; img-src 'self' data: blob:; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'",
+  );
+});
 
 function ok(data: unknown): Response {
   return new Response(JSON.stringify({ ok: true, data }), {
@@ -34,18 +48,55 @@ function failJob(job: Job, failure: unknown): void {
     job.message = "Paid calls are paused (KILL_PAID_CALLS). Replay and fixtures still run.";
   } else if (failure instanceof ModelCallError) {
     job.rejection = "R4";
-    job.message = failure.message.slice(0, 200);
+    /* Generic body only: upstream error details stay server-side (.local diagnostics). */
+    job.message = "The film pipeline could not finish. Please try again.";
   } else {
     job.rejection = "R4";
-    job.message = String(failure).slice(0, 200);
+    job.message = "The film pipeline could not finish. Please try again.";
   }
 }
 
 app.get("/api/health", (c) => ok({ status: "ok", mode: "local" }));
 
+/* PCA-25 bundle + era panels for the in-browser raw worker (public reference
+ * arrays only; no user data). Allowlisted filenames, no path traversal. */
+const BUNDLE_DIR = join(process.cwd(), "dataset", "interim", "reference-validation", "experimental-pca", "bundle-v1");
+const BUNDLE_FILES: Record<string, string> = {
+  "manifest.json": "application/json",
+  "markers.tsv": "text/tab-separated-values",
+  "weights.f64": "application/octet-stream",
+  "means.f64": "application/octet-stream",
+  "normalization.f64": "application/octet-stream",
+  "coordinate-scales.f64": "application/octet-stream",
+};
+
+app.get("/api/bundle/:file", (c) => {
+  const file = c.req.param("file");
+  const type = BUNDLE_FILES[file];
+  if (type === undefined) return err("NOT_FOUND", "unknown bundle file", 404);
+  return new Response(readFileSync(join(BUNDLE_DIR, file)), { headers: { "Content-Type": type } });
+});
+
+app.get("/api/era-panels", (c) => {
+  const path = join(process.cwd(), "dataset", "interim", "era-panels", "panels.json");
+  return new Response(readFileSync(path), { headers: { "Content-Type": "application/json" } });
+});
+
 app.get("/api/replay", (c) => ok(REPLAY));
 
-app.post("/api/jobs", async (c) => {
+/* Paid-job rate limit: local single-user server, simple in-memory window. */
+const jobAttempts: number[] = [];
+function rateLimited(): boolean {
+  const now = Date.now();
+  while (jobAttempts.length > 0 && now - jobAttempts[0] > 60_000) jobAttempts.shift();
+  if (jobAttempts.length >= 10) return true;
+  jobAttempts.push(now);
+  return false;
+}
+
+async function parseUpload(c: { req: { parseBody: () => Promise<Record<string, unknown>> } }): Promise<
+  { bytes: Uint8Array; mediaType: string; body: Record<string, unknown> } | Response
+> {
   const body = await c.req.parseBody();
   const upload = body["file"];
   if (!(upload instanceof File)) return err("R2", "multipart file field required");
@@ -55,19 +106,50 @@ app.post("/api/jobs", async (c) => {
   const isPng = bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
   const isJpeg = bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
   const mediaType = isPng ? "image/png" : isJpeg ? "image/jpeg" : null;
-  const jobId = randomUUID().slice(0, 12);
-  const job = createJobRecord(jobId);
-
   if (mediaType === null && (name.endsWith(".txt") || name.endsWith(".zip"))) {
-    job.state = "failed";
-    job.rejection = "R4";
-    job.message =
-      "Raw analysis runs in your browser (worker) once the validated science bundle ships; the server never receives genotypes.";
-    return err(job.rejection, job.message, 422);
+    return err("R4", "Raw analysis runs in your browser; the server never receives genotypes.", 422);
   }
   if (mediaType === null) return err("R2", "unsupported file type: PNG or JPEG screenshot required");
+  return { bytes, mediaType, body };
+}
 
-  void runScreenshotJob(job, Buffer.from(bytes).toString("base64"), mediaType).catch((failure: unknown) => {
+/* Correction step, phase 1: read the screenshot, return shares for the user
+ * to confirm or edit before any film generation is paid for. */
+app.post("/api/extract", async (c) => {
+  const parsed = await parseUpload(c);
+  if (parsed instanceof Response) return parsed;
+  try {
+    const result = await extractComposition(Buffer.from(parsed.bytes).toString("base64"), parsed.mediaType);
+    if (result.kind === "rejected") return err(result.code, result.message, 422);
+    return ok({ vendor: result.vendor, shares: result.shares, omitted: result.omitted });
+  } catch (failure) {
+    if (failure instanceof KillSwitchEngaged) return err("R5", "Paid calls are paused (KILL_PAID_CALLS).", 503);
+    return err("R4", "Extraction could not finish. Please try again.", 502);
+  }
+});
+
+app.post("/api/jobs", async (c) => {
+  if (rateLimited()) return err("R5", "Too many jobs this minute; paid-call protection. Try again shortly.", 429);
+  const parsed = await parseUpload(c);
+  if (parsed instanceof Response) return parsed;
+  const { bytes, mediaType, body } = parsed;
+
+  let corrected = undefined;
+  if (typeof body["corrected"] === "string") {
+    let json: unknown;
+    try {
+      json = JSON.parse(body["corrected"]);
+    } catch {
+      return err("R2", "corrected shares must be valid JSON");
+    }
+    const valid = CorrectedSharesSchema.safeParse(json);
+    if (!valid.success) return err("R2", "corrected shares failed validation");
+    corrected = valid.data;
+  }
+
+  const jobId = randomUUID().slice(0, 12);
+  const job = createJobRecord(jobId);
+  void runScreenshotJob(job, Buffer.from(bytes).toString("base64"), mediaType, corrected).catch((failure: unknown) => {
     failJob(job, failure);
   });
   return ok({ job_id: jobId, state: job.state });

@@ -8,7 +8,8 @@
     "dev:api": "tsx src/server/main.ts",
     "build": "tsc --noEmit && vite build",
     "start": "tsx src/server/main.ts",
-    "test": "node --experimental-strip-types --no-warnings --test tests/",
+    "serve": "npm run build && tsx src/server/main.ts",
+    "test": "node scripts/run-tests.mjs",
     "export": "node scripts/export.mjs",
     "typecheck": "tsc --noEmit"
   },
@@ -22,7 +23,7 @@
     "three": "^0.170.0",
     "topojson-client": "^3.1.0",
     "world-atlas": "^2.0.2",
-    "zod": "^3.23.8",
+    "zod": "^4.6.7",
     "zustand": "^5.0.0"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@
  * Runs in a Web Worker; nothing here touches the network.
  */
 
-import { nnls, solve } from "./linalg";
+import { simplexLeastSquares, solve } from "./linalg";
 import { EPOCHS, type Epoch, type EpochSources, type Panel } from "./panel";
 import { type Resampler, seededResampler } from "./rng";
 
@@ -48,7 +48,6 @@ export interface AnalyzeOptions {
 export const MIN_USABLE_MARKERS = 50;
 export const DEFAULT_N_BOOT = 200;
 export const DEFAULT_SEED = 0;
-const SUM_TO_ONE_STRENGTH = 10;
 const CLOSEST_K = 3;
 const LOW_PCT = 5;
 const HIGH_PCT = 95;
@@ -71,8 +70,9 @@ export function encode(calls: ReadonlyMap<string, string>, snps: readonly string
   snps.forEach((spec, i) => {
     const parts = spec.split(SNP_SPEC_SEP);
     const geno = calls.get(parts[0]);
-    if (geno === undefined) return;
+    const ref = parts[1];
     const alt = parts[SNP_SPEC_ALT_INDEX];
+    if (geno === undefined || geno.length !== 2 || [...geno].some((base) => base !== ref && base !== alt)) return;
     let count = 0;
     for (const base of geno) if (base === alt) count += 1;
     dosage.push(count);
@@ -81,7 +81,7 @@ export function encode(calls: ReadonlyMap<string, string>, snps: readonly string
   return { dosage: Float64Array.from(dosage), rows: Uint32Array.from(rows) };
 }
 
-/** Least-squares projection (lsqproject-style) + missing-data shrinkage. */
+/** Least-squares projection over observed loci; no unvalidated coverage multiplier. */
 export function project(dosage: ArrayLike<number>, rows: ArrayLike<number>, panel: Panel): number[] {
   const k = panel.nPcs;
   const n = rows.length;
@@ -104,19 +104,12 @@ export function project(dosage: ArrayLike<number>, rows: ArrayLike<number>, pane
   for (let a = 0; a < k; a += 1) {
     for (let b = 0; b < a; b += 1) ata[a][b] = ata[b][a];
   }
-  const shrink = panel.nSnps / Math.max(n, 1);
-  return solve(ata, atb).map((c) => c * shrink);
+  return solve(ata, atb);
 }
 
-/** Constrained NNLS: w >= 0, sum w = 1 (equality via an augmented row). */
+/** Fit nonnegative weights with an exact sum-to-one constraint. */
 export function fitWeights(coords: readonly number[], centroids: readonly (readonly number[])[]): number[] {
-  const s = centroids.length;
-  const transposed = coords.map((_, kIdx) => centroids.map((c) => c[kIdx]));
-  const mat = [...transposed, new Array<number>(s).fill(SUM_TO_ONE_STRENGTH)];
-  const target = [...coords, SUM_TO_ONE_STRENGTH];
-  const w = nnls(mat, target);
-  const total = w.reduce((a, b) => a + b, 0);
-  return total > 0 ? w.map((x) => x / total) : w.map(() => 1 / s);
+  return simplexLeastSquares(centroids, coords);
 }
 
 export function closest(coords: readonly number[], sources: EpochSources, k = CLOSEST_K): Closest[] {

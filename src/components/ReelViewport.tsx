@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ViewingBundle } from "../contracts/index";
 import { frameAt } from "../reel/engine";
-import { EvidenceTooltip } from "./EvidenceTooltip";
+import { EvidenceDrawer } from "./EvidenceDrawer";
 import { Waveform } from "./Waveform";
 
 const PLATES: Record<string, string> = {
@@ -35,8 +35,11 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
   const staticT = params.get("static") === "1" && params.get("t") !== null ? Number(params.get("t")) : undefined;
 
   const [liveT, setLiveT] = useState(0);
-  const [playing, setPlaying] = useState(staticT === undefined);
+  const [playing, setPlaying] = useState(
+    staticT === undefined && !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const [evidenceOpen, setEvidenceOpen] = useState(false);
+  const headlineRef = useRef<HTMLButtonElement>(null);
   const tRef = useRef(0);
   const playingRef = useRef(playing);
   playingRef.current = playing;
@@ -61,7 +64,12 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
 
   const frame = frameAt(plan, t);
   const beat = plan.beats[frame.beatIndex];
-  const claim = claims.find((c) => c.id === beat.claimIds[0]) ?? null;
+  const beatClaims = claims.filter((c) => beat.claimIds.includes(c.id));
+
+  function closeEvidence(): void {
+    setEvidenceOpen(false);
+    headlineRef.current?.focus();
+  }
   const eraBeats = plan.beats.filter((b) => b.era !== undefined);
 
   function seek(beatIndex: number): void {
@@ -96,11 +104,11 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background-obsidian/85 via-transparent to-background-obsidian/95" />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background-obsidian via-background-obsidian/30 to-transparent" />
           {beat.mapPaths.length > 0 && <MapOverlay origin={[60, 47]} paths={beat.mapPaths} />}
-          <span className="absolute bottom-24 left-5 z-10 rounded-full bg-black/50 px-2 py-0.5 font-mono text-[9px] text-white/60">
+          <span className="absolute bottom-24 left-5 z-10 rounded-full bg-black/50 px-2 py-0.5 font-mono text-[11px] text-white/60">
             Illustration (reconstruction)
           </span>
           {beat.coords !== null && (
-            <div className="pointer-events-none absolute right-4 top-24 font-mono text-[9px] tracking-widest text-archival-amber/70">
+            <div className="pointer-events-none absolute right-4 top-24 font-mono text-[11px] tracking-widest text-archival-amber/70">
               {beat.coords}
             </div>
           )}
@@ -117,8 +125,8 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
                       onClick={() => seek(plan.beats.indexOf(b))}
                       className={
                         active
-                          ? "whitespace-nowrap rounded-full bg-archival-amber px-2 py-0.5 text-[10px] font-semibold text-surface-container-lowest"
-                          : "whitespace-nowrap rounded-full bg-surface-charcoal/80 px-2 py-0.5 text-[10px] text-text-muted hover:text-on-surface"
+                          ? "flex min-h-9 items-center whitespace-nowrap rounded-full bg-archival-amber px-2.5 text-[11px] font-semibold text-surface-container-lowest"
+                          : "flex min-h-9 items-center whitespace-nowrap rounded-full bg-surface-charcoal/80 px-2.5 text-[11px] text-text-muted hover:text-on-surface"
                       }
                     >
                       {b.era === "bronze" ? "Bronze Age" : b.era === "middle" ? "Middle Ages" : "Modern Period"}
@@ -126,7 +134,7 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
                   );
                 })}
               </div>
-              <span className="font-mono text-[10px] text-text-muted">{Math.floor(t)}s / {plan.duration_s}s</span>
+              <span className="font-mono text-[11px] text-text-muted">{Math.floor(t)}s / {plan.duration_s}s</span>
             </div>
             <div className="grid w-full gap-1.5 pt-1" style={{ gridTemplateColumns: `repeat(${plan.beats.length}, 1fr)` }}>
               {plan.beats.map((b, i) => {
@@ -137,9 +145,11 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
                     type="button"
                     aria-label={`Beat ${i + 1}: ${b.category}`}
                     onClick={() => seek(i)}
-                    className="h-1 overflow-hidden rounded-full bg-surface-container-high"
+                    className="flex h-6 items-center"
                   >
-                    <span className="block h-full bg-archival-amber transition-[width] ease-linear" style={{ width: `${fill}%` }} />
+                    <span className="relative block h-1 w-full overflow-hidden rounded-full bg-surface-container-high">
+                      <span className="absolute inset-y-0 left-0 bg-archival-amber transition-[width] ease-linear" style={{ width: `${fill}%` }} />
+                    </span>
                   </button>
                 );
               })}
@@ -154,7 +164,9 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
               </span>
             </div>
             <button
+              ref={headlineRef}
               type="button"
+              aria-haspopup="dialog"
               onClick={() => {
                 setPlaying(false);
                 setEvidenceOpen(true);
@@ -162,16 +174,13 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
               className="group w-full rounded-2xl bg-surface-container-lowest/60 p-3.5 text-left backdrop-blur-md transition-colors hover:bg-surface-container-lowest/80"
             >
               <span className="flex items-center gap-1.5 pb-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-archival-amber">{beat.category}</span>
+                <span className="text-[11px] font-bold uppercase tracking-widest text-archival-amber">{beat.category}</span>
               </span>
               <span className="block text-[32px] font-light leading-tight text-text-primary group-hover:text-archival-amber">
                 {beat.headline}
               </span>
               <span className="block pt-1 text-sm text-text-muted">{beat.subtext}</span>
             </button>
-            {evidenceOpen && (
-              <EvidenceTooltip claim={claim} evidence={evidence} beatEra={beat.era} onClose={() => setEvidenceOpen(false)} />
-            )}
           </div>
 
           <div className="relative z-20 flex flex-col gap-3 bg-gradient-to-t from-background-obsidian via-background-obsidian/90 to-transparent p-4">
@@ -180,7 +189,7 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
               <button
                 type="button"
                 onClick={() => setPlaying((p) => !p)}
-                className="flex items-center gap-2 rounded-full bg-surface-charcoal px-3.5 py-1.5 text-xs text-text-primary transition-colors hover:bg-surface-container"
+                className="flex min-h-10 items-center gap-2 rounded-full bg-surface-charcoal px-3.5 text-xs text-text-primary transition-colors hover:bg-surface-container"
               >
                 <span className="text-archival-amber">{playing ? "❚❚" : "▶"}</span>
                 <span>{playing ? "Playing" : "Paused"}</span>
@@ -188,12 +197,15 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
               <button
                 type="button"
                 onClick={() => void share()}
-                className="flex items-center gap-1.5 rounded-full bg-surface-charcoal px-3 py-1.5 text-xs text-on-surface transition-colors hover:bg-surface-container"
+                className="flex min-h-10 items-center gap-1.5 rounded-full bg-surface-charcoal px-3 text-xs text-on-surface transition-colors hover:bg-surface-container"
               >
                 <span>Export 9:16</span>
               </button>
             </div>
           </div>
+          {evidenceOpen && (
+            <EvidenceDrawer claims={beatClaims} evidence={evidence} beat={beat} onClose={closeEvidence} />
+          )}
         </div>
       </div>
       <p className="max-w-xs pt-4 text-center text-sm text-text-muted">

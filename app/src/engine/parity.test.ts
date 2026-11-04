@@ -8,7 +8,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
 
-import { analyze } from "./analyze";
+import { analyze, encode, fitWeights, project } from "./analyze";
 import { panelFromFiles, parsePanelMeta, EPOCHS } from "./panel";
 import { parseRaw } from "./parse";
 import type { Resampler } from "./rng";
@@ -102,4 +102,31 @@ test("default seeded bootstrap is deterministic and brackets the point estimate"
   for (const share of a.epochs.bronze.shares) {
     assert.ok(share.low <= share.weight + TOL && share.weight <= share.high + TOL, share.label);
   }
+});
+
+
+test("missing loci do not inflate a least-squares projection", () => {
+  const { panel } = loadFixture();
+  const toy = { ...panel, nSnps: 4, nPcs: 2, mean: new Float32Array(4),
+    loadings: new Float32Array([1, 0, 0, 1, 1, 1, 1, -1]) };
+  const coords = project([0.3, 1.0, -0.4], [0, 2, 3], toy);
+  assertClose(coords[0], 0.3, "missing-data pc0");
+  assertClose(coords[1], 0.7, "missing-data pc1");
+});
+
+test("incompatible calls are excluded and simplex constraints hold", () => {
+  const calls = new Map([["rs1", "TT"], ["rs2", "AG"]]);
+  const encoded = encode(calls, ["rs1:A:C", "rs2:A:G"]);
+  assert.deepEqual([...encoded.rows], [1]);
+  assert.deepEqual([...encoded.dosage], [1]);
+  const weights = fitWeights([3, -1], [[1, 0], [0, 1]]);
+  assertClose(weights[0], 1, "simplex vertex");
+  assertClose(weights[1], 0, "simplex vertex");
+  assertClose(weights.reduce((a, b) => a + b, 0), 1, "simplex sum");
+});
+
+test("simplex fit recovers independent interior and boundary solutions", () => {
+  const vertices = [[0, 0], [1, 0], [0, 1]];
+  fitWeights([0.25, 0.45], vertices).forEach((v, i) => assertClose(v, [0.30, 0.25, 0.45][i], `interior ${i}`));
+  fitWeights([-0.2, 0.7], vertices).forEach((v, i) => assertClose(v, [0.30, 0, 0.7][i], `boundary ${i}`));
 });

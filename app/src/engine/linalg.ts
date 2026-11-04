@@ -108,3 +108,53 @@ function solvePassive(a: Matrix, b: readonly number[], passive: readonly boolean
   });
   return out;
 }
+
+/** Equality-constrained nonnegative least squares over the probability simplex. */
+export function simplexLeastSquares(centroids: Matrix, target: readonly number[]): number[] {
+  const n = centroids.length;
+  if (n === 0 || centroids.some((row) => row.length !== target.length || row.some((v) => !Number.isFinite(v))) || target.some((v) => !Number.isFinite(v))) {
+    throw new Error("invalid mixture inputs");
+  }
+  const gram = centroids.map((a) => centroids.map((b) => a.reduce((sum, v, k) => sum + v * b[k], 0)));
+  const linear = centroids.map((row) => row.reduce((sum, v, k) => sum + v * target[k], 0));
+  let best = 0;
+  for (let i = 1; i < n; i++) {
+    if (gram[i][i] - 2 * linear[i] < gram[best][best] - 2 * linear[best]) best = i;
+  }
+  let weights = new Array<number>(n).fill(0);
+  weights[best] = 1;
+  let active = [best];
+  const tolerance = 1e-10;
+  for (let iteration = 0; iteration < 100 * n; iteration++) {
+    const gradient = gram.map((row, i) => row.reduce((sum, value, j) => sum + value * weights[j], -linear[i]));
+    const baseline = active.reduce((sum, i) => sum + gradient[i], 0) / active.length;
+    let entering = -1;
+    for (let i = 0; i < n; i++) {
+      if (!active.includes(i) && gradient[i] < baseline - tolerance && (entering < 0 || gradient[i] < gradient[entering])) entering = i;
+    }
+    if (entering < 0) return weights;
+    active = [...active, entering];
+    for (let inner = 0; inner < 100 * n; inner++) {
+      const system = active.map((i) => [...active.map((j) => gram[i][j]), 1]);
+      system.push([...active.map(() => 1), 0]);
+      const candidate = solve(system, [...active.map((i) => linear[i]), 1]);
+      if (candidate.slice(0, active.length).every((value) => value > tolerance)) {
+        weights = new Array<number>(n).fill(0);
+        active.forEach((i, j) => { weights[i] = candidate[j]; });
+        break;
+      }
+      let alpha = 1;
+      for (let j = 0; j < active.length; j++) {
+        const i = active[j];
+        if (candidate[j] <= tolerance && weights[i] > 0) alpha = Math.min(alpha, weights[i] / (weights[i] - candidate[j]));
+      }
+      const updated = new Array<number>(n).fill(0);
+      active.forEach((i, j) => { updated[i] = weights[i] + alpha * (candidate[j] - weights[i]); });
+      weights = updated;
+      active = active.filter((i) => weights[i] > tolerance);
+      if (active.length === 0) throw new Error("simplex active set became empty");
+      if (inner === 100 * n - 1) throw new Error("simplex fit did not converge");
+    }
+  }
+  throw new Error("simplex fit did not converge");
+}

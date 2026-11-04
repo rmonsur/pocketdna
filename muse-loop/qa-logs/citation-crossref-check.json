@@ -1,0 +1,66 @@
+[
+  {
+    "id": "c-steppe-haak2015",
+    "doi": "10.1038/nature14317",
+    "status": "resolved",
+    "crossref_year": 2015,
+    "year_match": true
+  },
+  {
+    "id": "c-bronze-allentoft2015",
+    "doi": "10.1038/nature14507",
+    "status": "resolved",
+    "crossref_year": 2015,
+    "year_match": true
+  },
+  {
+    "id": "c-euro3-lazaridis2014",
+    "doi": "10.1038/nature13673",
+    "status": "resolved",
+    "crossref_year": 2014,
+    "year_match": true
+  },
+  {
+    "id": "c-farming-lazaridis2016",
+    "doi": "10.1038/nature19310",
+    "status": "resolved",
+    "crossref_year": 2016,
+    "year_match": true
+  },
+  {
+    "id": "c-iceage-fu2016",
+    "doi": "10.1038/nature17993",
+    "status": "resolved",
+    "crossref_year": 2016,
+    "year_match": true
+  },
+  {
+    "id": "c-minoan-lazaridis2017",
+    "doi": "10.1038/nature23310",
+    "status": "resolved",
+    "crossref_year": 2017,
+    "year_match": true
+  },
+  {
+    "id": "c-viking-margaryan2020",
+    "doi": "10.1038/s41586-020-2688-8",
+    "status": "resolved after correction",
+    "note": "Seeded DOI 10.1038/s41586-020-2682-5 returned 404 on doi.org and Crossref; corrected via Crossref title search and re-verified (200).",
+    "crossref_year": 2020,
+    "year_match": true
+  },
+  {
+    "id": "c-pca-patterson2006",
+    "doi": "10.1371/journal.pgen.0020190",
+    "status": "resolved",
+    "crossref_year": 2006,
+    "year_match": true
+  },
+  {
+    "id": "c-aadr-dataset",
+    "doi": "10.7910/DVN/FFIDCW",
+    "status": "resolved via DataCite (Dataverse DOI, not Crossref)",
+    "crossref_year": null,
+    "year_match": null
+  }
+]

@@ -72,6 +72,16 @@ def main() -> None:
             'snp_weights_sha256':hashlib.sha256((P/'pca.weights').read_bytes()).hexdigest(),
             'warning':'Exploratory numerical comparison only; training-score calibration, high-precision text output, no chip mask and no production tolerances. Does not certify browser parity or ancestry accuracy.'}
     (P/'projection-check.json').write_text(json.dumps(result,indent=2)+'\n')
+    # Experimental reference-only fixtures remain in the ignored dataset directory.
+    fixture=P/'ts-parity';fixture.mkdir(exist_ok=True)
+    np.asarray(weights,dtype='<f8').tofile(fixture/'weights.f64')
+    np.asarray(mu,dtype='<f8').tofile(fixture/'means.f64')
+    np.asarray(scale,dtype='<f8').tofile(fixture/'normalization.f64')
+    np.asarray(calibrated,dtype='<f8').tofile(fixture/'coordinate-scales.f64')
+    calls=np.stack([((data[index[sid],mi//4]>>shifts)&3) for sid in subset['test']])
+    calls.astype(np.uint8).tofile(fixture/'calls.u8')
+    (fixture/'manifest.json').write_text(json.dumps({'markers':len(snps),'dimensions':25,'samples':len(subset['test']),
+        'expected_smartpca':targets['test'].tolist(), 'scope':'Reference samples only; unmasked exploratory calibration.'},indent=2)+'\n')
     print(json.dumps(result,indent=2))
 
 

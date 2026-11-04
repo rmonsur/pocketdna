@@ -4,6 +4,19 @@ Finding Your Roots for everyone: turn ancestry evidence into a cited micro docum
 
 Meta Global AI Developer Hackathon, Oct 26 - Nov 4, 2026. Indie track. All code in this repo was built during the event window. A prior concept (DNAless) informed the idea; no old code, prompts, or assets are reused.
 
+## Run the target app (judge path)
+
+```sh
+npm install
+npm run serve   # builds, then serves app + API on http://localhost:8000
+```
+
+Open http://localhost:8000. Watch the saved episode with no key, upload an
+ancestry screenshot (needs `META_API_KEY` in `.env`), or drop a raw
+23andMe/AncestryDNA `.txt` export — raw files are analysed in your browser
+(experimental PocketDNA PCA-25) and never leave the device. For development,
+`npm run dev:api` (port 8000) plus `npm run dev` (port 5173) gives hot reload.
+
 ## Implementation status
 
 The reconciled release specification starts at [docs/ABOUT.md](docs/ABOUT.md); responsibilities are in [AGENTS.md](AGENTS.md). The target is React/Vite + Node/Hono with browser-local raw-DNA analysis, Muse Spark interpretation for both tiers, live Muse Image scenes, and one-command local startup/export. That migration is **pending**, not delivered by this documentation update.
@@ -81,11 +94,28 @@ Pipeline: gatekeeper (vendor, health-panel rejection) -> parse or engine -> cita
 
 ## Data rights
 
-- Builder's own DNA export: the builder requested it be eligible for Git tracking for the demo. Committing and pushing it publishes sensitive genetic data.
+- Builder's own DNA export: kept on disk for local testing but gitignored (`dataset/.gitignore`) since the 2026-11-05 security pass — committing and pushing it would publish sensitive genetic data.
 - Sample raw file in the repo is synthetic (`backend/pipeline/fixtures/mini-genome.txt`).
 - Shared screenshots: sent directly by group members with permission, PII redacted. Permission records kept.
 - Reference: AADR (Reich Lab, Harvard Dataverse, DOI 10.7910/DVN/FFIDCW), v66.0. Mallick et al. 2024, Scientific Data.
 - Reel clock pattern adapted from MengTo Skills html-reel (MIT, attributed).
+
+## Agent skills
+
+Skills installed at user scope (`muse skills list --source user`) and used to build and
+review this project. Install any of them with `muse skills install <path-to-skill-dir> --scope user`.
+
+| Skill | Source | Used for |
+|---|---|---|
+| [code-review](https://github.com/mattpocock/skills/tree/main/skills/engineering/code-review) | [mattpocock/skills](https://github.com/mattpocock/skills) — `skills/engineering/` | Two-axis review (Standards + Spec) of the working tree; findings in [2026-11-05-engineering-pass.md](muse-loop/qa-logs/2026-11-05-engineering-pass.md) |
+| [tdd](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) | [mattpocock/skills](https://github.com/mattpocock/skills) — `skills/engineering/` | Tests at public seams only (`tests/modelJson.test.ts`, `tests/extractor-rejection.test.ts`, boundary cases in `tests/server.test.ts`) |
+| [diagnosing-bugs](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) | [mattpocock/skills](https://github.com/mattpocock/skills) — `skills/engineering/` | Red-capable loop → fix for the extractor R1/R2 rejection bug and the reel-plan tiling defect |
+| [security-and-hardening](https://github.com/addyosmani/agent-skills/tree/main/skills/security-and-hardening) | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — `skills/` | Threat model + hardening: upload caps and content sniffing, localhost binding, fetch timeouts, security headers, generic error bodies, genome gitignore fix; see [2026-11-05-security-design-review.md](muse-loop/qa-logs/2026-11-05-security-design-review.md) |
+| [impeccable](https://github.com/pbakaus/impeccable/tree/main/plugin/skills/impeccable) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) — `plugin/skills/` | Design critique (two isolated assessments) + technical audit, scored 9/20 with findings in [2026-11-05-security-design-review.md](muse-loop/qa-logs/2026-11-05-security-design-review.md) |
+
+The Pocock `skills/engineering/` folder is a pack of sub-skills, not a single skill
+package, so its members are installed individually. Impeccable also ships a detector
+binary (`impeccable detect`) that runs against the live page.
 
 ## Repo layout
 

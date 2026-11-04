@@ -4,7 +4,7 @@ import { useDropzone } from "../hooks/useDropzone";
 
 interface Props {
   onWatchReplay: () => void;
-  onGenerate: (file: File) => void;
+  onGenerate: (file: File, tab: "screenshot" | "raw") => void;
   busy: boolean;
 }
 
@@ -24,7 +24,7 @@ export function UploadCard({ onWatchReplay, onGenerate, busy }: Props): React.JS
       setNotice("Drop a file first, or watch the saved episode below.");
       return;
     }
-    onGenerate(file);
+    onGenerate(file, tab);
   }
 
   return (
@@ -73,6 +73,15 @@ export function UploadCard({ onWatchReplay, onGenerate, busy }: Props): React.JS
             <span>{file !== null ? `${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB) ready` : "No file yet. Watch the saved episode to see the film."}</span>
           </div>
         </div>
+      </div>
+
+      <div className="rounded-xl bg-surface-container-lowest/60 p-4">
+        <p className="pb-1 text-[11px] font-bold uppercase tracking-wider text-archival-amber">Your privacy</p>
+        <p className="text-[13px] leading-relaxed text-on-surface">
+          {tab === "screenshot"
+            ? "Your screenshot is sent from this device to Meta's Muse API to read the ancestry panel. PocketDNA has no account, database, or analytics, and does not keep your image after the film is made. Health and trait screens are refused, never interpreted."
+            : "Raw DNA is the most sensitive file you own. It is analysed in your browser and never leaves this device — never uploaded, never stored, never sent to a hosted model. Results use the experimental PocketDNA PCA-25 basis and are labelled with their limitations."}
+        </p>
       </div>
 
       {notice !== "" && <p className="text-center text-sm text-text-muted">{notice}</p>}

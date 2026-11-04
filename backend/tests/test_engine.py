@@ -108,3 +108,30 @@ if __name__ == "__main__":
     for name, fn in sorted({k: v for k, v in globals().items() if k.startswith("test_")}.items()):
         fn()
         print(f"PASS {name}")
+
+
+def test_missing_marker_projection_has_no_artificial_coverage_multiplier() -> None:
+    panel = {"mean": np.zeros(4), "V": np.array([[1., 0.], [0., 1.], [1., 1.], [1., -1.]])}
+    truth = np.array([0.3, 0.7])
+    indices = np.array([0, 2, 3])
+    assert np.allclose(project(panel["V"][indices] @ truth, indices, panel), truth, atol=1e-12)
+
+
+def test_invalid_alleles_are_excluded() -> None:
+    dosage, rows = encode({"rs1": "TT", "rs2": "AG"}, np.array(["rs1:A:C", "rs2:A:G"]))
+    assert rows.tolist() == [1] and dosage.tolist() == [1.0]
+
+
+def test_simplex_fit_satisfies_exact_constraint() -> None:
+    from pipeline.engine import fit_weights
+    # The nearest feasible mixture is a vertex even when the target lies outside the simplex.
+    weights = fit_weights(np.array([3., -1.]), np.eye(2))
+    assert np.allclose(weights, [1., 0.], atol=1e-9)
+    assert abs(float(weights.sum()) - 1.0) < 1e-9 and np.all(weights >= 0)
+
+
+def test_simplex_fit_recovers_interior_and_boundary_solutions() -> None:
+    from pipeline.engine import fit_weights
+    vertices = np.array([[0., 0.], [1., 0.], [0., 1.]])
+    assert np.allclose(fit_weights(np.array([.25, .45]), vertices), [.30, .25, .45], atol=1e-8)
+    assert np.allclose(fit_weights(np.array([-.2, .7]), vertices), [.30, 0., .7], atol=1e-8)

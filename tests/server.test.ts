@@ -8,6 +8,8 @@ const { app } = await import("../src/server/app.ts");
 
 const health = await app.request("/api/health");
 assert.equal(health.status, 200);
+assert.equal(health.headers.get("x-content-type-options"), "nosniff");
+assert.match(health.headers.get("content-security-policy") ?? "", /default-src 'self'/);
 const healthBody = (await health.json()) as { ok: boolean };
 assert.equal(healthBody.ok, true);
 
@@ -69,5 +71,25 @@ const bigForm = new FormData();
 bigForm.append("file", new File([new Uint8Array(10 * 1024 * 1024 + 1)], "big.png", { type: "image/png" }));
 const bigRes = await app.request("http://x/api/jobs", { method: "POST", body: bigForm });
 assert.equal(bigRes.status, 413, "screenshots over 10 MB are rejected");
+
+const extractForm = new FormData();
+extractForm.append("file", new File([new Uint8Array([0x89, 0x50, 0x4e, 0x47])], "shot.png", { type: "image/png" }));
+const extractRes = await app.request("http://x/api/extract", { method: "POST", body: extractForm });
+assert.equal(extractRes.status, 503, "extract with kill switch is a typed 503");
+assert.equal(((await extractRes.json()) as { code: string }).code, "R5");
+
+const badCorrected = new FormData();
+badCorrected.append("file", new File([new Uint8Array([0x89, 0x50, 0x4e, 0x47])], "shot.png", { type: "image/png" }));
+badCorrected.append("corrected", JSON.stringify({ vendor: "X", shares: [] }));
+const badRes = await app.request("http://x/api/jobs", { method: "POST", body: badCorrected });
+assert.equal(badRes.status, 400, "empty corrected shares are rejected");
+
+const bundleManifest = await app.request("/api/bundle/manifest.json");
+assert.equal(bundleManifest.status, 200);
+assert.equal(((await bundleManifest.json()) as { dimensions: number }).dimensions, 25);
+const traversal = await app.request("/api/bundle/../markers.tsv");
+assert.equal(traversal.status, 404, "bundle endpoint is allowlisted");
+const panels = await app.request("/api/era-panels");
+assert.equal(panels.status, 200);
 
 console.log("PASS server");

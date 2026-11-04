@@ -118,3 +118,20 @@ Reference validation performed in this conversation
 - python3 research/audit_demo_overlap.py: completed a private aggregate-only
   ID/position/allele overlap check. Its output is ignored and is not scientific
   validation, a genotype log, or proof of build/strand compatibility.
+
+Production-validation work (current continuation)
+-------------------------------------------------
+- research/experimental_projection_check.py: first run failed because the
+  smartpca eigenvalue header has leading whitespace; parser corrected. Second
+  run completed on 16 basis and 16 held-out reference samples. A per-PC scale
+  fitted on basis samples only produced held-out RMSE 2.96e-7 and maximum
+  absolute error 6.03e-7 against six-decimal smartpca output. This is an
+  exploratory Python check, not validated TypeScript or production calibration.
+- research/run_masked_smartpca.py: started a repeat smartpca experiment using
+  a marker-presence proxy from the local demo file on 16 held-out *reference*
+  samples. No demo genotype values were analyzed. The proxy is not an official
+  consumer-chip manifest and does not establish assembly/strand compatibility.
+- python3 research/check_masked_input.py: passed; all 2,829 basis records were
+  unchanged, exactly 16 reference test records were masked, and modified calls
+  only became missing. The masked smartpca result was still running at this
+  entry; see ignored experimental-pca/demo-marker-mask/manifest.json.

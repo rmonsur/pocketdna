@@ -5,8 +5,8 @@ import type { ReplayBundle } from "./index.ts";
 const beats = [
   {
     id: "b1", kind: "hook" as const, tStart: 0, tEnd: 6,
-    category: "Opening Question", headline: "Your oldest signal is 5,000 years old.",
-    subtext: "Start with the anchor. Tap any claim to see its source.",
+    category: "Opening Question", headline: "Some of your matches are 5,000 years old.",
+    subtext: "Ancient reference samples, dated by their studies. Tap any claim to see its source.",
     evidenceClass: "editorial" as const, claimIds: ["haak2015"], assetId: "asset-steppe-horseman",
     coords: null, mapPaths: [],
   },
@@ -117,7 +117,7 @@ export const REPLAY: ReplayBundle = {
     {
       id: "margaryan2020", text: "Viking Age Scandinavians settled widely across Europe.",
       class: "context",
-      source: { authors: "Margaryan et al.", year: 2020, venue: "Nature 585, 390–396", doi: "10.1038/s41586-020-2682-5" },
+      source: { authors: "Margaryan et al.", year: 2020, venue: "Nature 585, 390–396", doi: "10.1038/s41586-020-2688-8" },
       detail: "Replay illustration of the fit card; live mode recomputes from your file.",
     },
     {

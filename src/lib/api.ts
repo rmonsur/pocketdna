@@ -1,5 +1,7 @@
 /** Typed API client. Same-origin /api; the browser never calls model APIs. */
 
+import { z } from "zod";
+
 import {
   CreateJobResponseSchema,
   JobStatusSchema,
@@ -30,9 +32,31 @@ async function unwrap<T>(res: Response, parse: (data: unknown) => T): Promise<T>
   return parse(body.data);
 }
 
-export async function createJob(file: File): Promise<CreateJobResponse> {
+export interface ExtractedShares {
+  vendor: string;
+  shares: { id: string; label: string; weight: number }[];
+  omitted: string[];
+}
+
+const ExtractedSharesSchema = z.object({
+  vendor: z.string(),
+  shares: z.array(z.object({ id: z.string(), label: z.string(), weight: z.number() })),
+  omitted: z.array(z.string()).default([]),
+});
+
+export async function extractPreview(file: File): Promise<ExtractedShares> {
   const form = new FormData();
   form.append("file", file);
+  const res = await fetch("/api/extract", { method: "POST", body: form });
+  return unwrap(res, (d) => ExtractedSharesSchema.parse(d));
+}
+
+export async function createJob(file: File, corrected?: ExtractedShares): Promise<CreateJobResponse> {
+  const form = new FormData();
+  form.append("file", file);
+  if (corrected !== undefined) {
+    form.append("corrected", JSON.stringify({ vendor: corrected.vendor, shares: corrected.shares }));
+  }
   const res = await fetch("/api/jobs", { method: "POST", body: form });
   return unwrap(res, (d) => CreateJobResponseSchema.parse(d));
 }
