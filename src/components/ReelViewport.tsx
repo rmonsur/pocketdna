@@ -123,25 +123,49 @@ export function ReelViewport({ bundle, fullBleed = false, aspect = "portrait" }:
     await navigator.clipboard?.writeText(window.location.href);
   }
 
+  /* Landscape stages (export and inline) are laid out at design size and scaled to fit. */
+  const scaled = fullBleed || landscape;
   const [stageScale, setStageScale] = useState(1);
+  const frameRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (!fullBleed) return;
-    const fit = (): void => setStageScale(Math.min(window.innerHeight / STAGE_HEIGHT, window.innerWidth / STAGE_WIDTH));
+    if (!scaled) return;
+    const fit = (): void => {
+      if (fullBleed) {
+        setStageScale(Math.min(window.innerHeight / STAGE_HEIGHT, window.innerWidth / STAGE_WIDTH));
+        return;
+      }
+      const width = frameRef.current?.clientWidth ?? STAGE_WIDTH;
+      setStageScale(width / STAGE_WIDTH);
+    };
     fit();
+    const observer = fullBleed || frameRef.current === null ? null : new ResizeObserver(fit);
+    if (observer !== null && frameRef.current !== null) observer.observe(frameRef.current);
     window.addEventListener("resize", fit);
-    return () => window.removeEventListener("resize", fit);
-  }, [fullBleed]);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", fit);
+    };
+  }, [scaled, fullBleed, STAGE_WIDTH]);
+
+  const frameClass = fullBleed
+    ? "relative overflow-hidden"
+    : landscape
+      ? "relative w-full overflow-hidden rounded-[24px] bg-background-obsidian shadow-[0_24px_60px_-15px_rgba(0,0,0,0.9)]"
+      : "relative h-[670px] w-full max-w-[375px] rounded-[36px] bg-background-obsidian p-3 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.9)]";
+  const frameStyle = fullBleed
+    ? { width: STAGE_WIDTH * stageScale, height: STAGE_HEIGHT * stageScale }
+    : landscape
+      ? { height: STAGE_HEIGHT * stageScale }
+      : undefined;
 
   return (
-    <div
-      className={fullBleed ? "relative overflow-hidden" : "flex w-full flex-col items-center"}
-      style={fullBleed ? { width: STAGE_WIDTH * stageScale, height: STAGE_HEIGHT * stageScale } : undefined}
-    >
-      <div
-        className={fullBleed ? "absolute left-0 top-0 origin-top-left bg-black" : "relative h-[670px] w-full max-w-[375px] rounded-[36px] bg-background-obsidian p-3 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.9)]"}
-        style={fullBleed ? { width: STAGE_WIDTH, height: STAGE_HEIGHT, transform: `scale(${stageScale})` } : undefined}
-      >
-        <div className={`relative flex h-full flex-col justify-between overflow-clip bg-surface-charcoal select-none ${fullBleed ? "" : "rounded-[28px]"}`}>
+    <div className={fullBleed ? "relative" : "flex w-full flex-col items-center"}>
+      <div ref={frameRef} className={frameClass} style={frameStyle}>
+        <div
+          className={scaled ? "absolute left-0 top-0 h-full origin-top-left" : "relative h-full"}
+          style={scaled ? { width: STAGE_WIDTH, height: STAGE_HEIGHT, transform: `scale(${stageScale})` } : undefined}
+        >
+        <div className={`relative flex h-full flex-col justify-between overflow-clip bg-surface-charcoal select-none ${scaled ? "" : "rounded-[28px]"}`}>
           <div
             className="absolute inset-0"
             style={{ background: PLATES[beat.assetId] ?? PLATES["asset-stamp-dark"], opacity: frame.sceneAlpha }}
@@ -278,10 +302,11 @@ export function ReelViewport({ bundle, fullBleed = false, aspect = "portrait" }:
             <EvidenceDrawer claims={beatClaims} evidence={evidence} beat={beat} onClose={closeEvidence} />
           )}
         </div>
+        </div>
       </div>
       {!fullBleed && (
-        <p className="max-w-xs pt-4 text-center text-sm text-text-muted">
-          Interactive documentary viewport. Tap any stat overlay in the reel to explore archaeological citations.
+        <p className="max-w-md pt-4 text-center text-sm text-text-muted">
+          Interactive documentary. Tap the caption card to explore the story and sources behind each scene.
         </p>
       )}
     </div>

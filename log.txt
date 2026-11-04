@@ -344,3 +344,13 @@ Landscape film, nav cleanup, docs pass 2 (2026-11-05)
   and is left to the builder.
 - 2026-11-05 README rewrite: judge setup on top, architecture and model-map diagrams embedded. Checks run: npm test (20 of 20 test files pass, offline); local server smoke test with KILL_PAID_CALLS=1 on port 8123 (/api/health, /api/replay, index, /api/bundle/manifest.json all 200). Not run: fresh clone on a clean machine, live Muse run, npm run serve build step.
 - 2026-11-05 diagram refresh: added plain-language Muse walkthroughs and dataset table to all seven diagram pages (diagram/walk-*.mjs, datasets.mjs); corrected 03 stage order (interpretation before profiler, audits parallel), 06 (image repair is implemented, visual auditor medium effort), 07 (high effort 32768 tokens); re-rendered diagram/previews/01-07 at 2x with Playwright. Checks run: verify-geometry.py 0 findings on all seven; self_check.py OK on all seven; headless Chrome console errors 0 and no sideways overflow on all seven. Not run: anatomy bench re-render (unchanged), mobile-width visual review of the walkthrough cards.
+- Job 047889d3-e6e (landscape images, stories): done; audits pass; images
+  3/3 approved first audit at 1536x1024. Exported with node
+  scripts/export.mjs --job 047889d3-e6e: demo/pocketdna-live-episode.mp4 is
+  1920x1080, 120 s (ffprobe); manifest carries 14 traced model calls,
+  $0.169. The API server process died once mid-run (job 90ce6258-da4, after
+  audits, cause not captured) and was restarted; the rerun completed.
+- Landing page: the in-app player is now the same 16:9 stage, scaled to a
+  full-width row under the hero and upload card (ResizeObserver scaling);
+  verified in Chrome with the globe-to-image dissolve on the Bronze Age beat.
+  tsc clean; npm test 20/20.

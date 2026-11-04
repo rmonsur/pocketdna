@@ -1,4 +1,4 @@
-/** Landing (mockup asymmetric grid): story left, film preview right. */
+/** Landing: story and upload on top, the 16:9 film full width below. */
 
 import { useEffect, useRef, useState } from "react";
 import { Footer } from "../components/Footer";
@@ -60,7 +60,7 @@ export function Landing(): React.JSX.Element {
   function show(bundleToShow: ViewingBundle): void {
     setBundle(bundleToShow);
     setPlayerKey((k) => k + 1);
-    playerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function watchReplay(): void {
@@ -167,8 +167,10 @@ export function Landing(): React.JSX.Element {
           <div className="pointer-events-none absolute left-10 top-1/4 -z-10 h-96 w-96 rounded-full bg-archival-amber/10 blur-[140px]" />
           <div className="pointer-events-none absolute bottom-10 right-20 -z-10 h-[500px] w-[500px] rounded-full bg-bio-lime/5 blur-[160px]" />
           <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="flex flex-col gap-10 lg:col-span-7">
+            <div className="flex flex-col gap-10 lg:col-span-6 lg:pt-10">
               <Hero />
+            </div>
+            <div className="flex flex-col gap-8 lg:col-span-6">
               <UploadCard
                 onWatchReplay={watchReplay}
                 onGenerate={(file) => void generate(file)}
@@ -188,10 +190,10 @@ export function Landing(): React.JSX.Element {
                 <RejectionNotice kind={phase.notice} message={phase.message} onRetry={retry} onReplay={watchReplay} />
               )}
             </div>
-            <div ref={playerRef} className="flex w-full flex-col items-center justify-center lg:col-span-5 lg:pt-[120px]">
-              {status !== null && <GenerationStatus {...status} />}
-              <ReelViewport key={playerKey} bundle={bundle} />
-            </div>
+          </div>
+          <div ref={playerRef} className="mx-auto mt-16 flex w-full max-w-[1200px] scroll-mt-24 flex-col items-center">
+            {status !== null && <GenerationStatus {...status} />}
+            <ReelViewport key={playerKey} bundle={bundle} aspect="landscape" />
           </div>
         </div>
       </main>

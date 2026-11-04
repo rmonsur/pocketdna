@@ -8,7 +8,7 @@ export function GenerationStatus({ title, detail, step }: GenerationStatusProps)
     <div
       role="status"
       aria-live="polite"
-      className="mb-4 w-full max-w-[375px] rounded-2xl bg-surface-translucent p-4 shadow-xl backdrop-blur-xl"
+      className="mb-4 w-full max-w-[560px] rounded-2xl bg-surface-translucent p-4 shadow-xl backdrop-blur-xl"
     >
       <div className="flex items-center gap-2">
         <span className="h-2 w-2 animate-pulse rounded-full bg-bio-lime" />
