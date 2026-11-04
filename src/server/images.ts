@@ -1,10 +1,11 @@
 /**
  * HistoricalImageAgent (AGENT.md / IMAGE.md): one reviewed scene image per era
  * beat, compiled from the gazetteer place and date of the chapter's leading
- * reference source. Bounded: MAX_IMAGES per episode, concurrency two, one
- * independent visual audit per candidate, no repairs in this version; any
- * failure leaves the beat on its deterministic plate. Personal percentages
- * never enter a prompt; bytes never enter logs.
+ * reference marker. Bounded: MAX_IMAGES per episode, concurrency two, one
+ * independent visual audit per candidate, at most one HIST-REPAIR-01 edit
+ * per scene and MAX_REPAIRS per episode; any failure leaves the beat on its
+ * deterministic plate. Personal percentages never enter a prompt; bytes
+ * never enter logs.
  */
 
 import { createHash } from "node:crypto";
@@ -12,14 +13,16 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import type { Beat, ReelPlan, SceneAsset, SceneAssets } from "../contracts/index.ts";
-import { callImage, callJson, readPrompt, IMAGE_USD_PER_IMAGE } from "../lib/muse/client.ts";
+import { callImage, callJson, readPrompt, IMAGE_USD_PER_IMAGE, type ImageResult } from "../lib/muse/client.ts";
 import { IMAGE, SPARK } from "../lib/muse/models.ts";
 
 export const MAX_IMAGES_PER_EPISODE = 6;
+export const MAX_REPAIRS_PER_EPISODE = 2;
 export const IMAGE_CONCURRENCY = 2;
 export const EPISODE_DIR = join(process.cwd(), ".local", "episodes");
 const PROMPT_TEMPLATE_ID = "HIST-IMAGE-01-v1";
-const AUDIT_TEMPLATE_ID = "HIST-AUDIT-01-v1";
+const REPAIR_TEMPLATE_ID = "HIST-REPAIR-01-v1";
+const AUDIT_TEMPLATE_ID = "HIST-AUDIT-01-v2";
 
 export interface SceneBrief {
   beatId: string;
@@ -32,19 +35,22 @@ export interface SceneBrief {
   purpose: string;
 }
 
-const AuditOut = z.object({
-  verdict: z.enum(["pass", "fallback"]),
+export const AuditOut = z.object({
+  verdict: z.enum(["pass", "repair", "fallback"]),
   issues: z.array(z.object({ region: z.string(), severity: z.enum(["low", "medium", "high"]), note: z.string() })).default([]),
+  repair: z.string().default(""),
 });
+
+export type AuditVerdict = z.infer<typeof AuditOut>;
 
 const AUDIT_SCHEMA = {
   name: "visual_audit",
   strict: true,
   schema: {
     type: "object",
-    required: ["verdict", "issues"],
+    required: ["verdict", "issues", "repair"],
     properties: {
-      verdict: { type: "string", enum: ["pass", "fallback"] },
+      verdict: { type: "string", enum: ["pass", "repair", "fallback"] },
       issues: {
         type: "array",
         items: {
@@ -53,6 +59,7 @@ const AUDIT_SCHEMA = {
           properties: { region: { type: "string" }, severity: { type: "string", enum: ["low", "medium", "high"] }, note: { type: "string" } },
         },
       },
+      repair: { type: "string" },
     },
   },
 };
@@ -92,12 +99,26 @@ export function compileScenePrompt(brief: SceneBrief): string {
   ].join("\n");
 }
 
+/** HIST-REPAIR-01: scoped correction of the attached candidate; nothing else changes. */
+export function compileRepairPrompt(brief: SceneBrief, instruction: string): string {
+  if (instruction.trim() === "") throw new Error("repair instruction missing");
+  return [
+    "Edit the attached image. The historical review identified this visible error:",
+    instruction.trim(),
+    `Follow the approved setting: ${brief.place}, ${brief.dateText}. If the replacement is uncertain, remove the object and preserve a plausible background instead.`,
+    "Preserve the approved composition, lighting, faces, other objects and the quiet lower 22% for captions. Add nothing else. No text, lettering or labels.",
+  ].join("\n");
+}
+
 function sha256(bytes: Uint8Array): string {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-async function auditImage(brief: SceneBrief, bytes: Uint8Array, format: string, runSpentUsd: number): Promise<{ verdict: "pass" | "fallback"; issues: string[]; costUsd: number }> {
-  const dataUrl = `data:image/${format};base64,${Buffer.from(bytes).toString("base64")}`;
+function dataUrl(bytes: Uint8Array, format: string): string {
+  return `data:image/${format};base64,${Buffer.from(bytes).toString("base64")}`;
+}
+
+async function auditImage(brief: SceneBrief, image: ImageResult, runSpentUsd: number): Promise<{ audit: AuditVerdict; costUsd: number }> {
   const result = await callJson({
     agent: "visual-auditor",
     model: SPARK,
@@ -108,7 +129,7 @@ async function auditImage(brief: SceneBrief, bytes: Uint8Array, format: string, 
         role: "user",
         content: [
           { type: "text", text: JSON.stringify({ brief: { place: brief.place, date: brief.dateText, family: brief.family, purpose: brief.purpose } }) },
-          { type: "image_url", image_url: { url: dataUrl } },
+          { type: "image_url", image_url: { url: dataUrl(image.bytes, image.format) } },
         ],
       },
     ],
@@ -116,7 +137,7 @@ async function auditImage(brief: SceneBrief, bytes: Uint8Array, format: string, 
     validate: (d) => AuditOut.parse(d),
     runSpentUsd,
   });
-  return { verdict: result.data.verdict, issues: result.data.issues.map((i) => `${i.severity}: ${i.region}: ${i.note}`), costUsd: result.costUsd };
+  return { audit: result.data, costUsd: result.costUsd };
 }
 
 export interface SceneOutcome {
@@ -124,49 +145,94 @@ export interface SceneOutcome {
   status: "approved" | "fallback" | "failed";
   asset: SceneAsset | null;
   reason: string | null;
+  repaired: boolean;
   costUsd: number;
   manifest: Record<string, unknown>;
 }
 
-async function produceScene(jobId: string, brief: SceneBrief, runSpentUsd: number): Promise<SceneOutcome> {
+/** Shared episode-wide repair allowance (AGENT.md: one per scene, two per episode). */
+export interface RepairBudget {
+  remaining: number;
+}
+
+export interface SceneTarget {
+  dir: string;
+  urlBase: string;
+  mode: SceneAsset["mode"] | null;
+}
+
+function issuesText(audit: AuditVerdict): string {
+  return audit.issues.map((i) => `${i.severity}: ${i.region}: ${i.note}`).join("; ");
+}
+
+/** Generate, audit, optionally repair once and re-audit; write the approved file into the target dir. */
+export async function produceScene(target: SceneTarget, brief: SceneBrief, runSpentUsd: number, repairs: RepairBudget): Promise<SceneOutcome> {
   const prompt = compileScenePrompt(brief);
   const base = { beatId: brief.beatId, template: PROMPT_TEMPLATE_ID, auditTemplate: AUDIT_TEMPLATE_ID, brief, prompt, model: IMAGE };
+  const attempts: Array<Record<string, unknown>> = [];
   try {
-    const image = await callImage({ agent: "historical-image", model: IMAGE, prompt, format: "png", runSpentUsd });
+    let image = await callImage({ agent: "historical-image", model: IMAGE, prompt, runSpentUsd });
     let cost = image.costUsd;
-    const audit = await auditImage(brief, image.bytes, image.format, runSpentUsd + cost);
-    cost += audit.costUsd;
+    let { audit, costUsd: auditCost } = await auditImage(brief, image, runSpentUsd + cost);
+    cost += auditCost;
+    attempts.push({ kind: "initial", hash: sha256(image.bytes), cached: image.cached, audit });
+    let repaired = false;
+    if (audit.verdict === "repair" && repairs.remaining > 0 && audit.repair.trim() !== "") {
+      repairs.remaining -= 1;
+      const repairPrompt = compileRepairPrompt(brief, audit.repair);
+      const fixed = await callImage({
+        agent: "historical-image-repair",
+        model: IMAGE,
+        prompt: repairPrompt,
+        references: [{ dataUrl: dataUrl(image.bytes, image.format), caption: "Reference A: the candidate to edit. Change only what the instruction names." }],
+        runSpentUsd: runSpentUsd + cost,
+      });
+      cost += fixed.costUsd;
+      const second = await auditImage(brief, fixed, runSpentUsd + cost);
+      cost += second.costUsd;
+      attempts.push({ kind: "repair", template: REPAIR_TEMPLATE_ID, prompt: repairPrompt, hash: sha256(fixed.bytes), cached: fixed.cached, audit: second.audit });
+      if (second.audit.verdict === "pass") {
+        image = fixed;
+        audit = second.audit;
+        repaired = true;
+      } else {
+        audit = { ...second.audit, verdict: "fallback" };
+      }
+    } else if (audit.verdict === "repair") {
+      audit = { ...audit, verdict: "fallback", issues: [...audit.issues, { region: "episode", severity: "medium", note: "repair allowance exhausted" }] };
+    }
     const hash = sha256(image.bytes);
     if (audit.verdict !== "pass") {
       return {
         beatId: brief.beatId,
         status: "fallback",
         asset: null,
-        reason: `visual audit: ${audit.issues.join("; ") || "fallback"}`,
+        reason: `visual audit: ${issuesText(audit) || audit.verdict}`,
+        repaired,
         costUsd: cost,
-        manifest: { ...base, hash, audit, mode: image.cached ? "cache" : "live", status: "fallback" },
+        manifest: { ...base, hash, attempts, mode: image.cached ? "cache" : "live", status: "fallback" },
       };
     }
-    const dir = join(EPISODE_DIR, jobId);
-    mkdirSync(dir, { recursive: true });
+    mkdirSync(target.dir, { recursive: true });
     const file = `${brief.beatId}.${image.format}`;
-    writeFileSync(join(dir, file), image.bytes);
+    writeFileSync(join(target.dir, file), image.bytes);
+    const mode = target.mode ?? (image.cached ? "cache" : "live");
     const asset: SceneAsset = {
-      url: `/api/jobs/${jobId}/assets/${file}`,
-      mode: image.cached ? "cache" : "live",
+      url: `${target.urlBase}/${file}`,
+      mode,
       label: `Illustrative historical reconstruction · ${brief.place}, ${brief.dateText}`,
-      audit: "pass",
+      audit: repaired ? "repaired" : "pass",
       place: brief.place,
       dateText: brief.dateText,
     };
-    return { beatId: brief.beatId, status: "approved", asset, reason: null, costUsd: cost, manifest: { ...base, hash, audit, file, mode: asset.mode, status: "approved" } };
+    return { beatId: brief.beatId, status: "approved", asset, reason: null, repaired, costUsd: cost, manifest: { ...base, hash, attempts, file, mode, status: "approved" } };
   } catch (err) {
     const reason = err instanceof Error ? err.message : "image step failed";
-    return { beatId: brief.beatId, status: "failed", asset: null, reason, costUsd: 0, manifest: { ...base, status: "failed", reason } };
+    return { beatId: brief.beatId, status: "failed", asset: null, reason, repaired: false, costUsd: 0, manifest: { ...base, attempts, status: "failed", reason } };
   }
 }
 
-/** Briefs for era beats whose atlas names a located leading source; one per era, max MAX_IMAGES. */
+/** Briefs for era beats whose atlas names a located leading marker; one per era, max MAX_IMAGES. */
 export function sceneBriefs(plan: ReelPlan): SceneBrief[] {
   const seen = new Set<string>();
   const briefs: SceneBrief[] = [];
@@ -209,22 +275,28 @@ export interface IllustrationResult {
   costUsd: number;
 }
 
-export async function illustrateEpisode(jobId: string, plan: ReelPlan, runSpentUsd: number): Promise<IllustrationResult> {
-  const briefs = sceneBriefs(plan);
+/** Run the briefs with the shared budget and attach the first approved image to the hook beat. */
+export async function illustrateBriefs(target: SceneTarget, briefs: SceneBrief[], hookBeatId: string | null, runSpentUsd: number): Promise<IllustrationResult> {
+  const repairs: RepairBudget = { remaining: MAX_REPAIRS_PER_EPISODE };
   const reserved = runSpentUsd + briefs.length * IMAGE_USD_PER_IMAGE;
-  const outcomes = await pool(briefs, IMAGE_CONCURRENCY, (brief) => produceScene(jobId, brief, reserved));
+  const outcomes = await pool(briefs, IMAGE_CONCURRENCY, (brief) => produceScene(target, brief, reserved, repairs));
   const assets: SceneAssets = {};
   for (const outcome of outcomes) if (outcome.asset !== null) assets[outcome.beatId] = outcome.asset;
-  const hook = plan.beats.find((b: Beat) => b.kind === "hook");
   const anchor = outcomes.find((o) => o.asset !== null);
-  if (hook !== undefined && anchor !== null && anchor !== undefined && anchor.asset !== null) assets[hook.id] = anchor.asset;
+  if (hookBeatId !== null && anchor !== undefined && anchor.asset !== null) assets[hookBeatId] = anchor.asset;
   const costUsd = outcomes.reduce((sum, o) => sum + o.costUsd, 0);
+  return { assets, outcomes, costUsd };
+}
+
+export async function illustrateEpisode(jobId: string, plan: ReelPlan, runSpentUsd: number): Promise<IllustrationResult> {
+  const target: SceneTarget = { dir: join(EPISODE_DIR, jobId), urlBase: `/api/jobs/${jobId}/assets`, mode: null };
+  const hook = plan.beats.find((b: Beat) => b.kind === "hook");
+  const result = await illustrateBriefs(target, sceneBriefs(plan), hook?.id ?? null, runSpentUsd);
   try {
-    const dir = join(EPISODE_DIR, jobId);
-    mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, "image-manifest.json"), JSON.stringify({ jobId, scenes: outcomes.map((o) => o.manifest), costUsd }, null, 1));
+    mkdirSync(target.dir, { recursive: true });
+    writeFileSync(join(target.dir, "image-manifest.json"), JSON.stringify({ jobId, scenes: result.outcomes.map((o) => o.manifest), costUsd: result.costUsd }, null, 1));
   } catch {
     /* manifest is diagnostics; the episode still renders */
   }
-  return { assets, outcomes, costUsd };
+  return result;
 }

@@ -41,7 +41,9 @@ const plan: ReelPlan = ReelPlanSchema.parse({
 const briefs = sceneBriefs(plan);
 assert.equal(briefs.length, 3, "one brief per era beat");
 assert.ok(briefs.length <= MAX_IMAGES_PER_EPISODE);
-assert.equal(sceneBriefs(REPLAY.plan).length, 0, "no atlas, no image brief");
+assert.equal(sceneBriefs(REPLAY.plan).length, 3, "replay fixture carries one atlas-backed brief per era");
+const noAtlas = ReelPlanSchema.parse({ ...plan, beats: plan.beats.map((b) => ({ ...b, atlas: undefined })) });
+assert.equal(sceneBriefs(noAtlas).length, 0, "no atlas, no image brief");
 const unlocated = { ...atlas, markers: [{ ...atlas.markers[0], place: null }] };
 assert.equal(sceneBriefs(ReelPlanSchema.parse({ ...plan, beats: plan.beats.map((b) => (b.kind === "era" ? { ...b, atlas: unlocated } : b)) })).length, 0);
 

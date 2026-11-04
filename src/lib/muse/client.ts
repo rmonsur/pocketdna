@@ -16,7 +16,9 @@ const LOCAL_DIR = process.env.POCKETDNA_LOCAL_DIR ?? join(ROOT, ".local");
 const CACHE_DIR = join(LOCAL_DIR, "muse-cache");
 const COST_LOG = join(LOCAL_DIR, "muse-cost.jsonl");
 const API_BASE = process.env.META_API_URL ?? "https://api.meta.ai/v1";
-const MAX_TOKENS_PER_CALL = 16384;
+const MAX_TOKENS_PER_CALL = 32768;
+/** Long structured plans at high effort can exceed two minutes of generation; keep one bounded wait. */
+const CHAT_TIMEOUT_MS = 300_000;
 /** Recorded pricing snapshot (IMAGE.md): $0.01 per returned image, grounding included. */
 export const IMAGE_USD_PER_IMAGE = 0.01;
 const IMAGE_TIMEOUT_MS = 180_000;
@@ -217,7 +219,7 @@ export async function callJson<T>(opts: CallJsonOpts<T>): Promise<CallResult<T>>
     try {
       resp = await fetch(`${API_BASE}/chat/completions`, {
         method: "POST",
-        signal: AbortSignal.timeout(120_000),
+        signal: AbortSignal.timeout(CHAT_TIMEOUT_MS),
         headers: { Authorization: `Bearer ${apiKey()}`, "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
@@ -226,12 +228,15 @@ export async function callJson<T>(opts: CallJsonOpts<T>): Promise<CallResult<T>>
     }
     if (!resp.ok) throw new ModelCallError(`${opts.agent}: HTTP ${resp.status}: ${(await resp.text()).slice(0, 300)}`);
     const raw = (await resp.json()) as {
-      choices?: Array<{ message?: { content?: string } }>;
+      choices?: Array<{ message?: { content?: string }; finish_reason?: string }>;
       usage?: { prompt_tokens?: number; completion_tokens?: number };
     };
     try {
       const content = raw.choices?.[0]?.message?.content;
-      if (typeof content !== "string" || content.trim() === "") throw new Error("empty completion");
+      if (typeof content !== "string" || content.trim() === "") {
+        const finish = raw.choices?.[0]?.finish_reason ?? "unknown";
+        throw new Error(`empty completion (finish_reason=${finish}, completion_tokens=${raw.usage?.completion_tokens ?? "?"})`);
+      }
       lastContent = content;
       const validated = opts.validate(parseModelJson(content));
       const inTok = Number(raw.usage?.prompt_tokens ?? 0);
@@ -260,10 +265,18 @@ export async function callJson<T>(opts: CallJsonOpts<T>): Promise<CallResult<T>>
   throw new ModelCallError(`${opts.agent}: schema validation failed twice: ${lastError}`);
 }
 
+export interface ImageReference {
+  /** data: URL of a reviewed reference or the candidate being repaired. */
+  dataUrl: string;
+  caption: string;
+}
+
 export interface CallImageOpts {
   agent: string;
   model: string;
   prompt: string;
+  /** Captioned reference images sent before the prompt (HIST-CONTINUITY-01 / HIST-REPAIR-01). */
+  references?: ImageReference[];
   /** "WxH" aspect request from the provider's accepted set; a ratio hint, not guaranteed pixels. */
   size?: string;
   format?: "webp" | "png" | "jpeg";
@@ -301,7 +314,7 @@ export async function callImage(opts: CallImageOpts): Promise<ImageResult> {
   if (killed()) throw new KillSwitchEngaged("KILL_PAID_CALLS is set; refusing paid call");
   const cap = opts.runSpendCapUsd ?? 5.0;
   if ((opts.runSpentUsd ?? 0) + IMAGE_USD_PER_IMAGE > cap) throw new BudgetExceeded(`run cap $${cap.toFixed(2)} reached`);
-  const format = opts.format ?? "webp";
+  const format = opts.format ?? "jpeg";
   const tool = {
     type: "image_generation",
     size: opts.size ?? IMAGE_PORTRAIT_SIZE,
@@ -311,7 +324,23 @@ export async function callImage(opts: CallImageOpts): Promise<ImageResult> {
     enable_image_search: true,
     enable_shell: false,
   };
-  const key = cacheKey(opts.model, opts.prompt, tool);
+  const references = opts.references ?? [];
+  const input =
+    references.length === 0
+      ? opts.prompt
+      : [
+          {
+            role: "user",
+            content: [
+              ...references.flatMap((r) => [
+                { type: "input_text", text: r.caption },
+                { type: "input_image", image_url: r.dataUrl },
+              ]),
+              { type: "input_text", text: opts.prompt },
+            ],
+          },
+        ];
+  const key = cacheKey(opts.model, input, tool);
   const hit = imageCacheGet(key);
   if (hit !== null) {
     return { bytes: hit.bytes, format: hit.format, model: opts.model, costUsd: 0, cached: true, responseId: null };
@@ -322,7 +351,7 @@ export async function callImage(opts: CallImageOpts): Promise<ImageResult> {
       method: "POST",
       signal: AbortSignal.timeout(IMAGE_TIMEOUT_MS),
       headers: { Authorization: `Bearer ${apiKey()}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ model: opts.model, input: opts.prompt, store: false, tools: [tool] }),
+      body: JSON.stringify({ model: opts.model, input, store: false, tools: [tool] }),
     });
   } catch (err) {
     throw new ModelCallError(`${opts.agent}: transport error: ${String(err).slice(0, 200)}`);

@@ -17,11 +17,11 @@ import {
 } from "../contracts/index.ts";
 import { callJson, readPrompt } from "../lib/muse/client.ts";
 import { SPARK } from "../lib/muse/models.ts";
-import { convergenceScene, eraScene } from "./atlasScenes.ts";
+import { convergenceScene, eraScene, providerEraScene } from "./atlasScenes.ts";
 import { loadGazetteer } from "./gazetteer.ts";
 import { illustrateEpisode } from "./images.ts";
 import { pushEvent, type Job } from "./jobs.ts";
-import { displayName, profilePopulations, type PopulationProfile } from "./profiles.ts";
+import { disambiguate, displayName, profilePopulations, type PopulationProfile } from "./profiles.ts";
 
 const ASSET_IDS = [
   "asset-steppe-horseman",
@@ -391,26 +391,36 @@ export function readableEvidence(evidence: EvidenceRecord, profiles: PopulationP
   const gazetteer = loadGazetteer();
   return {
     ...evidence,
-    epochs: evidence.epochs.map((epoch) => ({
-      ...epoch,
-      shares: epoch.shares.map((s) => ({ ...s, label: displayName(s.id, profiles, gazetteer, s.label) })),
-      closest: epoch.closest.map((c) => ({ ...c, label: displayName(c.label, profiles, gazetteer, c.label) })),
-    })),
+    epochs: evidence.epochs.map((epoch) => {
+      const names = disambiguate(epoch.shares.map((s) => displayName(s.id, profiles, gazetteer, s.label)));
+      return {
+        ...epoch,
+        shares: epoch.shares.map((s, i) => ({ ...s, label: names[i] })),
+        closest: [...new Set(epoch.closest.map((c) => displayName(c.label, profiles, gazetteer, c.label)))].map((label) => ({
+          label,
+          distance: epoch.closest.find((c) => displayName(c.label, profiles, gazetteer, c.label) === label)?.distance ?? 0,
+        })),
+      };
+    }),
   };
 }
 
 /** Deterministic globe scenes from gazetteer records (ATLAS): never model-chosen geometry. */
 export function withAtlas(plan: ReelPlan, evidence: EvidenceRecord): ReelPlan {
   const gazetteer = loadGazetteer();
+  const allClaimIds = [...new Set(plan.beats.flatMap((b) => b.claimIds))];
   return {
     ...plan,
     beats: plan.beats.map((beat) => {
       if (beat.kind === "era" && beat.era !== undefined) {
-        const atlas = eraScene(evidence, beat.era, gazetteer);
+        const atlas =
+          evidence.kind === "raw"
+            ? eraScene(evidence, beat.era, gazetteer)
+            : (providerEraScene(evidence, beat.era, beat.claimIds, gazetteer) ?? providerEraScene(evidence, beat.era, allClaimIds, gazetteer));
         return atlas === undefined ? beat : { ...beat, atlas };
       }
       if (beat.kind === "convergence") {
-        const atlas = convergenceScene(evidence, gazetteer);
+        const atlas = convergenceScene(evidence, allClaimIds, gazetteer);
         return atlas === undefined ? beat : { ...beat, atlas };
       }
       return beat;
@@ -423,21 +433,16 @@ async function continueJob(job: Job, index: IndexEntry[], spentAtStart: number):
   if (original === null) throw new Error("continueJob requires evidence");
   let spent = spentAtStart;
 
-  pushEvent(job, 3, "Profiling reference populations", SPARK, "running");
-  const profiled = await profilePopulations(original, spent);
-  spent += profiled.costUsd;
-  const evidence = readableEvidence(original, profiled.profiles);
-  job.evidence = evidence;
-  pushEvent(job, 3, "Profiling reference populations", SPARK, "done", `${profiled.profiles.length} populations explained`);
-
-  pushEvent(job, 4, "Selecting your citations", SPARK, "running");
+  /* Citations first: the profiler needs the cited studies to pick context sites for provider episodes. */
+  pushEvent(job, 3, "Selecting your citations", SPARK, "running");
+  const labelled = readableEvidence(original, []);
   const cited = await callJson({
     agent: "interpretation", model: SPARK, effort: "high",
     messages: [
       { role: "system", content: readPrompt("interpretation") },
       {
         role: "user",
-        content: [{ type: "text", text: JSON.stringify({ evidence, index }) }],
+        content: [{ type: "text", text: JSON.stringify({ evidence: labelled, index }) }],
       },
     ],
     jsonSchema: schema("interpretation"),
@@ -445,9 +450,17 @@ async function continueJob(job: Job, index: IndexEntry[], spentAtStart: number):
     runSpentUsd: spent,
   });
   spent += cited.costUsd;
-  const claims = [...profiled.claims, ...toClaims(cited.data, index)];
+  const citedClaims = toClaims(cited.data, index);
+  pushEvent(job, 3, "Selecting your citations", SPARK, "done", `${citedClaims.length} citations grounded`);
+
+  pushEvent(job, 4, "Profiling reference populations", SPARK, "running");
+  const profiled = await profilePopulations(original, citedClaims.map((c) => c.id), spent);
+  spent += profiled.costUsd;
+  const evidence = readableEvidence(original, profiled.profiles);
+  job.evidence = evidence;
+  const claims = [...profiled.claims, ...citedClaims];
   job.claims = claims;
-  pushEvent(job, 4, "Selecting your citations", SPARK, "done", `${claims.length} claims grounded`);
+  pushEvent(job, 4, "Profiling reference populations", SPARK, "done", `${profiled.profiles.length} populations explained`);
 
   const directOnce = async (repairIssues: unknown): Promise<ReelPlan> => {
     const reel = await callJson({
@@ -481,29 +494,32 @@ async function continueJob(job: Job, index: IndexEntry[], spentAtStart: number):
   pushEvent(job, 5, "Directing your film", SPARK, "done", `${plan.beats.length} beats, ${plan.duration_s}s`);
   pushEvent(job, 6, "Auditing", SPARK, "running");
 
+  /* The two audits are independent reviews of the same frozen plan; run them concurrently (RULES: reserve budget first). */
   const auditOnce = async (audited: ReelPlan) => {
-    const narrative = await callJson({
-      agent: "narrative-auditor", model: SPARK, effort: "high",
-      messages: [
-        { role: "system", content: readPrompt("narrative-auditor") },
-        { role: "user", content: [{ type: "text", text: JSON.stringify({ plan: audited, evidence, claims }) }] },
-      ],
-      jsonSchema: schema("narrative-auditor"),
-      validate: (d) => AuditOut.parse(d),
-      runSpentUsd: spent,
-    });
-    spent += narrative.costUsd;
-    const compliance = await callJson({
-      agent: "compliance", model: SPARK, effort: "high",
-      messages: [
-        { role: "system", content: readPrompt("compliance") },
-        { role: "user", content: [{ type: "text", text: JSON.stringify({ plan: audited }) }] },
-      ],
-      jsonSchema: schema("compliance"),
-      validate: (d) => AuditOut.parse(d),
-      runSpentUsd: spent,
-    });
-    spent += compliance.costUsd;
+    const reservedSpent = spent;
+    const [narrative, compliance] = await Promise.all([
+      callJson({
+        agent: "narrative-auditor", model: SPARK, effort: "high",
+        messages: [
+          { role: "system", content: readPrompt("narrative-auditor") },
+          { role: "user", content: [{ type: "text", text: JSON.stringify({ plan: audited, evidence, claims }) }] },
+        ],
+        jsonSchema: schema("narrative-auditor"),
+        validate: (d) => AuditOut.parse(d),
+        runSpentUsd: reservedSpent,
+      }),
+      callJson({
+        agent: "compliance", model: SPARK, effort: "high",
+        messages: [
+          { role: "system", content: readPrompt("compliance") },
+          { role: "user", content: [{ type: "text", text: JSON.stringify({ plan: audited }) }] },
+        ],
+        jsonSchema: schema("compliance"),
+        validate: (d) => AuditOut.parse(d),
+        runSpentUsd: reservedSpent,
+      }),
+    ]);
+    spent += narrative.costUsd + compliance.costUsd;
     return { narrative: narrative.data, compliance: compliance.data };
   };
 
@@ -526,14 +542,15 @@ async function continueJob(job: Job, index: IndexEntry[], spentAtStart: number):
   /* Approved copy is frozen here; atlas scenes and images add no claims. */
   plan = withAtlas(plan, evidence);
   const atlasBeats = plan.beats.filter((b) => b.atlas !== undefined).length;
-  pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "running", `${atlasBeats} globe scenes from reference sampling records`);
+  pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "running", `${atlasBeats} globe scenes from reference records`);
   try {
     const illustrated = await illustrateEpisode(job.id, plan, spent);
     spent += illustrated.costUsd;
     job.assets = illustrated.assets;
     const approved = illustrated.outcomes.filter((o) => o.status === "approved").length;
+    const repaired = illustrated.outcomes.filter((o) => o.repaired).length;
     const fallback = illustrated.outcomes.length - approved;
-    pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "done", `${approved} reviewed images, ${fallback} on fallback plates`);
+    pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "done", `${approved} reviewed images (${repaired} repaired), ${fallback} on fallback plates`);
   } catch (err) {
     pushEvent(job, 7, "Illustrating scenes", "muse-image-1.0", "failed", err instanceof Error ? err.message.slice(0, 80) : "image step failed");
   }

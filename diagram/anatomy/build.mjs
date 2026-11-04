@@ -57,7 +57,7 @@ const CARD_H = 5;
 const CARD_TOP = CARRIAGE_TOP + CARD_H;
 
 const LAMP = { post: [-16, -52], x: -16, r: 14, z: 34, h: 14, armZ: 54, postTop: 64 };
-const METER = { at: [-64, -52], r: 8, z: 10, h: 3, span: Math.PI * 1.5 };
+const METER = { at: [-100, -54], r: 8, z: 10, h: 3, span: Math.PI * 1.5 };
 const MAX_CALLS = 7;
 const STAMP = { postY: -32, postTop: 48, armD: 46, head: 18, headH: 7, rest: 38 };
 const REEL = { at: [142, 0], r: 22, z: 6, h: 4 };
@@ -302,10 +302,10 @@ const svg = k.figureSvg({
     plate(),
     tray(),
     analyser(),
-    rails(),
-    lampBack(),
     meter(),
     `<path data-part="meter-needle" class="iso-line" data-tone="hi" data-free="start" d="${needleAt(0)}" style="stroke-width:0.9"/>`,
+    rails(),
+    lampBack(),
     stampBack(STAMPS[0]),
     stampBack(STAMPS[1]),
     `<g data-part="carriage" transform="${k.translateAlong(P, [startX, 0, 0])}">${carriage()}</g>`,

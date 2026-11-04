@@ -1,6 +1,29 @@
 /** Demo replay bundle (STACK modes). Saved generation, clearly labelled. */
 
-import type { ReplayBundle } from "./index.ts";
+import type { AtlasScene, ReplayBundle } from "./index.ts";
+
+/* Reference sites from the cited studies; coordinates and dates come from the
+ * AADR v66.p1 annotation rows resolved by scripts/build-gazetteer.mjs. */
+const SITE_LEGEND = "Dated reference sites from the cited studies · context, not your route";
+const PANEL_LEGEND = "Present-day reference populations for your report's labels · not origins";
+const SAMARA = { id: "Russia_Samara_EBA_Yamnaya", label: "Yamnaya herders of the Samara steppe", place: "Lopatino, Russia", dateText: "about 3018 BCE", lon: 50.664, lat: 53.64, weight: 0.5 };
+const ESPERSTEDT = { id: "Germany_Esperstedt_CordedWare", label: "Corded Ware community at Esperstedt", place: "Esperstedt, Germany", dateText: "about 2369 BCE", lon: 11.68, lat: 51.42, weight: 0.5 };
+const VARNHEM = { id: "Sweden_Viking", label: "Viking Age Swedes", place: "Varnhem, Sweden", dateText: "about 1050 CE", lon: 13.65, lat: 58.38, weight: 0.34 };
+const JEVNAKER = { id: "Norway_Viking", label: "Viking Age Norwegians", place: "Jevnaker, Norway", dateText: "about 1000 CE", lon: 10.43, lat: 60.31, weight: 0.33 };
+const OXFORD = { id: "England_Viking", label: "Viking Age burials in England", place: "Oxford, United Kingdom", dateText: "about 925 CE", lon: -1.26, lat: 51.76, weight: 0.33 };
+const KENT = { id: "English", label: "Present-day English", place: "Kent, United Kingdom", dateText: "present-day", lon: 0.73, lat: 51.19, weight: 0.4 };
+const ARGYLL = { id: "Scottish", label: "Present-day Scottish", place: "Argyll and Bute, United Kingdom", dateText: "present-day", lon: -5.44, lat: 56.04, weight: 0.3 };
+const ORKNEY = { id: "Orcadian", label: "Present-day Orcadians", place: "Orkney, United Kingdom", dateText: "present-day", lon: -3, lat: 59, weight: 0.3 };
+
+const BRONZE_ATLAS: AtlasScene = { preset: "locate-region", focus: [31.9, 53.1], markers: [SAMARA, ESPERSTEDT], legend: SITE_LEGEND };
+const MIDDLE_ATLAS: AtlasScene = { preset: "locate-region", focus: [7.7, 56.9], markers: [VARNHEM, JEVNAKER, OXFORD], legend: SITE_LEGEND };
+const MODERN_ATLAS: AtlasScene = { preset: "locate-region", focus: [-2.2, 55.1], markers: [KENT, ARGYLL, ORKNEY], legend: PANEL_LEGEND };
+const CONVERGENCE_ATLAS: AtlasScene = {
+  preset: "affinity-overview",
+  focus: [12.6, 55.6],
+  markers: [SAMARA, ESPERSTEDT, VARNHEM, JEVNAKER, OXFORD, KENT, ARGYLL, ORKNEY],
+  legend: SITE_LEGEND,
+};
 
 const beats = [
   {
@@ -27,6 +50,7 @@ const beats = [
       { to: [20, 41] as [number, number], label: "Corded Ware" },
       { to: [88, 40] as [number, number], label: "Afanasievo" },
     ],
+    atlas: BRONZE_ATLAS,
   },
   {
     id: "b4", kind: "era" as const, era: "middle" as const, tStart: 40, tEnd: 66,
@@ -35,6 +59,7 @@ const beats = [
     evidenceClass: "personal" as const, claimIds: ["margaryan2020"], assetId: "asset-market-town",
     coords: "59°37'N 17°43'E · BALTIC SEA BASIN",
     mapPaths: [{ to: [46, 30] as [number, number], label: "Sigtuna" }],
+    atlas: MIDDLE_ATLAS,
   },
   {
     id: "b5", kind: "era" as const, era: "modern" as const, tStart: 66, tEnd: 92,
@@ -43,13 +68,14 @@ const beats = [
     evidenceClass: "personal" as const, claimIds: ["leslie2015"], assetId: "asset-harbor",
     coords: "51°30'N 0°07'W · WESTERN EUROPE",
     mapPaths: [{ to: [50, 36] as [number, number], label: "British Isles" }],
+    atlas: MODERN_ATLAS,
   },
   {
     id: "b6", kind: "convergence" as const, tStart: 92, tEnd: 112,
     category: "Convergence", headline: "Every path leads to you.",
     subtext: "Approved places, revisited with a legend. No route is drawn to a person.",
     evidenceClass: "editorial" as const, claimIds: [], assetId: "asset-convergence-globe",
-    coords: null, mapPaths: [],
+    coords: null, mapPaths: [], atlas: CONVERGENCE_ATLAS,
   },
   {
     id: "b7", kind: "stamp" as const, tStart: 112, tEnd: 120,

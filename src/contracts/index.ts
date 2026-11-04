@@ -169,9 +169,9 @@ export type ReplayBundle = z.infer<typeof ReplayBundleSchema>;
 /** A reviewed scene image for one beat asset id; the URL is same-origin. */
 export const SceneAssetSchema = z.object({
   url: z.string(),
-  mode: z.enum(["live", "cache", "fallback"]),
+  mode: z.enum(["live", "cache", "fallback", "replay"]),
   label: z.string(),
-  audit: z.enum(["pass", "fallback"]),
+  audit: z.enum(["pass", "repaired", "fallback"]),
   place: z.string().nullable(),
   dateText: z.string().nullable(),
 });

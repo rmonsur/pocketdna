@@ -26,13 +26,24 @@ export const GazetteerEntrySchema = z.object({
 
 export type GazetteerEntry = z.infer<typeof GazetteerEntrySchema>;
 
+/** A dated reference site from a cited study (ATLAS 6: excavated sites as dated points). */
+export const ContextSiteSchema = GazetteerEntrySchema.extend({
+  era: z.enum(["bronze", "middle", "modern"]),
+  claimIds: z.array(z.string()),
+});
+
+export type ContextSite = z.infer<typeof ContextSiteSchema>;
+
 const GazetteerFileSchema = z.object({
   schemaVersion: z.literal(1),
   basisId: z.string(),
+  sites: z.array(ContextSiteSchema).default([]),
   entries: z.record(z.string(), GazetteerEntrySchema),
 });
 
 export type Gazetteer = Map<string, GazetteerEntry>;
+
+let cachedSites: ContextSite[] = [];
 
 const GAZETTEER_PATH = join(process.cwd(), "dataset", "interim", "era-panels", "gazetteer.json");
 
@@ -45,15 +56,35 @@ export function loadGazetteer(path = GAZETTEER_PATH): Gazetteer {
   if (existsSync(path)) {
     const parsed = GazetteerFileSchema.parse(JSON.parse(readFileSync(path, "utf8")));
     for (const [id, entry] of Object.entries(parsed.entries)) map.set(id, entry);
+    if (path === GAZETTEER_PATH) cachedSites = parsed.sites;
   }
   if (path === GAZETTEER_PATH) cached = map;
   return map;
 }
 
+/** Context sites whose cited studies appear in the claim ids (gazetteer must be loaded first). */
+export function sitesForClaims(claimIds: string[], sites: ContextSite[] = loadedSites()): ContextSite[] {
+  const wanted = new Set(claimIds);
+  return sites.filter((site) => site.lat !== null && site.lon !== null && site.claimIds.some((c) => wanted.has(c)));
+}
+
+export function loadedSites(): ContextSite[] {
+  loadGazetteer();
+  return cachedSites;
+}
+
+/** AADR present-day rows sometimes carry a locality like "India, modern 2"; that is not a place name. */
+function usableLocality(locality: string | null, country: string | null): string | null {
+  if (locality === null || locality === "") return null;
+  if (/\bmodern\b/i.test(locality) || /^\d+$/.test(locality)) return null;
+  if (country !== null && locality.toLowerCase() === country.toLowerCase()) return null;
+  return locality;
+}
+
 /** Readable "where" for captions and briefs: "Rabat, Uzbekistan" or null. */
 export function placeText(entry: GazetteerEntry | undefined): string | null {
   if (entry === undefined) return null;
-  const parts = [entry.locality, entry.country].filter((p): p is string => p !== null && p !== "");
+  const parts = [usableLocality(entry.locality, entry.country), entry.country].filter((p): p is string => p !== null && p !== "");
   return parts.length === 0 ? null : parts.join(", ");
 }
 

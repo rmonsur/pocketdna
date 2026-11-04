@@ -200,3 +200,64 @@ Reel content pass: readable populations, globe, images (2026-11-05, Claude Code 
   dissolve. Verified in Chrome: Bronze Age, Modern and convergence beats.
 - npx tsc --noEmit clean; npm test 19/19 pass after the globe resize and
   overflow-clip change. Details: muse-loop/qa-logs/2026-11-05-reel-content.md.
+
+## 2026-11-05 · diagram/ folder (diagram-design + anatomy skills)
+
+- Scope: seven schematic HTML diagrams (diagram/01..07) and one isometric
+  figure (diagram/anatomy/pocketdna-bench{,-light}.html), content from
+  docs/ and AGENTS.md, cross-checked against src/server/pipeline.ts,
+  images.ts, app.ts and src/lib/muse/client.ts. No DNA, keys or model
+  payloads involved.
+- python3 -I <diagram-design>/scripts/verify-geometry.py diagram/0*.html:
+  first pass 3 findings (04: label mask clipped by a later node and a
+  connector transiting behind the visual-auditor node; 06: connector riding
+  a node border and attaching at a corner). Rerouted; second pass 0
+  findings on all seven files.
+- python3 -I <diagram-design>/skills/diagram-design/scripts/self_check.py
+  on all seven files: OK.
+- Headless Chrome (anatomy scripts/capture.mjs) renders of all seven pages
+  at 2x reviewed; fixed a connector crossing a zone label (01), ALT guards
+  crossing a lifeline (05), callout leader starts (01, 02, 03, 04, 06, 07).
+- anatomy scripts/lines.mjs diagram/anatomy/pocketdna-bench.html and
+  -light.html: "line ends: 0 of 526 ends on 49 lines float" for both.
+- anatomy scripts/capture.mjs: console clean, no sideways scroll at 1100 px
+  and 390 px, readout advances through all nine stations on the idle tour,
+  --reduced renders the rest pose; 4x zooms of lamp, stamps, analyser slot
+  and call meter reviewed (meter relocated twice to clear the stamp arm and
+  lamp housing).
+- Not run: anatomy build --audit (no recorder, pipes or turned parts in
+  this figure); diagram-design lint-render.py / verify-contrast.py
+  (repository gates, not shipped with the skill install).
+
+Reel content pass 2: repairs, replay package, provider path, no sample codes (2026-11-05)
+---------------------------------------------------------------------------------------
+- node scripts/build-gazetteer.mjs: adds 12 cited context sites (AADR groups
+  for Haak 2015, Allentoft 2015, Lazaridis 2014/2016, Margaryan 2020, Leslie
+  2015 replay claims) anchored on each group's most frequent locality.
+- npm test: 20/20 pass with new tests/providerPath.test.ts (reviewed provider
+  label table, context-site scenes, convergence composition, HIST-REPAIR-01
+  prompt, audit verdict schema, episode repair cap, group-shared profiles and
+  "(individual n)" disambiguation). tests/images.test.ts updated for the
+  replay fixture now carrying atlas scenes.
+- npx tsx scripts/build-replay-assets.ts (deliberate paid run, $0.096):
+  three replay scene images generated through the same agent path; b3 passed
+  first audit, b4 and b5 were repaired once each (busy caption zones) and
+  passed re-audit. Written to public/assets/replay/ with manifest.json and
+  src/contracts/replayAssets.ts. Verified in Chrome: replay Bronze Age beat
+  shows the Samara/Esperstedt globe then the reviewed steppe image.
+- Provider path live check: tests/fixtures/composition.png -> extractor read
+  four 23andMe rows -> correction table -> job 459ffe42-bab started; outcome
+  recorded below.
+- Provider job 459ffe42-bab failed at the director (R4) with no schema
+  failure recorded: the chat transport timeout (120 s) cut a long high-effort
+  plan. Raised CHAT_TIMEOUT_MS to 300 s and added structured job_failed
+  logging in failJob (job id, error class, message only).
+- Raw job e3325bf3-eac (reordered pipeline: citations -> profiles): done;
+  audits passed first round; 4 globe scenes; images 2/3 approved, bronze
+  scene went repair -> re-audit repair -> fallback plate (bounded, as
+  specified); reel copy and evidence labels contain no sample codes;
+  same-group samples read "(individual 1)" / "(individual 2)".
+- placeText now drops AADR junk localities such as "India, modern 2";
+  present-day fallback names read "Present-day X people from Country".
+  npm test 20/20; tsc clean. Asset route no longer requires the in-memory
+  job so images survive a server restart.

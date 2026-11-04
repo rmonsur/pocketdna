@@ -131,7 +131,9 @@ export function ReelViewport({ bundle }: { bundle: ViewingBundle }): React.JSX.E
           {atlas === undefined && beat.mapPaths.length > 0 && <MapOverlay origin={[60, 47]} paths={beat.mapPaths} />}
           {imageAlpha > 0.05 && asset !== undefined && (
             <span className="absolute bottom-24 left-5 z-10 max-w-[80%] truncate rounded-full bg-black/55 px-2 py-0.5 font-mono text-[10px] text-white/70">
-              Illustrative reconstruction · {asset.mode === "live" ? "generated live" : asset.mode === "cache" ? "from cache" : "reviewed library"}
+              Illustrative reconstruction ·{" "}
+              {asset.mode === "live" ? "generated live" : asset.mode === "cache" ? "from cache" : asset.mode === "replay" ? "saved replay" : "reviewed library"}
+              {asset.audit === "repaired" ? " · repaired once" : ""}
             </span>
           )}
           {atlas !== undefined && globeAlpha > 0.05 && (

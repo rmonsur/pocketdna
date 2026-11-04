@@ -18,6 +18,11 @@ the beat order hook, method, three era chapters, convergence, stamp; the
 "your result ends here" line belongs at the convergence beat after the eras. Write the globe cue into the beat: the app draws reference sampling
 locations for each era; your copy must call them similarity, never origin.
 
+Every beat that mentions the viewer's result, including the convergence and
+stamp beats, carries a qualifier ("consistent with", "similar to", or
+"similarity, not descent") in its headline or subtext. Report provider rows
+exactly as reported; an "Unassigned" or "Broadly" row gets no story.
+
 Copy rules: headline at most 70 characters, subtext at most 170 characters,
 plain readable sentences (no bracket lists, no ALL-CAPS prefixes). State each
 share once with its range, e.g. "60.5% (range 44.6–74.1%) similar to ...".

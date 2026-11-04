@@ -98,6 +98,26 @@ function readable(id, eraGroup) {
   return id.replace(/_/g, " ");
 }
 
+/**
+ * Context sites for cited studies (citation-index ids and replay claim ids):
+ * AADR groups whose rows supply the coordinates and dates. Labels are the
+ * readable names used on screen; eras match the citation index.
+ */
+const CONTEXT_SITES = [
+  { group: "Russia_Samara_EBA_Yamnaya", label: "Yamnaya herders of the Samara steppe", era: "bronze", claims: ["c-steppe-haak2015", "haak2015", "c-euro3-lazaridis2014"] },
+  { group: "Germany_Esperstedt_CordedWare", label: "Corded Ware community at Esperstedt", era: "bronze", claims: ["c-steppe-haak2015", "haak2015"] },
+  { group: "Russia_Chelyabinsk_MLBA_Sintashta", label: "Sintashta settlement at Kamenny Ambar", era: "bronze", claims: ["c-bronze-allentoft2015"] },
+  { group: "Russia_Altai_Afanasievo", label: "Afanasievo pastoralists of the Altai", era: "bronze", claims: ["c-bronze-allentoft2015"] },
+  { group: "Turkey_N", label: "Neolithic farmers of northwest Anatolia", era: "bronze", claims: ["c-farming-lazaridis2016", "c-euro3-lazaridis2014"] },
+  { group: "Luxembourg_Loschbour_Mesolithic", label: "Mesolithic forager at Loschbour", era: "bronze", claims: ["c-euro3-lazaridis2014", "c-iceage-fu2016"] },
+  { group: "Sweden_Viking", label: "Viking Age Swedes", era: "middle", claims: ["c-viking-margaryan2020", "margaryan2020"] },
+  { group: "Norway_Viking", label: "Viking Age Norwegians", era: "middle", claims: ["c-viking-margaryan2020", "margaryan2020"] },
+  { group: "England_Viking", label: "Viking Age burials in England", era: "middle", claims: ["c-viking-margaryan2020", "margaryan2020"] },
+  { group: "English", label: "Present-day English", era: "modern", claims: ["leslie2015"] },
+  { group: "Scottish", label: "Present-day Scottish", era: "modern", claims: ["leslie2015"] },
+  { group: "Orcadian", label: "Present-day Orcadians", era: "modern", claims: ["leslie2015"] },
+];
+
 const panels = JSON.parse(readFileSync(PANELS, "utf8"));
 const entries = {};
 let matched = 0;
@@ -132,9 +152,38 @@ for (const [era, sources] of Object.entries(panels.panels)) {
   }
 }
 
+function describeRows(id, label, rows, match) {
+  const lat = mean(rows.map((r) => r[COL.lat]));
+  const lon = mean(rows.map((r) => r[COL.lon]));
+  const locality = rows.length > 0 ? clean(mode(rows.map((r) => r[COL.locality]))) : null;
+  return {
+    id,
+    label,
+    groupId: rows.length > 0 ? clean(mode(rows.map((r) => r[COL.group]))) : null,
+    locality: locality === null ? null : locality.split("(")[0].trim(),
+    country: rows.length > 0 ? clean(mode(rows.map((r) => r[COL.country]))) : null,
+    lat: lat === null ? null : Number(lat.toFixed(3)),
+    lon: lon === null ? null : Number(lon.toFixed(3)),
+    dateText: rows.length > 0 ? dateText(rows) : null,
+    publication: rows.length > 0 ? clean(mode(rows.map((r) => r[COL.publication]))) : null,
+    doi: rows.length > 0 ? clean(mode(rows.map((r) => r[COL.doi])))?.replace(/^https?:\/\/doi\.org\//, "") ?? null : null,
+    individuals: rows.length,
+    match,
+  };
+}
+
+/* Sites use the rows of their most frequent locality so coordinates name one real place, not a mean over several. */
+const sites = CONTEXT_SITES.map((site) => {
+  const all = byGroup.get(site.group) ?? [];
+  const locality = mode(all.map((r) => r[COL.locality]));
+  const rows = locality === null ? all : all.filter((r) => r[COL.locality] === locality);
+  return { ...describeRows(site.group, site.label, rows, rows.length > 0 ? "group" : "none"), eras: [site.era], era: site.era, claimIds: site.claims };
+});
+
 const out = {
   schemaVersion: 1,
   basisId: panels.basis_id,
+  sites,
   source: "AADR v66.p1 annotation files (1240K + HO compatibility); sampling metadata only",
   note: "Coordinates are reference sampling locations, never territories, routes or personal origins.",
   entries,

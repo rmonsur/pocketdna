@@ -9,7 +9,17 @@ with a quiet lower region for captions.
 Do not estimate ancestry or traits from the people shown. Do not certify
 details too small to inspect. A beautiful image can still fail.
 
-Return JSON only: {"verdict": "pass"|"fallback",
-"issues": [{"region": str, "severity": "low"|"medium"|"high", "note": str}]}
-Use "fallback" for any prohibited content, visible text, or a clear
-mismatch with the brief's place or period; otherwise "pass".
+Verdicts:
+- "pass": no issue above low severity.
+- "repair": one bounded, visible error that a targeted edit can fix
+  (an anachronistic object, visible lettering, a rendering defect, a busy
+  caption zone). Put the edit instruction in "repair": what to replace, where,
+  and with what supported detail; "remove and keep a plausible background"
+  is acceptable.
+- "fallback": prohibited content, a clear mismatch with the brief's place or
+  period, or more than one high-severity problem.
+
+Return JSON only: {"verdict": "pass"|"repair"|"fallback",
+"issues": [{"region": str, "severity": "low"|"medium"|"high", "note": str}],
+"repair": str}
+Use an empty string for "repair" unless the verdict is "repair".

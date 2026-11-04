@@ -38,10 +38,7 @@ export function RawResult({
           <ul className="flex flex-col gap-1">
             {era.shares.filter((s) => s.weight >= 0.01).slice(0, 6).map((s) => (
               <li key={s.source_id} className="flex items-baseline justify-between gap-3 text-[13px] text-on-surface">
-                <span>
-                  {s.label}
-                  {s.label !== s.source_id && <span className="pl-1.5 font-mono text-[10px] text-text-muted">{s.source_id}</span>}
-                </span>
+                <span>{s.label}</span>
                 <span className="font-mono text-[12px] text-text-muted">
                   {(s.weight * 100).toFixed(1)}% ({(s.low * 100).toFixed(1)}–{(s.high * 100).toFixed(1)})
                 </span>
@@ -49,7 +46,7 @@ export function RawResult({
             ))}
           </ul>
           <p className="pt-1 text-[12px] text-text-muted">
-            Closest panel sources: {era.closest.map((c) => c.source_id).join(" · ")}
+            Closest panel sources: {[...new Set(era.closest.map((c) => c.label))].join(" · ")}
           </p>
         </section>
       ))}

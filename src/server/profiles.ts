@@ -1,17 +1,23 @@
 /**
  * Population profiles (InterpretationAgent, population step): plain-language
- * "who / where / why similar" for the top fitted panel sources, grounded only
- * in the gazetteer record for each source. Each profile becomes a context
- * Claim whose source is the AADR publication for that sample group.
+ * "who / where / why similar" for the reference populations an episode
+ * names, grounded only in the gazetteer record for each one. Each profile
+ * becomes a context Claim whose source is the AADR publication for that
+ * sample group. Raw episodes profile the top fitted sources per era (one per
+ * AADR group); provider episodes profile the present-day populations their
+ * labels resolve to plus the dated sites of the studies they cite.
  */
 
 import { z } from "zod";
 import { ClaimSchema, type Claim, type EvidenceRecord } from "../contracts/index.ts";
 import { callJson, readPrompt } from "../lib/muse/client.ts";
 import { SPARK } from "../lib/muse/models.ts";
-import { loadGazetteer, placeText, publicationYear, type Gazetteer, type GazetteerEntry } from "./gazetteer.ts";
+import { loadGazetteer, placeText, publicationYear, sitesForClaims, type Gazetteer, type GazetteerEntry } from "./gazetteer.ts";
+import { resolveProviderShares } from "./providerRegions.ts";
 
 export const PROFILES_PER_ERA = 3;
+const PROVIDER_PROFILE_LABELS = 3;
+const CONTEXT_SITE_PROFILES = 4;
 const MIN_PROFILE_WEIGHT = 0.02;
 const AADR_DOI = "10.7910/DVN/FFIDCW";
 const AADR_YEAR = 2024;
@@ -58,11 +64,13 @@ export interface ProfileTarget {
   record: GazetteerEntry | undefined;
 }
 
-/** Top sources per era worth profiling; weights stay out of the request (minimal brief). */
-export function profileTargets(evidence: EvidenceRecord): ProfileTarget[] {
-  if (evidence.kind !== "raw") return [];
-  const gazetteer = loadGazetteer();
-  const seen = new Set<string>();
+function groupKey(id: string, record: GazetteerEntry | undefined): string {
+  return record?.groupId ?? id;
+}
+
+/** Raw: top sources per era, one target per AADR group (several samples of one group share a profile). */
+function rawTargets(evidence: Extract<EvidenceRecord, { kind: "raw" }>, gazetteer: Gazetteer): ProfileTarget[] {
+  const seenGroups = new Set<string>();
   const targets: ProfileTarget[] = [];
   for (const epoch of evidence.epochs) {
     const top = [...epoch.shares]
@@ -70,12 +78,37 @@ export function profileTargets(evidence: EvidenceRecord): ProfileTarget[] {
       .sort((a, b) => b.weight - a.weight)
       .slice(0, PROFILES_PER_ERA);
     for (const share of top) {
-      if (seen.has(share.id)) continue;
-      seen.add(share.id);
-      targets.push({ sourceId: share.id, era: epoch.era, panelLabel: share.label, record: gazetteer.get(share.id) });
+      const record = gazetteer.get(share.id);
+      const key = `${epoch.era}:${groupKey(share.id, record)}`;
+      if (seenGroups.has(key)) continue;
+      seenGroups.add(key);
+      targets.push({ sourceId: share.id, era: epoch.era, panelLabel: share.label, record });
     }
   }
   return targets;
+}
+
+/** Provider: present-day populations behind the heaviest labels, plus the cited studies' sites. */
+function providerTargets(evidence: Extract<EvidenceRecord, { kind: "provider" }>, claimIds: string[], gazetteer: Gazetteer): ProfileTarget[] {
+  const seen = new Set<string>();
+  const targets: ProfileTarget[] = [];
+  for (const resolved of resolveProviderShares(evidence.shares).slice(0, PROVIDER_PROFILE_LABELS)) {
+    const id = resolved.sourceIds[0];
+    if (id === undefined || seen.has(id)) continue;
+    seen.add(id);
+    targets.push({ sourceId: id, era: "modern", panelLabel: `${resolved.share.label} (provider label)`, record: gazetteer.get(id) });
+  }
+  for (const site of sitesForClaims(claimIds).slice(0, CONTEXT_SITE_PROFILES)) {
+    if (seen.has(site.id)) continue;
+    seen.add(site.id);
+    targets.push({ sourceId: site.id, era: site.era, panelLabel: site.label, record: site });
+  }
+  return targets;
+}
+
+export function profileTargets(evidence: EvidenceRecord, claimIds: string[] = []): ProfileTarget[] {
+  const gazetteer = loadGazetteer();
+  return evidence.kind === "raw" ? rawTargets(evidence, gazetteer) : providerTargets(evidence, claimIds, gazetteer);
 }
 
 function recordForPrompt(target: ProfileTarget): Record<string, unknown> {
@@ -94,7 +127,7 @@ function recordForPrompt(target: ProfileTarget): Record<string, unknown> {
   };
 }
 
-/** "KumarFuMolBiolEvol2021" -> authors "Kumar, Fu et al.", venue "MolBiolEvol". */
+/** "KumarFuMolBiolEvol2021" -> authors "Kumar, Fu et al.", venue "Mol Biol Evol". */
 export function splitPublication(abbrev: string): { authors: string; venue: string } {
   const body = abbrev.replace(/\d{4}$/, "");
   const tokens = body.match(/[A-Z][a-z]+|[A-Z]+(?![a-z])/g) ?? [body];
@@ -130,8 +163,8 @@ export interface ProfilesResult {
   costUsd: number;
 }
 
-export async function profilePopulations(evidence: EvidenceRecord, runSpentUsd: number): Promise<ProfilesResult> {
-  const targets = profileTargets(evidence);
+export async function profilePopulations(evidence: EvidenceRecord, claimIds: string[], runSpentUsd: number): Promise<ProfilesResult> {
+  const targets = profileTargets(evidence, claimIds);
   if (targets.length === 0) return { profiles: [], claims: [], costUsd: 0 };
   const result = await callJson({
     agent: "population-profiler",
@@ -151,12 +184,37 @@ export async function profilePopulations(evidence: EvidenceRecord, runSpentUsd: 
   return { profiles, claims, costUsd: result.costUsd };
 }
 
-/** Readable name for a source id once profiles exist; falls back to the gazetteer label. */
+/** Profile for a source, or for another sample of the same AADR group. */
+export function profileFor(sourceId: string, profiles: PopulationProfile[], gazetteer: Gazetteer): PopulationProfile | undefined {
+  const direct = profiles.find((p) => p.source_id === sourceId);
+  if (direct !== undefined) return direct;
+  const group = gazetteer.get(sourceId)?.groupId;
+  if (group === undefined || group === null) return undefined;
+  return profiles.find((p) => gazetteer.get(p.source_id)?.groupId === group);
+}
+
+/** Readable name for a source id; never a lab code. Falls back to the gazetteer label and place. */
 export function displayName(sourceId: string, profiles: PopulationProfile[], gazetteer: Gazetteer, fallback: string): string {
-  const profile = profiles.find((p) => p.source_id === sourceId);
+  const profile = profileFor(sourceId, profiles, gazetteer);
   if (profile !== undefined) return profile.name;
   const entry = gazetteer.get(sourceId);
   if (entry === undefined) return fallback;
   const place = placeText(entry);
+  if (entry.dateText === "present-day") {
+    return entry.country === null ? `Present-day ${entry.label} people` : `Present-day ${entry.label} people from ${entry.country}`;
+  }
   return place === null ? entry.label : `${entry.label} · ${place}`;
+}
+
+/** Shares of one AADR group get an ordinal so two rows never read as the same thing twice. */
+export function disambiguate(names: string[]): string[] {
+  const counts = new Map<string, number>();
+  for (const n of names) counts.set(n, (counts.get(n) ?? 0) + 1);
+  const seen = new Map<string, number>();
+  return names.map((n) => {
+    if ((counts.get(n) ?? 0) < 2) return n;
+    const index = (seen.get(n) ?? 0) + 1;
+    seen.set(n, index);
+    return `${n} (individual ${index})`;
+  });
 }

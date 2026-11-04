@@ -67,7 +67,7 @@ AtlasSceneSchema.parse(scene);
 assert.equal(eraScene(evidence, "bronze", gazetteer), undefined, "no epoch, no scene");
 assert.equal(eraScene({ kind: "provider", vendor: "x", shares: [], limitations: [] }, "middle", gazetteer), undefined, "provider evidence has no atlas");
 
-const convergence = convergenceScene(evidence, gazetteer);
+const convergence = convergenceScene(evidence, [], gazetteer);
 assert.ok(convergence !== undefined && convergence.preset === "affinity-overview");
 
 assert.equal(placeText(undefined), null);
@@ -92,3 +92,9 @@ assert.deepEqual(visibleMarkers(["a", "b", "c"], 0.34), ["a", "b"]);
 assert.deepEqual(visibleMarkers(["a", "b", "c"], 0), []);
 
 console.log("PASS atlasScenes");
+
+/* Present-day AADR rows with a junk locality fall back to the country. */
+const junk: GazetteerEntry = { ...entry("Khonda_Dora", 17.6, 83.2), locality: "India, modern 2", country: "India", dateText: "present-day" };
+assert.equal(placeText(junk), "India");
+assert.equal(placeText({ ...junk, locality: "Vishakapatman" }), "Vishakapatman, India");
+console.log("PASS atlasScenes placeText");

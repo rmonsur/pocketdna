@@ -46,6 +46,9 @@ function err(code: string, message: string, status = 400): Response {
 
 function failJob(job: Job, failure: unknown): void {
   job.state = "failed";
+  /* Structured server-side diagnostics: opaque job id, error class and message; never payloads or personal data. */
+  const detail = failure instanceof Error ? { name: failure.name, message: failure.message.slice(0, 300) } : { name: "unknown", message: String(failure).slice(0, 300) };
+  console.error(JSON.stringify({ event: "job_failed", job_id: job.id, ...detail }));
   if (failure instanceof KillSwitchEngaged) {
     job.rejection = "R5";
     job.message = "Paid calls are paused (KILL_PAID_CALLS). Replay and fixtures still run.";
@@ -235,11 +238,12 @@ app.get("/api/jobs/:id", (c) => {
 /* Reviewed scene images for one job: allowlisted file names only, served from the private episode dir. */
 const ASSET_TYPES: Record<string, string> = { png: "image/png", webp: "image/webp", jpeg: "image/jpeg" };
 app.get("/api/jobs/:id/assets/:file", (c) => {
-  const job = jobs.get(c.req.param("id"));
+  /* Files outlive the in-memory job so a reel already on screen keeps its images across a server restart. */
+  const jobId = c.req.param("id");
   const file = c.req.param("file");
   const match = /^([a-z0-9_-]+)\.(png|webp|jpeg)$/i.exec(file);
-  if (job === undefined || match === null) return err("NOT_FOUND", "unknown asset", 404);
-  const path = join(EPISODE_DIR, job.id, file);
+  if (!/^[a-z0-9-]+$/i.test(jobId) || match === null) return err("NOT_FOUND", "unknown asset", 404);
+  const path = join(EPISODE_DIR, jobId, file);
   if (!existsSync(path)) return err("NOT_FOUND", "unknown asset", 404);
   return new Response(readFileSync(path), { headers: { "Content-Type": ASSET_TYPES[match[2].toLowerCase()] ?? "application/octet-stream", "Cache-Control": "private, max-age=3600" } });
 });

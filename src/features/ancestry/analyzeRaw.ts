@@ -29,7 +29,7 @@ export interface EraFitResult {
   era: string;
   shares: EraFitShare[];
   residual: number;
-  closest: { source_id: string; distance: number }[];
+  closest: { source_id: string; label: string; distance: number }[];
 }
 
 export interface RawAnalysisResult {
@@ -105,12 +105,13 @@ export function analyzeRaw(
     const closest = sources
       .map((s, i) => ({
         source_id: s.source_id,
+        label: s.era_group,
         distance: Math.hypot(...s.centroid.map((v, j) => v - coordinates[j])),
         index: i,
       }))
       .sort((a, b) => a.distance - b.distance)
       .slice(0, 3)
-      .map(({ source_id, distance }) => ({ source_id, distance }));
+      .map(({ source_id, label, distance }) => ({ source_id, label, distance }));
     return { era, sources, fit, closest };
   });
 

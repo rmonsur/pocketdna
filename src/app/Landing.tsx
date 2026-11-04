@@ -10,6 +10,7 @@ import { ReelViewport } from "../components/ReelViewport";
 import { RejectionNotice, type NoticeKind } from "../components/RejectionNotice";
 import { UploadCard } from "../components/UploadCard";
 import { REPLAY } from "../contracts/fixtures";
+import { REPLAY_ASSETS } from "../contracts/replayAssets";
 import type { ProgressEvent, ViewingBundle } from "../contracts/index";
 import { ApiError, createJob, createRawEpisode, extractPreview, getJob, subscribeJob, type ExtractedShares } from "../lib/api";
 import { statusFromEvents, type GenerationStatusProps } from "../lib/generationStatus";
@@ -47,7 +48,7 @@ function viewportStatus(phase: Phase): GenerationStatusProps | null {
 
 export function Landing(): React.JSX.Element {
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
-  const [bundle, setBundle] = useState<ViewingBundle>({ ...REPLAY, assets: {} });
+  const [bundle, setBundle] = useState<ViewingBundle>({ ...REPLAY, assets: REPLAY_ASSETS });
   const [playerKey, setPlayerKey] = useState(0);
   const playerRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -68,7 +69,7 @@ export function Landing(): React.JSX.Element {
   function watchReplay(): void {
     streamRef.current?.close();
     setPhase({ kind: "idle" });
-    show({ ...REPLAY, assets: {} });
+    show({ ...REPLAY, assets: REPLAY_ASSETS });
   }
 
   async function finish(jobId: string): Promise<void> {

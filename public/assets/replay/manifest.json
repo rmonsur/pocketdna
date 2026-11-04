@@ -1,0 +1,141 @@
+{
+ "builtAt": "2026-11-04T20:12:46.164Z",
+ "scenes": [
+  {
+   "beatId": "b3",
+   "template": "HIST-IMAGE-01-v1",
+   "auditTemplate": "HIST-AUDIT-01-v2",
+   "brief": {
+    "beatId": "b3",
+    "era": "bronze",
+    "place": "Lopatino, Russia",
+    "dateText": "about 3018 BCE",
+    "family": "Yamnaya herders of the Samara steppe",
+    "publication": null,
+    "doi": null,
+    "purpose": "Contextual illustration for the bronze chapter of the saved demonstration episode."
+   },
+   "prompt": "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Portrait 9:16.\nThis is an illustrative reconstruction, not an archival photograph and not a portrait of anyone's actual ancestors.\n\nSETTING: Lopatino, Russia, about 3018 BCE (reference family: Yamnaya herders of the Samara steppe).\nPURPOSE: Contextual illustration for the bronze chapter of the saved demonstration episode. It accompanies a separately stated genetic-similarity finding and makes no claim about any person's family.\nACTION: a small group engaged in one ordinary, period-plausible task of daily life (preparing food, tending animals, building, making or carrying goods), seen from a slight distance.\nSUBJECTS: fictional inhabitants of this setting in roles appropriate to the action; appearance is not derived from any genetic result.\n\nUse your web and image search to verify period and regional visual details for Lopatino, Russia around about 3018 BCE. Prioritize excavation reports and museum object records for this place and period. Do not substitute popular entertainment imagery. Where a detail is unknown, keep it visually nonspecific rather than inventing it. Search supports reconstruction; it does not establish provenance.\n\nCOMPOSITION: medium-wide, low eye level, natural lens, focal subject slightly off centre. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 80% of frame width and between 12% and 72% of frame height. Keep the lower 22% visually quiet for captions.\nLIGHT: low warm sunlight from one side. Natural highlights, restrained earth palette, atmospheric depth, readable shadows and subtle cinematic grain.\nMOOD: dignified human agency through ordinary skilled work, travel or community. Beautiful without fantasy spectacle or idealized luxury.\n\nExclude: battle, weapons as a subject, conquest imagery, political symbols, modern equipment in ancient scenes, fantasy armour, invented monuments, unsupported ornament, any text or lettering, logos, percentages, maps, charts and watermarks. Do not infer physical traits from genetics. Do not render citations into the image.",
+   "model": "muse-image-1.0",
+   "hash": "7f2c57b11c64b6b7ea0e03ad3e5cd517c67cff4776863a24ae6cb5855f0fa83c",
+   "attempts": [
+    {
+     "kind": "initial",
+     "hash": "7f2c57b11c64b6b7ea0e03ad3e5cd517c67cff4776863a24ae6cb5855f0fa83c",
+     "cached": false,
+     "audit": {
+      "verdict": "pass",
+      "issues": [],
+      "repair": ""
+     }
+    }
+   ],
+   "file": "b3.jpeg",
+   "mode": "replay",
+   "status": "approved"
+  },
+  {
+   "beatId": "b4",
+   "template": "HIST-IMAGE-01-v1",
+   "auditTemplate": "HIST-AUDIT-01-v2",
+   "brief": {
+    "beatId": "b4",
+    "era": "middle",
+    "place": "Varnhem, Sweden",
+    "dateText": "about 1050 CE",
+    "family": "Viking Age Swedes",
+    "publication": null,
+    "doi": null,
+    "purpose": "Contextual illustration for the middle chapter of the saved demonstration episode."
+   },
+   "prompt": "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Portrait 9:16.\nThis is an illustrative reconstruction, not an archival photograph and not a portrait of anyone's actual ancestors.\n\nSETTING: Varnhem, Sweden, about 1050 CE (reference family: Viking Age Swedes).\nPURPOSE: Contextual illustration for the middle chapter of the saved demonstration episode. It accompanies a separately stated genetic-similarity finding and makes no claim about any person's family.\nACTION: a small group engaged in one ordinary, period-plausible task of daily life (preparing food, tending animals, building, making or carrying goods), seen from a slight distance.\nSUBJECTS: fictional inhabitants of this setting in roles appropriate to the action; appearance is not derived from any genetic result.\n\nUse your web and image search to verify period and regional visual details for Varnhem, Sweden around about 1050 CE. Prioritize excavation reports and museum object records for this place and period. Do not substitute popular entertainment imagery. Where a detail is unknown, keep it visually nonspecific rather than inventing it. Search supports reconstruction; it does not establish provenance.\n\nCOMPOSITION: medium-wide, low eye level, natural lens, focal subject slightly off centre. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 80% of frame width and between 12% and 72% of frame height. Keep the lower 22% visually quiet for captions.\nLIGHT: low warm sunlight from one side. Natural highlights, restrained earth palette, atmospheric depth, readable shadows and subtle cinematic grain.\nMOOD: dignified human agency through ordinary skilled work, travel or community. Beautiful without fantasy spectacle or idealized luxury.\n\nExclude: battle, weapons as a subject, conquest imagery, political symbols, modern equipment in ancient scenes, fantasy armour, invented monuments, unsupported ornament, any text or lettering, logos, percentages, maps, charts and watermarks. Do not infer physical traits from genetics. Do not render citations into the image.",
+   "model": "muse-image-1.0",
+   "hash": "83ad6b4a645e2f5352b178d40ed6f2fe75494992935186731e394f428a65af19",
+   "attempts": [
+    {
+     "kind": "initial",
+     "hash": "4eda758ea21dca9f3ba53db252104067b6869923357b9ab393c2e17d683d486c",
+     "cached": false,
+     "audit": {
+      "verdict": "repair",
+      "issues": [
+       {
+        "region": "lower foreground / bottom third",
+        "severity": "medium",
+        "note": "lower foreground is busy with vegetable basket, scattered bean pods, fire-pit stones and foreground weeds, leaving no quiet caption space required for portrait contextual illustration"
+       }
+      ],
+      "repair": "Simplify bottom edge foreground: remove scattered bean pods and reduce foreground weed detail, replace with plain dark earth and soft-blurred grass matching surrounding soil to create a quiet caption zone, keeping basket, fire-pit and pot above the caption area."
+     }
+    },
+    {
+     "kind": "repair",
+     "template": "HIST-REPAIR-01-v1",
+     "prompt": "Edit the attached image. The historical review identified this visible error:\nSimplify bottom edge foreground: remove scattered bean pods and reduce foreground weed detail, replace with plain dark earth and soft-blurred grass matching surrounding soil to create a quiet caption zone, keeping basket, fire-pit and pot above the caption area.\nFollow the approved setting: Varnhem, Sweden, about 1050 CE. If the replacement is uncertain, remove the object and preserve a plausible background instead.\nPreserve the approved composition, lighting, faces, other objects and the quiet lower 22% for captions. Add nothing else. No text, lettering or labels.",
+     "hash": "83ad6b4a645e2f5352b178d40ed6f2fe75494992935186731e394f428a65af19",
+     "cached": false,
+     "audit": {
+      "verdict": "pass",
+      "issues": [],
+      "repair": ""
+     }
+    }
+   ],
+   "file": "b4.jpeg",
+   "mode": "replay",
+   "status": "approved"
+  },
+  {
+   "beatId": "b5",
+   "template": "HIST-IMAGE-01-v1",
+   "auditTemplate": "HIST-AUDIT-01-v2",
+   "brief": {
+    "beatId": "b5",
+    "era": "modern",
+    "place": "Kent, United Kingdom",
+    "dateText": "present-day",
+    "family": "Present-day English",
+    "publication": null,
+    "doi": null,
+    "purpose": "Contextual illustration for the modern chapter of the saved demonstration episode."
+   },
+   "prompt": "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Portrait 9:16.\nThis is an illustrative reconstruction, not an archival photograph and not a portrait of anyone's actual ancestors.\n\nSETTING: Kent, United Kingdom, present-day (reference family: Present-day English).\nPURPOSE: Contextual illustration for the modern chapter of the saved demonstration episode. It accompanies a separately stated genetic-similarity finding and makes no claim about any person's family.\nACTION: an ordinary present-day moment in this locality: people at everyday work or travel in the actual landscape, with no costume or ethnic styling inferred from any label.\nSUBJECTS: fictional inhabitants of this setting in roles appropriate to the action; appearance is not derived from any genetic result.\n\nUse your web and image search to verify period and regional visual details for Kent, United Kingdom around present-day. Prioritize excavation reports and museum object records for this place and period. Do not substitute popular entertainment imagery. Where a detail is unknown, keep it visually nonspecific rather than inventing it. Search supports reconstruction; it does not establish provenance.\n\nCOMPOSITION: medium-wide, low eye level, natural lens, focal subject slightly off centre. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 80% of frame width and between 12% and 72% of frame height. Keep the lower 22% visually quiet for captions.\nLIGHT: low warm sunlight from one side. Natural highlights, restrained earth palette, atmospheric depth, readable shadows and subtle cinematic grain.\nMOOD: dignified human agency through ordinary skilled work, travel or community. Beautiful without fantasy spectacle or idealized luxury.\n\nExclude: battle, weapons as a subject, conquest imagery, political symbols, modern equipment in ancient scenes, fantasy armour, invented monuments, unsupported ornament, any text or lettering, logos, percentages, maps, charts and watermarks. Do not infer physical traits from genetics. Do not render citations into the image.",
+   "model": "muse-image-1.0",
+   "hash": "06a4e148ce43cfd6a1d9cc6cae7195a04dafde2e1314e9517e9308ec8f3c1411",
+   "attempts": [
+    {
+     "kind": "initial",
+     "hash": "3aac593eeb17de7cda278c3fca62c5b095a205b77ef532bd077960ae7b5e33c6",
+     "cached": false,
+     "audit": {
+      "verdict": "repair",
+      "issues": [
+       {
+        "region": "lower foreground - bottom ~25% of frame",
+        "severity": "medium",
+        "note": "Bottom quarter foreground is filled with sharp twigs, cut stems, leaves, stones and seedlings with no soft quiet area for caption text, failing the portrait crop with quiet lower region requirement."
+       }
+      ],
+      "repair": "Soften and simplify the bottom ~25% of the frame into a quiet out-of-focus mossy earth gradient; remove the sharp twigs, cut stems, leaves, stones and seedlings there and keep a plausible blurred ground background."
+     }
+    },
+    {
+     "kind": "repair",
+     "template": "HIST-REPAIR-01-v1",
+     "prompt": "Edit the attached image. The historical review identified this visible error:\nSoften and simplify the bottom ~25% of the frame into a quiet out-of-focus mossy earth gradient; remove the sharp twigs, cut stems, leaves, stones and seedlings there and keep a plausible blurred ground background.\nFollow the approved setting: Kent, United Kingdom, present-day. If the replacement is uncertain, remove the object and preserve a plausible background instead.\nPreserve the approved composition, lighting, faces, other objects and the quiet lower 22% for captions. Add nothing else. No text, lettering or labels.",
+     "hash": "06a4e148ce43cfd6a1d9cc6cae7195a04dafde2e1314e9517e9308ec8f3c1411",
+     "cached": false,
+     "audit": {
+      "verdict": "pass",
+      "issues": [],
+      "repair": ""
+     }
+    }
+   ],
+   "file": "b5.jpeg",
+   "mode": "replay",
+   "status": "approved"
+  }
+ ],
+ "costUsd": 0.09570700000000001
+}

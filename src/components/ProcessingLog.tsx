@@ -5,8 +5,8 @@ import type { ProgressEvent } from "../contracts/index.ts";
 const STEPS = [
   { step: 1, title: "Reading your results" },
   { step: 2, title: "Extracting composition" },
-  { step: 3, title: "Profiling reference populations" },
-  { step: 4, title: "Selecting your citations" },
+  { step: 3, title: "Selecting your citations" },
+  { step: 4, title: "Profiling reference populations" },
   { step: 5, title: "Directing your film" },
   { step: 6, title: "Auditing" },
   { step: 7, title: "Illustrating scenes" },
