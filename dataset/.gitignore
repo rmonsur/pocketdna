@@ -1,0 +1,4 @@
+# Dataset intake is private by default. Promote reviewed artifacts explicitly.
+*
+!README.md
+!.gitignore

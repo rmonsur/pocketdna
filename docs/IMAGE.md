@@ -1,18 +1,18 @@
 # PocketDNA historical image direction
 
-Version: 1.0 · 4 November 2026 · Companion: AGENT.md
+Version: 1.1 · 4 November 2026 · Companions: [AGENT.md](AGENT.md), [AGENTS.md](../AGENTS.md), [ABOUT.md](ABOUT.md)
 
 ## Decision and scope
 
-Generate historical scene images on demand with Muse Image for both raw-DNA and screenshot episodes. This supersedes STACK.md's earlier restriction to packaged imagery for raw-DNA episodes and its two-image limit for screenshot episodes. Keep packaged, clearly labelled replay assets for the no-key judge demo and service failures. Live generation remains the normal keyed experience.
+Generate historical scene images on demand with Muse Image for both raw-DNA and screenshot episodes. This matches STACK.md's shared policy: six initial images, up to two episode-wide repairs, at most one repair per scene and initial concurrency two. Keep packaged, clearly labelled replay assets for the no-key judge demo and service failures. Live generation remains the normal keyed experience.
 
 This document stores the actual reusable prompt templates, visual direction, evidence requirements and delivery contract. AGENT.md assigns responsibility to the runtime HistoricalImageAgent. These are implementation specifications; creating these documents does not deploy an agent or generate images.
 
 Images illustrate historically grounded contexts selected by the documentary. They do not reconstruct an individual's ancestors, prove ethnic identity, establish a migration route, or recover appearance from DNA. Population affinities and archaeological cultures are different kinds of evidence. A screenshot cannot establish ancient ancestry components. Both input paths must preserve those limits when choosing scenes.
 
-## Verified Muse capabilities and chosen settings
+## Recorded Muse capabilities and proposed settings
 
-According to Meta's [image guide](https://dev.meta.ai/docs/image-generation) and [model page](https://dev.meta.ai/models/muse-image):
+The earlier specification records the interfaces below; this documentation pass does not reverify provider capabilities or pricing. Smoke-test actual account access before implementation. According to Meta's [image guide](https://dev.meta.ai/docs/image-generation) and [model page](https://dev.meta.ai/models/muse-image):
 
 | Interface | PocketDNA choice |
 |---|---|
@@ -27,7 +27,7 @@ According to Meta's [image guide](https://dev.meta.ai/docs/image-generation) and
 
 Search is internal: intermediate lookups are not exposed as tool calls. An optional reasoning summary is not a citation ledger. Do not attach a separate web-search or function tool to Muse Image. Do not assume seeded reproducibility. [API documentation](https://dev.meta.ai/docs/image-generation)
 
-Meta lists $0.01 per returned generated image, including internal grounding. [Model pricing](https://dev.meta.ai/models/muse-image) Recheck account pricing before launch. Research and audit model calls have separate costs.
+The earlier pricing snapshot records $0.01 per returned generated image, including internal grounding. [Model pricing](https://dev.meta.ai/models/muse-image) Recheck account pricing before launch. Research and audit model calls have separate costs.
 
 ## What “period accurate, beautiful and heroic” means
 
@@ -44,7 +44,7 @@ People are fictional inhabitants of an illustrated setting. Do not condition ski
 - Place important faces and objects inside the central 80% of frame width and between 12% and 72% of frame height. Treat these as initial layout targets and preview against actual UI overlays.
 - Keep the bottom 22% visually quiet for captions and the top 10% available for chapter labels. Render all labels, percentages and citations in HTML, never into the image.
 - Leave useful scene detail beyond the planned crop; keep camera motion modest enough to avoid exposing missing content.
-- Prefer an establishing shot, a human activity shot and a material-detail shot as the visual vocabulary. A two-to-three-minute episode needs changing composition, not dozens of unrelated AI portraits.
+- Prefer an establishing shot, a human activity shot and a material-detail shot as the visual vocabulary. A 90–150 second episode needs changing composition, not dozens of unrelated AI portraits.
 - Maps, borders, dates, routes, statistical charts and ancestry percentages are deterministic app graphics. Generated scenery is not geographic evidence.
 
 ## Historical evidence before image generation
@@ -231,7 +231,7 @@ A complete compiled scene prompt must replace every placeholder with reviewed sp
 7. Assemble HTML Reel scenes with deterministic pan/zoom, dissolves and restrained depth effects. A still image does not contain reliable depth; use simple camera moves unless manually prepared layers are available.
 8. Finish source drawers, captions, reconstruction labels and export. Do not reveal an unaudited candidate during progressive loading.
 
-Initial product budget: six generated scene images, up to two repair images across the episode, with no more than one repair per scene. These are new design limits, not provider limits. At the documented image price, eight outputs cost $0.08 in image fees; research/audit fees are additional. Raise the limit only after measuring quality and latency. Reserve against a configured whole-session cap before dispatch.
+Initial product budget: six generated scene images, up to two repair images across the episode, with no more than one repair per scene. These are new design limits, not provider limits. At that recorded price, eight outputs would cost $0.08 in image fees; research/audit fees are additional. Raise the limit only after measuring quality and latency. Reserve against a configured whole-session cap before dispatch.
 
 Measure time to first accepted image and full episode completion on representative machines and account limits. Do not promise subsecond generation or offline live generation. A two-minute video need not require two minutes of generated video: alternate six stills with detail crops, source panels and deterministic terrain/map sequences. Do not stretch a weak shot merely to fill duration.
 

@@ -1,112 +1,73 @@
-# PocketDNA General Plan
+# PocketDNA general plan
 
-- Meta Global AI Developer Hackathon | Oct 26 - Nov 4, 2026 | Indie Developer Track (solo)
-- Submission deadline: November 4, 9:00 PM EST/8:00 AM GMT +6 DHAKA time on this machine. Internal deadline: November 4, 2:00 PM EST.
-- Track: Indie Developer Track
-- Builder: Solo Participant (leveraging Muse Code as force-multiplier)
+PocketDNA turns ancestry evidence into a cited, cinematic micro documentary that explains what a result means and why. The hackathon deliverable is a local website with a **90–150 second, 9:16, silent-first film**; 120 seconds is the default. Kinetic text carries the story. Voiceover is an optional later enhancement.
 
+Meta Global AI Developer Hackathon · Oct 26–Nov 4, 2026 · solo Indie Developer Track. The supplied submission deadline is **Nov 4, 2026, 21:00 EST = Nov 5, 2026, 08:00 Asia/Dhaka**. The builder must verify the official event terms and deadline before submission. The current delivery target is **5–6 hours from the next implementation kickoff**, within the remaining less-than-12-hour window. This replaces the earlier fixed internal submission target; leave the remaining time for submission and recovery.
 
-## One-liner
+## Status and shared decisions
 
-PocketDNA is Finding Your Roots for everyone: drop your DNA test and get a micro documentary of your origins. 
+These documents specify the agreed target, not a claim that it is already built. The existing `app/` and `backend/` contain an earlier Expo/FastAPI prototype. Migrating to the React/Vite + Node/Hono judge path is pending; do not advertise its planned bootstrap command as available until tested. The [root README](../README.md) retains the prototype instructions with that distinction.
 
-PocketDNA is a website that helps 50 million + people who have taken DNA test create their own custom micro Finding Your Roots episode at a fraction of the cost. 
+| Topic | Agreed decision |
+| --- | --- |
+| Input support | 23andMe and AncestryDNA only at launch: PNG/JPEG screenshots up to 10 MB; official raw `.txt`/`.zip` exports up to 50 MB. MyHeritage is deferred. |
+| Screenshot evidence | User-corrected provider percentages plus sourced historical context. No inferred personal PCA coordinates or ancient percentages. Population-proxy simulation is deferred research. |
+| Raw-DNA evidence | Deterministic browser-worker projection into **PocketDNA PCA-25**, followed by separately validated era fits. All targets/references share one versioned basis. This is not Global25. |
+| Privacy | Raw genotypes stay in browser memory. Live interpretation sends minimal derived findings to the server/model; screenshots are sent for extraction with clear disclosure. Image/atlas roles receive contextual briefs only. |
+| Runtime | React/Vite, strict TypeScript, Node/Hono, one localhost origin. Python/PLINK/EIGENSOFT are offline research tools. No mandatory Modal, Baseten, GPU or hosted database. |
+| Images | Muse Image generates historical illustrations for **both input tiers** in live mode: six initial images, up to two repairs total, at most one repair per scene; initial concurrency two. Reviewed packaged assets support replay and failures. |
+| Geography | Deterministic Three.js globe with approved geographic data and an SVG fallback. Historical movement is context, never a reconstructed personal itinerary. SAM cutouts are optional. |
+| Film | Hook, evidence/method beat, Bronze Age, Medieval and Modern chapters, convergence and source/share stamp. Use local period dates; context-only chapters are allowed when individual evidence is insufficient. |
+| Evidence | Clicking a claim pauses playback and opens an accessible explanation/source drawer or mobile sheet. MP4 carries source cues and a companion evidence manifest. |
+| Export | Local Playwright Chromium plus native FFmpeg, using the same absolute-time renderer as preview. Hosted export is deferred. |
+| Models | Muse Spark for runtime extraction/research/direction/review; Muse Image for images; Wonder for development/research assistance. Confirm exact model access/settings before live integration. |
+| Quality | TDD and at least 80% coverage for first-party runtime/research logic, plus targeted numerical, privacy, audit and export checks. Never present pending checks as passed. |
 
+## Product and scientific boundaries
 
-## The Problem
+People often have a vendor ancestry report without an explanation of its historical context. PocketDNA pairs the report or validated raw-file findings with a readable story, maps, illustrative historical scenes and inspectable sources. Marketing audience/cost estimates require evidence before appearing as factual submission claims.
 
-50 million people have taken DNA tests globally. Hundreds and thousands of people post screenshots of their DNA test results in Facebook Groups and subreddits asking "what does this mean?" hoping a knowledgeable stranger replies. The alternative is a professional genetic genealogist who charges $2,000 per case. There are many existing deep-ancestry tools (MyTrueAncestry, IllustrativeDNA, Genoplot) that show dry dashboards with no interpretation and no narrative. What people want is a story of who they are. 
+The LLM never computes ancestry. Raw analysis uses fixed normalization/loadings, missing-aware projection and nonnegative mixture fitting with weights summing to one. Validate against the pinned Python/smartpca oracle before enabling personal raw-DNA results. Do not mix native coordinates with Global25 references. The optional G25 prediction adapter is outside the hackathon critical path.
 
-Meanwhile, we are going through a golden age of paleogenomics, led by David Reich's lab at Harvard and the Allen Ancient DNA Resource (AADR), which has sequenced over 10,000 ancient human skeletons and published over 15,000 ANCIENT DNA (aDNA) samples. However, deep ancestry insights are locked behind UNIX command-line tools (PLINK, EIGENSOFT/smartpca, qpAdm) and dense academic PDFs in Nature and Science. There are some genetics bloggers like Davidski and Razib Khan who offer tools and blog posts for interpretation but there still exists a large gap beteween what people want and what currently is being served. 
+Fit Bronze Age, Medieval and Modern models independently where references support them. Never add percentages across eras or imply a proven genealogical chain. A poor fit or missing coverage yields a limitation or contextual chapter, not invented precision. Screenshots establish only what the provider reported. A strong hook must be supported; “rarest,” “oldest,” IBD and exact migration dates require evidence beyond a PCA fit.
 
+Live historical research is bounded and attached to specific claims. Reviewed, versioned evidence packs support outages and replay. A URL alone is not verification. Generated people are fictional inhabitants of a documented setting, never portraits of the viewer's ancestors or appearance predictions.
 
+Ancestry only: no health, traits, personality, ethnic essentialism, political framing or battle imagery. Reject health panels. Raw DNA, private screenshots and personal episode manifests stay out of Git and logs. Public demo inputs require redistribution permission; private permission to show a screenshot is insufficient.
 
-## Hackathon Problem statement fit
+## Five-to-six-hour implementation plan
 
-Build for Your World: a domain problem the builder knows firsthand (prior project
-DNAless; personal demo uses builder's own DNA). Secondary resonance with Push the Frontier via the real bioinformatics pipeline.
+This is the next work allocation, not authorization to start it during the documentation pass. Owners are defined in [AGENTS.md](../AGENTS.md). Time windows are elapsed from kickoff; independent work can overlap when assigned. Extensive research experiments remain a backlog, not a claim that every experiment fits six hours.
 
+| Window | Accountable build owner(s) | Deliverable and gate |
+| --- | --- | --- |
+| 0:00–0:30 | IntegrationLead, RuntimeEngineer, ScientificEngineer | Inspect prototype reuse, freeze EvidenceRecord/ReferenceBundle/ReelPlan, verify model access and dataset availability; prove one local scene export. |
+| 0:30–2:00 | ScientificEngineer, RuntimeEngineer, ExperienceEngineer | Freeze one defensible reference/evidence path; build worker contracts, server adapter, upload/correction flow, film shell and source drawer. Raw results remain gated on scientific validation. |
+| 2:00–3:30 | NarrativeEngineer, VisualEngineer, ExperienceEngineer | Connect Spark interpretation/direction, both live image paths, reviewed globe scenes and independent auditors; complete one coherent 120-second film. |
+| 3:30–4:30 | IntegrationLead, RuntimeEngineer, QAReleaseEngineer | Integrate playback/export, replay, cancellation, bounded repairs and error recovery; verify supported inputs and privacy boundaries. |
+| 4:30–6:00 | QAReleaseEngineer, IntegrationLead | Fresh-clone judge setup, required tests/coverage, phone review, demo video, provenance and submission package. Freeze scope and leave submission buffer. |
 
-## The Product
+If the validated reference bundle is unavailable at the scientific gate, ship the screenshot/context and labelled replay paths; clearly mark personal raw analysis unavailable. Synthetic fixtures demonstrate software behavior only. Do not claim the full raw-DNA target is complete. If image generation fails, use reviewed fallback scenes. Cut voiceover, SAM transitions, extra terrain detail, hosted services and new research experiments before weakening evidence or privacy gates.
 
-A website where a person can drop their DNA raw data file or DNA test result screenshot and get a 90-150 second reel episode of their origin at a tap of a button. Judges run it locally from the repo. 
+## Document ownership and precedence
 
-The user provides DNA results either via screenshot or actual raw DNA text file upload (supprt 23andMe and AncestryDNA only for now) and PocketDNA produces a chaptered, narrated, visually produced micro documentary of their origins (90 second to 150 second max, 9:16 vertical ratio), with every factual claim grounded in cited literature powered by Muse Spark which runs live search. The product generates DNA based ancestry analysis, maps, images all tied into a compelling narrative via the shorts/reels documentary. 
+The user's current instructions govern scope. [RULES.md](RULES.md) owns safety, rights and engineering gates; this page owns product scope and delivery priorities; [STACK.md](STACK.md) owns architecture; specialist documents own their detailed contracts. [AGENTS.md](../AGENTS.md) owns role names and handoffs. Any future decision must update all affected documents in the same change. A newer date alone does not silently override another contract.
 
-Underneath, a fleet of agents running in a graph network (divided across three classes: orchestrator, worker, auditor) powered by Muse Spark collaborate to fetch information, create images, write the script, build the scene and direct the reel micro episode. 
+Historical measurements and catalog rows are evidence to review, not current production approval. External provider capabilities, pricing, event rules and source-data claims still require their stated verification; this documentation reconciliation does not certify them.
 
-Muse Images model is used to generate images. Muse Wonder is used to manage the bioinformatics pipeline. 
+## Related documents
 
-## Execution 
-
-
-### User inputs
-
-| Tier | Input | Pipeline | What it proves |
-|------|-------|----------|----------------|
-| 1 | Screenshot of 23andMe, AncestryDNA, MyHeritage results | Muse Spark vision parses the image into structured ancestry data | Zero-friction entry; meets users where they are (the screenshot-posting behavior) |
-| 2 | Raw genotype file (23andMe or AncestryDNA .txt or .zip)| Deep-time ancestry engine: user genotypes projected onto a precomputed 25-PC AADR eigenspace (basis built at build time, validated against EIGENSOFT smartpca as oracle), then 3-epoch constrained NNLS mixture fit (Bronze Age, Middle Ages, Modern). |
-
-### Output
-
-A 90-150 second, 9:16, auto-generated cinematic reel. Imagine Spotify Wrapped meets a
-Nat Geo/Ken Burns sequence with a tappable evidence layer underneath. Stunning sleek visuals and short beats. 
-
-Users can pause and replay, with the information clickable. The user can request explainers and find citation. Muse Spark distills dense scientific literature into easy to consume pieces tying them all under an unified grand narrative about their origin. 
-
-Each output is:
-- 90-150 seconds strict
-- starts with a hook (your oldest/rarest MOST INTERESTING signal) 
-- method-credibility beat (marker counts, N ancient genomes compared) 
-- 3 eras (Bronze Age, Middle Ages, Modern period) 
-- convergence map (all paths lead to you) 
-- share stamp (Instagram/Threads/Facebook reels and stories)
-
-Each era: 20-30 second full-bleed period scene (from the pregenerated Muse Image library; on-the-fly generation for uncommon populations in Tier 1 only, Tier 2 is library-only) with slow push, inset animated map path, kinetic typography (Inter display) carrying ONE cited claim plus a short plain-language explainer of what the result means. Core reel is silent; kinetic type carries narration.
-  
-Engine: our own t-driven scene engine (every element a pure function of time t, inspired by the html-reel clock pattern (check SKILLS.md) but written by Muse Code). Muse Spark authors each user's reel JSON (beats, copy, map coords, timings) against it
-
-Playback: in-app via WebView (identical on web); MP4 export as a Modal job (headless browser; steps t frame-by-frame -> ffmpeg) feeding the share/viral loop
-
-Content: 
-- Images of Ancestral components (e.g Anatolian Neolithic Farmer, Medieval Anatolian, Modern Turkish): Muse Image generated tasteful cinematic photography of ethnic and cultural groups
-- Animation: movement of ancestral components across a globe/atlas,each component represented by a circular icon (like circular profile picture in social media sites) showing at each era the ancestral components coalescing together
-- Text explanation of what is happening powered by Muse directed script
-- Clickable text: users can pause, click the text and find explainer of their origin stories backed by citation
-- [CRITICAL]: WHEN THE USER CAN CLICK THE TEXT ON VIDEO: tooltip appears EXPLAINING WHY THEY HAVE THIS PARTICULAR ANCESTRY COMPOSITION. THE WHY IS CRITICAL. 
-- BROADER PROINT: DNA tests offer the what, we offer the why and how via our script and storytelling. 
-
-
-### Bioinformatics Pipeline
-
-For screenshots: simulated ancestry by parsing the screenshots, finding relevant G25 coordinate value for each ancestry component (e.g English 75% French 10%, Swedish 15%), and creating a synethic G25 coordinate out of those component coordinates and then finding ancestry splits across three different eras. 
-
-For raw data: The 23andMe or Ancestry raw data file is parsed, compared against SNP selection of precomputed custom G25 dataset (deived from AADR, EGDP, SGDP using same mathetmatic formula as original G25), then projected into eigenspace to derive G25 coordinates. Once done, the G25 coordinate is fed to ancestry calculators like the screenshot pipeline to find ancestry splits across three different eras. 
-
-### Muse model usage map
-
-
-### Critical scientific honesty rule
-
-The LLM never computes ancestry at inference time. The math is deterministic population
-genetics: a PCA-projection + mixture-fitting engine or the vendor's own published percentages from screenshot. Muse does what previously required a human expert: interpretation, narrative, visuals, and cited storytelling. 
-
-
-## Hard boundaries (see RULES.md)
-
-- CRITICAL: Easy one command install so the judge doesnt have to spend minutes debugging 
-- No health/trait interpretation ever. Health panels in screenshots are detected and rejected with a clear message. Ancestry only.
-- Demo data: builder's own DNA (hero demo) + screenshots shared directly with the builder by members of Facebook ancestry groups the builder admins, personal information redacted. 
-- Public repo from day one; all work during the event window.
-
-
-## Related docs
-
-- RULES.md — hackathon compliance + engineering rules
-- STACK.md — architecture, services, credits budget
-- DESIGN.md — visual direction and per-feature quality references
-- USER_FLOW.md — screens and flows
-- AGENTS_PIPELINE.md — runtime and build-time agent architecture (one agent, one task)
-- SKILLS.md - open source libraries of skills, UI components to fast track the build
-- UI-COMPONENTS.md — component-level spec sheet with acceptance criteria and build order
-- CHECKLIST.md — living spec sheet and project management tracker
+| Document | Purpose |
+| --- | --- |
+| [RULES.md](RULES.md) | Hackathon constraints, ancestry/privacy boundaries, code quality, budgets and completion gates. |
+| [STACK.md](STACK.md) | Target runtime/research architecture, contracts, installation, storage, export and acceptance requirements. |
+| [DESIGN.md](DESIGN.md) | Canonical dark visual tokens, responsive layout, controls, evidence interaction and error states. |
+| [BIOINFORMATICS.md](BIOINFORMATICS.md) | PCA-25 methodology, historical audit findings, identity/QC checks, projection, fitting and validation gates. |
+| [POPLIST.md](POPLIST.md) | Candidate population/sample catalog, exact IDs, warnings and provenance; not an approved production panel. |
+| [AGENTS.md](../AGENTS.md) | Repository build responsibilities and complete runtime agent roster, outputs, boundaries and handoffs. |
+| [AGENT.md](AGENT.md) | Detailed HistoricalImageAgent state machine, input/output contract, tools and acceptance checks. |
+| [DIRECTOR.md](DIRECTOR.md) | DocumentaryDirector script method, timed ReelPlan, readable captions and editorial review. |
+| [IMAGE.md](IMAGE.md) | Historical image briefs, reusable prompts, generation/repair budget, provenance and visual audit. |
+| [ATLAS.md](ATLAS.md) | Geographic research, globe/terrain rendering, map semantics, optional segmentation and atlas review. |
+| [Dataset guide](../dataset/README.md) | Local dataset staging, provenance requirements and promotion of reviewed reference assets. |
+| [Repository README](../README.md) | Existing prototype startup and implementation-status caveat; future judge entry point after validation. |

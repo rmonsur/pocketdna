@@ -1,10 +1,16 @@
 # PocketDNA
 
-Finding Your Roots for everyone: drop your DNA test, get a 30-60 second cited micro documentary of your origins.
+Finding Your Roots for everyone: turn ancestry evidence into a cited micro documentary. The agreed release target is 90–150 seconds, silent-first.
 
 Meta Global AI Developer Hackathon, Oct 26 - Nov 4, 2026. Indie track. All code in this repo was built during the event window. A prior concept (DNAless) informed the idea; no old code, prompts, or assets are reused.
 
-## Run it (judges start here)
+## Implementation status
+
+The reconciled release specification starts at [docs/ABOUT.md](docs/ABOUT.md); responsibilities are in [AGENTS.md](AGENTS.md). The target is React/Vite + Node/Hono with browser-local raw-DNA analysis, Muse Spark interpretation for both tiers, live Muse Image scenes, and one-command local startup/export. That migration is **pending**, not delivered by this documentation update.
+
+The instructions and model routing below describe the earlier Expo/FastAPI prototype, including its 30–60 second reel format and Python requirement. They are retained for development and have not been revalidated in this documentation pass. They do not override the target contracts or establish scientific release readiness. The final judge instructions must be replaced after fresh-clone verification.
+
+## Run the existing prototype
 
 Requirements: Python 3.12+, Node 20+, Chrome. Two terminals. Runs fully on your machine; no hosted deployment needed.
 
@@ -88,5 +94,7 @@ app/        Expo + React Native Web (TypeScript strict). Web is the only surface
 backend/    FastAPI api/, agents/, deterministic pipeline/, muse/ client, glimmer/ Modal GPU server
 shared/     JSON schemas shared app <-> backend
 demo/       Fixtures (sample reel, sample parse, gatekeeper rejection)
-docs/       Planning docs; start with PIVOT-2026-10-31.md
+docs/       Reconciled target specifications; start with ABOUT.md
+dataset/    Ignored local reference-data staging; start with its README.md
+AGENTS.md   Build ownership and runtime agent contracts
 ```

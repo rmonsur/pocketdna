@@ -2,6 +2,10 @@
 
 Version 1 · 3 November 2026 · metadata-based selection planning
 
+[Product scope](ABOUT.md) · [Scientific specification](BIOINFORMATICS.md) · [Dataset intake](../dataset/README.md)
+
+Source status: the tables preserve the earlier annotation audit. Its original source files are not bundled in this checkout; checksums below record the expected inputs, not files newly verified here. All records remain candidates pending current-release, identity, genotype and rights checks. Historical research is background subject to RULES eligibility/attribution, not automatically new hackathon work.
+
 This is a searchable **candidate and review catalog**, not a ready-to-run smartpca poplist or a blanket recommendation to include every listed sample. It draws on the supplied v62 HO and 1240K annotation CSVs, the earlier 6,881-ID panel, the v66 1240K patch `.ind`, and BIOINFORMATICS.md section 17. Genotypes, current-release quality and relationships remain to be checked.
 
 ## Navigation and scope

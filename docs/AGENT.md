@@ -1,6 +1,6 @@
 # PocketDNA runtime image agent
 
-Version: 1.0 · 4 November 2026 · Governing image specification: IMAGE.md
+Version: 1.1 · 4 November 2026 · Governing image specification: [IMAGE.md](IMAGE.md) · Full role registry: [AGENTS.md](../AGENTS.md)
 
 ## Assignment
 
@@ -8,7 +8,7 @@ Assign **HistoricalImageAgent** responsibility for creating the episode's histor
 
 This is an application agent contract, not a repository-wide coding-agent instruction file. The singular filename is intentional. It specifies work to implement; no background agent has been deployed by this document.
 
-Apply RULES.md's ancestry-only, no-war and privacy constraints. IMAGE.md's live-generation decision replaces the older image-count and packaged-only constraints in STACK.md. Other stack and bioinformatics decisions remain applicable. A user's ancestry evidence controls narrative eligibility; it never serves as a costume, face or personality generator.
+Apply RULES.md's ancestry-only, no-war and privacy constraints. IMAGE.md and STACK.md share live generation for both tiers: six initial images, up to two episode-wide repairs, at most one repair per scene and initial concurrency two. Reviewed assets support replay and failures. Stack and bioinformatics boundaries remain applicable. A user's ancestry evidence controls narrative eligibility; it never serves as a costume, face or personality generator.
 
 ## Runtime ownership
 
@@ -21,7 +21,7 @@ Apply RULES.md's ancestry-only, no-war and privacy constraints. IMAGE.md's live-
 | VisualEvidenceAuditor | Reviews the actual image independently against the brief | Returns pass, repair or fallback; uncertainty is allowed |
 | ReelAssembler | Places approved images into deterministic HTML Reel scenes | Does not alter source claims or present reconstruction as documentary footage |
 
-These roles are logical steps, not separate servers or an elaborate multi-agent framework. Implement a small TypeScript state machine in the existing Node/Hono runtime. Use the project's configured Muse reasoning model for brief planning and review, with vision support required for the visual auditor. Confirm that adapter's actual search and vision interfaces before implementation; do not assume Muse Image accepts arbitrary external tools. No new Python, Modal, Baseten, database or job service is required for this path.
+The table above covers image-specific collaboration; the complete roster and final narrative/compliance render gates are in AGENTS.md. These roles are logical steps, not separate servers or an elaborate multi-agent framework. Implement a small TypeScript state machine in the target Node/Hono runtime. Use the project's configured Muse reasoning model for brief planning and review, with vision support required for the visual auditor. Confirm that adapter's actual search and vision interfaces before implementation; do not assume Muse Image accepts arbitrary external tools. No new Python, Modal, Baseten, database or job service is required for this path.
 
 ## Agent system prompt — HIST-AGENT-01
 

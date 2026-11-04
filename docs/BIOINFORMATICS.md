@@ -2,6 +2,10 @@
 
 Custom ancestry PCA, projection and reference-mixture engine
 
+[Product scope and timebox](ABOUT.md) · [Architecture](STACK.md) · [Agent ownership](../AGENTS.md) · [Dataset intake](../dataset/README.md)
+
+Status: the earlier-run measurements and metadata audits below are preserved reports, not newly reproduced results. Their original input files/scripts are not bundled in this checkout. Do not treat them as validated production artifacts or newly created hackathon work. Recover sources, check event eligibility/attribution and pass release gates before reuse. The full experiment program is a research backlog; the hackathon focuses on the minimum validated path in ABOUT. If it cannot pass, personal raw analysis remains unavailable.
+
 ## 1. Decision and scope
 
 Build **PocketDNA PCA-25**, a versioned, independently validated ancestry coordinate system. Use Global25 agreement as an external benchmark, not as proof of historical accuracy or the sole optimization objective.
@@ -24,7 +28,7 @@ The work contains valuable controls: diagnosis of fold-assignment noise, paired 
 
 ### Reported measurements
 
-| Measurement in LEARNINGS.md | Reported value | Interpretation pending code inspection |
+| Measurement in external prior-run notes | Reported value | Interpretation pending code inspection |
 | --- | --- | --- |
 | PC1–8 band Procrustes | 0.9758 | Strong broad-structure agreement under the report's metric |
 | PC9–25 band Procrustes | 0.6609 | Material geometric disagreement remains |
@@ -34,7 +38,7 @@ The work contains valuable controls: diagnosis of fold-assignment noise, paired 
 
 Do not call all these values “correlation.” Pearson r, held-out R², normalized Procrustes similarity and subspace containment are different quantities. Recover each implementation and give its equation. State whether Procrustes is fitted and scored on the same samples, whether scaling/reflection are allowed, and whether the statistic is 1 minus disparity or something else.
 
-### File-level audit performed for this document
+### Previously reported file-level audit
 
 | Check | Observed result |
 | --- | --- |
@@ -47,13 +51,13 @@ Do not call all these values “correlation.” Pearson r, held-out R², normali
 | ID suffixes | HO 3,990; DG 1,871; no suffix 889; SG 72; AG 38; TW 18; BY 3 |
 | Source totals in final table | AADR 5,992; EGDP 402; France256 256; FrancoCantabrian 189; SGDP 42 |
 
-Unique strings are not unique biological individuals. The supplied list includes `mota.DG`, `mota.SG`, `mota_alt.SG`, and both `Sumidouro5.SG` and `Sumidouro5_d.SG`. These are candidate duplicate representations requiring Master ID/annotation verification. `Selkup4.HO` and `Selkup4a.HO` also merit inspection; names alone do not prove duplication.
+Unique strings are not unique biological individuals. The supplied list includes `mota.DG`, `mota.SG`, `mota_alt.SG`, and both `Sumidouro5.SG` and `Sumidouro5_d.SG`. These are candidate duplicate representations requiring Master ID/annotation verification. `Selkup4.HO` and `Selkup4a.HO` have different v62 Master IDs under the later review in section 17; names alone are not a duplicate flag.
 
 The list contains Biaka 20 and Mbuti 10 although the notes describe their inclusion as rejected. It contains Selkup 24 plus Selkups 3, and Nganasan 28 plus Nganasans 2, whereas the notes later mention 9 Selkup and 11 Nganasan. These may reflect different runs or definitions; they cannot be treated as one coherent frozen configuration.
 
 The merged input count 9,477 minus the final 6,881 leaves 2,596 exclusions. The table's 1,821 “held out” figure and the notes' relatedness/pseudo-haploid counts need a sequential exclusion ledger, including overlapping reasons. The difference is not proof of a filtering bug, but the current report does not reconcile it.
 
-### Additional audit: supplied AADR 1240K patch individual file
+### Previously reported additional audit: supplied AADR 1240K patch individual file
 
 `v66.p1_1240K.aadr.patch.PUB.ind` contains **23,089 rows**, all with three fields, **23,089 unique IDs**, and **3,898 distinct population labels**. Sex codes are M 12,368, F 9,359 and U 1,362. These are metadata counts, not genotype-quality measurements.
 
@@ -65,7 +69,7 @@ The file explicitly includes `Chimp.REF` and `Gorilla.REF`; neither is in the su
 | --- | --- | --- |
 | `mota.DG`, `mota.SG`, `mota_alt.SG` | All M, `Ethiopia_MotaCave_4500BP` | Stronger duplicate-representation flag; resolve Master ID and choose one basis representation |
 | `Sumidouro5.SG`, `Sumidouro5_d.SG` | Both M, `Brazil_CentralMinasGerais_EarlyHolocene_10400BP_HG` | Stronger duplicate-representation flag; check damage-restricted representation in annotations |
-| `Selkup4.HO`, `Selkup4a.HO` | Neither present | Cannot resolve with this file; obtain matching HO annotations |
+| `Selkup4.HO`, `Selkup4a.HO` | Neither present | This file cannot resolve them; section 17 reports distinct v62 Master IDs from the later HO annotation review |
 
 An `.ind` provides ID, sex and group only. It cannot establish coverage, contamination, diploidy, biological uniqueness, the correct SNP denominator or genotype identity. Obtain the matching release README, `.anno`, `.snp` and genotype headers, and the Human Origins `.ind`/annotations actually used by the old merge. Check whether the “patch” is a full replacement or a supplemental resource from its README rather than guessing from its filename.
 
@@ -353,7 +357,7 @@ A roughly 6,881 × 169,983 matrix has about 1.17 billion entries: approximately 
 
 [7] [Missing-locus uncertainty in ancient-genome PCA projection](https://doi.org/10.1186/s12864-025-11728-1).
 
-Local evidence: v66.p1_1240K.aadr.patch.PUB.ind; LEARNINGS.md; FINALPOPLIST.txt; FINALPOPLIST.panel_ids.txt; current STACK.md, RULES.md and ABOUT.md. Performance claims from the earlier run remain unverified until the original data/code/results are reproduced. Earlier candidate duplicate identities were provisional; section 17 confirms four Master-ID pairs using the supplied v62 annotations and leaves others unresolved. Proposed thresholds and ablations are a plan, not results.
+Local evidence: v66.p1_1240K.aadr.patch.PUB.ind; external prior-run notes (not bundled); FINALPOPLIST.txt; FINALPOPLIST.panel_ids.txt; current STACK.md, RULES.md and ABOUT.md. Performance claims from the earlier run remain unverified until the original data/code/results are reproduced. Earlier candidate duplicate identities were provisional; section 17 confirms four Master-ID pairs using the supplied v62 annotations and leaves others unresolved. Proposed thresholds and ablations are a plan, not results.
 
 
 ## 17. Refinement from the supplied v62 HO and 1240K annotations

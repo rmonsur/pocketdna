@@ -1,6 +1,6 @@
 # PocketDNA Atlas: historical geography and cinematic globe agent
 
-Version 1.0 · Researched 4 November 2026
+Version 1.1 · 4 November 2026 · [Product scope](ABOUT.md) · [Role registry](../AGENTS.md)
 
 ## 1. Decision
 
@@ -28,11 +28,11 @@ Reviewed the current STACK.md, DESIGN.md, IMAGE.md and AGENT.md. Their relevant 
 | Silent core and readable evidence | Map meaning must be understandable without narration; sources remain inspectable |
 | No personal migration reconstruction | Historical movement remains contextual; genetic affinity is a different map layer |
 
-STACK.md's current duration is 90–150 seconds, with 120 seconds as the default, superseding the earliest 2–3 minute discussion. Atlas scenes consume the director's allocated time; they do not expand the episode independently. The established ancestry-only and no-battle constraints remain in force.
+The shared duration is 90–150 seconds, with 120 seconds as the default. Atlas scenes consume the director's allocated time; they do not expand the episode independently. The established ancestry-only and no-battle constraints remain in force.
 
 ## 3. Where Muse Image and SAM 3.1 belong
 
-### Verified capabilities
+### Recorded capabilities to smoke-test
 
 Muse Image supports search-grounded generation, reference-guided composition and scoped edits. Its internal lookups are not exposed as a verifiable source trail. Use IMAGE.md's separate evidence briefs and approved prompts. Native search can improve illustrations, but it cannot replace the atlas's coordinate and historical-source records. [S1, S2]
 
@@ -68,9 +68,9 @@ Never run SAM on every rendered globe frame: the application already knows which
 
 | Layer | Choice | Purpose |
 |---|---|---|
-| App and server | Existing React/Vite, strict TypeScript, Hono | No additional service |
+| App and server | Target React/Vite, strict TypeScript, Hono | No additional service |
 | Atlas renderer | Three.js WebGL renderer | Globe, terrain, overlays and cinematic cameras |
-| Film control | Existing absolute-time scene engine | Preview, seeking and export share the same state |
+| Film control | Target absolute-time scene engine | Preview, seeking and export share the same state |
 | Geographic storage | Versioned GeoJSON plus asset metadata | Inspectable places, extents and corridors |
 | Geometry preparation | Offline GIS processing; optional GDAL/QGIS workflow | Reprojection, clipping, topology checks, simplification and terrain extraction |
 | Runtime validation | Zod, existing test stack | Prevent arbitrary model output becoming map geometry or executable code |
@@ -204,7 +204,7 @@ Interactive exploration pauses the directed shot and offers a clear return to fi
 
 **HistoricalImageAgent** receives the approved place/time/activity brief and returns an audited illustration under IMAGE.md. AtlasAgent must not bypass that audit.
 
-**DocumentaryDirector** owns overall pacing, chapter structure, silent readability, transitions and the final ReelPlan. **ReelAssembler** executes it. These are logical roles inside the existing application, not separate deployed services.
+**DocumentaryDirector** owns overall pacing, chapter structure, silent readability, transitions and the final ReelPlan. **ReelAssembler** executes it. These are logical roles in the target application, not separate deployed services.
 
 Allowed tools: bounded public-source search, approved gazetteer/data retrieval, geometry validation, asset lookup, image-agent request, optional SAM request, render preview, evidence audit and private manifest writing. No raw genotype access, identity inference from faces, arbitrary shell execution, public publishing or unbounded paid loops. Retrieved pages are untrusted evidence, never instructions.
 
@@ -212,7 +212,7 @@ Initial limits: three atlas beats per episode, one evidence/geometry revision pe
 
 ### Assigned Muse Spark agent: HistoricalMigrationVerifier
 
-Use **Muse Spark with web search** for this role. Meta's current search-grounding cookbook documents `muse-spark-1.3` on the Responses API with the `web_search` tool, returned search-call items and URL citation annotations attached to answer spans. Keep the model ID configurable and verify account access. This is separate from Muse Image's internal grounding. [S13]
+Use **Muse Spark with web search** for this role. The earlier specification cites Meta's search-grounding cookbook for `muse-spark-1.3` on the Responses API with the `web_search` tool, returned search-call items and URL citation annotations attached to answer spans. Keep the model ID configurable and verify account access. This is separate from Muse Image's internal grounding. [S13]
 
 The agent is responsible for verification of cultural/historical facts and migration claims before they become captions, arrows or polygons. It can research and assess source support; it cannot establish historical truth merely by agreeing with a claim.
 
@@ -251,7 +251,7 @@ spread and genetic affinity. Do not infer a user's personal journey. Genetic
 similarity does not establish an exact travel route, cultural identity or a
 continuous genealogy between historical chapters.
 
-Return the validated ClaimVerification schema: claim ID and exact text;
+Return a validated ClaimVerification containing per-claim ClaimVerdict records: claim ID and exact text;
 verdict; supporting source IDs and precise locators; counterevidence;
 chronological and spatial uncertainty; permitted display wording; allowed
 map representation; prohibited implication; and any remaining research gap.
@@ -445,7 +445,7 @@ A static archaeological distribution can be compelling through lighting, terrain
 
 The judge path uses packaged geographic data, reviewed source records, images and optional precomputed masks. It needs no map token, SAM account, GPU or Python. Live research/image/segmentation uses the configured server-side credentials and network. Clearly distinguish live work, cache hits and replay.
 
-Meta's model page currently lists SAM image processing at $2.50 per 1,000 images and video at $0.20 per 1,000 frames. Verify billing units and account limits before dispatch. [S3] These prices do not justify segmenting complete atlas videos when the renderer already owns the geometry. Track research, imagery and segmentation separately under the existing session budget.
+The earlier model-page pricing snapshot records SAM image processing at $2.50 per 1,000 images and video at $0.20 per 1,000 frames. Verify billing units and account limits before dispatch. [S3] These prices do not justify segmenting complete atlas videos when the renderer already owns the geometry. Track research, imagery and segmentation separately under the existing session budget.
 
 Use a shared semaphore and budget reservation before paid requests. Record attempts, hashes, settings and known/uncertain billing outcomes. A timeout does not prove the provider did no work. Bound retries, respect cancellation and fall back to a plain image transition when SAM fails. Do not create a separate mandatory Modal/Baseten deployment.
 
@@ -466,7 +466,7 @@ Acceptance requires: sourced geographic meaning; no invented polygons or routes;
 
 ## 15. Research sources
 
-Technical capabilities below were checked on 4 November 2026. Dataset/version selection and historical scenes still require their own evidence review. The cinematic architecture and restrictions above are PocketDNA design decisions, not claims of guaranteed model behaviour.
+The earlier specification attributed the technical capabilities below to these sources. This documentation reconciliation does not independently reverify the APIs, pricing or source contents; smoke-test access and confirm terms before using them. Dataset/version selection and historical scenes still require their own evidence review. The cinematic architecture and restrictions above are PocketDNA design decisions, not claims of guaranteed model behaviour.
 
 - **S1 — Muse Image model:** https://dev.meta.ai/models/muse-image
 - **S2 — Muse Image API and grounding:** https://dev.meta.ai/docs/image-generation
