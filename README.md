@@ -71,8 +71,6 @@ everyone their own episode:
 Ancestry only. No health, traits or personality. No modern nations as heirs. No battle
 imagery. A health panel is rejected up front with a typed message.
 
----
-
 
 ## How I built this
 

@@ -1,0 +1,6 @@
+# Rendered assets and supplied screenshots are deliverables, not source commits.
+assets/
+preview/
+*.mp4
+*.jpg
+*.png
