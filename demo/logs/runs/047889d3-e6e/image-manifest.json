@@ -1,0 +1,105 @@
+{
+ "jobId": "047889d3-e6e",
+ "scenes": [
+  {
+   "beatId": "b3-bronze",
+   "template": "HIST-IMAGE-01-v2-landscape",
+   "auditTemplate": "HIST-AUDIT-01-v2",
+   "brief": {
+    "beatId": "b3-bronze",
+    "era": "bronze",
+    "place": "Shahr-i Sokhta, Iran",
+    "dateText": "about 2742 BCE",
+    "family": "Indus Valley Civilization (3100–2000 BC)",
+    "publication": null,
+    "doi": null,
+    "purpose": "Contextual illustration for the bronze chapter of an ancestry documentary: history."
+   },
+   "prompt": "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Landscape 16:9, like a frame of a documentary film.\nThis is an illustrative reconstruction, not an archival photograph and not a portrait of anyone's actual ancestors.\n\nSETTING: Shahr-i Sokhta, Iran, about 2742 BCE (reference family: Indus Valley Civilization (3100–2000 BC)).\nPURPOSE: Contextual illustration for the bronze chapter of an ancestry documentary: history. It accompanies a separately stated genetic-similarity finding and makes no claim about any person's family.\nACTION: a small group engaged in one ordinary, period-plausible task of daily life (preparing food, tending animals, building, making or carrying goods), seen from a slight distance.\nSUBJECTS: fictional inhabitants of this setting in roles appropriate to the action; appearance is not derived from any genetic result.\n\nUse your web and image search to verify period and regional visual details for Shahr-i Sokhta, Iran around about 2742 BCE. Prioritize excavation reports and museum object records for this place and period. Do not substitute popular entertainment imagery. Where a detail is unknown, keep it visually nonspecific rather than inventing it. Search supports reconstruction; it does not establish provenance.\n\nCOMPOSITION: wide cinematic frame, low eye level, natural lens, focal subject in the right two thirds of the frame. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 85% of frame height. Keep the left 45% of the frame visually quiet and uncluttered (open landscape, sky or soft background) because a caption card sits there.\nLIGHT: low warm sunlight from one side. Natural highlights, restrained earth palette, atmospheric depth, readable shadows and subtle cinematic grain.\nMOOD: dignified human agency through ordinary skilled work, travel or community. Beautiful without fantasy spectacle or idealized luxury.\n\nExclude: battle, weapons as a subject, conquest imagery, political symbols, modern equipment in ancient scenes, fantasy armour, invented monuments, unsupported ornament, any text or lettering, logos, percentages, maps, charts and watermarks. Do not infer physical traits from genetics. Do not render citations into the image.",
+   "model": "muse-image-1.0",
+   "hash": "b684fc009e0500ddd969845a275a66a009f4b330d0dd784ee0aede77a329448d",
+   "attempts": [
+    {
+     "kind": "initial",
+     "hash": "b684fc009e0500ddd969845a275a66a009f4b330d0dd784ee0aede77a329448d",
+     "cached": false,
+     "audit": {
+      "verdict": "pass",
+      "issues": [],
+      "repair": ""
+     }
+    }
+   ],
+   "file": "b3-bronze.jpeg",
+   "mode": "live",
+   "status": "approved"
+  },
+  {
+   "beatId": "b4-middle",
+   "template": "HIST-IMAGE-01-v2-landscape",
+   "auditTemplate": "HIST-AUDIT-01-v2",
+   "brief": {
+    "beatId": "b4-middle",
+    "era": "middle",
+    "place": "Rabat, Uzbekistan",
+    "dateText": "about 50 BCE",
+    "family": "Khwarazm and Transoxiana (100 BC–AD 950)",
+    "publication": null,
+    "doi": null,
+    "purpose": "Contextual illustration for the middle chapter of an ancestry documentary: history."
+   },
+   "prompt": "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Landscape 16:9, like a frame of a documentary film.\nThis is an illustrative reconstruction, not an archival photograph and not a portrait of anyone's actual ancestors.\n\nSETTING: Rabat, Uzbekistan, about 50 BCE (reference family: Khwarazm and Transoxiana (100 BC–AD 950)).\nPURPOSE: Contextual illustration for the middle chapter of an ancestry documentary: history. It accompanies a separately stated genetic-similarity finding and makes no claim about any person's family.\nACTION: a small group engaged in one ordinary, period-plausible task of daily life (preparing food, tending animals, building, making or carrying goods), seen from a slight distance.\nSUBJECTS: fictional inhabitants of this setting in roles appropriate to the action; appearance is not derived from any genetic result.\n\nUse your web and image search to verify period and regional visual details for Rabat, Uzbekistan around about 50 BCE. Prioritize excavation reports and museum object records for this place and period. Do not substitute popular entertainment imagery. Where a detail is unknown, keep it visually nonspecific rather than inventing it. Search supports reconstruction; it does not establish provenance.\n\nCOMPOSITION: wide cinematic frame, low eye level, natural lens, focal subject in the right two thirds of the frame. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 85% of frame height. Keep the left 45% of the frame visually quiet and uncluttered (open landscape, sky or soft background) because a caption card sits there.\nLIGHT: low warm sunlight from one side. Natural highlights, restrained earth palette, atmospheric depth, readable shadows and subtle cinematic grain.\nMOOD: dignified human agency through ordinary skilled work, travel or community. Beautiful without fantasy spectacle or idealized luxury.\n\nExclude: battle, weapons as a subject, conquest imagery, political symbols, modern equipment in ancient scenes, fantasy armour, invented monuments, unsupported ornament, any text or lettering, logos, percentages, maps, charts and watermarks. Do not infer physical traits from genetics. Do not render citations into the image.",
+   "model": "muse-image-1.0",
+   "hash": "1ef4f66e602b55bfaaee276dbf79e2ec845cbf8822a1de6905bd7194aa3705f9",
+   "attempts": [
+    {
+     "kind": "initial",
+     "hash": "1ef4f66e602b55bfaaee276dbf79e2ec845cbf8822a1de6905bd7194aa3705f9",
+     "cached": false,
+     "audit": {
+      "verdict": "pass",
+      "issues": [],
+      "repair": ""
+     }
+    }
+   ],
+   "file": "b4-middle.jpeg",
+   "mode": "live",
+   "status": "approved"
+  },
+  {
+   "beatId": "b5-modern",
+   "template": "HIST-IMAGE-01-v2-landscape",
+   "auditTemplate": "HIST-AUDIT-01-v2",
+   "brief": {
+    "beatId": "b5-modern",
+    "era": "modern",
+    "place": "Vishakapatman, India",
+    "dateText": "present-day",
+    "family": "Mala",
+    "publication": null,
+    "doi": null,
+    "purpose": "Contextual illustration for the modern chapter of an ancestry documentary: result."
+   },
+   "prompt": "Create one beautiful, cinematic, historically grounded reconstruction for PocketDNA. Landscape 16:9, like a frame of a documentary film.\nThis is an illustrative reconstruction, not an archival photograph and not a portrait of anyone's actual ancestors.\n\nSETTING: Vishakapatman, India, present-day (reference family: Mala).\nPURPOSE: Contextual illustration for the modern chapter of an ancestry documentary: result. It accompanies a separately stated genetic-similarity finding and makes no claim about any person's family.\nACTION: an ordinary present-day moment in this locality: people at everyday work or travel in the actual landscape, with no costume or ethnic styling inferred from any label.\nSUBJECTS: fictional inhabitants of this setting in roles appropriate to the action; appearance is not derived from any genetic result.\n\nUse your web and image search to verify period and regional visual details for Vishakapatman, India around present-day. Prioritize excavation reports and museum object records for this place and period. Do not substitute popular entertainment imagery. Where a detail is unknown, keep it visually nonspecific rather than inventing it. Search supports reconstruction; it does not establish provenance.\n\nCOMPOSITION: wide cinematic frame, low eye level, natural lens, focal subject in the right two thirds of the frame. One clear focal action. Layered foreground and distant terrain; tangible materials and credible scale. Keep crucial subjects inside the central 85% of frame height. Keep the left 45% of the frame visually quiet and uncluttered (open landscape, sky or soft background) because a caption card sits there.\nLIGHT: low warm sunlight from one side. Natural highlights, restrained earth palette, atmospheric depth, readable shadows and subtle cinematic grain.\nMOOD: dignified human agency through ordinary skilled work, travel or community. Beautiful without fantasy spectacle or idealized luxury.\n\nExclude: battle, weapons as a subject, conquest imagery, political symbols, modern equipment in ancient scenes, fantasy armour, invented monuments, unsupported ornament, any text or lettering, logos, percentages, maps, charts and watermarks. Do not infer physical traits from genetics. Do not render citations into the image.",
+   "model": "muse-image-1.0",
+   "hash": "07e9935729a466b485eced3398f73a81925c0593ab9759d325663c93f026a8b4",
+   "attempts": [
+    {
+     "kind": "initial",
+     "hash": "07e9935729a466b485eced3398f73a81925c0593ab9759d325663c93f026a8b4",
+     "cached": false,
+     "audit": {
+      "verdict": "pass",
+      "issues": [],
+      "repair": ""
+     }
+    }
+   ],
+   "file": "b5-modern.jpeg",
+   "mode": "live",
+   "status": "approved"
+  }
+ ],
+ "costUsd": 0.054969000000000004
+}

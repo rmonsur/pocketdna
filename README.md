@@ -42,6 +42,21 @@ Optional variables: `KILL_PAID_CALLS=1` refuses every paid call (the app degrade
 errors and the replay, never a hang), `PORT` changes the port (default 8000),
 `POCKETDNA_LOCAL_DIR` moves the cache and cost log (default `.local/`).
 
+### Muse model call logs
+
+I have placed proofs of Meta models call logs at [demo/logs/](demo/logs/): holds the real
+call logs from building and testing PocketDNA:
+
+- **[muse-cost.jsonl](demo/logs/muse-cost.jsonl):** every live Muse call, 128 in total (102
+  Muse Spark, 26 Muse Image), with tokens and cost. The whole build and test period cost
+  about $2.73.
+- **[runs/](demo/logs/runs/):** four complete runs with per-call traces, film plans and image
+  audits. They include the episode in the demo video (the auditors sent the script back once
+  before passing), a run the auditors blocked, an image repair that passed, and a repair that
+  fell back.
+
+See [demo/logs/README.md](demo/logs/README.md) for how to read them.
+
 ### Honest limits of the judge path
 
 - The production of a 3 minute short takes roughly 8-12 minutes. Within this time, the DNA raw file is projected against reference samples first, ancestry calculations are computed and fed to Muse. Muse then processes these calculations, validating them by performing web searches and cross referencing them with scientific publications, directing the script of the episode, setting the pace, crafting the content. Muse Image generates images and all these take time. 

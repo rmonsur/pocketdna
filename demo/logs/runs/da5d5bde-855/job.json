@@ -1,0 +1,472 @@
+{
+ "job_id": "da5d5bde-855",
+ "state": "failed",
+ "rejection": "R4",
+ "message": "Film failed audit (narrative/compliance). No reel renders without a pass.",
+ "reel": null,
+ "evidence": {
+  "kind": "raw",
+  "basisId": "pocketdna-pca25-experimental-v1",
+  "markerCount": 99794,
+  "usableMarkers": 47115,
+  "epochs": [
+   {
+    "era": "bronze",
+    "shares": [
+     {
+      "id": "IRN_Shahr_I_Sokhta_BA2",
+      "label": "Bronze Age people at Shahr-i Sokhta, Iran",
+      "weight": 0.794652778145664,
+      "low": 0.7755144396350667,
+      "high": 0.8273940669398444
+     },
+     {
+      "id": "Wales_N",
+      "label": "Early farmers at Ogof-Yr-Ychen, United Kingdom",
+      "weight": 0.11490979769997617,
+      "low": 0.08370174264840627,
+      "high": 0.13122430299159324
+     },
+     {
+      "id": "Dinka",
+      "label": "Present-day Dinka people near Aweil, South Sudan",
+      "weight": 0.0904374241543597,
+      "low": 0.059272779205615134,
+      "high": 0.11354570858147078
+     }
+    ],
+    "closest": [
+     {
+      "label": "Bronze Age people at Shahr-i Sokhta, Iran",
+      "distance": 0.042314984024018634
+     },
+     {
+      "label": "Bronze Age Caucasian (3700–1700 BC)",
+      "distance": 0.09474418690017149
+     },
+     {
+      "label": "Tibetan Plateau (1200 BC–AD 500) · Samdzong Tomb, Nepal",
+      "distance": 0.10347843331858564
+     }
+    ]
+   },
+   {
+    "era": "middle",
+    "shares": [
+     {
+      "id": "L8630",
+      "label": "Antiquity-era people near Rabat, Uzbekistan (individual 1)",
+      "weight": 0.6050968921547056,
+      "low": 0.4458539696997043,
+      "high": 0.7413448721524047
+     },
+     {
+      "id": "L8002",
+      "label": "Antiquity-era people near Rabat, Uzbekistan (individual 2)",
+      "weight": 0.2981261590501473,
+      "low": 0.15574649174383856,
+      "high": 0.42277059531813416
+     },
+     {
+      "id": "R11759",
+      "label": "Ancient coastal people at Kerkouene, Tunisia",
+      "weight": 0.03948381884693415,
+      "low": 0,
+      "high": 0.07635413147178832
+     },
+     {
+      "id": "Dinka",
+      "label": "Present-day Dinka people near Aweil, South Sudan",
+      "weight": 0.02278468635787464,
+      "low": 0,
+      "high": 0.057063730314006654
+     },
+     {
+      "id": "HGDP00653",
+      "label": "Present-day Arabian Peninsula people from Israel",
+      "weight": 0.018386775547698023,
+      "low": 0,
+      "high": 0.04080452821138215
+     },
+     {
+      "id": "Hadza",
+      "label": "Present-day Sub-Saharan African people from Tanzania",
+      "weight": 0.009719665963540382,
+      "low": 0,
+      "high": 0.03655359038749408
+     },
+     {
+      "id": "MARC1492",
+      "label": "North Amerindian (4000 BC–AD 1600) · Old Mission Point, Canada",
+      "weight": 0.0038906553863131393,
+      "low": 0,
+      "high": 0.025361972606759802
+     },
+     {
+      "id": "San (Khomani)",
+      "label": "Present-day Sub-Saharan African people from South Africa",
+      "weight": 0.002511346692786658,
+      "low": 0,
+      "high": 0.010251482418377957
+     }
+    ],
+    "closest": [
+     {
+      "label": "Antiquity-era people near Rabat, Uzbekistan",
+      "distance": 0.0648317576957682
+     }
+    ]
+   },
+   {
+    "era": "modern",
+    "shares": [
+     {
+      "id": "Mala",
+      "label": "Present-day Mala community near Vishakapatman, India",
+      "weight": 0.3613732595071399,
+      "low": 0,
+      "high": 0.4518147959870843
+     },
+     {
+      "id": "Brahui",
+      "label": "Present-day Brahui community in Pakistan",
+      "weight": 0.20937918225913002,
+      "low": 0,
+      "high": 0.2838398137223737
+     },
+     {
+      "id": "Madiga",
+      "label": "Present-day Madiga community near Vishakapatman, India",
+      "weight": 0.1142685005303907,
+      "low": 0,
+      "high": 0.6854065197273106
+     },
+     {
+      "id": "Khonda_Dora",
+      "label": "Present-day Khonda Dora people from India",
+      "weight": 0.10295294737702056,
+      "low": 0,
+      "high": 0.3016296477327375
+     },
+     {
+      "id": "Gelao",
+      "label": "Present-day Gelao people from China",
+      "weight": 0.0754658685344073,
+      "low": 0,
+      "high": 0.09623076467289021
+     },
+     {
+      "id": "Kubachinian",
+      "label": "Present-day Kubachinian people from Russia",
+      "weight": 0.03154017084278621,
+      "low": 0,
+      "high": 0.1368453970136364
+     },
+     {
+      "id": "Newar",
+      "label": "Present-day Newar people from Nepal",
+      "weight": 0.02869651466772603,
+      "low": 0,
+      "high": 0.02064348408757326
+     },
+     {
+      "id": "Kalash",
+      "label": "Present-day Kalash people from Pakistan",
+      "weight": 0.01837640900348709,
+      "low": 0,
+      "high": 0.03042400180307653
+     },
+     {
+      "id": "Bahun",
+      "label": "Present-day Bahun people from Nepal",
+      "weight": 0.01474741666976187,
+      "low": 0,
+      "high": 0.10293829876345162
+     },
+     {
+      "id": "Selkup",
+      "label": "Present-day Selkup people from Russia",
+      "weight": 0.01284166931621797,
+      "low": 0,
+      "high": 0.03253160505714773
+     },
+     {
+      "id": "Datog",
+      "label": "Present-day Datog people from Tanzania",
+      "weight": 0.008538692200279896,
+      "low": 0,
+      "high": 0.026888044171977484
+     },
+     {
+      "id": "Australian",
+      "label": "Present-day Australian people from Australia",
+      "weight": 0.008243959019536144,
+      "low": 0,
+      "high": 0.035487084790579375
+     }
+    ],
+    "closest": [
+     {
+      "label": "Present-day Bahun people from Nepal",
+      "distance": 0.02236511713973181
+     },
+     {
+      "label": "Present-day Irula people from India",
+      "distance": 0.024384843834836537
+     },
+     {
+      "label": "Present-day Cochin Jew A people from India",
+      "distance": 0.025542157979836156
+     }
+    ]
+   }
+  ],
+  "limitations": [
+   "Experimental PocketDNA PCA-25 coordinates; not Global25 and not comparable to it.",
+   "Consumer-mask validation: coordinates from chip-density data shift ~0.3 SD (p95) vs full-marker scores.",
+   "Era panels are experimental: bronze coverage is sparse (20 sources); panel sparsity limits fit precision.",
+   "Bootstrap ranges resample chromosomes; they describe fit stability, not confidence in ancestry."
+  ]
+ },
+ "claims": [
+  {
+   "id": "pop-irn-shahr-i-sokhta-ba2",
+   "text": "Bronze Age people at Shahr-i Sokhta, Iran: These were Bronze Age people linked to the Indus Valley Civilization group who lived about 2742 BCE.",
+   "class": "context",
+   "source": {
+    "authors": "Lazaridis, Reich et al.",
+    "year": 2022,
+    "venue": "Science",
+    "doi": "10.1126/science.abm4247"
+   },
+   "detail": "They were sampled at Shahr-i Sokhta in Iran. A match with this group is consistent with having ancestry similar to Bronze Age people from this part of Iran, not a direct family link. Broad family label that covers many towns and times.",
+   "story": "Shahr-i Sokhta was a large Bronze Age town in what is now southeast Iran, where people probably lived by farming, making crafts, and trading goods with nearby regions. People likely settled there because water and trade paths made town life possible in a dry area. The town matters because its workshops and planned streets show how early town life worked."
+  },
+  {
+   "id": "pop-wales-n",
+   "text": "Early farmers at Ogof-Yr-Ychen, United Kingdom: These were early European farmers who lived about 3265 BCE.",
+   "class": "context",
+   "source": {
+    "authors": "Brace, Barnes et al.",
+    "year": 2019,
+    "venue": "Nat Ecol Evol",
+    "doi": "10.1038/s41559-019-0871-9"
+   },
+   "detail": "They were sampled at Ogof-Yr-Ychen in the United Kingdom. A match with this group is consistent with having ancestry similar to early farmers from this area, not a direct family link. Date is only approximate and the family label is very broad.",
+   "story": "These people probably lived in small farm groups near the coast and grew crops and kept animals. Farming had probably become a common way to get food in this area by that time. These farm villages matter because they show how daily life slowly changed toward settling down and farming."
+  },
+  {
+   "id": "pop-dinka",
+   "text": "Present-day Dinka people near Aweil, South Sudan: These are present-day people in the Sub-Saharan African group.",
+   "class": "context",
+   "source": {
+    "authors": "Meyer, P et al.",
+    "year": 2012,
+    "venue": "Science",
+    "doi": "10.1126/science.1224344"
+   },
+   "detail": "They were sampled near Aweil in South Sudan. A match with this group is similar to sharing ancestry with present-day Dinka people, not the same as being a community member. Small panel with only two people, so it shows limited variation.",
+   "story": "The Dinka are a present-day community living near Aweil in South Sudan, in an area of grasslands and rivers. They probably have deep roots in this river plain, where keeping animals and growing food have long supported family life. They matter because their language and customs carry the history of life in this grassland river area."
+  },
+  {
+   "id": "pop-l8630",
+   "text": "Antiquity-era people near Rabat, Uzbekistan: These were people of the Khwarazm and Transoxiana group who lived about 50 BCE.",
+   "class": "context",
+   "source": {
+    "authors": "Kumar, Fu et al.",
+    "year": 2021,
+    "venue": "Mol Biol Evol",
+    "doi": "10.1093/molbev/msab216"
+   },
+   "detail": "They were sampled near Rabat in Uzbekistan. A match with this group is consistent with having ancestry similar to ancient people from this part of Central Asia, not a direct family link. Only two people in this reference, so it shows limited variation.",
+   "story": "Near Rabat in Uzbekistan, people in ancient times probably lived in oasis towns where river water made farming possible in dry land. These towns probably grew because farmers, craft makers, and traders could share water and markets. They matter because they show how people learned to build a good life in dry country."
+  },
+  {
+   "id": "pop-r11759",
+   "text": "Ancient coastal people at Kerkouene, Tunisia: These were people of the North African group dated to about 641 BCE.",
+   "class": "context",
+   "source": {
+    "authors": "Moots, Pinhasi et al.",
+    "year": 2023,
+    "venue": "Nat Ecol Evol",
+    "doi": "10.1038/s41559-023-02143-4"
+   },
+   "detail": "They were sampled at Kerkouene in Tunisia. A match with this group is consistent with having ancestry similar to ancient coastal people in Tunisia, not a direct family link. Date is approximate and the family time range is very broad.",
+   "story": "Kerkouene was a small seaside town where people probably lived by fishing, farming, and making goods for sea trade. People probably chose this coast because the sea and good land made food and trade easier. This town matters because its houses and streets show how ordinary coastal life worked long ago."
+  },
+  {
+   "id": "pop-mala",
+   "text": "Present-day Mala community near Vishakapatman, India: These are present-day people in the Mala group.",
+   "class": "context",
+   "source": {
+    "authors": "Mallick, Reich et al.",
+    "year": 2016,
+    "venue": "Nature",
+    "doi": "10.1038/nature18964"
+   },
+   "detail": "They were sampled near Vishakapatman in India. A match with this group is similar to sharing ancestry with the present-day Mala community, not the same as being a member. Small panel with only four people, so it shows limited variation.",
+   "story": "The Mala are a present-day community living near Vishakapatman in eastern India. They probably have long roots in this coastal area, where town and village life have mixed for many years. They matter because their community history is part of the rich mix of peoples in this region."
+  },
+  {
+   "id": "pop-brahui",
+   "text": "Present-day Brahui community in Pakistan: These are present-day people in the Brahui group.",
+   "class": "context",
+   "source": {
+    "authors": "Byrska, Bishop et al.",
+    "year": 2022,
+    "venue": "Zody Cell",
+    "doi": "10.1016/j.cell.2022.08.004"
+   },
+   "detail": "They were sampled in Pakistan. A match with this group is similar to sharing ancestry with the present-day Brahui community, not the same as being a member. Broad community label that covers many families and histories.",
+   "story": "The Brahui are a present-day community living in Pakistan. They probably have long roots in dry hills and plains where herding and farming have long supported life. They matter because their community history adds to the mix of cultures in this region."
+  },
+  {
+   "id": "pop-madiga",
+   "text": "Present-day Madiga community near Vishakapatman, India: These are present-day people in the Madiga group.",
+   "class": "context",
+   "source": {
+    "authors": "Mallick, Reich et al.",
+    "year": 2016,
+    "venue": "Nature",
+    "doi": "10.1038/nature18964"
+   },
+   "detail": "They were sampled near Vishakapatman in India. A match with this group is similar to sharing ancestry with the present-day Madiga community, not the same as being a member. Small panel with only four people, so it shows limited variation.",
+   "story": "The Madiga are a present-day community living near Vishakapatman in eastern India. They probably have long roots in this area, where village work and crafts have long shaped daily life. They matter because their community story is part of the long history of peoples in this region."
+  },
+  {
+   "id": "c-bronze-allentoft2015",
+   "text": "The Bronze-era experimental fit is consistent with large-scale Bronze Age population movements across Eurasia and is best read as genetic similarity, not direct descent.",
+   "class": "context",
+   "source": {
+    "authors": "Allentoft et al.",
+    "year": 2015,
+    "venue": "Nature",
+    "doi": "10.1038/nature14507"
+   },
+   "detail": "The Bronze Age was a time of big moves across Europe and Asia. This test uses experimental PocketDNA PCA-25 coordinates with 47115 usable markers out of 99794, which is not Global25 and not comparable to it. Bronze coverage is sparse with 20 sources, and chip-density data can shift about 0.3 SD (p95). So the result is consistent with old expansions, not proof of who you descend from.",
+   "story": null
+  },
+  {
+   "id": "c-farming-lazaridis2016",
+   "text": "The Bronze-era fit estimate including European Farmer-related share weight 0.11490979769997617 [range 0.08370174264840627-0.13122430299159324] is consistent with expansion of farming communities from Anatolia and the Near East.",
+   "class": "context",
+   "source": {
+    "authors": "Lazaridis et al.",
+    "year": 2016,
+    "venue": "Nature",
+    "doi": "10.1038/nature19310"
+   },
+   "detail": "The model estimates a small share similar to European Farmer from Ogof-Yr-Ychen. Farming spread when farming groups moved from Anatolia and the Near East. This share is consistent with that old farming expansion. The range shows fit stability, not certainty about ancestry.",
+   "story": null
+  },
+  {
+   "id": "c-pca-patterson2006",
+   "text": "The Middle-era fit centered on Khwarazm and Transoxiana individuals from Rabat with weights 0.6050968921547056 and 0.2981261590501473 is consistent with population movements during the Middle period and is best read as model similarity.",
+   "class": "context",
+   "source": {
+    "authors": "Patterson, Price & Reich",
+    "year": 2006,
+    "venue": "PLoS Genetics",
+    "doi": "10.1371/journal.pgen.0020190"
+   },
+   "detail": "The model looks most similar to two people from the Middle period place called Rabat. Weight 0.6050968921547056 has range 0.4458539696997043-0.7413448721524047 and weight 0.2981261590501473 has range 0.15574649174383856-0.42277059531813416, with closest distance 0.0648317576957682. PCA turns DNA similarities into a map, and bootstrap ranges show fit stability, not confidence. It is consistent with movement at that time, not proof of direct descent.",
+   "story": null
+  },
+  {
+   "id": "c-pca-patterson2006",
+   "text": "The Modern-era PCA-based similarities to present-day groups are consistent with population structure from genome-wide data and are best read as model similarity under experimental PCA, not direct descent.",
+   "class": "context",
+   "source": {
+    "authors": "Patterson, Price & Reich",
+    "year": 2006,
+    "venue": "PLoS Genetics",
+    "doi": "10.1371/journal.pgen.0020190"
+   },
+   "detail": "The modern fit estimates similarity to people living today, like Mala weight 0.3613732595071399 [range 0-0.4518147959870843] and Brahui weight 0.20937918225913002, with closest distance 0.02236511713973181. PCA finds structure in DNA data from many genomes in one shared collection. Because this uses experimental PocketDNA PCA-25 with 47115 usable markers, the result is consistent with shared old structure, not proof that any present-day group is your heir.",
+   "story": null
+  }
+ ],
+ "assets": {},
+ "events": [
+  {
+   "job_id": "da5d5bde-855",
+   "step": 1,
+   "title": "Analysed on your device",
+   "model": "browser-worker",
+   "status": "done",
+   "artifact": "PCA-25 projection (on-device)"
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 2,
+   "title": "Fitting era sources",
+   "model": "browser-worker",
+   "status": "done",
+   "artifact": "era mixtures with bootstrap ranges"
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 3,
+   "title": "Selecting your citations",
+   "model": "muse-spark-1.3",
+   "status": "running",
+   "artifact": ""
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 3,
+   "title": "Selecting your citations",
+   "model": "muse-spark-1.3",
+   "status": "done",
+   "artifact": "4 citations grounded"
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 4,
+   "title": "Profiling reference populations",
+   "model": "muse-spark-1.3",
+   "status": "running",
+   "artifact": ""
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 4,
+   "title": "Profiling reference populations",
+   "model": "muse-spark-1.3",
+   "status": "done",
+   "artifact": "8 populations explained"
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 5,
+   "title": "Directing your film",
+   "model": "muse-spark-1.3",
+   "status": "running",
+   "artifact": ""
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 5,
+   "title": "Directing your film",
+   "model": "muse-spark-1.3",
+   "status": "done",
+   "artifact": "7 beats, 120s"
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 6,
+   "title": "Auditing",
+   "model": "muse-spark-1.3",
+   "status": "running",
+   "artifact": ""
+  },
+  {
+   "job_id": "da5d5bde-855",
+   "step": 6,
+   "title": "Auditing",
+   "model": "muse-spark-1.3",
+   "status": "failed",
+   "artifact": "audit blocked"
+  }
+ ]
+}
