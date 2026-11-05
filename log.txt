@@ -384,3 +384,9 @@ Render.com deploy prep (2026-11-05)
   era panels, gazetteer and replay images; a raw-episode job persisted to the
   disk dir and failed typed under KILL_PAID_CALLS=1 (no spend). tsc clean;
   npm test 20/20. Not deployed: account and secret steps are the builder's.
+- Final demo-video verification: passed. Exactly 180.000 seconds, 1920x1080,
+  24 fps, 4,320 decoded frames, no audio stream, 14 chapter markers. Full FFmpeg
+  decode completed without errors. Final encoded contact sheet and closing
+  frame inspected. Copy in pocketdnafinal matches the verified SHA-256.
+- Delivered: pocketdnafinal/pocketdna-hackathon-demo.mp4, voiceover cue sheet,
+  cover, contact sheet, verification JSON, and editable HTML/asset source folder.
