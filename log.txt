@@ -354,3 +354,33 @@ Landscape film, nav cleanup, docs pass 2 (2026-11-05)
   full-width row under the hero and upload card (ResizeObserver scaling);
   verified in Chrome with the globe-to-image dissolve on the Bronze Age beat.
   tsc clean; npm test 20/20.
+
+Hackathon demo-video assembly (2026-11-05)
+-----------------------------------------
+- Source inventory: found the two pitch scripts, supplied diagrams, eight
+  screenshots and the 120-second episode. The screenshots folder was initially
+  absent and then supplied by the user. Original inputs were left unchanged.
+- ffprobe source: 1920x1080, 12 fps, 120 seconds, no audio stream.
+- HTML Reel workflow downloaded and read; scene-clock source and attribution
+  retained. Network and Chromium sandbox restrictions required approved retries.
+- First contact-sheet review: two visual reviewers identified distant diagram
+  labels and a late product reveal. Revised with close-up pans and an 8-second
+  teaser at 0:30. Revised full-resolution frames were judged legible; no final
+  playback claim was made from the stills.
+- Opening segment encoded: ffprobe confirms 1920x1080, 24 fps, 720 frames,
+  exactly 30.000 seconds. Complete-movie verification is still pending below.
+
+Render.com deploy prep (2026-11-05)
+----------------------------------
+- main.ts binds HOST (default 127.0.0.1) and serves the SPA shell for client
+  routes such as /reel; EPISODE_DIR follows POCKETDNA_LOCAL_DIR so episodes,
+  cache, cost log and traces share one persistent disk; paid jobs capped per
+  rolling day (DAILY_JOB_LIMIT, default 40) on top of 10 per minute.
+- render.yaml blueprint: Node web service (starter plan), npm ci && npm run
+  build, npx tsx src/server/main.ts, /api/health check, 1 GB disk at
+  /var/data, META_API_KEY left for the dashboard (sync: false).
+- Local rehearsal: npm run build ok; server on :8100 with HOST=0.0.0.0 and a
+  scratch disk dir returned 200 for /api/health, /, /reel, bundle manifest,
+  era panels, gazetteer and replay images; a raw-episode job persisted to the
+  disk dir and failed typed under KILL_PAID_CALLS=1 (no spend). tsc clean;
+  npm test 20/20. Not deployed: account and secret steps are the builder's.

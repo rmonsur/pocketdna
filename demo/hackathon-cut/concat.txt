@@ -1,0 +1,6 @@
+file '/Users/reshadmonsur/Documents/Git/hackathon/pocketdna/demo/hackathon-cut/opening.mp4'
+file '/Users/reshadmonsur/Documents/Git/hackathon/pocketdna/demo/hackathon-cut/teaser.mp4'
+file '/Users/reshadmonsur/Documents/Git/hackathon/pocketdna/demo/hackathon-cut/explain.mp4'
+file '/Users/reshadmonsur/Documents/Git/hackathon/pocketdna/demo/hackathon-cut/showcase.mp4'
+file '/Users/reshadmonsur/Documents/Git/hackathon/pocketdna/demo/hackathon-cut/evidence.mp4'
+file '/Users/reshadmonsur/Documents/Git/hackathon/pocketdna/demo/hackathon-cut/ending.mp4'

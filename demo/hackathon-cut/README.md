@@ -13,3 +13,5 @@ To add voiceover later (from this directory, using an audio file of your own):
 ```sh
 ffmpeg -i pocketdna-hackathon-demo.mp4 -i voiceover.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -af apad -t 180 pocketdna-hackathon-demo-vo.mp4
 ```
+
+The editable source package can be rendered separately with Node and FFmpeg: install its Playwright dependency and Chromium, then run `npm run preview`, `npm run render`, and `npm run assemble`. The assembly uses `assets/source-episode.mp4`. If you edit timeline.json, run `node update-timeline.mjs` to update the HTML's inline scene table first. The supplied renderer's segment boundaries match this fixed 180-second edit; adjust them as well when retiming section boundaries.

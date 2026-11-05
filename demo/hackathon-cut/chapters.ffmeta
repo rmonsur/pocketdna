@@ -1,0 +1,73 @@
+;FFMETADATA1
+title=PocketDNA — Hackathon Demo
+comment=Silent edit; voiceover to be recorded later.
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=12000
+title=Percentages. But where is the story?
+[CHAPTER]
+TIMEBASE=1/1000
+START=12000
+END=25000
+title=“What does this mean?”
+[CHAPTER]
+TIMEBASE=1/1000
+START=25000
+END=30000
+title=Meet PocketDNA.
+[CHAPTER]
+TIMEBASE=1/1000
+START=30000
+END=38000
+title=Episode showcase
+[CHAPTER]
+TIMEBASE=1/1000
+START=38000
+END=58000
+title=Privacy is built into the architecture.
+[CHAPTER]
+TIMEBASE=1/1000
+START=58000
+END=73000
+title=Two inputs. One evidence record.
+[CHAPTER]
+TIMEBASE=1/1000
+START=73000
+END=92000
+title=Muse is the documentary crew.
+[CHAPTER]
+TIMEBASE=1/1000
+START=92000
+END=100000
+title=Every model call has guardrails.
+[CHAPTER]
+TIMEBASE=1/1000
+START=100000
+END=110000
+title=Writers do not grade their own work.
+[CHAPTER]
+TIMEBASE=1/1000
+START=110000
+END=120000
+title=The art department has an editor.
+[CHAPTER]
+TIMEBASE=1/1000
+START=120000
+END=155000
+title=Episode showcase
+[CHAPTER]
+TIMEBASE=1/1000
+START=155000
+END=165000
+title=A story you can inspect.
+[CHAPTER]
+TIMEBASE=1/1000
+START=165000
+END=175000
+title=One Meta-powered film crew.
+[CHAPTER]
+TIMEBASE=1/1000
+START=175000
+END=180000
+title=From a DNA result to a story to share.

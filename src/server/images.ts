@@ -19,7 +19,8 @@ import { IMAGE, SPARK } from "../lib/muse/models.ts";
 export const MAX_IMAGES_PER_EPISODE = 6;
 export const MAX_REPAIRS_PER_EPISODE = 2;
 export const IMAGE_CONCURRENCY = 2;
-export const EPISODE_DIR = join(process.cwd(), ".local", "episodes");
+/** Episode files live beside the muse cache; POCKETDNA_LOCAL_DIR points both at a persistent disk when hosted. */
+export const EPISODE_DIR = join(process.env.POCKETDNA_LOCAL_DIR ?? join(process.cwd(), ".local"), "episodes");
 const PROMPT_TEMPLATE_ID = "HIST-IMAGE-01-v2-landscape";
 const REPAIR_TEMPLATE_ID = "HIST-REPAIR-01-v1";
 const AUDIT_TEMPLATE_ID = "HIST-AUDIT-01-v2";

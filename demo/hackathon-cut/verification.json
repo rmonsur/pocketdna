@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "duration_seconds": 180.0,
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "decoded_frames": 4320,
+  "audio_streams": 0,
+  "chapters": 14,
+  "full_decode": "passed",
+  "sha256": "b5f5e07f4ee82a79b3d1bd47f34f7129bb9ea1645e44cb8b6d00ce8c6ace2837",
+  "source_video_teaser_seconds": [
+    0,
+    8
+  ],
+  "source_video_showcase_seconds": [
+    35,
+    70
+  ],
+  "voiceover": "not included; add later",
+  "visual_qa": "contact sheet and full-size preview frames inspected; see Source.md and Look.md"
+}

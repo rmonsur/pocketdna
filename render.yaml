@@ -1,0 +1,26 @@
+# Render Blueprint: one Node web service running the Hono API and the built app,
+# with a persistent disk for the Muse cache, cost log, traces and episode images.
+services:
+  - type: web
+    name: pocketdna
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npx tsx src/server/main.ts
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: NODE_VERSION
+        value: 22.11.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: POCKETDNA_LOCAL_DIR
+        value: /var/data
+      - key: DAILY_JOB_LIMIT
+        value: "40"
+      - key: META_API_KEY
+        sync: false
+    disk:
+      name: pocketdna-data
+      mountPath: /var/data
+      sizeGB: 1

@@ -60,11 +60,14 @@ this mean?" A professional genealogist costs about $2,000 for the answer. Pocket
 everyone their own episode:
 
 1. **Drop your result.** A 23andMe or AncestryDNA raw data file (usually a .txt or .zip file)
+
 2. **The math is deterministic.** For raw files, ancestry is population genetics running in a
    Web Worker in your browser: parse, quality-check, project onto a fixed reference basis,
    fit each era separately. The DNA data file never leave the device. **Muse NEVER computes
    ancestry.**
+
 3. **Muse does what only a model can.** Read the results of genetics pipeline, research and cite,      write the story, direct a timed film, paint the scenes, and audit all of it.
+
 4. **A film plays.** Hook, method beat, Bronze Age, Middle Ages, Modern, convergence, source
    stamp. Every claim is a button that opens its source.
 
@@ -75,11 +78,16 @@ imagery. A health panel is rejected up front with a typed message.
 ## How I built this
 
 I had a much more ambitious scope: build a mobile app in React Native/Expo and make a reels style
-micro documentary in 9:16 format. If you check the the [Git Commit history](https://github.com/rmonsur/pocketdna/commit/2ba3c5a6c6557d8f4276396255539f4960682e2c). this is the direction I was taking 5 days ago. Unfortunately my preeliminary test build was rejected by Testflight and the bionformatics genetic pipeline (more on that below) took longer than expected so I focused entirely on a scoped out and deliverable web app as a last dash effort.
+micro documentary in 9:16 format. If you check the the [Git Commit history](https://github.com/rmonsur/pocketdna/commit/2ba3c5a6c6557d8f4276396255539f4960682e2c). this is the direction I was taking 5 days ago. Unfortunately my preeliminary test build was rejected by Testflight and the bionformatics genetic pipeline (more on that below) took longer than expected so I focused entirely on a scoped out and deliverable web app as a last dash effort. 
+
+I spent time creating detailed markdown documents with help from Muse Wonder. Once the markdown were completed, I fed the docs to Muse Code to generate the entire codebase. I spawned another agent and had that agent grade the code generation and create logs for bug fixes. These logs can be found in 
+[muse-loop](muse-loop/). Then I used open source third party skills to generate code review, edit AI-slop designs, perform unit testing and security hardening. These skills have been referenced below in this doc. 
 
 The Bionformatics pipeline involves downloading >10GB of open source/CC license genetic data, prepping the dataset and then finally building a reference panel out of that dataset to compare our 23andMe results against. Since original, intermediary and final dataset volume easily exceeds 25 GB I have excluded them from the repo and instead shared links on where I downloaded them from. 
 
 Muse Wonder (medium mode) was crucial in this genetic pipeline. I was able to speedrun easily a weeks worth of work in 2 days. The genetic calculations to compute ancestry were also reverse engineered by Muse Wonder. Word of caution: lots of optimization and fine tuning needs to be done to the reverse engineered genetics calculations but I hope it shows the power of these models. 
+
+
 
 
 ## Architecture
@@ -93,16 +101,21 @@ How to read it:
 
 - **Browser zone.** The React app, the in-memory ancestry Web Worker (dashed amber: the one
   place raw genotypes ever exist) and the deterministic reel engine that plays the film.
+
 - **One arrow leaves the browser.** It carries derived findings, never genotypes. Raw files
   are held in browser memory and released on reset. Nothing is logged or sent to analytics.
+
 - **Local server zone.** A Hono server on one localhost origin: `/api/jobs` to start an
   episode, server-sent events on `/api/jobs/:id/events` for live progress and cancellation,
   `/api/raw-episodes` (strict Zod validation) for the browser's derived findings, and
   `/api/bundle` for the public reference arrays.
+
 - **The orchestrator** sequences the agents and enforces the audit gates.
+
 - **One Muse adapter.** Every model call in the product goes through a single typed module
   (`src/lib/muse/client.ts`). It owns the kill switch, a per-run cost cap, a sha256 response
   cache, JSON-schema structured output, Zod validation with one retry, and a cost log.
+
 - **Muse zone.** Muse Spark for reading, reasoning and review. Muse Image for scenes.
 
 Why this shape: judges and users get one command and one port, and a privacy story that is a
@@ -110,7 +123,7 @@ property of the architecture, not a promise. Python, PLINK and EIGENSOFT are off
 tools used to build and validate the reference bundle, never a runtime requirement.
 Full specification: [docs/STACK.md](docs/STACK.md).
 
----
+
 
 ## How Muse runs everything in the background
 
@@ -118,7 +131,7 @@ Full specification: [docs/STACK.md](docs/STACK.md).
 
 *Open [diagram/07-muse-model-map.html](diagram/07-muse-model-map.html) for the original.*
 
-One adapter, three effort tiers. The tier is chosen per task so cheap steps stay cheap and
+One adapter with three effort tiers. The tier is chosen per task so cheap steps stay cheap and
 the reasoning-heavy steps get the budget (settings from `src/lib/muse/models.ts`):
 
 | Effort | Temperature | Token cap | Used for |
@@ -134,34 +147,49 @@ the reasoning-heavy steps get the budget (settings from `src/lib/muse/models.ts`
 | **Muse Wonder** | Development and research assistant only. Not in the user's runtime path. |
 | **Muse Code** | Wrote the codebase during the event, including the browser ancestry engine. |
 
-### The agent crew, in order
+### The agent fleet
 
-The pipeline lives in `src/server/pipeline.ts`. The full role roster, inputs, outputs and
+The full agentic pipeline lives in `src/server/pipeline.ts`. The full role roster, inputs, outputs and
 authority limits are in [AGENTS.md](AGENTS.md).
 
+The agents are divided into three broad classes: orchestrator, worker and audtitor. 
+Orchestrator agents handle the management and deployment of other agents. 
+Worker agents handles 1 task and 1 task only. 
+Auditor agents verifies responses from worker agents. 
+This way, the agents don't self verify or grade their own work. 
+
+The Full Agent Roster:
+
 1. **Gatekeeper** (Spark, low) accepts a supported ancestry panel and rejects health reports.
+
 2. **Extractor** (Spark, medium) reads a screenshot into typed numbers. **You correct them**
    before anything else runs, so a misread digit cannot reach the film.
+
 3. **Interpretation, then population profiler** (Spark, high) turn evidence into plain
    language with a source locator on every claim, then into readable cards for the
    closest reference populations. They cannot change a number or infer
    traits or personal routes.
+
 4. **Director** (Spark, high) writes one complete, timed script: hook, method beat, three
    era chapters, convergence, ending. Method: [docs/DIRECTOR.md](docs/DIRECTOR.md).
+
 5. **Narrative auditor** and **compliance auditor** (Spark, high) review the exact script.
    One checks captions, numbers, qualifiers and source links. The other enforces ancestry-only,
    privacy and imagery rules. If either fails, the director gets one repair; a second failure
    stops with a typed error. **Nothing renders until both pass.**
+
 6. **Atlas scenes** are built deterministically from a gazetteer of cited, dated sites.
    Geography never comes from a model's memory. Spec: [docs/ATLAS.md](docs/ATLAS.md).
+
 7. **Historical image agent** (Muse Image, audited by Spark) paints the scenes. States, tools
    and acceptance checks: [docs/AGENT.md](docs/AGENT.md); prompts and provenance:
    [docs/IMAGE.md](docs/IMAGE.md). Generated people are fictional inhabitants of a documented
    setting, never portraits of the viewer's ancestors.
+
 8. **Reel assembler** (deterministic code) plays the approved plan. Every frame is a pure
    function of time, so the preview and the MP4 export are identical.
 
-The separation is the point: **writers never grade their own work, and auditors never write.**
+
 
 ### What every Muse call goes through
 
@@ -176,7 +204,7 @@ Muse model (or deliberately no model) is used there, and which guard limits it. 
 [diagram/03-evidence-to-film.html](diagram/03-evidence-to-film.html) to see the hand-offs
 between agents.
 
----
+
 
 ## Inputs and the science
 
@@ -191,7 +219,7 @@ proof; see [docs/BIOINFORMATICS.md](docs/BIOINFORMATICS.md) for the metric defin
 the validation gates still required). References: AADR v66 (Reich Lab), SGDP, EGDP, with
 candidate populations catalogued in [docs/POPLIST.md](docs/POPLIST.md).
 
----
+
 
 ## Genomic datasets
 
@@ -214,7 +242,7 @@ Provenance, identity checks and the rebuild path: [dataset/README.md](dataset/RE
 The same table appears on the architecture and input diagrams; edit it once in
 `diagram/datasets.mjs`.
 
----
+
 
 ## Documentation map
 

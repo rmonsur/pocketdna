@@ -138,10 +138,16 @@ app.get("/api/replay", (c) => ok(REPLAY));
 
 /* Paid-job rate limit: local single-user server, simple in-memory window. */
 const jobAttempts: number[] = [];
+const MINUTE_MS = 60_000;
+const DAY_MS = 24 * 60 * MINUTE_MS;
+const JOBS_PER_MINUTE = 10;
+/** Hosted deploys spend the owner's Meta credits: cap paid jobs per rolling day (DAILY_JOB_LIMIT, default 40). */
+const DAILY_JOB_LIMIT = Number(process.env.DAILY_JOB_LIMIT ?? 40);
 function rateLimited(): boolean {
   const now = Date.now();
-  while (jobAttempts.length > 0 && now - jobAttempts[0] > 60_000) jobAttempts.shift();
-  if (jobAttempts.length >= 10) return true;
+  while (jobAttempts.length > 0 && now - jobAttempts[0] > DAY_MS) jobAttempts.shift();
+  const lastMinute = jobAttempts.filter((at) => now - at <= MINUTE_MS).length;
+  if (lastMinute >= JOBS_PER_MINUTE || jobAttempts.length >= DAILY_JOB_LIMIT) return true;
   jobAttempts.push(now);
   return false;
 }
@@ -181,7 +187,7 @@ app.post("/api/extract", async (c) => {
 });
 
 app.post("/api/jobs", async (c) => {
-  if (rateLimited()) return err("R5", "Too many jobs this minute; paid-call protection. Try again shortly.", 429);
+  if (rateLimited()) return err("R5", "Too many episodes right now (paid-call protection). Try again later, or watch the saved episode.", 429);
   const parsed = await parseUpload(c);
   if (parsed instanceof Response) return parsed;
   const { bytes, mediaType, body } = parsed;
@@ -244,7 +250,7 @@ const RawSummarySchema = z
   .strict();
 
 app.post("/api/raw-episodes", async (c) => {
-  if (rateLimited()) return err("R5", "Too many jobs this minute; paid-call protection. Try again shortly.", 429);
+  if (rateLimited()) return err("R5", "Too many episodes right now (paid-call protection). Try again later, or watch the saved episode.", 429);
   let body: unknown;
   try {
     body = await c.req.json();
