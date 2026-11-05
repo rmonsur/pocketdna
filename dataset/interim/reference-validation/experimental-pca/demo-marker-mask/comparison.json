@@ -1,0 +1,10 @@
+{
+  "basis_correlation_min_absolute": 0.9999999999999998,
+  "heldout_samples": 16,
+  "python_vs_masked_smartpca_max_absolute_error": 6.3136578069313e-07,
+  "python_vs_masked_smartpca_rmse": 2.913949211451762e-07,
+  "masked_vs_full_absolute_delta_in_training_sd_median": 0.0525236820245474,
+  "masked_vs_full_absolute_delta_in_training_sd_p95": 0.1790379154185828,
+  "masked_vs_full_absolute_delta_in_training_sd_max": 0.2939200612674665,
+  "limitations": "16 reference samples only; demo-file marker presence is not an official chip manifest and does not establish build/strand compatibility; train-based scale calibration and six-decimal oracle output; no mixture/clinical accuracy."
+}

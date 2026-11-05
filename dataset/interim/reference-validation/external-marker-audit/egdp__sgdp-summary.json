@@ -1,0 +1,12 @@
+{
+  "left": "egdp",
+  "right": "sgdp",
+  "left_samples": 402,
+  "right_samples": 42,
+  "markers": 96601,
+  "cross_panel_pairs_at_least_0_0884": 0,
+  "cross_panel_pairs_at_least_0_354": 0,
+  "minimum_joint_markers": null,
+  "marker_list_sha256": "393eeced8661b2a8344c848a2f6c0303271a5bd9c7437a9671383a10d62db517",
+  "scope": "Exploratory KING flags, not proven identity or complete independence. No production selection."
+}

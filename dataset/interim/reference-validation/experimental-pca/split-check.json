@@ -1,0 +1,10 @@
+{
+  "candidate_records": 3692,
+  "basis": 2829,
+  "held_out": 698,
+  "eligible_aliases": 3527,
+  "screened_marker_count": 99794,
+  "review_group_leakage": 0,
+  "status": "pass",
+  "limitations": "Does not establish independence beyond observed kinship edges or scientific validity."
+}

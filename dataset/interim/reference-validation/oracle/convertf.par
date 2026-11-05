@@ -1,0 +1,8 @@
+genotypename: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/aadr_v66p1_ho/v66.p1_HO.aadr.patch.PUB.geno
+snpname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/aadr_v66p1_ho/v66.p1_HO.aadr.patch.PUB.snp
+indivname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/smartpca-smoke/smoke.ind
+outputformat: EIGENSTRAT
+genotypeoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/oracle/chr22.geno
+snpoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/oracle/chr22.snp
+indivoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/oracle/chr22.ind
+chrom: 22

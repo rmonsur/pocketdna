@@ -1,0 +1,7 @@
+{
+  "status": "pass",
+  "basis_unchanged": 2829,
+  "test_samples_masked": 16,
+  "called_genotypes_changed_to_missing": 840328,
+  "scope": "Checks data and role integrity only; no claim of chip-mask provenance or projection validity."
+}

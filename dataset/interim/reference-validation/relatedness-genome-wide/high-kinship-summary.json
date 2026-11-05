@@ -1,0 +1,8 @@
+{
+  "pairs": 20,
+  "joint_markers_min": 568937,
+  "discordance_fraction_min": 0.0002955777421317551,
+  "discordance_fraction_max": 0.004817756623316817,
+  "king_table_sha256": "5cb8ae7c9e4cdf331967c083eebffcb69f07c832f8d99be9567a6b81ded5a33b",
+  "scope": "High concordance can indicate duplicate assays or genetically identical people; it does not establish sample identity."
+}

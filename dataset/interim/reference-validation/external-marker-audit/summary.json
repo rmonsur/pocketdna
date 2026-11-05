@@ -1,0 +1,60 @@
+{
+  "egdp": {
+    "bim_sha256": "026df47bae2792d64c3e026eca8ce0e132f03e9561849c83016db6f8d5728fac",
+    "classification": {
+      "allele_mismatch": 225,
+      "direct_same_order": 115051,
+      "direct_swapped": 411902,
+      "palindromic": 130
+    },
+    "exact_id_overlap": 527308,
+    "external_duplicate_id_excess": 0,
+    "external_rows": 1061219,
+    "external_unique_ids": 1061219,
+    "king_marker_classification": {
+      "allele_mismatch": 2,
+      "direct_same_order": 27445,
+      "direct_swapped": 72331,
+      "palindromic": 2
+    },
+    "reference_rows": 579720
+  },
+  "francocantabrian": {
+    "bim_sha256": "8ff981938fe5ea1fb3df6a1708ba40422c29e482ab9990adac069a039d90cfcb",
+    "classification": {
+      "direct_same_order": 114789,
+      "direct_swapped": 323193,
+      "missing_or_invalid_alleles": 97111
+    },
+    "exact_id_overlap": 535093,
+    "external_duplicate_id_excess": 0,
+    "external_rows": 593504,
+    "external_unique_ids": 593504,
+    "king_marker_classification": {
+      "direct_same_order": 27092,
+      "direct_swapped": 70643,
+      "missing_or_invalid_alleles": 2886
+    },
+    "reference_rows": 579720
+  },
+  "limitations": "Marker metadata only; same coordinates do not prove same assembly/strand or sample independence. No genotypes merged.",
+  "sgdp": {
+    "bim_sha256": "4d8ae76fd0524d2f60da3b194b89ae686ee6f2fa64b595a19888d3740acaae31",
+    "classification": {
+      "allele_mismatch": 74,
+      "direct_same_order": 113255,
+      "direct_swapped": 429090,
+      "palindromic": 56
+    },
+    "exact_id_overlap": 542475,
+    "external_duplicate_id_excess": 0,
+    "external_rows": 1102957,
+    "external_unique_ids": 1102957,
+    "king_marker_classification": {
+      "allele_mismatch": 1,
+      "direct_same_order": 26413,
+      "direct_swapped": 72172
+    },
+    "reference_rows": 579720
+  }
+}

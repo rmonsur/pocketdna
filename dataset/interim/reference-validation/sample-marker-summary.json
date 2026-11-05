@@ -1,0 +1,26 @@
+{
+  "assessment_counts": {
+    "CRITICAL": 373,
+    "MERGE_CRITICAL": 2,
+    "MERGE_PASS": 183,
+    "MERGE_QUESTIONABLE": 7,
+    "PASS": 23053,
+    "PROVISIONAL_CRITICAL": 83,
+    "PROVISIONAL_PASS": 2908,
+    "PROVISIONAL_QUESTIONABLE": 22,
+    "QUESTIONABLE": 963
+  },
+  "autosomal_marker_counts": {
+    "autosomal_total": 579720
+  },
+  "duplicate_coordinate_excess": 0,
+  "first_order_issues": [],
+  "group_label_mismatches": 23,
+  "individual_rows": 27594,
+  "missing_individual_ids": 0,
+  "scope": "metadata review only; no selection, genotype QC or biological identity confirmation",
+  "shared_individual_id_groups": 2280,
+  "shared_persistent_id_groups": 0,
+  "unmatched_individuals": 0,
+  "within_chromosome_decreasing_positions": 0
+}

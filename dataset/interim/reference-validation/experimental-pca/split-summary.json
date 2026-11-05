@@ -1,0 +1,17 @@
+{
+  "version": "pocketdna-experimental-pca-split-v1",
+  "source_selected_sha256": "f021bd4816818d676a965c7a54a9eace57b7131574d4c5ae98e4a2018557dbdc",
+  "kinship_graph_sha256": "02a415e8adf3242f38f70778e0747f40ebad8ceabf3b0b84ecc400c1f0e50635",
+  "split_sha256": "2f01e340041524caca937ae2da89008645db5e73b1177eabb1862d22441e9a21",
+  "role_counts": {
+    "test": 698,
+    "basis": 2829,
+    "excluded_group_member": 121,
+    "excluded_label": 44
+  },
+  "kinship_groups": 3527,
+  "basis_source_groups": 387,
+  "test_source_groups": 254,
+  "test_groups_absent_from_basis": 29,
+  "limitations": "Exploratory split based on prior all-sample kinship screen; unknown relationships, representation, species and source review remain. Not an approved production or untouched final benchmark."
+}

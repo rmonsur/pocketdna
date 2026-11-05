@@ -1,0 +1,12 @@
+{
+  "left": "egdp",
+  "right": "francocantabrian",
+  "left_samples": 402,
+  "right_samples": 190,
+  "markers": 95929,
+  "cross_panel_pairs_at_least_0_0884": 0,
+  "cross_panel_pairs_at_least_0_354": 0,
+  "minimum_joint_markers": null,
+  "marker_list_sha256": "a7520b0f9201b86796fb9fa5009da4ff8e2393f07e9cbad9a8662e7f18271e68",
+  "scope": "Exploratory KING flags, not proven identity or complete independence. No production selection."
+}

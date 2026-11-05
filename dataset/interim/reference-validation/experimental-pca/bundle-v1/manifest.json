@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "basisId": "pocketdna-pca25-experimental-v1",
+  "status": "experimental; not production validation; personal raw-DNA results disabled",
+  "dimensions": 25,
+  "markers": 99794,
+  "basisSamples": 2829,
+  "callConvention": "calls[i] = copies of allele a1 (markers.tsv) in {0,1,2}; 3 = missing/no-call",
+  "calibration": "25 per-axis scales fitted on 16 evenly spaced basis individuals against smartpca scores",
+  "parity": "Python and TypeScript projection match smartpca at max abs error ~6.3e-7 (full and demo-masked)",
+  "sources": {
+    "pca.weights": "3a877936eaf9d515313f6d2e9ad66ec8d593d2b01c976c79a4485199271d27f7",
+    "frozen.snp": "61e4deac275085759d9c9dbe739d484313c71bd4177bf3b89e70182df571e367",
+    "basis-frequency.acount": "e0aad782d522ccb962f4ee153035db4b2251e236fe2925a2440dc2495e49f267"
+  },
+  "files": {
+    "weights.f64": "1bb228409d7ea86202ca74d29da05aba419e393fe365200bcc54daa7560f06a2",
+    "means.f64": "77fae3df103f4c2a40b5dc4abc914739dbe681f82709509e31d8a45f87f254b5",
+    "normalization.f64": "553acefaf30d9b73818d024793bf33195ce3b915065a1cb89c0e313f20a6e7e1",
+    "coordinate-scales.f64": "cf55f2ee58e3d0fc3b7472d95acee85892a0eda8286fe684e29b41c71eb8f7b7",
+    "markers.tsv": "2106ccb2cb593675780eccdd1ba26fd14695b3fc39e60c79e1d6dca253a182c8"
+  },
+  "limitations": [
+    "Experimental basis; identity/QC gates in docs/BIOINFORMATICS.md are not all closed.",
+    "Consumer-chip transfer validated only as marker-presence proxy on 16 reference samples.",
+    "Allele harmonization from consumer exports to the a1-count convention is required before runtime use."
+  ]
+}

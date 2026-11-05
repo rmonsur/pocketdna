@@ -1,0 +1,10 @@
+{
+  "samples": 16,
+  "markers": 99794,
+  "dimensions": 25,
+  "maxAbsError": 6.313657800790379e-7,
+  "rmse": 2.913949211284017e-7,
+  "tolerance": 0.000002,
+  "passed": true,
+  "scope": "Experimental reference samples; basis-fitted coordinate scales; not production validation."
+}

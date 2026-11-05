@@ -1,0 +1,12 @@
+{
+  "reference_samples": 3692,
+  "external_samples": 402,
+  "markers": 99776,
+  "cross_panel_pairs_at_least_0_0884": 50,
+  "cross_panel_pairs_at_least_0_354": 43,
+  "minimum_joint_markers": 99315,
+  "marker_list_sha256": "7d8af87d01a5abaeb4a6f1d4e665aff72dbccb8afd7eccd0acec7d641974d6e3",
+  "plink_sha256": "8e0898ed59c2180e8b6c8930509e81bfc06a66064a0c4e38f5c3a3f77b5a7f1c",
+  "plink2_sha256": "de69252e00db70f1a002349970b081dcf7c3a8b6d629209e72c5e922b869614e",
+  "scope": "Exploratory screening only. Do not equate high kinship with identity or claim independence below threshold. No production selection."
+}

@@ -1,0 +1,13 @@
+{
+  "records": 4326,
+  "groups": 4127,
+  "multi_record_groups": 140,
+  "max_group_size": 7,
+  "flagged_edges_by_run": {
+    "aadr": 160,
+    "egdp": 50,
+    "francocantabrian": 3
+  },
+  "cross_source_groups": 49,
+  "scope": "Flagged-edge grouping only. External-panel comparisons use their respective marker intersections; absence of an edge is not evidence of independence. Do not use as final held-out split."
+}

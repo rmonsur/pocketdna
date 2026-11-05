@@ -1,0 +1,17 @@
+genotypename: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/demo-marker-mask/masked.geno
+snpname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/frozen.snp
+indivname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/demo-marker-mask/masked.ind
+evecoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/demo-marker-mask/masked.evec
+evaloutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/demo-marker-mask/masked.eval
+snpweightoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/demo-marker-mask/masked.weights
+poplistname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/demo-marker-mask/basis.poplist
+numoutevec: 25
+numoutlieriter: 0
+lsqproject: YES
+shrinkmode: NO
+autoshrink: NO
+fastmode: NO
+hiprecision: YES
+noxdata: YES
+killr2: NO
+ldregress: 0

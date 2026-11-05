@@ -1,0 +1,16 @@
+{
+  "purpose": "exploratory genome-wide relatedness pilot; not a validated panel",
+  "samples": 3692,
+  "markers": 579720,
+  "sample_groups": 434,
+  "selection": "present, .HO, HumanOrigins, Pass, >=0.98 full-autosomal call rate, matching group labels; unique Individual ID; exclude two known nonhuman/reference controls",
+  "bed_sha256": "20bbb550024aa365ba01a01d488ade602f945df0e04bbe4f6f8f044640e69d31",
+  "bim_sha256": "6a8f43a8b42b98d2c1b95f2c2d65bc970983ec69a53b5d1b9b218ac01727a7c5",
+  "fam_sha256": "30f7a583c5bbfa6034b26f047446b0a2b20d20d6c3d4c727e27cdfd007d2cc7b",
+  "selection_sha256": "f021bd4816818d676a965c7a54a9eace57b7131574d4c5ae98e4a2018557dbdc",
+  "excluded_known_controls": [
+    "Chimp_HO.HO",
+    "Href_HO.HO"
+  ],
+  "note": "Species screening, held-out split and cross-study identity checks remain open."
+}

@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "purpose": "experimental PCA and held-out projection; not production validated",
+  "binary_sha256": "77b88d964ffafcd512f873dcc0957d114f4882f6cb35149963685be61620e087",
+  "split_sha256": "2f01e340041524caca937ae2da89008645db5e73b1177eabb1862d22441e9a21",
+  "aliases_sha256": "faaf6ac5d2ecec5d0561aec7143df32e337b6bd2211ebcf7d3565d011117762e",
+  "geno_sha256": "e8a6d83c455c222649c4d8b8b3d64773ba04a68995da8dccabf3dbeb18384bf3",
+  "snp_sha256": "61e4deac275085759d9c9dbe739d484313c71bd4177bf3b89e70182df571e367",
+  "ind_sha256": "9d9f10cd6a132fe4148d422e1491c737ee2dc3ec5c0799d440238537d3333143",
+  "parameter_sha256": "03a784b3cad5dbb41c069cf828c77d065c6dbc7324b3578c26881961208fea0c",
+  "basis_count": 2829,
+  "test_count": 698,
+  "thread_environment": {
+    "OPENBLAS_NUM_THREADS": "4",
+    "OMP_NUM_THREADS": "4"
+  },
+  "exit_code": 0,
+  "output_sha256": {
+    "pca.evec": "9665a8899112c99b8506826a290534598dd8f3721b87b58d9cb96f5dfc65b63b",
+    "pca.eval": "363750bab64700c17eea41ebc2170be73fa375e962263004f9a8163dea63609c",
+    "pca.weights": "3a877936eaf9d515313f6d2e9ad66ec8d593d2b01c976c79a4485199271d27f7"
+  }
+}

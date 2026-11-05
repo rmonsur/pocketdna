@@ -1,0 +1,5831 @@
+{
+ "schemaVersion": 1,
+ "basisId": "pocketdna-pca25-experimental-v1",
+ "sites": [
+  {
+   "id": "Russia_Samara_EBA_Yamnaya",
+   "label": "Yamnaya herders of the Samara steppe",
+   "groupId": "Russia_Samara_EBA_Yamnaya",
+   "locality": "Lopatino",
+   "country": "Russia",
+   "lat": 53.64,
+   "lon": 50.664,
+   "dateText": "about 3018 BCE",
+   "publication": "LazaridisReichNature2025",
+   "doi": "10.1038/s41586-024-08531-5",
+   "individuals": 16,
+   "match": "group",
+   "eras": [
+    "bronze"
+   ],
+   "era": "bronze",
+   "claimIds": [
+    "c-steppe-haak2015",
+    "haak2015",
+    "c-euro3-lazaridis2014"
+   ]
+  },
+  {
+   "id": "Germany_Esperstedt_CordedWare",
+   "label": "Corded Ware community at Esperstedt",
+   "groupId": "Germany_Esperstedt_CordedWare",
+   "locality": "Esperstedt",
+   "country": "Germany",
+   "lat": 51.42,
+   "lon": 11.68,
+   "dateText": "about 2369 BCE",
+   "publication": "MathiesonReichNature2015",
+   "doi": "10.1038/nature16152",
+   "individuals": 26,
+   "match": "group",
+   "eras": [
+    "bronze"
+   ],
+   "era": "bronze",
+   "claimIds": [
+    "c-steppe-haak2015",
+    "haak2015"
+   ]
+  },
+  {
+   "id": "Russia_Chelyabinsk_MLBA_Sintashta",
+   "label": "Sintashta settlement at Kamenny Ambar",
+   "groupId": "Russia_Chelyabinsk_MLBA_Sintashta",
+   "locality": "Kamenny-Ambar-5",
+   "country": "Russia",
+   "lat": 52.817,
+   "lon": 60.467,
+   "dateText": "about 1870 BCE",
+   "publication": "NarasimhanReichScience2019",
+   "doi": "10.1126/science.aat7487",
+   "individuals": 86,
+   "match": "group",
+   "eras": [
+    "bronze"
+   ],
+   "era": "bronze",
+   "claimIds": [
+    "c-bronze-allentoft2015"
+   ]
+  },
+  {
+   "id": "Russia_Altai_Afanasievo",
+   "label": "Afanasievo pastoralists of the Altai",
+   "groupId": "Russia_Altai_Afanasievo",
+   "locality": "Nizhny-Tyumechin-1",
+   "country": "Russia",
+   "lat": 50.754,
+   "lon": 85.557,
+   "dateText": "about 2938 BCE",
+   "publication": "AkbariReichNature2026",
+   "doi": "10.1126/science.aat7487",
+   "individuals": 14,
+   "match": "group",
+   "eras": [
+    "bronze"
+   ],
+   "era": "bronze",
+   "claimIds": [
+    "c-bronze-allentoft2015"
+   ]
+  },
+  {
+   "id": "Turkey_N",
+   "label": "Neolithic farmers of northwest Anatolia",
+   "groupId": "Turkey_N",
+   "locality": "Barcın-Höyük",
+   "country": "Turkey",
+   "lat": 40.304,
+   "lon": 29.608,
+   "dateText": "about 6273 BCE",
+   "publication": "MathiesonReichNature2015",
+   "doi": "10.1038/nature16152",
+   "individuals": 86,
+   "match": "group",
+   "eras": [
+    "bronze"
+   ],
+   "era": "bronze",
+   "claimIds": [
+    "c-farming-lazaridis2016",
+    "c-euro3-lazaridis2014"
+   ]
+  },
+  {
+   "id": "Luxembourg_Loschbour_Mesolithic",
+   "label": "Mesolithic forager at Loschbour",
+   "groupId": "Luxembourg_Loschbour_Mesolithic",
+   "locality": "Loschbour",
+   "country": "Luxembourg",
+   "lat": 49.81,
+   "lon": 6.4,
+   "dateText": "about 6075 BCE",
+   "publication": "MathiesonReichNature2018",
+   "doi": "10.1038/nature25778",
+   "individuals": 4,
+   "match": "group",
+   "eras": [
+    "bronze"
+   ],
+   "era": "bronze",
+   "claimIds": [
+    "c-euro3-lazaridis2014",
+    "c-iceage-fu2016"
+   ]
+  },
+  {
+   "id": "Sweden_Viking",
+   "label": "Viking Age Swedes",
+   "groupId": "Sweden_Viking",
+   "locality": "Varnhem",
+   "country": "Sweden",
+   "lat": 58.38,
+   "lon": 13.65,
+   "dateText": "about 1050 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 62,
+   "match": "group",
+   "eras": [
+    "middle"
+   ],
+   "era": "middle",
+   "claimIds": [
+    "c-viking-margaryan2020",
+    "margaryan2020"
+   ]
+  },
+  {
+   "id": "Norway_Viking",
+   "label": "Viking Age Norwegians",
+   "groupId": "Norway_Viking",
+   "locality": "Jevnaker nor",
+   "country": "Norway",
+   "lat": 60.31,
+   "lon": 10.43,
+   "dateText": "about 1000 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 4,
+   "match": "group",
+   "eras": [
+    "middle"
+   ],
+   "era": "middle",
+   "claimIds": [
+    "c-viking-margaryan2020",
+    "margaryan2020"
+   ]
+  },
+  {
+   "id": "England_Viking",
+   "label": "Viking Age burials in England",
+   "groupId": "England_Viking",
+   "locality": "St John's College Oxford",
+   "country": "United Kingdom",
+   "lat": 51.76,
+   "lon": -1.26,
+   "dateText": "about 925 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 38,
+   "match": "group",
+   "eras": [
+    "middle"
+   ],
+   "era": "middle",
+   "claimIds": [
+    "c-viking-margaryan2020",
+    "margaryan2020"
+   ]
+  },
+  {
+   "id": "English",
+   "label": "Present-day English",
+   "groupId": "English",
+   "locality": "Kent",
+   "country": "United Kingdom",
+   "lat": 51.19,
+   "lon": 0.73,
+   "dateText": "present-day",
+   "publication": "The1000GenomesProjectConsortiumNature2015",
+   "doi": "10.1038/nature15393",
+   "individuals": 19,
+   "match": "group",
+   "eras": [
+    "modern"
+   ],
+   "era": "modern",
+   "claimIds": [
+    "leslie2015"
+   ]
+  },
+  {
+   "id": "Scottish",
+   "label": "Present-day Scottish",
+   "groupId": "Scottish",
+   "locality": "Argyll and Bute",
+   "country": "United Kingdom",
+   "lat": 56.04,
+   "lon": -5.44,
+   "dateText": "present-day",
+   "publication": "The1000GenomesProjectConsortiumNature2015",
+   "doi": "10.1038/nature15393",
+   "individuals": 10,
+   "match": "group",
+   "eras": [
+    "modern"
+   ],
+   "era": "modern",
+   "claimIds": [
+    "leslie2015"
+   ]
+  },
+  {
+   "id": "Orcadian",
+   "label": "Present-day Orcadians",
+   "groupId": "Orcadian",
+   "locality": "Orkney",
+   "country": "United Kingdom",
+   "lat": 59,
+   "lon": -3,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 47,
+   "match": "group",
+   "eras": [
+    "modern"
+   ],
+   "era": "modern",
+   "claimIds": [
+    "leslie2015"
+   ]
+  }
+ ],
+ "source": "AADR v66.p1 annotation files (1240K + HO compatibility); sampling metadata only",
+ "note": "Coordinates are reference sampling locations, never territories, routes or personal origins.",
+ "entries": {
+  "19651": {
+   "id": "19651",
+   "label": "North Amerindian (4000 BC–AD 1600)",
+   "eras": [
+    "bronze",
+    "middle"
+   ],
+   "groupId": "Canada_BigBarLake_5600BP",
+   "locality": "Big Bar Lake",
+   "country": "Canada",
+   "lat": 51.3,
+   "lon": -121.77,
+   "dateText": "about 3676 BCE",
+   "publication": "Moreno-MayarWillerslevScience2018",
+   "doi": "10.1126/science.aav2621",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "ARG_Yamana_1500BP": {
+   "id": "ARG_Yamana_1500BP",
+   "label": "South Amerindian (9000 BC–AD 1500)",
+   "eras": [
+    "bronze"
+   ],
+   "groupId": "Argentina_BeagleChannel_1500BP_LateHorizon_Yamana",
+   "locality": "Río Pipo",
+   "country": "Argentina",
+   "lat": -54.85,
+   "lon": -68.52,
+   "dateText": "about 460 CE",
+   "publication": "NakatsukaReichNatComm2020",
+   "doi": "10.1038/s41467-020-17656-w",
+   "individuals": 2,
+   "match": "alias"
+  },
+  "BedouinB": {
+   "id": "BedouinB",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "bronze",
+    "modern"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 61,
+   "match": "group"
+  },
+  "Biaka": {
+   "id": "Biaka",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle",
+    "modern"
+   ],
+   "groupId": "Biaka",
+   "locality": "Central African Republic, modern",
+   "country": "Central African Republic",
+   "lat": 4,
+   "lon": 17,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 68,
+   "match": "group"
+  },
+  "Dinka": {
+   "id": "Dinka",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle",
+    "modern"
+   ],
+   "groupId": "Dinka",
+   "locality": "Aweil",
+   "country": "South Sudan",
+   "lat": 8.783,
+   "lon": 27.4,
+   "dateText": "present-day",
+   "publication": "MeyerPääboScience2012",
+   "doi": "10.1126/science.1224344",
+   "individuals": 2,
+   "match": "group"
+  },
+  "HRV_MN_Sopot": {
+   "id": "HRV_MN_Sopot",
+   "label": "European Farmer (6300–2800 BC)",
+   "eras": [
+    "bronze"
+   ],
+   "groupId": "Croatia_MN_Sopot",
+   "locality": "Hermanov-Vinograd",
+   "country": "Croatia",
+   "lat": 45.524,
+   "lon": 18.716,
+   "dateText": "about 4934 BCE",
+   "publication": "MathiesonReichNature2018",
+   "doi": "10.1038/nature25778",
+   "individuals": 26,
+   "match": "alias"
+  },
+  "Hadza": {
+   "id": "Hadza",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle",
+    "modern"
+   ],
+   "groupId": "Hadza",
+   "locality": "Lake Eyasi",
+   "country": "Tanzania",
+   "lat": -3.6,
+   "lon": 35.1,
+   "dateText": "present-day",
+   "publication": "PickrellPakendorfNatComm2012",
+   "doi": "10.1038/ncomms2140",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Herero (Namibia)": {
+   "id": "Herero (Namibia)",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle"
+   ],
+   "groupId": "Namibia_Bantu_Herero",
+   "locality": "Botswana or Namibia, modern, 2",
+   "country": "Namibia",
+   "lat": -22,
+   "lon": 19,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 10,
+   "match": "alias"
+  },
+  "IRN_Shahr_I_Sokhta_BA2": {
+   "id": "IRN_Shahr_I_Sokhta_BA2",
+   "label": "Indus Valley Civilization (3100–2000 BC)",
+   "eras": [
+    "bronze"
+   ],
+   "groupId": "Iran_ShahriSokhta_BA2-2",
+   "locality": "Shahr-i Sokhta",
+   "country": "Iran",
+   "lat": 30.65,
+   "lon": 61.4,
+   "dateText": "about 2742 BCE",
+   "publication": "LazaridisReichScience2022",
+   "doi": "10.1126/science.abm4247",
+   "individuals": 22,
+   "match": "alias"
+  },
+  "Igbo": {
+   "id": "Igbo",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle",
+    "modern"
+   ],
+   "groupId": "Igbo",
+   "locality": "Kwamba Suleja",
+   "country": "Nigeria",
+   "lat": 6,
+   "lon": 7,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Kongo": {
+   "id": "Kongo",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle",
+    "modern"
+   ],
+   "groupId": "Kongo",
+   "locality": "Bandevouri-Fang",
+   "country": "Congo",
+   "lat": 2.5,
+   "lon": 11.75,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 2,
+   "match": "group"
+  },
+  "MARC1492": {
+   "id": "MARC1492",
+   "label": "North Amerindian (4000 BC–AD 1600)",
+   "eras": [
+    "bronze",
+    "middle"
+   ],
+   "groupId": "Canada_700BP",
+   "locality": "Old Mission Point",
+   "country": "Canada",
+   "lat": 47.989,
+   "lon": -66.713,
+   "dateText": "about 1274 CE",
+   "publication": "RaghavanWillerslevScience2015",
+   "doi": "10.1126/science.aab3884",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "Mbuti": {
+   "id": "Mbuti",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle",
+    "modern"
+   ],
+   "groupId": "Mbuti",
+   "locality": "Congo, modern",
+   "country": "Congo",
+   "lat": 1,
+   "lon": 29,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 40,
+   "match": "group"
+  },
+  "NPL_Samdzong_1500BP": {
+   "id": "NPL_Samdzong_1500BP",
+   "label": "Tibetan Plateau (1200 BC–AD 500)",
+   "eras": [
+    "bronze"
+   ],
+   "groupId": "Nepal_Mustang_SamdzongTomb_MiddleKingdom",
+   "locality": "Samdzong Tomb",
+   "country": "Nepal",
+   "lat": 29.28,
+   "lon": 84.03,
+   "dateText": "about 675 CE",
+   "publication": "LiuJeongNatComm2022",
+   "doi": "10.1038/s41467-022-28827-2",
+   "individuals": 18,
+   "match": "alias"
+  },
+  "RUS_Maykop_Novosvobodnaya": {
+   "id": "RUS_Maykop_Novosvobodnaya",
+   "label": "Bronze Age Caucasian (3700–1700 BC)",
+   "eras": [
+    "bronze"
+   ],
+   "groupId": null,
+   "locality": null,
+   "country": null,
+   "lat": null,
+   "lon": null,
+   "dateText": null,
+   "publication": null,
+   "doi": null,
+   "individuals": 0,
+   "match": "none"
+  },
+  "RUS_Yankovsky_IA": {
+   "id": "RUS_Yankovsky_IA",
+   "label": "Amur River (1000–800 BC)",
+   "eras": [
+    "bronze"
+   ],
+   "groupId": "Russia_PrimorskyKrai_IA_Yankovsky",
+   "locality": "Pospelovo-1",
+   "country": "Russia",
+   "lat": 43.061,
+   "lon": 131.887,
+   "dateText": "about 900 BCE",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 2,
+   "match": "alias"
+  },
+  "San (Khomani)": {
+   "id": "San (Khomani)",
+   "label": "Sub-Saharan African",
+   "eras": [
+    "bronze",
+    "middle"
+   ],
+   "groupId": "Khomani",
+   "locality": "NorthernCape",
+   "country": "South Africa",
+   "lat": -27.527,
+   "lon": 20.98,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 15,
+   "match": "alias"
+  },
+  "Wales_N": {
+   "id": "Wales_N",
+   "label": "European Farmer (6300–2800 BC)",
+   "eras": [
+    "bronze"
+   ],
+   "groupId": "Wales_N",
+   "locality": "Ogof-Yr-Ychen",
+   "country": "United Kingdom",
+   "lat": 52.356,
+   "lon": -3.598,
+   "dateText": "about 3265 BCE",
+   "publication": "BraceBarnesNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0871-9",
+   "individuals": 22,
+   "match": "group"
+  },
+  "XVII-B-939": {
+   "id": "XVII-B-939",
+   "label": "North Amerindian (4000 BC–AD 1600)",
+   "eras": [
+    "bronze",
+    "middle"
+   ],
+   "groupId": "Canada_6500BP",
+   "locality": "Lucy Islands",
+   "country": "Canada",
+   "lat": 54.3,
+   "lon": -130.619,
+   "dateText": "about 4552 BCE",
+   "publication": "RaghavanWillerslevScience2015",
+   "doi": "10.1126/science.aab3884",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "kennewick": {
+   "id": "kennewick",
+   "label": "North Amerindian (4000 BC–AD 1600)",
+   "eras": [
+    "bronze",
+    "middle"
+   ],
+   "groupId": "USA_WA_Kennewick_8800BP",
+   "locality": "Columbia River",
+   "country": "USA",
+   "lat": 46.211,
+   "lon": -119.136,
+   "dateText": "about 6802 BCE",
+   "publication": "RasmussenWillerslevNature2015",
+   "doi": "10.1038/nature14625",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "BOL001": {
+   "id": "BOL001",
+   "label": "Volga (AD 200–400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_Tver_BA",
+   "locality": "Bolshnevo-3",
+   "country": "Russia",
+   "lat": 57.74,
+   "lon": 36.633,
+   "dateText": "about 2528 BCE",
+   "publication": "SaagMetspaluSciAdv2021",
+   "doi": "10.1126/sciadv.abd6535",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "BOL002": {
+   "id": "BOL002",
+   "label": "Volga (AD 200–400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_Tver_BA",
+   "locality": "Bolshnevo-3",
+   "country": "Russia",
+   "lat": 57.74,
+   "lon": 36.633,
+   "dateText": "about 2356 BCE",
+   "publication": "SaagMetspaluSciAdv2021",
+   "doi": "10.1126/sciadv.abd6535",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "BOL004": {
+   "id": "BOL004",
+   "label": "Volga (AD 200–400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_Roman_RyazanOka",
+   "locality": "Bolshoye-Davydovskoye-2",
+   "country": "Russia",
+   "lat": 56.511,
+   "lon": 40.211,
+   "dateText": "about 263 CE",
+   "publication": "PeltolaOnkamoCurrBiol2023",
+   "doi": "10.1016/j.cub.2022.11.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "BOL005": {
+   "id": "BOL005",
+   "label": "Volga (AD 200–400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_Roman_RyazanOka",
+   "locality": "Bolshoye-Davydovskoye-2",
+   "country": "Russia",
+   "lat": 56.511,
+   "lon": 40.211,
+   "dateText": "about 219 CE",
+   "publication": "PeltolaOnkamoCurrBiol2023",
+   "doi": "10.1016/j.cub.2022.11.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "BOL007": {
+   "id": "BOL007",
+   "label": "Volga (AD 200–400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_MigrationPeriod_RyazanOka",
+   "locality": "Bolshoye-Davydovskoye-2",
+   "country": "Russia",
+   "lat": 56.511,
+   "lon": 40.211,
+   "dateText": "about 373 CE",
+   "publication": "PeltolaOnkamoCurrBiol2023",
+   "doi": "10.1016/j.cub.2022.11.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "BOL008": {
+   "id": "BOL008",
+   "label": "Volga (AD 200–400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_Roman_RyazanOka",
+   "locality": "Bolshoye-Davydovskoye-2",
+   "country": "Russia",
+   "lat": 56.511,
+   "lon": 40.211,
+   "dateText": "about 289 CE",
+   "publication": "PeltolaOnkamoCurrBiol2023",
+   "doi": "10.1016/j.cub.2022.11.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "BOL009": {
+   "id": "BOL009",
+   "label": "Volga (AD 200–400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_Roman_RyazanOka",
+   "locality": "Bolshoye-Davydovskoye-2",
+   "country": "Russia",
+   "lat": 56.511,
+   "lon": 40.211,
+   "dateText": "about 295 CE",
+   "publication": "PeltolaOnkamoCurrBiol2023",
+   "doi": "10.1016/j.cub.2022.11.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "CL23": {
+   "id": "CL23",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Piedmont_North_EarlyMedieval_Lombards-2",
+   "locality": "Collegno",
+   "country": "Italy",
+   "lat": 45.079,
+   "lon": 7.578,
+   "dateText": "about 600 CE",
+   "publication": "AmorimVeeramahNatComm2018",
+   "doi": "10.1038/s41467-018-06024-4",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "CL36": {
+   "id": "CL36",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Piedmont_North_EarlyMedieval_Lombards-2",
+   "locality": "Collegno",
+   "country": "Italy",
+   "lat": 45.079,
+   "lon": 7.578,
+   "dateText": "about 600 CE",
+   "publication": "AmorimVeeramahNatComm2018",
+   "doi": "10.1038/s41467-018-06024-4",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "COR001": {
+   "id": "COR001",
+   "label": "Sardinian (AD 770–1000)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Sardinia_EarlyMedieval-o",
+   "locality": "Corona Moltana/ Zarau",
+   "country": "Italy",
+   "lat": 40.519,
+   "lon": 8.789,
+   "dateText": "about 933 CE",
+   "publication": "MarcusNovembreNatComm2020",
+   "doi": "10.1038/s41467-020-14523-6",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "COR002": {
+   "id": "COR002",
+   "label": "Sardinian (AD 770–1000)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Sardinia_EarlyMedieval-o",
+   "locality": "Corona Moltana/ Zarau",
+   "country": "Italy",
+   "lat": 40.519,
+   "lon": 8.789,
+   "dateText": "about 844 CE",
+   "publication": "MarcusNovembreNatComm2020",
+   "doi": "10.1038/s41467-020-14523-6",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "DA126": {
+   "id": "DA126",
+   "label": "Turkic (AD 650–1200)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Kazakhstan_Medieval_Nomad",
+   "locality": "Almaly",
+   "country": "Kazakhstan",
+   "lat": 43.385,
+   "lon": 77.541,
+   "dateText": "about 959 CE",
+   "publication": "DamgaardWillerslevNature2018",
+   "doi": "10.1038/s41586-018-0094-2",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "DA205": {
+   "id": "DA205",
+   "label": "Turkic (AD 650–1200)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Kazakhstan_EarlyMedieval_Karakhanid",
+   "locality": "Butakty",
+   "country": "Kazakhstan",
+   "lat": 43.069,
+   "lon": 68.249,
+   "dateText": "about 950 CE",
+   "publication": "DamgaardWillerslevNature2018",
+   "doi": "10.1038/s41586-018-0094-2",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "ETR003": {
+   "id": "ETR003",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Tuscany_EarlyMedieval",
+   "locality": "Chiusi",
+   "country": "Italy",
+   "lat": 43.017,
+   "lon": 11.948,
+   "dateText": "about 1073 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "ETR007": {
+   "id": "ETR007",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Tuscany_EarlyMedieval",
+   "locality": "Chiusi",
+   "country": "Italy",
+   "lat": 43.017,
+   "lon": 11.948,
+   "dateText": "about 862 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "ETR010": {
+   "id": "ETR010",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Tuscany_EarlyMedieval",
+   "locality": "Chiusi",
+   "country": "Italy",
+   "lat": 43.017,
+   "lon": 11.948,
+   "dateText": "about 950 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "ETR013": {
+   "id": "ETR013",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Tuscany_EarlyMedieval",
+   "locality": "Chiusi",
+   "country": "Italy",
+   "lat": 43.017,
+   "lon": 11.948,
+   "dateText": "about 968 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "ETR014": {
+   "id": "ETR014",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Tuscany_EarlyMedieval",
+   "locality": "Chiusi",
+   "country": "Italy",
+   "lat": 43.017,
+   "lon": 11.948,
+   "dateText": "about 1006 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "HGDP00607": {
+   "id": "HGDP00607",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00608": {
+   "id": "HGDP00608",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00610": {
+   "id": "HGDP00610",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00612": {
+   "id": "HGDP00612",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00616": {
+   "id": "HGDP00616",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00618": {
+   "id": "HGDP00618",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00623": {
+   "id": "HGDP00623",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00624": {
+   "id": "HGDP00624",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00630": {
+   "id": "HGDP00630",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00631": {
+   "id": "HGDP00631",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00636": {
+   "id": "HGDP00636",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00641": {
+   "id": "HGDP00641",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00643": {
+   "id": "HGDP00643",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00648": {
+   "id": "HGDP00648",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00649": {
+   "id": "HGDP00649",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00650": {
+   "id": "HGDP00650",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00651": {
+   "id": "HGDP00651",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "HGDP00653": {
+   "id": "HGDP00653",
+   "label": "Arabian Peninsula",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "BedouinB",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 3,
+   "match": "sample"
+  },
+  "I13861": {
+   "id": "I13861",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I13863": {
+   "id": "I13863",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "AkbariReichNature2026",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 6,
+   "match": "sample"
+  },
+  "I13864": {
+   "id": "I13864",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I13865": {
+   "id": "I13865",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I13867": {
+   "id": "I13867",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I13870": {
+   "id": "I13870",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I14736": {
+   "id": "I14736",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I14737": {
+   "id": "I14737",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1346 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I14739": {
+   "id": "I14739",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I14741": {
+   "id": "I14741",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1341 CE",
+   "publication": "AkbariReichNature2026",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 6,
+   "match": "sample"
+  },
+  "I14851": {
+   "id": "I14851",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1346 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "I14852": {
+   "id": "I14852",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "AkbariReichNature2026",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 6,
+   "match": "sample"
+  },
+  "I14897": {
+   "id": "I14897",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-highEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1347 CE",
+   "publication": "AkbariReichNature2026",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 6,
+   "match": "sample"
+  },
+  "I14903": {
+   "id": "I14903",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Germany_Medieval_Jewish-lowEastEU",
+   "locality": "Erfurt",
+   "country": "Germany",
+   "lat": 50.979,
+   "lon": 11.027,
+   "dateText": "about 1325 CE",
+   "publication": "WaldmanReichCell2022",
+   "doi": "10.1016/j.cell.2022.11.002",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "L5138": {
+   "id": "L5138",
+   "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Uzbekistan_Antiquity",
+   "locality": "Rabat",
+   "country": "Uzbekistan",
+   "lat": 38.103,
+   "lon": 67.275,
+   "dateText": "about 101 BCE",
+   "publication": "KumarFuMolBiolEvol2021",
+   "doi": "10.1093/molbev/msab216",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "L5139": {
+   "id": "L5139",
+   "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Uzbekistan_Antiquity",
+   "locality": "Rabat",
+   "country": "Uzbekistan",
+   "lat": 38.103,
+   "lon": 67.275,
+   "dateText": "about 50 BCE",
+   "publication": "KumarFuMolBiolEvol2021",
+   "doi": "10.1093/molbev/msab216",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "L7999": {
+   "id": "L7999",
+   "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Uzbekistan_Antiquity",
+   "locality": "Rabat",
+   "country": "Uzbekistan",
+   "lat": 38.103,
+   "lon": 67.275,
+   "dateText": "about 50 BCE",
+   "publication": "KumarFuMolBiolEvol2021",
+   "doi": "10.1093/molbev/msab216",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "L8002": {
+   "id": "L8002",
+   "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Uzbekistan_Antiquity",
+   "locality": "Rabat",
+   "country": "Uzbekistan",
+   "lat": 38.103,
+   "lon": 67.275,
+   "dateText": "about 50 BCE",
+   "publication": "KumarFuMolBiolEvol2021",
+   "doi": "10.1093/molbev/msab216",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "L8630": {
+   "id": "L8630",
+   "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Uzbekistan_Antiquity",
+   "locality": "Rabat",
+   "country": "Uzbekistan",
+   "lat": 38.103,
+   "lon": 67.275,
+   "dateText": "about 50 BCE",
+   "publication": "KumarFuMolBiolEvol2021",
+   "doi": "10.1093/molbev/msab216",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "L8671": {
+   "id": "L8671",
+   "label": "Khwarazm and Transoxiana (100 BC–AD 950)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Uzbekistan_HephthalitePeriod",
+   "locality": "Serkharakat",
+   "country": "Uzbekistan",
+   "lat": 38.261,
+   "lon": 68.058,
+   "dateText": "about 525 CE",
+   "publication": "KumarFuMolBiolEvol2021",
+   "doi": "10.1093/molbev/msab216",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "ORD010": {
+   "id": "ORD010",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Apulia_Medieval",
+   "locality": "Herdonia",
+   "country": "Italy",
+   "lat": 41.317,
+   "lon": 15.633,
+   "dateText": "about 1080 CE",
+   "publication": "AneliPaganiMolBiolEvol2022",
+   "doi": "10.1093/molbev/msac014",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "POP001": {
+   "id": "POP001",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Tuscany_EarlyMedieval",
+   "locality": "Poggio Pelliccia",
+   "country": "Italy",
+   "lat": 42.914,
+   "lon": 11.017,
+   "dateText": "about 861 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "R11759": {
+   "id": "R11759",
+   "label": "North African (AD 580–1160)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Tunisia_Punic-oAfrica1",
+   "locality": "Kerkouene",
+   "country": "Tunisia",
+   "lat": 36.948,
+   "lon": 11.099,
+   "dateText": "about 641 BCE",
+   "publication": "MootsPinhasiNatEcolEvol2023",
+   "doi": "10.1038/s41559-023-02143-4",
+   "individuals": 4,
+   "match": "sample"
+  },
+  "SB605": {
+   "id": "SB605",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "England_Medieval",
+   "locality": "Norwich",
+   "country": "United Kingdom",
+   "lat": 52.626,
+   "lon": 1.292,
+   "dateText": "about 1200 CE",
+   "publication": "BraceBarnesCurrBiol2022",
+   "doi": "10.1016/j.cub.2022.08.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "SB606": {
+   "id": "SB606",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "England_Medieval",
+   "locality": "Norwich",
+   "country": "United Kingdom",
+   "lat": 52.626,
+   "lon": 1.292,
+   "dateText": "about 1200 CE",
+   "publication": "BraceBarnesCurrBiol2022",
+   "doi": "10.1016/j.cub.2022.08.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "SB671": {
+   "id": "SB671",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "England_Medieval",
+   "locality": "Norwich",
+   "country": "United Kingdom",
+   "lat": 52.626,
+   "lon": 1.292,
+   "dateText": "about 1166 CE",
+   "publication": "BraceBarnesCurrBiol2022",
+   "doi": "10.1016/j.cub.2022.08.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "SB676": {
+   "id": "SB676",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "England_Medieval",
+   "locality": "Norwich",
+   "country": "United Kingdom",
+   "lat": 52.626,
+   "lon": 1.292,
+   "dateText": "about 1200 CE",
+   "publication": "BraceBarnesCurrBiol2022",
+   "doi": "10.1016/j.cub.2022.08.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "SB696": {
+   "id": "SB696",
+   "label": "European Jew (AD 1160–1400)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "England_Medieval",
+   "locality": "Norwich",
+   "country": "United Kingdom",
+   "lat": 52.626,
+   "lon": 1.292,
+   "dateText": "about 1200 CE",
+   "publication": "BraceBarnesCurrBiol2022",
+   "doi": "10.1016/j.cub.2022.08.036",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "Sunghir6": {
+   "id": "Sunghir6",
+   "label": "Slavic (AD 540–1270)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Russia_Vladimir_Medieval",
+   "locality": "Sunghir",
+   "country": "Russia",
+   "lat": 56.176,
+   "lon": 40.502,
+   "dateText": "about 1137 CE",
+   "publication": "SikoraWillerslevScience2017",
+   "doi": "10.1126/science.aao1807",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "TAQ003": {
+   "id": "TAQ003",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Lazio_EarlyMedieval",
+   "locality": "Tarquinia",
+   "country": "Italy",
+   "lat": 42.25,
+   "lon": 11.768,
+   "dateText": "about 841 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "TAQ009": {
+   "id": "TAQ009",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Lazio_EarlyMedieval",
+   "locality": "Tarquinia",
+   "country": "Italy",
+   "lat": 42.25,
+   "lon": 11.768,
+   "dateText": "about 978 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "TAQ011": {
+   "id": "TAQ011",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Lazio_EarlyMedieval",
+   "locality": "Tarquinia",
+   "country": "Italy",
+   "lat": 42.25,
+   "lon": 11.768,
+   "dateText": "about 959 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "TAQ022": {
+   "id": "TAQ022",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Lazio_EarlyMedieval",
+   "locality": "Tarquinia",
+   "country": "Italy",
+   "lat": 42.25,
+   "lon": 11.768,
+   "dateText": "about 1091 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VEN001": {
+   "id": "VEN001",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Basilicata",
+   "locality": "Venosa",
+   "country": "Italy",
+   "lat": 40.968,
+   "lon": 15.827,
+   "dateText": "about 725 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VEN005": {
+   "id": "VEN005",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Basilicata_LateAntiquity_Roman",
+   "locality": "Venosa",
+   "country": "Italy",
+   "lat": 40.968,
+   "lon": 15.827,
+   "dateText": "about 700 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VEN006": {
+   "id": "VEN006",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Basilicata_LateAntiquity_Roman",
+   "locality": "Venosa",
+   "country": "Italy",
+   "lat": 40.968,
+   "lon": 15.827,
+   "dateText": "about 700 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VEN012": {
+   "id": "VEN012",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Basilicata",
+   "locality": "Venosa",
+   "country": "Italy",
+   "lat": 40.968,
+   "lon": 15.827,
+   "dateText": "about 700 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VEN013": {
+   "id": "VEN013",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Basilicata_LateAntiquity_Roman",
+   "locality": "Venosa",
+   "country": "Italy",
+   "lat": 40.968,
+   "lon": 15.827,
+   "dateText": "about 700 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VEN015": {
+   "id": "VEN015",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Basilicata_LateAntiquity_Roman",
+   "locality": "Venosa",
+   "country": "Italy",
+   "lat": 40.968,
+   "lon": 15.827,
+   "dateText": "about 700 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VEN016": {
+   "id": "VEN016",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Basilicata_LateAntiquity_Roman",
+   "locality": "Venosa",
+   "country": "Italy",
+   "lat": 40.968,
+   "lon": 15.827,
+   "dateText": "about 700 CE",
+   "publication": "PosthKrauseSciAdv2021",
+   "doi": "10.1126/sciadv.abi7673",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK139": {
+   "id": "VK139",
+   "label": "Slavic (AD 540–1270)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Denmark_Viking",
+   "locality": "Galgedil",
+   "country": "Denmark",
+   "lat": 55.5,
+   "lon": 10.33,
+   "dateText": "about 950 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK212": {
+   "id": "VK212",
+   "label": "Slavic (AD 540–1270)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Poland_Viking",
+   "locality": "Cedynia",
+   "country": "Poland",
+   "lat": 52.88,
+   "lon": 14.2,
+   "dateText": "about 1042 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK340": {
+   "id": "VK340",
+   "label": "Slavic (AD 540–1270)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Denmark_Viking",
+   "locality": "Hesselbjerg",
+   "country": "Denmark",
+   "lat": 55.95,
+   "lon": 10.2,
+   "dateText": "about 875 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK432": {
+   "id": "VK432",
+   "label": "Baltic (AD 900–1050)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Sweden_Viking",
+   "locality": "Frojel",
+   "country": "Sweden",
+   "lat": 57.34,
+   "lon": 18.19,
+   "dateText": "about 975 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK458": {
+   "id": "VK458",
+   "label": "Baltic (AD 900–1050)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Sweden_Viking",
+   "locality": "Frojel",
+   "country": "Sweden",
+   "lat": 57.34,
+   "lon": 18.19,
+   "dateText": "about 975 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK463": {
+   "id": "VK463",
+   "label": "Baltic (AD 900–1050)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Sweden_Viking",
+   "locality": "Frojel",
+   "country": "Sweden",
+   "lat": 57.34,
+   "lon": 18.19,
+   "dateText": "about 975 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK475": {
+   "id": "VK475",
+   "label": "Baltic (AD 900–1050)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Sweden_Viking",
+   "locality": "Kopparsvik",
+   "country": "Sweden",
+   "lat": 57.63,
+   "lon": 18.28,
+   "dateText": "about 975 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK478": {
+   "id": "VK478",
+   "label": "Baltic (AD 900–1050)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Sweden_Viking",
+   "locality": "Kopparsvik",
+   "country": "Sweden",
+   "lat": 57.63,
+   "lon": 18.28,
+   "dateText": "about 975 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK534": {
+   "id": "VK534",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Sud_Medieval",
+   "locality": "San Lorenzo",
+   "country": "Italy",
+   "lat": 41.42,
+   "lon": 15.58,
+   "dateText": "about 1184 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK535": {
+   "id": "VK535",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Sud_Medieval",
+   "locality": "San Lorenzo",
+   "country": "Italy",
+   "lat": 41.42,
+   "lon": 15.58,
+   "dateText": "about 1250 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "VK537": {
+   "id": "VK537",
+   "label": "Italian (AD 650–1450)",
+   "eras": [
+    "middle"
+   ],
+   "groupId": "Italy_Apulia_Medieval-2",
+   "locality": "Cancarro",
+   "country": "Italy",
+   "lat": 41.34,
+   "lon": 15.26,
+   "dateText": "about 1150 CE",
+   "publication": "MargaryanWillerslevNature2020",
+   "doi": "10.1038/s41586-020-2688-8",
+   "individuals": 2,
+   "match": "sample"
+  },
+  "Abazin": {
+   "id": "Abazin",
+   "label": "Abazin",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Abazin",
+   "locality": "Prikubansky District",
+   "country": "Russia",
+   "lat": 44.15,
+   "lon": 42.2,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Abkhasian": {
+   "id": "Abkhasian",
+   "label": "Abkhasian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Abkhasian",
+   "locality": "Sukhum",
+   "country": "Abkhazia",
+   "lat": 43.003,
+   "lon": 41.015,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 13,
+   "match": "group"
+  },
+  "Adygei": {
+   "id": "Adygei",
+   "label": "Adygei",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Adygei",
+   "locality": "Krasnodar",
+   "country": "Russia",
+   "lat": 44.182,
+   "lon": 39.146,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 66,
+   "match": "group"
+  },
+  "Akha": {
+   "id": "Akha",
+   "label": "Akha",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Akha",
+   "locality": "Ban Pa Hi",
+   "country": "Thailand",
+   "lat": 20.223,
+   "lon": 99.743,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 30,
+   "match": "group"
+  },
+  "Albanian": {
+   "id": "Albanian",
+   "label": "Albanian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Albanian",
+   "locality": "Tirana",
+   "country": "Albania",
+   "lat": 41.33,
+   "lon": 19.83,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Algerian": {
+   "id": "Algerian",
+   "label": "Algerian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Algerian",
+   "locality": "Algiers",
+   "country": "Algeria",
+   "lat": 36.75,
+   "lon": 3.04,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 7,
+   "match": "group"
+  },
+  "Altaian": {
+   "id": "Altaian",
+   "label": "Altaian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Altaian",
+   "locality": "Ongudaisky District",
+   "country": "Russia",
+   "lat": 50.961,
+   "lon": 86.72,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 28,
+   "match": "group"
+  },
+  "Ami": {
+   "id": "Ami",
+   "label": "Ami",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Ami",
+   "locality": "Taiwan, modern 11",
+   "country": "Taiwan",
+   "lat": 22.8,
+   "lon": 121.2,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Armenian_Hemsheni": {
+   "id": "Armenian_Hemsheni",
+   "label": "Armenian Hemsheni",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Armenian_Hemsheni",
+   "locality": "Proletarsky",
+   "country": "Russia",
+   "lat": 41,
+   "lon": 39.7,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 7,
+   "match": "group"
+  },
+  "Assyrian": {
+   "id": "Assyrian",
+   "label": "Assyrian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Assyrian",
+   "locality": "Hakkâri",
+   "country": "Turkey",
+   "lat": 38.074,
+   "lon": 44.297,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 15,
+   "match": "group"
+  },
+  "Atayal": {
+   "id": "Atayal",
+   "label": "Atayal",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Atayal",
+   "locality": "Taiwan, modern 10",
+   "country": "Taiwan",
+   "lat": 24.6,
+   "lon": 121.3,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 11,
+   "match": "group"
+  },
+  "Australian": {
+   "id": "Australian",
+   "label": "Australian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Australian",
+   "locality": "Unknown, Australia",
+   "country": "Australia",
+   "lat": -13,
+   "lon": 143,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 12,
+   "match": "group"
+  },
+  "Avar": {
+   "id": "Avar",
+   "label": "Avar",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Avar",
+   "locality": "Gunibsky District",
+   "country": "Russia",
+   "lat": 41.815,
+   "lon": 47.365,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Aymara": {
+   "id": "Aymara",
+   "label": "Aymara",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Aymara",
+   "locality": "Unknown, Peru",
+   "country": "Peru",
+   "lat": null,
+   "lon": null,
+   "dateText": "present-day",
+   "publication": "RaghavanWillerslevScience2015",
+   "doi": "10.1126/science.aab3884",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Bahun": {
+   "id": "Bahun",
+   "label": "Bahun",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Bahun",
+   "locality": "Nepal, modern",
+   "country": "Nepal",
+   "lat": 27.4,
+   "lon": 85.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Balkar": {
+   "id": "Balkar",
+   "label": "Balkar",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Balkar",
+   "locality": "Nalchik",
+   "country": "Russia",
+   "lat": 43.485,
+   "lon": 43.607,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Balti": {
+   "id": "Balti",
+   "label": "Balti",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Balti",
+   "locality": "Unknown, Balti",
+   "country": "Pakistan",
+   "lat": null,
+   "lon": null,
+   "dateText": "present-day",
+   "publication": "YangZhangJHumGenet2018",
+   "doi": "10.1038/s10038-018-0424-0",
+   "individuals": 36,
+   "match": "group"
+  },
+  "Bashkir": {
+   "id": "Bashkir",
+   "label": "Bashkir",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Bashkir",
+   "locality": "Davlekanovo",
+   "country": "Russia",
+   "lat": 54.436,
+   "lon": 55.958,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 57,
+   "match": "group"
+  },
+  "BedouinA": {
+   "id": "BedouinA",
+   "label": "BedouinA",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "BedouinA",
+   "locality": "Israel, modern 2",
+   "country": "Israel",
+   "lat": 31,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 75,
+   "match": "group"
+  },
+  "Belarusian": {
+   "id": "Belarusian",
+   "label": "Belarusian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Belarusian",
+   "locality": "Vitebsk, Senno, Shumilino, Glubokoe, Dubrovno, Slutsk, Cherven, Kobrin",
+   "country": "Belarus",
+   "lat": 53.92,
+   "lon": 28.012,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Berber_Algeria": {
+   "id": "Berber_Algeria",
+   "label": "Berber Algeria",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Berber",
+   "locality": "Ifrane",
+   "country": "Morocco",
+   "lat": 33.5,
+   "lon": 5.1,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 5,
+   "match": "group-parent"
+  },
+  "Besermyan": {
+   "id": "Besermyan",
+   "label": "Besermyan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Besermyan",
+   "locality": "Yukamensky District",
+   "country": "Russia",
+   "lat": 56.09,
+   "lon": 52.37,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 6,
+   "match": "group"
+  },
+  "Bonan": {
+   "id": "Bonan",
+   "label": "Bonan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Bonan",
+   "locality": "Jishishan",
+   "country": "China",
+   "lat": 35.7,
+   "lon": 102.8,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Brahui": {
+   "id": "Brahui",
+   "label": "Brahui",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Brahui",
+   "locality": "Pakistan, modern 1",
+   "country": "Pakistan",
+   "lat": 30.499,
+   "lon": 66.5,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 77,
+   "match": "group"
+  },
+  "Bulgarian": {
+   "id": "Bulgarian",
+   "label": "Bulgarian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Bulgarian",
+   "locality": "Plovdiv",
+   "country": "Bulgaria",
+   "lat": 42.163,
+   "lon": 24.741,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Burmese": {
+   "id": "Burmese",
+   "label": "Burmese",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Burmese",
+   "locality": "Mandalay",
+   "country": "Myanmar",
+   "lat": 18.952,
+   "lon": 96.264,
+   "dateText": "present-day",
+   "publication": "SkoglundReichNature2016",
+   "doi": "10.1038/nature19844",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Burusho": {
+   "id": "Burusho",
+   "label": "Burusho",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Burusho",
+   "locality": "Pakistan, modern 7",
+   "country": "Pakistan",
+   "lat": 36.498,
+   "lon": 74,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 75,
+   "match": "group"
+  },
+  "Buryat": {
+   "id": "Buryat",
+   "label": "Buryat",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Buryat",
+   "locality": "Aginsky District",
+   "country": "Russia",
+   "lat": 52.952,
+   "lon": 109.473,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 44,
+   "match": "group"
+  },
+  "Cambodian": {
+   "id": "Cambodian",
+   "label": "Cambodian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Cambodian",
+   "locality": "Cambodia, modern",
+   "country": "Cambodia",
+   "lat": 12,
+   "lon": 105,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 30,
+   "match": "group"
+  },
+  "Chechen": {
+   "id": "Chechen",
+   "label": "Chechen",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Chechen",
+   "locality": "Grozny",
+   "country": "Russia",
+   "lat": 43.333,
+   "lon": 45.65,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 11,
+   "match": "group"
+  },
+  "Chukchi": {
+   "id": "Chukchi",
+   "label": "Chukchi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Chukchi",
+   "locality": "Russia, modern, 4",
+   "country": "Russia",
+   "lat": 68.768,
+   "lon": 169.496,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 25,
+   "match": "group"
+  },
+  "Chuvash": {
+   "id": "Chuvash",
+   "label": "Chuvash",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Chuvash",
+   "locality": "Cheboksary",
+   "country": "Russia",
+   "lat": 55.722,
+   "lon": 47.402,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Circassian": {
+   "id": "Circassian",
+   "label": "Circassian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Circassian",
+   "locality": "Karachaevo-Cherkessia Republic, modern 2",
+   "country": "Russia",
+   "lat": 44.2,
+   "lon": 41.83,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Cochin_Jew_A": {
+   "id": "Cochin_Jew_A",
+   "label": "Cochin Jew A",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Jew_Cochin",
+   "locality": "Cochin",
+   "country": "India",
+   "lat": 9.97,
+   "lon": 76.28,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 5,
+   "match": "alias"
+  },
+  "Cochin_Jew_B": {
+   "id": "Cochin_Jew_B",
+   "label": "Cochin Jew B",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Jew_Cochin",
+   "locality": "Cochin",
+   "country": "India",
+   "lat": 9.97,
+   "lon": 76.28,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 5,
+   "match": "alias"
+  },
+  "Croatian": {
+   "id": "Croatian",
+   "label": "Croatian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Croatian",
+   "locality": "Split",
+   "country": "Croatia",
+   "lat": 43.513,
+   "lon": 16.446,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Cypriot": {
+   "id": "Cypriot",
+   "label": "Cypriot",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Cypriot",
+   "locality": "Nicosia",
+   "country": "Cyprus",
+   "lat": 35.13,
+   "lon": 33.43,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 5,
+   "match": "group"
+  },
+  "Czech": {
+   "id": "Czech",
+   "label": "Czech",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Czech",
+   "locality": "Czechia, modern",
+   "country": "Czechia",
+   "lat": 50.1,
+   "lon": 14.4,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 12,
+   "match": "group"
+  },
+  "Dai": {
+   "id": "Dai",
+   "label": "Dai",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Dai",
+   "locality": "China, modern, 10",
+   "country": "China",
+   "lat": 21,
+   "lon": 100,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 38,
+   "match": "group"
+  },
+  "Darginian": {
+   "id": "Darginian",
+   "label": "Darginian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Darginian",
+   "locality": "Dagestan Republic, modern 3",
+   "country": "Russia",
+   "lat": 42.18,
+   "lon": 47.22,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Datog": {
+   "id": "Datog",
+   "label": "Datog",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Datog",
+   "locality": "Gorofani",
+   "country": "Tanzania",
+   "lat": -3.33,
+   "lon": 35.67,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 3,
+   "match": "group"
+  },
+  "Daur": {
+   "id": "Daur",
+   "label": "Daur",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Daur",
+   "locality": "China, modern, 6",
+   "country": "China",
+   "lat": 48.498,
+   "lon": 124,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 28,
+   "match": "group"
+  },
+  "Dolgan": {
+   "id": "Dolgan",
+   "label": "Dolgan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Dolgan",
+   "locality": "Anabarsky Ulus",
+   "country": "Russia",
+   "lat": 72.971,
+   "lon": 115.444,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Dongxiang": {
+   "id": "Dongxiang",
+   "label": "Dongxiang",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Dongxiang",
+   "locality": "Linxia",
+   "country": "China",
+   "lat": 35.6,
+   "lon": 103.2,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 7,
+   "match": "group"
+  },
+  "Druze": {
+   "id": "Druze",
+   "label": "Druze",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Druze",
+   "locality": "Israel, modern 1",
+   "country": "Israel",
+   "lat": 32,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 127,
+   "match": "group"
+  },
+  "Dungan": {
+   "id": "Dungan",
+   "label": "Dungan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Dungan",
+   "locality": "Tashkent",
+   "country": "Uzbekistan",
+   "lat": 41.3,
+   "lon": 69.27,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 17,
+   "match": "group"
+  },
+  "Dusun": {
+   "id": "Dusun",
+   "label": "Dusun",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Dusun",
+   "locality": "Tutong",
+   "country": "Brunei",
+   "lat": 4.707,
+   "lon": 114.683,
+   "dateText": "present-day",
+   "publication": "SkoglundReichNature2016",
+   "doi": "10.1038/nature19844",
+   "individuals": 14,
+   "match": "group"
+  },
+  "English": {
+   "id": "English",
+   "label": "English",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "English",
+   "locality": "Kent",
+   "country": "United Kingdom",
+   "lat": 50.797,
+   "lon": -1.754,
+   "dateText": "present-day",
+   "publication": "The1000GenomesProjectConsortiumNature2015",
+   "doi": "10.1038/nature15393",
+   "individuals": 34,
+   "match": "group"
+  },
+  "Eskimo_Naukan": {
+   "id": "Eskimo_Naukan",
+   "label": "Eskimo Naukan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Eskimo_Naukan",
+   "locality": "Naukan",
+   "country": "Russia",
+   "lat": 66.02,
+   "lon": 169.71,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 16,
+   "match": "group"
+  },
+  "Estonian": {
+   "id": "Estonian",
+   "label": "Estonian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Estonian",
+   "locality": "Parnu, Avinurme, Viljandi, Talinn 1",
+   "country": "Estonia",
+   "lat": 58.539,
+   "lon": 24.889,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Even": {
+   "id": "Even",
+   "label": "Even",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Even",
+   "locality": "Djigda",
+   "country": "Russia",
+   "lat": 57.53,
+   "lon": 135.88,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Ezid": {
+   "id": "Ezid",
+   "label": "Ezid",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Ezid",
+   "locality": "Armavir and Aragotchotansk regions",
+   "country": "Armenia",
+   "lat": 36.9,
+   "lon": 46.6,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Gagauz": {
+   "id": "Gagauz",
+   "label": "Gagauz",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Gagauz",
+   "locality": "Chadyr-Lungsky District",
+   "country": "Moldova",
+   "lat": 45.54,
+   "lon": 28.38,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Gambian": {
+   "id": "Gambian",
+   "label": "Gambian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Gambian",
+   "locality": "Western Divisions",
+   "country": "Gambia",
+   "lat": 13.453,
+   "lon": -16.577,
+   "dateText": "present-day",
+   "publication": "The1000GenomesProjectConsortiumNature2015",
+   "doi": "10.1038/nature15393",
+   "individuals": 22,
+   "match": "group"
+  },
+  "Gelao": {
+   "id": "Gelao",
+   "label": "Gelao",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Gelao",
+   "locality": "Longlin",
+   "country": "China",
+   "lat": 24.8,
+   "lon": 105.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Greek_Crete": {
+   "id": "Greek_Crete",
+   "label": "Greek Crete",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Greek_Crete",
+   "locality": "Preveliana",
+   "country": "Greece",
+   "lat": 35.165,
+   "lon": 25.306,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Greek_Crete_Chania": {
+   "id": "Greek_Crete_Chania",
+   "label": "Greek Crete Chania",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Greek_Crete",
+   "locality": "Preveliana",
+   "country": "Greece",
+   "lat": 35.165,
+   "lon": 25.306,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group-parent"
+  },
+  "Greek_Crete_Heraklion": {
+   "id": "Greek_Crete_Heraklion",
+   "label": "Greek Crete Heraklion",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Greek_Crete",
+   "locality": "Preveliana",
+   "country": "Greece",
+   "lat": 35.165,
+   "lon": 25.306,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group-parent"
+  },
+  "Greek_Crete_Lasithi": {
+   "id": "Greek_Crete_Lasithi",
+   "label": "Greek Crete Lasithi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Greek_Crete",
+   "locality": "Preveliana",
+   "country": "Greece",
+   "lat": 35.165,
+   "lon": 25.306,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group-parent"
+  },
+  "Gurung": {
+   "id": "Gurung",
+   "label": "Gurung",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Gurung",
+   "locality": "Nepal, modern",
+   "country": "Nepal",
+   "lat": 27.4,
+   "lon": 85.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 5,
+   "match": "group"
+  },
+  "Hawaiian": {
+   "id": "Hawaiian",
+   "label": "Hawaiian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Hawaiian",
+   "locality": "USA, modern",
+   "country": "USA",
+   "lat": 21.3,
+   "lon": -157.817,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Hazara": {
+   "id": "Hazara",
+   "label": "Hazara",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Hazara",
+   "locality": "Pakistan, modern 2",
+   "country": "Pakistan",
+   "lat": 33.499,
+   "lon": 70,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 50,
+   "match": "group"
+  },
+  "Hezhen": {
+   "id": "Hezhen",
+   "label": "Hezhen",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Hezhen",
+   "locality": "China, modern, 8",
+   "country": "China",
+   "lat": 47.498,
+   "lon": 133.5,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 30,
+   "match": "group"
+  },
+  "Hmong": {
+   "id": "Hmong",
+   "label": "Hmong",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Hmong",
+   "locality": "Khun Klang",
+   "country": "Thailand",
+   "lat": 18.54,
+   "lon": 98.52,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Htin_Mal": {
+   "id": "Htin_Mal",
+   "label": "Htin Mal",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Htin_Mal",
+   "locality": "Ta Luang",
+   "country": "Thailand",
+   "lat": 19.08,
+   "lon": 100.55,
+   "dateText": "present-day",
+   "publication": "LipsonReichScience2018",
+   "doi": "10.1126/science.aat3188",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Huichol": {
+   "id": "Huichol",
+   "label": "Huichol",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Huichol",
+   "locality": "Unknown, Mexico",
+   "country": "Mexico",
+   "lat": null,
+   "lon": null,
+   "dateText": "present-day",
+   "publication": "RaghavanWillerslevScience2015",
+   "doi": "10.1126/science.aab3884",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Hungarian": {
+   "id": "Hungarian",
+   "label": "Hungarian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Hungarian",
+   "locality": "Hungary, modern",
+   "country": "Hungary",
+   "lat": 47.495,
+   "lon": 19.079,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 24,
+   "match": "group"
+  },
+  "Icelandic": {
+   "id": "Icelandic",
+   "label": "Icelandic",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Icelandic",
+   "locality": "Iceland, modern",
+   "country": "Iceland",
+   "lat": 64.133,
+   "lon": -21.933,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 16,
+   "match": "group"
+  },
+  "Igorot": {
+   "id": "Igorot",
+   "label": "Igorot",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Igorot",
+   "locality": "Mountain Province, modern 2",
+   "country": "Philippines",
+   "lat": 17.1,
+   "lon": 121,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Ingushian": {
+   "id": "Ingushian",
+   "label": "Ingushian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Ingushian",
+   "locality": "Malgobeksky District",
+   "country": "Russia",
+   "lat": 43.52,
+   "lon": 44.58,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Iranian_Bandari": {
+   "id": "Iranian_Bandari",
+   "label": "Iranian Bandari",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Iranian_Bandari",
+   "locality": "Bandar Abbas",
+   "country": "Iran",
+   "lat": 27.183,
+   "lon": 56.267,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Iranian_Bandari_Zanji": {
+   "id": "Iranian_Bandari_Zanji",
+   "label": "Iranian Bandari Zanji",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Iranian_Bandari",
+   "locality": "Bandar Abbas",
+   "country": "Iran",
+   "lat": 27.183,
+   "lon": 56.267,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 8,
+   "match": "group-parent"
+  },
+  "Iranian_Zoroastrian": {
+   "id": "Iranian_Zoroastrian",
+   "label": "Iranian Zoroastrian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Iranian_Zoroastrian",
+   "locality": "Tehran",
+   "country": "Iran",
+   "lat": 32.751,
+   "lon": 52.783,
+   "dateText": "present-day",
+   "publication": "BroushakiBurgerScience2016",
+   "doi": "10.1126/science.aaf7943",
+   "individuals": 24,
+   "match": "group"
+  },
+  "Iraqi_Jew": {
+   "id": "Iraqi_Jew",
+   "label": "Iraqi Jew",
+   "eras": [
+    "modern"
+   ],
+   "groupId": null,
+   "locality": null,
+   "country": null,
+   "lat": null,
+   "lon": null,
+   "dateText": null,
+   "publication": null,
+   "doi": null,
+   "individuals": 0,
+   "match": "none"
+  },
+  "Irula": {
+   "id": "Irula",
+   "label": "Irula",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Irula",
+   "locality": "India, modern 1",
+   "country": "India",
+   "lat": 13.5,
+   "lon": 80,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Itelmen": {
+   "id": "Itelmen",
+   "label": "Itelmen",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Itelmen",
+   "locality": "Kovran",
+   "country": "Russia",
+   "lat": 57.15,
+   "lon": 156.925,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Japanese": {
+   "id": "Japanese",
+   "label": "Japanese",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Japanese",
+   "locality": "Japan, modern 1",
+   "country": "Japan",
+   "lat": 37.993,
+   "lon": 138.044,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 91,
+   "match": "group"
+  },
+  "Jordanian": {
+   "id": "Jordanian",
+   "label": "Jordanian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Jordanian",
+   "locality": "Jordan, modern",
+   "country": "Jordan",
+   "lat": 32.055,
+   "lon": 35.914,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 15,
+   "match": "group"
+  },
+  "Ju_hoan_North": {
+   "id": "Ju_hoan_North",
+   "label": "Ju hoan North",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Ju_hoan_North",
+   "locality": "Namibia, modern 4",
+   "country": "Namibia",
+   "lat": -18.937,
+   "lon": 21.452,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 25,
+   "match": "group"
+  },
+  "Kaitag": {
+   "id": "Kaitag",
+   "label": "Kaitag",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kaitag",
+   "locality": "Dagestan Republic, modern 5",
+   "country": "Russia",
+   "lat": 42.15,
+   "lon": 47.63,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Kalash": {
+   "id": "Kalash",
+   "label": "Kalash",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kalash",
+   "locality": "Pakistan, modern 6",
+   "country": "Pakistan",
+   "lat": 35.994,
+   "lon": 71.5,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 65,
+   "match": "group"
+  },
+  "Kalmyk": {
+   "id": "Kalmyk",
+   "label": "Kalmyk",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kalmyk",
+   "locality": "Yashkul",
+   "country": "Russia",
+   "lat": 46.065,
+   "lon": 45.105,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Karakalpak": {
+   "id": "Karakalpak",
+   "label": "Karakalpak",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Karakalpak",
+   "locality": "Karakalpak region",
+   "country": "Uzbekistan",
+   "lat": 43,
+   "lon": 59,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 20,
+   "match": "group"
+  },
+  "Karelian": {
+   "id": "Karelian",
+   "label": "Karelian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Karelian",
+   "locality": "Prionezhsky and Olonets Districts",
+   "country": "Russia",
+   "lat": 60.389,
+   "lon": 31.946,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Karen_Sgaw": {
+   "id": "Karen_Sgaw",
+   "label": "Karen Sgaw",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Karen_Sgaw",
+   "locality": "Mae Han",
+   "country": "Thailand",
+   "lat": 18.2,
+   "lon": 97.91,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Karitiana": {
+   "id": "Karitiana",
+   "label": "Karitiana",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Karitiana",
+   "locality": "Brazil, modern, 2",
+   "country": "Brazil",
+   "lat": -10,
+   "lon": -63,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 44,
+   "match": "group"
+  },
+  "Kazakh": {
+   "id": "Kazakh",
+   "label": "Kazakh",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kazakh",
+   "locality": "Ulzhan",
+   "country": "Kazakhstan",
+   "lat": 47.484,
+   "lon": 70.059,
+   "dateText": "present-day",
+   "publication": "ZengReichNature2025",
+   "doi": "10.1038/s41586-025-09189-3",
+   "individuals": 70,
+   "match": "group"
+  },
+  "Kazakh_China": {
+   "id": "Kazakh_China",
+   "label": "Kazakh China",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kazakh_China",
+   "locality": "Kazak Autonomous County of Aksay",
+   "country": "China",
+   "lat": 38.5,
+   "lon": 94.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Ket": {
+   "id": "Ket",
+   "label": "Ket",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Ket",
+   "locality": "Kellog Village",
+   "country": "Russia",
+   "lat": 62.652,
+   "lon": 87.409,
+   "dateText": "present-day",
+   "publication": "ZengReichNature2025",
+   "doi": "10.1038/s41586-025-09189-3",
+   "individuals": 49,
+   "match": "group"
+  },
+  "Khakass": {
+   "id": "Khakass",
+   "label": "Khakass",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Khakass",
+   "locality": "Askizskiy and Tashtypskiy Districts",
+   "country": "Russia",
+   "lat": 54.286,
+   "lon": 89.357,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Khamnegan": {
+   "id": "Khamnegan",
+   "label": "Khamnegan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Khamnegan",
+   "locality": "Aga District",
+   "country": "Russia",
+   "lat": 50.68,
+   "lon": 114.6,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Khanty": {
+   "id": "Khanty",
+   "label": "Khanty",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Khanty",
+   "locality": "Unknown, Russia",
+   "country": "Russia",
+   "lat": null,
+   "lon": null,
+   "dateText": "present-day",
+   "publication": "ZengReichNature2025",
+   "doi": "10.1038/s41586-025-09189-3",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Khmer": {
+   "id": "Khmer",
+   "label": "Khmer",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Khmer",
+   "locality": "Sangkla",
+   "country": "Thailand",
+   "lat": 14.9,
+   "lon": 103.49,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Khomani_San": {
+   "id": "Khomani_San",
+   "label": "Khomani San",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Khomani_San",
+   "locality": "Andriesvale",
+   "country": "South Africa",
+   "lat": -27,
+   "lon": 20.75,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Khonda_Dora": {
+   "id": "Khonda_Dora",
+   "label": "Khonda Dora",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Khonda_Dora",
+   "locality": "India, modern 2",
+   "country": "India",
+   "lat": 18.33,
+   "lon": 82.87,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Kikuyu": {
+   "id": "Kikuyu",
+   "label": "Kikuyu",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kikuyu",
+   "locality": "Nyeri",
+   "country": "Kenya",
+   "lat": -0.4,
+   "lon": 36.9,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Korean": {
+   "id": "Korean",
+   "label": "Korean",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Korean",
+   "locality": "South Korea, modern",
+   "country": "Republic of Korea",
+   "lat": 37.6,
+   "lon": 127,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Koryak": {
+   "id": "Koryak",
+   "label": "Koryak",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Koryak",
+   "locality": "Voyampolka",
+   "country": "Russia",
+   "lat": 58.1,
+   "lon": 158.929,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 13,
+   "match": "group"
+  },
+  "Kubachinian": {
+   "id": "Kubachinian",
+   "label": "Kubachinian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kubachinian",
+   "locality": "Dakhadaevsky District",
+   "country": "Russia",
+   "lat": 42.08,
+   "lon": 47.58,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 6,
+   "match": "group"
+  },
+  "Kumyk": {
+   "id": "Kumyk",
+   "label": "Kumyk",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kumyk",
+   "locality": "Khasavyurt",
+   "country": "Russia",
+   "lat": 43.25,
+   "lon": 46.583,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 6,
+   "match": "group"
+  },
+  "Kusunda": {
+   "id": "Kusunda",
+   "label": "Kusunda",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kusunda",
+   "locality": "Khadre 1",
+   "country": "Nepal",
+   "lat": 28.072,
+   "lon": 82.543,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Kuy_Suay": {
+   "id": "Kuy_Suay",
+   "label": "Kuy Suay",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Kuy_Suay",
+   "locality": "Sam Rong",
+   "country": "Thailand",
+   "lat": 15.01,
+   "lon": 103.94,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Lak": {
+   "id": "Lak",
+   "label": "Lak",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lak",
+   "locality": "Dagestan Republic, modern 4",
+   "country": "Russia",
+   "lat": 42.17,
+   "lon": 47.12,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Lao": {
+   "id": "Lao",
+   "label": "Lao",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lao",
+   "locality": "Unknown, Laos",
+   "country": "Laos",
+   "lat": null,
+   "lon": null,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovSciRep2022",
+   "doi": "10.1038/s41598-022-26799-3",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Lawa": {
+   "id": "Lawa",
+   "label": "Lawa",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lawa",
+   "locality": "Dong",
+   "country": "Thailand",
+   "lat": 18.23,
+   "lon": 97.56,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Lebanese_Christian": {
+   "id": "Lebanese_Christian",
+   "label": "Lebanese Christian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lebanese_Christian",
+   "locality": "Beirut",
+   "country": "Lebanon",
+   "lat": 33.896,
+   "lon": 35.508,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Lebanese_Maronite_Christian_Zgharta": {
+   "id": "Lebanese_Maronite_Christian_Zgharta",
+   "label": "Lebanese Maronite Christian Zgharta",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lebanese",
+   "locality": "Lebanon, modern",
+   "country": "Lebanon",
+   "lat": 33.816,
+   "lon": 35.574,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group-parent"
+  },
+  "Lebanese_Muslim": {
+   "id": "Lebanese_Muslim",
+   "label": "Lebanese Muslim",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lebanese_Muslim",
+   "locality": "Beirut",
+   "country": "Lebanon",
+   "lat": 33.896,
+   "lon": 35.508,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 11,
+   "match": "group"
+  },
+  "Lebanese_Orthodox_Christian_Koura": {
+   "id": "Lebanese_Orthodox_Christian_Koura",
+   "label": "Lebanese Orthodox Christian Koura",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lebanese",
+   "locality": "Lebanon, modern",
+   "country": "Lebanon",
+   "lat": 33.816,
+   "lon": 35.574,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group-parent"
+  },
+  "Lebanese_Shia_Muslim_Beirut": {
+   "id": "Lebanese_Shia_Muslim_Beirut",
+   "label": "Lebanese Shia Muslim Beirut",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lebanese",
+   "locality": "Lebanon, modern",
+   "country": "Lebanon",
+   "lat": 33.816,
+   "lon": 35.574,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group-parent"
+  },
+  "Lebanese_Sunni_Muslim_Beirut": {
+   "id": "Lebanese_Sunni_Muslim_Beirut",
+   "label": "Lebanese Sunni Muslim Beirut",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lebanese",
+   "locality": "Lebanon, modern",
+   "country": "Lebanon",
+   "lat": 33.816,
+   "lon": 35.574,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group-parent"
+  },
+  "Lebanese_Sunni_Muslim_Dinniyeh": {
+   "id": "Lebanese_Sunni_Muslim_Dinniyeh",
+   "label": "Lebanese Sunni Muslim Dinniyeh",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lebanese",
+   "locality": "Lebanon, modern",
+   "country": "Lebanon",
+   "lat": 33.816,
+   "lon": 35.574,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group-parent"
+  },
+  "Lemande": {
+   "id": "Lemande",
+   "label": "Lemande",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lemande",
+   "locality": "Tobagne",
+   "country": "Cameroon",
+   "lat": 4.5,
+   "lon": 11.08,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Lezgin": {
+   "id": "Lezgin",
+   "label": "Lezgin",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Lezgin",
+   "locality": "Dagestanskiye Ogni",
+   "country": "Russia",
+   "lat": 42.117,
+   "lon": 48.183,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 13,
+   "match": "group"
+  },
+  "Li": {
+   "id": "Li",
+   "label": "Li",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Li",
+   "locality": "Baisha",
+   "country": "China",
+   "lat": 18.65,
+   "lon": 109.55,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Libyan": {
+   "id": "Libyan",
+   "label": "Libyan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Libyan",
+   "locality": "Tripoli",
+   "country": "Libya",
+   "lat": 32.88,
+   "lon": 13.19,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 5,
+   "match": "group"
+  },
+  "Libyan_Jew": {
+   "id": "Libyan_Jew",
+   "label": "Libyan Jew",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Libyan",
+   "locality": "Tripoli",
+   "country": "Libya",
+   "lat": 32.88,
+   "lon": 13.19,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 5,
+   "match": "group-parent"
+  },
+  "Luo": {
+   "id": "Luo",
+   "label": "Luo",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Luo",
+   "locality": "Bondo District",
+   "country": "Kenya",
+   "lat": -0.1,
+   "lon": 34.3,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 12,
+   "match": "group"
+  },
+  "Madiga": {
+   "id": "Madiga",
+   "label": "Madiga",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Madiga",
+   "locality": "Vishakapatman",
+   "country": "India",
+   "lat": 17.683,
+   "lon": 83.217,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Magar": {
+   "id": "Magar",
+   "label": "Magar",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Magar",
+   "locality": "Tanahun",
+   "country": "Nepal",
+   "lat": 27.4,
+   "lon": 86.2,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 6,
+   "match": "group"
+  },
+  "Makrani": {
+   "id": "Makrani",
+   "label": "Makrani",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Makrani",
+   "locality": "Pakistan, modern 3",
+   "country": "Pakistan",
+   "lat": 26,
+   "lon": 64,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 74,
+   "match": "group"
+  },
+  "Mala": {
+   "id": "Mala",
+   "label": "Mala",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mala",
+   "locality": "Vishakapatman",
+   "country": "India",
+   "lat": 17.683,
+   "lon": 83.217,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Malay": {
+   "id": "Malay",
+   "label": "Malay",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Malay",
+   "locality": "Singapore",
+   "country": "Singapore",
+   "lat": 1.35,
+   "lon": 103.82,
+   "dateText": "present-day",
+   "publication": "SkoglundReichNature2016",
+   "doi": "10.1038/nature19844",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Maltese": {
+   "id": "Maltese",
+   "label": "Maltese",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Maltese",
+   "locality": "La Valetta",
+   "country": "Malta",
+   "lat": 35.94,
+   "lon": 14.38,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Mandenka": {
+   "id": "Mandenka",
+   "label": "Mandenka",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mandenka",
+   "locality": "Senegal, modern",
+   "country": "Senegal",
+   "lat": 12,
+   "lon": -12,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 69,
+   "match": "group"
+  },
+  "Maniq": {
+   "id": "Maniq",
+   "label": "Maniq",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Maniq",
+   "locality": "Satun",
+   "country": "Thailand",
+   "lat": 7.177,
+   "lon": 99.957,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Mansi": {
+   "id": "Mansi",
+   "label": "Mansi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mansi",
+   "locality": "Sos'va river",
+   "country": "Russia",
+   "lat": 62.875,
+   "lon": 62.813,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 12,
+   "match": "group"
+  },
+  "Maonan": {
+   "id": "Maonan",
+   "label": "Maonan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Maonan",
+   "locality": "Luocheng",
+   "country": "China",
+   "lat": 24.8,
+   "lon": 108.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 16,
+   "match": "group"
+  },
+  "Maori": {
+   "id": "Maori",
+   "label": "Maori",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Maori",
+   "locality": "New Zealand, modern",
+   "country": "New Zealand",
+   "lat": -41.283,
+   "lon": 174.45,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Mari": {
+   "id": "Mari",
+   "label": "Mari",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mari",
+   "locality": "Russia, modern, 7",
+   "country": "Russia",
+   "lat": 56.65,
+   "lon": 47.883,
+   "dateText": "present-day",
+   "publication": "RaghavanWillerslevNature2014",
+   "doi": "10.1038/nature12736",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Masai": {
+   "id": "Masai",
+   "label": "Masai",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Masai",
+   "locality": "Kinyawa",
+   "country": "Kenya",
+   "lat": -1.45,
+   "lon": 35.288,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 16,
+   "match": "group"
+  },
+  "Mayan": {
+   "id": "Mayan",
+   "label": "Mayan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mayan",
+   "locality": "Mexico, modern 1",
+   "country": "Mexico",
+   "lat": 19,
+   "lon": -91,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 66,
+   "match": "group"
+  },
+  "Miao": {
+   "id": "Miao",
+   "label": "Miao",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Miao",
+   "locality": "China, modern, 4",
+   "country": "China",
+   "lat": 28,
+   "lon": 109,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 34,
+   "match": "group"
+  },
+  "Mixe": {
+   "id": "Mixe",
+   "label": "Mixe",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mixe",
+   "locality": "Nochixtlan",
+   "country": "Mexico",
+   "lat": 17.325,
+   "lon": -97.058,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 16,
+   "match": "group"
+  },
+  "Mixtec": {
+   "id": "Mixtec",
+   "label": "Mixtec",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mixtec",
+   "locality": "Nochixtlan",
+   "country": "Mexico",
+   "lat": 17.45,
+   "lon": -97.217,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Mlabri": {
+   "id": "Mlabri",
+   "label": "Mlabri",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mlabri",
+   "locality": "Huay Yuak",
+   "country": "Thailand",
+   "lat": 18.61,
+   "lon": 100.71,
+   "dateText": "present-day",
+   "publication": "LipsonReichScience2018",
+   "doi": "10.1126/science.aat3188",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Mon": {
+   "id": "Mon",
+   "label": "Mon",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mon",
+   "locality": "Nong Du",
+   "country": "Thailand",
+   "lat": 18.31,
+   "lon": 98.53,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Mongol": {
+   "id": "Mongol",
+   "label": "Mongol",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mongol",
+   "locality": "Mongolia, modern 2",
+   "country": "Mongolia",
+   "lat": 48.346,
+   "lon": 98.92,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 68,
+   "match": "group"
+  },
+  "Mongola": {
+   "id": "Mongola",
+   "label": "Mongola",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mongola",
+   "locality": "China, modern, 7",
+   "country": "China",
+   "lat": 45,
+   "lon": 111,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 28,
+   "match": "group"
+  },
+  "Mordovian": {
+   "id": "Mordovian",
+   "label": "Mordovian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mordovian",
+   "locality": "Ichkalovsky District",
+   "country": "Russia",
+   "lat": 54.487,
+   "lon": 44.158,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 32,
+   "match": "group"
+  },
+  "Moroccan": {
+   "id": "Moroccan",
+   "label": "Moroccan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Moroccan",
+   "locality": "Casablanca",
+   "country": "Morocco",
+   "lat": 33.53,
+   "lon": -7.58,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Mozabite": {
+   "id": "Mozabite",
+   "label": "Mozabite",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mozabite",
+   "locality": "Algeria, modern",
+   "country": "Algeria",
+   "lat": 32,
+   "lon": 3,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 78,
+   "match": "group"
+  },
+  "Mulam": {
+   "id": "Mulam",
+   "label": "Mulam",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Mulam",
+   "locality": "Luocheng",
+   "country": "China",
+   "lat": 24.8,
+   "lon": 108.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 17,
+   "match": "group"
+  },
+  "Murut": {
+   "id": "Murut",
+   "label": "Murut",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Murut",
+   "locality": "Temburong",
+   "country": "Brunei",
+   "lat": 4.62,
+   "lon": 115.14,
+   "dateText": "present-day",
+   "publication": "SkoglundReichNature2016",
+   "doi": "10.1038/nature19844",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Nahua": {
+   "id": "Nahua",
+   "label": "Nahua",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Nahua",
+   "locality": "Unknown, Mexico",
+   "country": "Mexico",
+   "lat": 19.01,
+   "lon": -99.06,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Nanai": {
+   "id": "Nanai",
+   "label": "Nanai",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Nanai",
+   "locality": "Ulchsky and Nikovaevsky Districts",
+   "country": "Russia",
+   "lat": 52.85,
+   "lon": 141.25,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Naxi": {
+   "id": "Naxi",
+   "label": "Naxi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Naxi",
+   "locality": "China, modern, 13",
+   "country": "China",
+   "lat": 26,
+   "lon": 100,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 31,
+   "match": "group"
+  },
+  "Negidal": {
+   "id": "Negidal",
+   "label": "Negidal",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Negidal",
+   "locality": "Solnechniy District",
+   "country": "Russia",
+   "lat": 52.47,
+   "lon": 136.59,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 3,
+   "match": "group"
+  },
+  "Newar": {
+   "id": "Newar",
+   "label": "Newar",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Newar",
+   "locality": "Kathmandu",
+   "country": "Nepal",
+   "lat": 27.7,
+   "lon": 85.333,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Nganasan": {
+   "id": "Nganasan",
+   "label": "Nganasan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Nganasan",
+   "locality": "Volochanka",
+   "country": "Russia",
+   "lat": 70.894,
+   "lon": 93.846,
+   "dateText": "present-day",
+   "publication": "FlegontovSchiffelsNature2019",
+   "doi": "10.1038/s41586-019-1251-y",
+   "individuals": 33,
+   "match": "group"
+  },
+  "Norwegian": {
+   "id": "Norwegian",
+   "label": "Norwegian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Norwegian",
+   "locality": "Bergen",
+   "country": "Norway",
+   "lat": 60.359,
+   "lon": 5.358,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 13,
+   "match": "group"
+  },
+  "Nyah_Kur": {
+   "id": "Nyah_Kur",
+   "label": "Nyah Kur",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Nyah_Kur",
+   "locality": "Thepsatit",
+   "country": "Thailand",
+   "lat": 15.59,
+   "lon": 101.46,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Orcadian": {
+   "id": "Orcadian",
+   "label": "Orcadian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Orcadian",
+   "locality": "Orkney",
+   "country": "United Kingdom",
+   "lat": 59,
+   "lon": -3,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 47,
+   "match": "group"
+  },
+  "Oroqen": {
+   "id": "Oroqen",
+   "label": "Oroqen",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Oroqen",
+   "locality": "China, modern, 5",
+   "country": "China",
+   "lat": 50.434,
+   "lon": 126.5,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 31,
+   "match": "group"
+  },
+  "Ossetian": {
+   "id": "Ossetian",
+   "label": "Ossetian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Ossetian",
+   "locality": "Vladikavkaz",
+   "country": "Russia",
+   "lat": 43.048,
+   "lon": 44.32,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 20,
+   "match": "group"
+  },
+  "Palestinian": {
+   "id": "Palestinian",
+   "label": "Palestinian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Palestinian",
+   "locality": "Israel, modern 1",
+   "country": "Israel",
+   "lat": 32,
+   "lon": 35,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 132,
+   "match": "group"
+  },
+  "Papuan": {
+   "id": "Papuan",
+   "label": "Papuan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Papuan",
+   "locality": "Iatmul and Kwoma societies",
+   "country": "Papua New Guinea",
+   "lat": -4,
+   "lon": 143,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 78,
+   "match": "group"
+  },
+  "Piapoco": {
+   "id": "Piapoco",
+   "label": "Piapoco",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Piapoco",
+   "locality": "Colombia, modern, 1",
+   "country": "Colombia",
+   "lat": 3,
+   "lon": -68,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 22,
+   "match": "group"
+  },
+  "Pima": {
+   "id": "Pima",
+   "label": "Pima",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Pima",
+   "locality": "Mexico, modern 2",
+   "country": "Mexico",
+   "lat": 29,
+   "lon": -108,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 44,
+   "match": "group"
+  },
+  "Polish": {
+   "id": "Polish",
+   "label": "Polish",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Polish",
+   "locality": "Poland, modern",
+   "country": "Poland",
+   "lat": 52.233,
+   "lon": 21.017,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Quechua": {
+   "id": "Quechua",
+   "label": "Quechua",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Quechua",
+   "locality": "Peru, modern 1",
+   "country": "Peru",
+   "lat": -13.5,
+   "lon": -72,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Rai": {
+   "id": "Rai",
+   "label": "Rai",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Rai",
+   "locality": "Nepal, modern",
+   "country": "Nepal",
+   "lat": 27.4,
+   "lon": 85.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 5,
+   "match": "group"
+  },
+  "Romanian": {
+   "id": "Romanian",
+   "label": "Romanian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Romanian",
+   "locality": "Horea village",
+   "country": "Romania",
+   "lat": 45.776,
+   "lon": 22.95,
+   "dateText": "present-day",
+   "publication": "LazaridisReichNature2016",
+   "doi": "10.1038/nature19310",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Russian_Krasnoborsky": {
+   "id": "Russian_Krasnoborsky",
+   "label": "Russian Krasnoborsky",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Russian",
+   "locality": "Vologda Administrative Region",
+   "country": "Russia",
+   "lat": 58.508,
+   "lon": 38.351,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 125,
+   "match": "group-parent"
+  },
+  "Russian_Leshukonsky": {
+   "id": "Russian_Leshukonsky",
+   "label": "Russian Leshukonsky",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Russian",
+   "locality": "Vologda Administrative Region",
+   "country": "Russia",
+   "lat": 58.508,
+   "lon": 38.351,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 125,
+   "match": "group-parent"
+  },
+  "Russian_Pinezhsky": {
+   "id": "Russian_Pinezhsky",
+   "label": "Russian Pinezhsky",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Russian",
+   "locality": "Vologda Administrative Region",
+   "country": "Russia",
+   "lat": 58.508,
+   "lon": 38.351,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 125,
+   "match": "group-parent"
+  },
+  "Saami": {
+   "id": "Saami",
+   "label": "Saami",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Saami",
+   "locality": "Utsjoki",
+   "country": "Finland",
+   "lat": 69.91,
+   "lon": 27.03,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 6,
+   "match": "group"
+  },
+  "Saharawi": {
+   "id": "Saharawi",
+   "label": "Saharawi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Saharawi",
+   "locality": "Close to the Algerian border",
+   "country": "Morocco",
+   "lat": 27.3,
+   "lon": -8.9,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Salar": {
+   "id": "Salar",
+   "label": "Salar",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Salar",
+   "locality": "Xunhua",
+   "country": "China",
+   "lat": 35.8,
+   "lon": 102.5,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Samaritan": {
+   "id": "Samaritan",
+   "label": "Samaritan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Samaritan",
+   "locality": "Mount Gerizim",
+   "country": "Israel",
+   "lat": 32.203,
+   "lon": 35.27,
+   "dateText": "present-day",
+   "publication": "MallickReichNature2016",
+   "doi": "10.1038/nature18964",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Sardinian": {
+   "id": "Sardinian",
+   "label": "Sardinian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Sardinian",
+   "locality": "Italy, modern 1",
+   "country": "Italy",
+   "lat": 40,
+   "lon": 9,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 89,
+   "match": "group"
+  },
+  "Saudi": {
+   "id": "Saudi",
+   "label": "Saudi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Saudi",
+   "locality": "Saudi Arabia, modern",
+   "country": "Saudi Arabia",
+   "lat": 18.49,
+   "lon": 42.517,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 7,
+   "match": "group"
+  },
+  "Scottish": {
+   "id": "Scottish",
+   "label": "Scottish",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Scottish",
+   "locality": "Argyll and Bute",
+   "country": "United Kingdom",
+   "lat": 56.04,
+   "lon": -5.44,
+   "dateText": "present-day",
+   "publication": "The1000GenomesProjectConsortiumNature2015",
+   "doi": "10.1038/nature15393",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Selkup": {
+   "id": "Selkup",
+   "label": "Selkup",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Selkup",
+   "locality": "Tolka Purovskaja in Purovsky-rayon, Yamalo-Nenets Autonomous Okrug / Farkovo in Turukhansky rayon, Krasnoyarsky kray / Krasnoselkup in Krasnoselkupsky rayon, Yamalo-Nenets Autonomous Okrug / Sovetskaja Rechka in Krasnoselkupsky rayon, Yamalo-Nenets Autonomous Okrug / Tolka Krasnoselkupskaya in Krasnoselkupsky rayon, Yamalo-Nenets Autonomous Okrug",
+   "country": "Russia",
+   "lat": 65.672,
+   "lon": 85.508,
+   "dateText": "present-day",
+   "publication": "FlegontovSchiffelsNature2019",
+   "doi": "10.1038/s41586-019-1251-y",
+   "individuals": 24,
+   "match": "group"
+  },
+  "She": {
+   "id": "She",
+   "label": "She",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "She",
+   "locality": "China, modern, 12",
+   "country": "China",
+   "lat": 27,
+   "lon": 119,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 34,
+   "match": "group"
+  },
+  "Sherpa": {
+   "id": "Sherpa",
+   "label": "Sherpa",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Sherpa",
+   "locality": "Singel",
+   "country": "India",
+   "lat": 27.2,
+   "lon": 88.15,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Shor_Khakassia": {
+   "id": "Shor_Khakassia",
+   "label": "Shor Khakassia",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Shor_Khakassia",
+   "locality": "Khakassia Republic",
+   "country": "Russia",
+   "lat": 53.3,
+   "lon": 90,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 6,
+   "match": "group"
+  },
+  "Shor_Mountain": {
+   "id": "Shor_Mountain",
+   "label": "Shor Mountain",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Shor_Mountain",
+   "locality": "Tashtagol District",
+   "country": "Russia",
+   "lat": 52.75,
+   "lon": 88,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 7,
+   "match": "group"
+  },
+  "Somali": {
+   "id": "Somali",
+   "label": "Somali",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Somali",
+   "locality": "Garissa",
+   "country": "Kenya",
+   "lat": -0.457,
+   "lon": 39.658,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 12,
+   "match": "group"
+  },
+  "Somali_Kenya": {
+   "id": "Somali_Kenya",
+   "label": "Somali Kenya",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Somali",
+   "locality": "Garissa",
+   "country": "Kenya",
+   "lat": -0.457,
+   "lon": 39.658,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 12,
+   "match": "group-parent"
+  },
+  "Spanish_Aragon_North": {
+   "id": "Spanish_Aragon_North",
+   "label": "Spanish Aragon North",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Spanish",
+   "locality": "Eivissa",
+   "country": "Spain",
+   "lat": 40.588,
+   "lon": -1.021,
+   "dateText": "present-day",
+   "publication": "BiaginiCalafellEJHG2019",
+   "doi": "10.1038/s41431-019-0361-1",
+   "individuals": 283,
+   "match": "group-parent"
+  },
+  "Surui": {
+   "id": "Surui",
+   "label": "Surui",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Surui",
+   "locality": "Brazil, modern, 1",
+   "country": "Brazil",
+   "lat": -11,
+   "lon": -62,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 28,
+   "match": "group"
+  },
+  "Syrian": {
+   "id": "Syrian",
+   "label": "Syrian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Syrian",
+   "locality": "Syria, modern",
+   "country": "Syria",
+   "lat": 35.129,
+   "lon": 36.87,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 7,
+   "match": "group"
+  },
+  "Tabasaran": {
+   "id": "Tabasaran",
+   "label": "Tabasaran",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tabasaran",
+   "locality": "Dagestan Republic, modern 2",
+   "country": "Russia",
+   "lat": 41.96,
+   "lon": 47.82,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Tai_Lue": {
+   "id": "Tai_Lue",
+   "label": "Tai Lue",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tai_Lue",
+   "locality": "Koh Chang",
+   "country": "Thailand",
+   "lat": 20.26,
+   "lon": 99.53,
+   "dateText": "present-day",
+   "publication": "ChangmaiFlegontovPLoSGenet2022",
+   "doi": "10.1371/journal.pgen.1010036",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Tamang": {
+   "id": "Tamang",
+   "label": "Tamang",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tamang",
+   "locality": "Nepal, modern",
+   "country": "Nepal",
+   "lat": 27.4,
+   "lon": 85.3,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 7,
+   "match": "group"
+  },
+  "Tatar_Kazan": {
+   "id": "Tatar_Kazan",
+   "label": "Tatar Kazan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tatar_Kazan",
+   "locality": "Mamadish and Sarmanovo Districts",
+   "country": "Russia",
+   "lat": 55.23,
+   "lon": 52.58,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 13,
+   "match": "group"
+  },
+  "Tatar_Mishar": {
+   "id": "Tatar_Mishar",
+   "label": "Tatar Mishar",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tatar_Mishar",
+   "locality": "Drozhzhanovsky and Alekseevski Districts",
+   "country": "Russia",
+   "lat": 55,
+   "lon": 48.5,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Tatar_Siberian": {
+   "id": "Tatar_Siberian",
+   "label": "Tatar Siberian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tatar_Siberian",
+   "locality": "Yalutorovskiy District",
+   "country": "Russia",
+   "lat": 57.523,
+   "lon": 67.636,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 19,
+   "match": "group"
+  },
+  "Tatar_Siberian_Zabolotniye": {
+   "id": "Tatar_Siberian_Zabolotniye",
+   "label": "Tatar Siberian Zabolotniye",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tatar_Siberian_Zabolotniye",
+   "locality": "Tobolsk District",
+   "country": "Russia",
+   "lat": 58.1,
+   "lon": 68.72,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 5,
+   "match": "group"
+  },
+  "Teleut": {
+   "id": "Teleut",
+   "label": "Teleut",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Teleut",
+   "locality": "Russia, modern, 11",
+   "country": "Russia",
+   "lat": 55.367,
+   "lon": 86.067,
+   "dateText": "present-day",
+   "publication": "DamgaardWillerslevScience2018",
+   "doi": "10.1126/science.aar7711",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Thai": {
+   "id": "Thai",
+   "label": "Thai",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Thai",
+   "locality": "Thailand, modern",
+   "country": "Thailand",
+   "lat": 13.8,
+   "lon": 100.5,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Tharu": {
+   "id": "Tharu",
+   "label": "Tharu",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tharu",
+   "locality": "Nepal, modern",
+   "country": "Nepal",
+   "lat": 27.4,
+   "lon": 85.48,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 5,
+   "match": "group"
+  },
+  "Tibetan": {
+   "id": "Tibetan",
+   "label": "Tibetan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tibetan",
+   "locality": "Gangcha",
+   "country": "China",
+   "lat": 32.242,
+   "lon": 96.654,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 96,
+   "match": "group"
+  },
+  "Tibetan_Yunnan": {
+   "id": "Tibetan_Yunnan",
+   "label": "Tibetan Yunnan",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tibetan_Yunnan",
+   "locality": "Yunnan",
+   "country": "China",
+   "lat": 27.8,
+   "lon": 99.7,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 4,
+   "match": "group"
+  },
+  "Tlingit": {
+   "id": "Tlingit",
+   "label": "Tlingit",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tlingit",
+   "locality": "Nikolskoye",
+   "country": "Russia",
+   "lat": 55.18,
+   "lon": 166,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Todzin": {
+   "id": "Todzin",
+   "label": "Todzin",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Todzin",
+   "locality": "Todzinsky District",
+   "country": "Russia",
+   "lat": 51,
+   "lon": 94.95,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 3,
+   "match": "group"
+  },
+  "Tu": {
+   "id": "Tu",
+   "label": "Tu",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tu",
+   "locality": "China, modern, 14",
+   "country": "China",
+   "lat": 36,
+   "lon": 101,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 34,
+   "match": "group"
+  },
+  "Tubalar": {
+   "id": "Tubalar",
+   "label": "Tubalar",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tubalar",
+   "locality": "Artybash and Kebezen",
+   "country": "Russia",
+   "lat": 51.305,
+   "lon": 87.068,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 31,
+   "match": "group"
+  },
+  "Tujia": {
+   "id": "Tujia",
+   "label": "Tujia",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tujia",
+   "locality": "China, modern, 2",
+   "country": "China",
+   "lat": 29,
+   "lon": 109,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 32,
+   "match": "group"
+  },
+  "Tunisian": {
+   "id": "Tunisian",
+   "label": "Tunisian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tunisian",
+   "locality": "Tunis",
+   "country": "Tunisia",
+   "lat": 36.82,
+   "lon": 10.17,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group"
+  },
+  "Tunisian_Jew": {
+   "id": "Tunisian_Jew",
+   "label": "Tunisian Jew",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tunisian",
+   "locality": "Tunis",
+   "country": "Tunisia",
+   "lat": 36.82,
+   "lon": 10.17,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 8,
+   "match": "group-parent"
+  },
+  "Turkish_Balikesir": {
+   "id": "Turkish_Balikesir",
+   "label": "Turkish Balikesir",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Turkish",
+   "locality": "Kayseri",
+   "country": "Turkey",
+   "lat": 38.851,
+   "lon": 31.711,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 50,
+   "match": "group-parent"
+  },
+  "Turkish_Trabzon": {
+   "id": "Turkish_Trabzon",
+   "label": "Turkish Trabzon",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Turkish_Trabzon",
+   "locality": "Trabzon",
+   "country": "Turkey",
+   "lat": 41,
+   "lon": 39.733,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 9,
+   "match": "group"
+  },
+  "Turkmen": {
+   "id": "Turkmen",
+   "label": "Turkmen",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Turkmen",
+   "locality": "Nukut in Karakalpak",
+   "country": "Uzbekistan",
+   "lat": 42.464,
+   "lon": 59.612,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Tuvinian": {
+   "id": "Tuvinian",
+   "label": "Tuvinian",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Tuvinian",
+   "locality": "Shagonar Village",
+   "country": "Russia",
+   "lat": 51.162,
+   "lon": 93.257,
+   "dateText": "present-day",
+   "publication": "ZengReichNature2025",
+   "doi": "10.1038/s41586-025-09189-3",
+   "individuals": 54,
+   "match": "group"
+  },
+  "Udmurt": {
+   "id": "Udmurt",
+   "label": "Udmurt",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Udmurt",
+   "locality": "Yukamensky District",
+   "country": "Russia",
+   "lat": 56.09,
+   "lon": 52.37,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Ulchi": {
+   "id": "Ulchi",
+   "label": "Ulchi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Ulchi",
+   "locality": "Bogorodskoe",
+   "country": "Russia",
+   "lat": 52.213,
+   "lon": 140.43,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 29,
+   "match": "group"
+  },
+  "Uzbek": {
+   "id": "Uzbek",
+   "label": "Uzbek",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Uzbek",
+   "locality": "Tashkent",
+   "country": "Uzbekistan",
+   "lat": 41.36,
+   "lon": 67.196,
+   "dateText": "present-day",
+   "publication": "JeongKrauseNatEcolEvol2019",
+   "doi": "10.1038/s41559-019-0878-2",
+   "individuals": 31,
+   "match": "group"
+  },
+  "Xibo": {
+   "id": "Xibo",
+   "label": "Xibo",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Xibo",
+   "locality": "China, modern, 9",
+   "country": "China",
+   "lat": 43.498,
+   "lon": 81.5,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 29,
+   "match": "group"
+  },
+  "Yemenite_Jew": {
+   "id": "Yemenite_Jew",
+   "label": "Yemenite Jew",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Jew_Yemenite",
+   "locality": "Yemen, modern 2",
+   "country": "Yemen",
+   "lat": 15.35,
+   "lon": 44.2,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 12,
+   "match": "alias"
+  },
+  "Yi": {
+   "id": "Yi",
+   "label": "Yi",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Yi",
+   "locality": "China, modern, 3",
+   "country": "China",
+   "lat": 28,
+   "lon": 103,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 32,
+   "match": "group"
+  },
+  "Yoruba": {
+   "id": "Yoruba",
+   "label": "Yoruba",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Yoruba",
+   "locality": "Nigeria, modern 11",
+   "country": "Nigeria",
+   "lat": 7.4,
+   "lon": 3.9,
+   "dateText": "present-day",
+   "publication": "Byrska-BishopZodyCell2022",
+   "doi": "10.1016/j.cell.2022.08.004",
+   "individuals": 69,
+   "match": "group"
+  },
+  "Yugur": {
+   "id": "Yugur",
+   "label": "Yugur",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Yugur",
+   "locality": "Sunan",
+   "country": "China",
+   "lat": 38.9,
+   "lon": 99.6,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 16,
+   "match": "group"
+  },
+  "Yukagir_Forest": {
+   "id": "Yukagir_Forest",
+   "label": "Yukagir Forest",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Yukagir_Forest",
+   "locality": "Nelemnoe",
+   "country": "Russia",
+   "lat": 65.48,
+   "lon": 151,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 5,
+   "match": "group"
+  },
+  "Yukagir_Tundra": {
+   "id": "Yukagir_Tundra",
+   "label": "Yukagir Tundra",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Yukagir_Tundra",
+   "locality": "Kolymskoe",
+   "country": "Russia",
+   "lat": 68.553,
+   "lon": 153.964,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 14,
+   "match": "group"
+  },
+  "Yukpa": {
+   "id": "Yukpa",
+   "label": "Yukpa",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Yukpa",
+   "locality": "Unknown, Venezuela",
+   "country": "Venezuela",
+   "lat": null,
+   "lon": null,
+   "dateText": "present-day",
+   "publication": "RaghavanWillerslevScience2015",
+   "doi": "10.1126/science.aab3884",
+   "individuals": 2,
+   "match": "group"
+  },
+  "Zapotec": {
+   "id": "Zapotec",
+   "label": "Zapotec",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Zapotec",
+   "locality": "Nochixtlan",
+   "country": "Mexico",
+   "lat": 17.45,
+   "lon": -97.217,
+   "dateText": "present-day",
+   "publication": "LazaridisKrauseNature2014",
+   "doi": "10.1038/nature13673",
+   "individuals": 10,
+   "match": "group"
+  },
+  "Zhuang": {
+   "id": "Zhuang",
+   "label": "Zhuang",
+   "eras": [
+    "modern"
+   ],
+   "groupId": "Zhuang",
+   "locality": "Xingbin",
+   "country": "China",
+   "lat": 23.728,
+   "lon": 108.567,
+   "dateText": "present-day",
+   "publication": "WangReichNature2021",
+   "doi": "10.1038/s41586-021-03336-2",
+   "individuals": 18,
+   "match": "group"
+  }
+ }
+}

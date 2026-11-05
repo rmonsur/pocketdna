@@ -1,0 +1,15 @@
+genotypename: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/aadr_v66p1_ho/v66.p1_HO.aadr.patch.PUB.geno
+snpname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/aadr_v66p1_ho/v66.p1_HO.aadr.patch.PUB.snp
+indivname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/smartpca-smoke/smoke.ind
+evecoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/smartpca-smoke/smoke.evec
+evaloutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/smartpca-smoke/smoke.eval
+snpweightoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/smartpca-smoke/smoke.weights
+poplistname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/smartpca-smoke/poplist.txt
+numoutevec: 5
+numoutlieriter: 0
+lsqproject: YES
+shrinkmode: NO
+autoshrink: NO
+fastmode: NO
+noxdata: YES
+chrom: 22

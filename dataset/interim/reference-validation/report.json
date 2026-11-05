@@ -1,0 +1,90 @@
+{
+  "annotation_matches": 27594,
+  "annotation_rows": 27594,
+  "annotation_unmatched": 0,
+  "assessment_counts_matched": {
+    "CRITICAL": 373,
+    "MERGE_CRITICAL": 2,
+    "MERGE_PASS": 183,
+    "MERGE_QUESTIONABLE": 7,
+    "PASS": 23053,
+    "PROVISIONAL_CRITICAL": 83,
+    "PROVISIONAL_PASS": 2908,
+    "PROVISIONAL_QUESTIONABLE": 22,
+    "QUESTIONABLE": 963
+  },
+  "autosomal_allele_pairs": {
+    "AC": 47919,
+    "AG": 262272,
+    "CT": 209408,
+    "GT": 60121
+  },
+  "checksums": {
+    "aadr_v66.p1__README.docx": {
+      "actual": "f92df8d4b1fb863bcc7601208153ed34",
+      "expected": "f92df8d4b1fb863bcc7601208153ed34",
+      "match": true
+    },
+    "v66.p1_HO.aadr.PUB.anno": {
+      "actual": "548b011b4adbcd46f0ff66b957c59c3f",
+      "expected": "548b011b4adbcd46f0ff66b957c59c3f",
+      "match": true
+    },
+    "v66.p1_HO.aadr.patch.PUB.geno": {
+      "actual": "9f9f0629f803835985bc38856e989995",
+      "expected": "9f9f0629f803835985bc38856e989995",
+      "match": true
+    },
+    "v66.p1_HO.aadr.patch.PUB.ind": {
+      "actual": "a14985ffae6dd33a00f4fd5bfefe58c5",
+      "expected": "a14985ffae6dd33a00f4fd5bfefe58c5",
+      "match": true
+    },
+    "v66.p1_HO.aadr.patch.PUB.snp": {
+      "actual": "fbd2cfe09ec6bad794f7607768b57a3a",
+      "expected": "fbd2cfe09ec6bad794f7607768b57a3a",
+      "match": true
+    }
+  },
+  "chromosomes": {
+    "1": 49770,
+    "10": 31834,
+    "11": 29520,
+    "12": 28523,
+    "13": 18621,
+    "14": 19650,
+    "15": 19044,
+    "16": 19172,
+    "17": 16142,
+    "18": 17984,
+    "19": 9189,
+    "2": 51538,
+    "20": 16260,
+    "21": 8317,
+    "22": 8054,
+    "23": 3814,
+    "24": 597,
+    "3": 42953,
+    "4": 35632,
+    "5": 36773,
+    "6": 35582,
+    "7": 30184,
+    "8": 30099,
+    "9": 24879
+  },
+  "duplicate_annotation_ids": 0,
+  "duplicate_genetic_ids": 0,
+  "duplicate_marker_ids": 0,
+  "header_dimensions_match": true,
+  "individual_ids_with_multiple_representations": 2280,
+  "individuals": 27594,
+  "interpretation": "Metadata audit only: no genotype call rate, relatedness, assembly verification, held-out validation, or production approval.",
+  "markers": 584131,
+  "tgeno_header": [
+    "TGENO",
+    "27594",
+    "584131",
+    "8c17d6d1",
+    "80974215"
+  ]
+}

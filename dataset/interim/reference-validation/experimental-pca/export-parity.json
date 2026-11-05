@@ -1,0 +1,7 @@
+{
+  "samples_checked": 64,
+  "markers_checked": 99794,
+  "calls_checked": 6386816,
+  "mismatches": 0,
+  "scope": "Deterministically spaced samples; source BED and exported TGENO, not an independent biological truth."
+}

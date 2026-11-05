@@ -1,0 +1,14 @@
+{
+  "source": "local demo input",
+  "reported_builds": [
+    "37"
+  ],
+  "counts": {
+    "autosomal_rows": 931564,
+    "rsid_matches": 172424,
+    "matching_rsid_and_position": 172424,
+    "called_alleles_compatible_direct": 172424,
+    "missing_or_unsupported_calls": 2482
+  },
+  "limitations": "Preliminary exact-ID/position check only. Does not validate assembly, strand, vendor format, chip support, duplicate coordinates or genotypes. No personal ancestry analysis."
+}

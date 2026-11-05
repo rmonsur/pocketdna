@@ -1,4 +1,39 @@
 # Dataset intake is private by default. Promote reviewed artifacts explicitly.
+# Upstream reference genotypes (AADR, EGDP, SGDP, Franco-Cantabrian) stay out:
+# they are multi-GB, publicly downloadable, and regenerable from manifests.
 *
+!*/
 !README.md
 !.gitignore
+
+# The builder's own 23andMe raw export, published by choice (also shared on openSNP).
+!genome_reshad_ monsur_n_v2_v3_Full_20171127205355.txt
+
+# Era reference panels: Bronze Age, Middle Ages and Modern sources, gazetteer, extraction ledgers.
+!interim/era-panels/**
+
+# smartpca smoke test: parameters, logs, eigenvalues, eigenvectors, weights.
+!interim/smartpca-smoke/**
+
+# Reference validation reports (sample crosswalk, call counts, kinship review, oracle checks).
+!interim/reference-validation/*.json
+!interim/reference-validation/*.tsv
+!interim/reference-validation/oracle/**
+!interim/reference-validation/external-marker-audit/*.json
+!interim/reference-validation/relatedness-pilot/*.json
+!interim/reference-validation/relatedness-genome-wide/*.json
+
+# Custom PocketDNA PCA-25 basis (the "pocketdna-g25"): smartpca run, splits, validations, browser bundle.
+!interim/reference-validation/experimental-pca/**
+# ...minus regenerable bulk genotype intermediates and duplicate weight matrices.
+interim/reference-validation/experimental-pca/frozen.geno
+interim/reference-validation/experimental-pca/alias.bed
+interim/reference-validation/experimental-pca/pca.weights
+interim/reference-validation/experimental-pca/ts-parity/weights.f64
+interim/reference-validation/experimental-pca/demo-marker-mask/masked.geno
+interim/reference-validation/experimental-pca/demo-marker-mask/masked.weights
+interim/reference-validation/experimental-pca/demo-marker-mask/ts-parity/weights.f64
+
+# Never commit tool binaries or OS clutter.
+interim/tools/
+.DS_Store

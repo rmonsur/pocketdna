@@ -1,0 +1,13 @@
+{
+  "status": "completed",
+  "basis_samples": 2829,
+  "selected_test_samples": 16,
+  "matched_marker_count": 47142,
+  "all_basis_markers": 99794,
+  "masked_geno_sha256": "f6b96e29cc99edc960fbf592f1c318608f8de0dd5a566da5403e572e930cea0b",
+  "ind_sha256": "45a639c15619f9bac994d945de7d0c1feadea6442001677833de65c98f3ff4ba",
+  "parameter_sha256": "ce9bc3d7a1c8a0ff01643f47da0a99856da221637babc689daf95d701c52dfe4",
+  "smartpca_sha256": "77b88d964ffafcd512f873dcc0957d114f4882f6cb35149963685be61620e087",
+  "scope": "Consumer-file marker presence is an individual-specific proxy, not an official chip manifest; applied to unrelated reference samples only. No consumer genotype calls used.",
+  "exit_code": 0
+}

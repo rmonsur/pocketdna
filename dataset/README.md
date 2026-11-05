@@ -11,7 +11,16 @@ ScientificEngineer owns intake and provenance under [BIOINFORMATICS.md](../docs/
 - `processed/`: candidate compact bundles and oracle fixtures awaiting release review.
 - `manifests/`: source releases, checksums, permissions, sample/variant roles, exclusions and run identity.
 
-Reference files and generated results are ignored by Git. The builder explicitly requested that their DNA export be eligible for Git tracking for the demo; the exception is in `.gitignore`. This is sensitive personal genetic data and publishing the repository will publish the file if it is added and committed. Large inputs can instead live outside the repository, referenced through private local configuration. Other personal inputs remain ignored.
+## What is committed
+
+The builder chose to publish their own 23andMe raw export (`genome_reshad_ monsur_n_v2_v3_Full_20171127205355.txt`, already shared on openSNP) and the research outputs behind PocketDNA, so judges can inspect the work:
+
+- `interim/era-panels/`: the Bronze Age, Middle Ages and Modern reference panels, the AADR gazetteer, sample lists and extraction ledgers.
+- `interim/reference-validation/experimental-pca/`: the custom PocketDNA PCA-25 basis (smartpca parameters, eigenvalues, eigenvectors, basis/test splits, LD pruning, validation and parity reports) and `bundle-v1/`, the compact bundle the browser worker projects onto.
+- `interim/smartpca-smoke/` and `interim/reference-validation/oracle/`: the smartpca smoke test and chromosome-22 oracle fixture.
+- `interim/reference-validation/*.json|*.tsv`: sample crosswalk, call counts, kinship review and audit summaries.
+
+Still ignored: the upstream AADR, EGDP, SGDP and Franco-Cantabrian genotype files (multi-GB, publicly downloadable), bulk regenerable intermediates such as `frozen.geno`, `alias.bed` and full weight matrices, and tool binaries. `dataset/.gitignore` lists the exact allowlist. Publishing the repository publishes the genome file.
 
 Before processing, record source URL/accession, release, original filename, SHA-256, assembly, genotype type, sample/marker identity, rights and role. Recover the historical source files mentioned in the scientific docs before claiming their audit has been reproduced. Keep v62 annotation findings distinct from current-release genotype approval.
 

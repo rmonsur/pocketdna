@@ -1,0 +1,16 @@
+{
+  "samples": 27594,
+  "autosomal_marker_denominator": 579720,
+  "call_rate_quantiles_0_5_25_50_75_95_100_percent": [
+    0.0002656454840267715,
+    0.022586766024977577,
+    0.2860652556406541,
+    0.722375457117229,
+    0.9387980404333126,
+    0.998166356171945,
+    1.0
+  ],
+  "samples_ge_98_percent": 4896,
+  "samples_ge_95_percent": 5536,
+  "scope": "Raw metadata panel, not the final filtered PCA marker set; do not use as a genotype-type classifier or production QC."
+}

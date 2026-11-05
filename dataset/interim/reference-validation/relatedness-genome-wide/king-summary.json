@@ -1,0 +1,12 @@
+{
+  "flagged_pairs": 160,
+  "flagged_samples": 244,
+  "related_components": 94,
+  "max_component_size": 7,
+  "pairs_ge_0_177": 100,
+  "pairs_ge_0_354": 20,
+  "minimum_joint_markers": 98969,
+  "median_joint_markers": 101196.0,
+  "same_original_group_pairs": 78,
+  "scope": "screening only; no removals or identity confirmation"
+}

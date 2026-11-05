@@ -1,0 +1,8 @@
+{
+  "samples_checked": 64,
+  "max_abs_error": 4.992264045489136e-07,
+  "median_abs_error": 4.849949819632797e-07,
+  "tolerance": 2e-06,
+  "passed": true,
+  "scope": "Extraction correctness only (identical calls, identical marker subset). Full-vs-masked coordinate shift is measured separately in consumer-mask-validation.json."
+}

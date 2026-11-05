@@ -1,0 +1,31 @@
+PLINK v2.0.0-b.1.3 M1 (31 Oct 2026)
+Options in effect:
+  --bfile dataset/interim/reference-validation/relatedness-genome-wide/pilot
+  --extract dataset/interim/reference-validation/experimental-pca/basis-ld.prune.in
+  --freq counts
+  --keep dataset/interim/reference-validation/experimental-pca/basis.keep
+  --memory 2048
+  --out dataset/interim/reference-validation/experimental-pca/basis-frequency
+  --threads 4
+
+Hostname: Reshads-MacBook-Pro.local
+Working directory: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna
+Start time: Wed Nov  4 21:47:16 2026
+
+Random number seed: 1793807236
+16384 MiB RAM detected; reserving 2048 MiB for main workspace.
+Using up to 4 compute threads.
+3692 samples (0 females, 0 males, 3692 ambiguous; 3692 founders) loaded from
+dataset/interim/reference-validation/relatedness-genome-wide/pilot.fam.
+579720 variants loaded from
+dataset/interim/reference-validation/relatedness-genome-wide/pilot.bim.
+Note: No phenotype data present.
+--extract: 99794 variants remaining.
+--keep: 2829 samples remaining.
+2829 samples (0 females, 0 males, 2829 ambiguous; 2829 founders) remaining
+after main filters.
+Calculating allele frequencies... done.
+--freq counts: Allele counts (founders only) written to
+dataset/interim/reference-validation/experimental-pca/basis-frequency.acount .
+
+End time: Wed Nov  4 21:47:18 2026

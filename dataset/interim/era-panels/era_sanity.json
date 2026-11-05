@@ -1,0 +1,31 @@
+{
+  "date_sanity": {
+    "bronze": {
+      "n_dated": 129,
+      "median_bp": 0.0,
+      "frac_in_broad_window": 0.37209302325581395
+    },
+    "middle": {
+      "n_dated": 144,
+      "median_bp": 603.5,
+      "frac_in_broad_window": 0.4027777777777778
+    },
+    "modern": {
+      "n_dated": 3419,
+      "median_bp": 0.0,
+      "frac_in_broad_window": 0.999122550453349
+    }
+  },
+  "allele_error_injection": {
+    "flip_1pct": {
+      "samples": 16,
+      "median_max_axis_delta_sd": 0.23803021555283482,
+      "p95_max_axis_delta_sd": 0.31696930087748176
+    },
+    "flip_5pct": {
+      "samples": 16,
+      "median_max_axis_delta_sd": 0.36268543528343317,
+      "p95_max_axis_delta_sd": 0.5190790609436453
+    }
+  }
+}

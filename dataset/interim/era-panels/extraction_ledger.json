@@ -1,0 +1,21 @@
+{
+  "datasets": {
+    "1240K": {
+      "markers_absent": 0,
+      "markers_incompatible": 0,
+      "markers_flipped": 99794,
+      "snp_duplicate_ids": 0
+    },
+    "HO": {
+      "markers_absent": 52888,
+      "markers_incompatible": 0,
+      "markers_flipped": 46906,
+      "snp_duplicate_ids": 0
+    }
+  },
+  "full_marker_smartpca_delta": {
+    "samples": 2077,
+    "max_abs_error": 0.008533016150702476,
+    "interpretation": "Dominated by marker-subset information loss (HO extractions carry 46,906 of 99,794 bundle markers); extraction correctness is proven like-for-like in extraction_parity.json (max 5.0e-7)."
+  }
+}

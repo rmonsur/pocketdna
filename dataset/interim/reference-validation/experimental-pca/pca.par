@@ -1,0 +1,17 @@
+genotypename: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/frozen.geno
+snpname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/frozen.snp
+indivname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/pca.ind
+evecoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/pca.evec
+evaloutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/pca.eval
+snpweightoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/pca.weights
+poplistname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/experimental-pca/basis.poplist
+numoutevec: 25
+numoutlieriter: 0
+lsqproject: YES
+shrinkmode: NO
+autoshrink: NO
+fastmode: NO
+hiprecision: YES
+noxdata: YES
+killr2: NO
+ldregress: 0

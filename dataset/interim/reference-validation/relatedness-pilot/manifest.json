@@ -1,0 +1,16 @@
+{
+  "purpose": "exploratory chromosome-22 relatedness pilot; not a validated panel",
+  "samples": 3692,
+  "markers": 8054,
+  "sample_groups": 434,
+  "selection": "present, .HO, HumanOrigins, Pass, >=0.98 full-autosomal call rate, matching group labels; unique Individual ID; exclude two known nonhuman/reference controls",
+  "bed_sha256": "8a5583bbcfe6672872c8e35e6fba36ff1c79148a903e5189431464c563fddee3",
+  "bim_sha256": "7a8af2a9b037d0d71d20eaa544fdef2117f3e6f9c89034cfcfce54e589c56aab",
+  "fam_sha256": "30f7a583c5bbfa6034b26f047446b0a2b20d20d6c3d4c727e27cdfd007d2cc7b",
+  "selection_sha256": "f021bd4816818d676a965c7a54a9eace57b7131574d4c5ae98e4a2018557dbdc",
+  "excluded_known_controls": [
+    "Chimp_HO.HO",
+    "Href_HO.HO"
+  ],
+  "note": "Chromosome 22 cannot establish genome-wide unrelatedness. Species screening, held-out split and cross-study identity checks remain open."
+}

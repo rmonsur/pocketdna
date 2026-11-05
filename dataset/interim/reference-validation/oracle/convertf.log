@@ -1,0 +1,18 @@
+parameter file: dataset/interim/reference-validation/oracle/convertf.par
+genotypename: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/aadr_v66p1_ho/v66.p1_HO.aadr.patch.PUB.geno
+snpname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/aadr_v66p1_ho/v66.p1_HO.aadr.patch.PUB.snp
+indivname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/smartpca-smoke/smoke.ind
+outputformat: EIGENSTRAT
+genotypeoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/oracle/chr22.geno
+snpoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/oracle/chr22.snp
+indivoutname: /Users/reshadmonsur/Documents/Git/hackathon/pocketdna/dataset/interim/reference-validation/oracle/chr22.ind
+chrom: 22
+## /Users/reshadmonsur/bio_tools/bin/convertf version: 8640
+end of inpackt;  records read: 64
+before compress: snps: 584131 indivs: 27594
+after compress: snps: 8054 indivs: 64
+numvalidind:     64  maxmiss: 64001
+calling outfiles
+eigenstrat output
+numsnps output: 8054
+##end of convertf:       67.934 seconds cpu        0.000 Mbytes in use

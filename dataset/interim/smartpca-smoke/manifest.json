@@ -1,0 +1,13 @@
+{
+  "purpose": "input compatibility smoke test; not a validated reference basis",
+  "sample_count": 64,
+  "reference_ind_count": 27594,
+  "reference_snp_count": 584131,
+  "smartpca_sha256": "77b88d964ffafcd512f873dcc0957d114f4882f6cb35149963685be61620e087",
+  "ind_sha256": "51f99bee3667b5c3a97b663cc12fd3e25486cf64049782657d99db347b65509e",
+  "snp_sha256": "c0d565ee9e6a6edf30c2063430ee4f828e5db45f26d4747fd76f19eee650a5de",
+  "genotype_sha256": "7af8c2f5cf0db612e39257e59f20aba87906de90c79f409771c3b3145a253ec3",
+  "parameter_sha256": "b8b2fe7810d2a3131feb0e143cded9d4f018445d542fcb1fc042f70caab5934a",
+  "status": "passed",
+  "exit_code": 0
+}

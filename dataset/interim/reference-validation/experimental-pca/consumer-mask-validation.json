@@ -1,0 +1,50 @@
+{
+  "status": "experimental validation; not a production gate sign-off",
+  "acceptance": "p95 per-sample max-axis |delta| <= 0.25 basis-training SD",
+  "chip_mask_markers": 47142,
+  "results": {
+    "chip_mask": {
+      "samples": 64,
+      "median_max_axis_delta_sd": 0.21630667795958985,
+      "p95_max_axis_delta_sd": 0.32191041433503437,
+      "max_max_axis_delta_sd": 0.4195176135001426,
+      "min_usable_markers": 46310,
+      "acceptable": false
+    },
+    "chip_plus_10pct_nocall": {
+      "samples": 32,
+      "median_max_axis_delta_sd": 0.23632755601343808,
+      "p95_max_axis_delta_sd": 0.3569060793336617,
+      "max_max_axis_delta_sd": 0.46976882559537264,
+      "min_usable_markers": 42078,
+      "acceptable": false
+    },
+    "chip_plus_30pct_nocall": {
+      "samples": 32,
+      "median_max_axis_delta_sd": 0.2858173855537785,
+      "p95_max_axis_delta_sd": 0.41277036092570624,
+      "max_max_axis_delta_sd": 0.504311358995433,
+      "min_usable_markers": 32651,
+      "acceptable": false
+    },
+    "chip_plus_50pct_nocall": {
+      "samples": 32,
+      "median_max_axis_delta_sd": 0.36091046510320235,
+      "p95_max_axis_delta_sd": 0.5248786770251601,
+      "max_max_axis_delta_sd": 0.5846890269374617,
+      "min_usable_markers": 23249,
+      "acceptable": false
+    },
+    "chromosome_dropout_worst": {
+      "chromosome": "chr8",
+      "samples": 16,
+      "median_max_axis_delta_sd": 0.23952218856899501,
+      "p95_max_axis_delta_sd": 0.3336851374348676,
+      "max_max_axis_delta_sd": 0.3774421682682642,
+      "min_usable_markers": 44636,
+      "acceptable": false
+    },
+    "chromosome_dropout_all_acceptable": false
+  },
+  "limitations": "Reference samples under synthetic masks; one real consumer marker set; no strand/build errors injected; scales fitted on 16 basis samples."
+}
