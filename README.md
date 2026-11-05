@@ -5,8 +5,7 @@ documentary about where your story fits in human history, written, directed, ill
 audited end to end by Meta's Muse models.
 
 Meta Global AI Developer Hackathon, Oct 26 - Nov 4, 2026. Solo, Indie Developer track.
-Everything in this repository was built during the event window. A prior concept (DNAless)
-informed the idea; no old code, prompts or assets are reused.
+Everything in this repository was built during the event window. 
 
 ---
 
@@ -27,8 +26,8 @@ Open **http://localhost:8000**. That is the whole setup.
 | You have | Do this | What you see |
 | --- | --- | --- |
 | Nothing else | Click the small **Replay mode: saved episode, no upload or key needed.** link under the upload card | The saved 120-second film with its globe, reviewed historical scenes and a source drawer. Tap any claim to pause and open its citation. **No key, no network call, no cost.** |
-| A Meta Model API key | Copy the key into `.env` (below), restart, then upload `tests/fixtures/composition.png` (a 23andMe ancestry screenshot fixture) | A live run. The processing screen shows each Muse agent working: gatekeeper, extractor, you correct the numbers, then profiler, interpretation, director, both audits, and Muse Image scenes. |
-| Nothing, just want to see the live output | Open `demo/pocketdna-live-episode.mp4` and its `.manifest.json` | A 120-second export of one real live run on the builder's own raw 23andMe file, plus the exact beats, citations and one row per Muse call (model, effort, tokens, USD, duration). See [demo/EXPORT.md](demo/EXPORT.md). |
+| A Meta Model API key | Copy the key into `.env` (below), restart, then upload `tests/fixtures/composition.png` (a 23andMe ancestry screenshot fixture) | A live run. The processing screen shows each Muse agent working: gatekeeper, extractor, you correct the numbers, then profiler, interpretation, director, both audits, and Muse Image scenes. WARNING: TAKES 8-12 minutes to process so you might just see the demo video in [demo/](demo/pocketdna-live-episode.mp4) |
+| Nothing, just want to see the live output | Open `demo/pocketdna-live-episode.mp4` and its `.manifest.json` | A 120-second export of one real live run on my own raw 23andMe file, plus the exact citations and one row per Muse call (model, effort, tokens, USD, duration). See [demo/EXPORT.md](demo/EXPORT.md). |
 
 ```sh
 # .env  (git-ignored; never commit a real key)
@@ -41,6 +40,8 @@ errors and the replay, never a hang), `PORT` changes the port (default 8000),
 
 ### Honest limits of the judge path
 
+- The production of a 3 minute short takes roughly 8-12 minutes. Within this time, the DNA raw file is projected against reference samples first, ancestry calculations are computed and fed to Muse. Muse then processes these calculations, validating them by performing web searches and cross referencing them with scientific publications, directing the script of the episode, setting the pace, crafting the content. Muse Image generates images and all these take time. 
+
 - **Raw DNA files (`.txt` / `.zip` from 23andMe or AncestryDNA) need a reference bundle that
   is not in git.** The PCA-25 reference arrays, era panels and gazetteer are built from
   licensed AADR / SGDP / EGDP downloads and live in the git-ignored `dataset/` tree
@@ -48,23 +49,9 @@ errors and the replay, never a hang), `PORT` changes the port (default 8000),
   clone the browser raw-analysis route will report the bundle as missing. The saved live
   episode in `demo/` shows what that path produces, and the code, the deterministic engine
   and its tests are all in the repo.
-- **The screenshot route needs a Meta key.** Without one, the replay is the product demo.
-- The raw engine is labelled **experimental PocketDNA PCA-25** in the app. It is not Global25
-  and not a clinical result.
+
 - This build calls the hosted Meta Model API. It does not run Muse Glimmer / Spark Open.
 
-### Verify it works
-
-```sh
-npm test            # 20 test files, Node's built-in runner, runs offline, no key
-npm run typecheck   # strict TypeScript
-```
-
-At the time of writing: 20 of 20 test files pass, and the server serves the app, `/api/health`,
-`/api/replay` and the reference-bundle route on a local machine with paid calls killed. The
-append-only record of every check is [log.txt](log.txt).
-
----
 
 ## What it does, in one picture
 
@@ -72,13 +59,12 @@ People post the same DNA pie chart on Reddit and Facebook groups asking stranger
 this mean?" A professional genealogist costs about $2,000 for the answer. PocketDNA gives
 everyone their own episode:
 
-1. **Drop your result.** A 23andMe or AncestryDNA screenshot, or the raw export.
+1. **Drop your result.** A 23andMe or AncestryDNA raw data file (usually a .txt or .zip file)
 2. **The math is deterministic.** For raw files, ancestry is population genetics running in a
    Web Worker in your browser: parse, quality-check, project onto a fixed reference basis,
-   fit each era separately. Your genotypes never leave the device. **The LLM never computes
+   fit each era separately. The DNA data file never leave the device. **Muse NEVER computes
    ancestry.**
-3. **Muse does what only a model can.** Read the screenshot, research and cite, write the
-   story, direct a timed film, paint the scenes, and audit all of it.
+3. **Muse does what only a model can.** Read the results of genetics pipeline, research and cite,      write the story, direct a timed film, paint the scenes, and audit all of it.
 4. **A film plays.** Hook, method beat, Bronze Age, Middle Ages, Modern, convergence, source
    stamp. Every claim is a button that opens its source.
 
@@ -86,6 +72,17 @@ Ancestry only. No health, traits or personality. No modern nations as heirs. No 
 imagery. A health panel is rejected up front with a typed message.
 
 ---
+
+
+## How I built this
+
+I had a much more ambitious scope: build a mobile app in React Native/Expo and make a reels style
+micro documentary in 9:16 format. If you check the the [Git Commit history](https://github.com/rmonsur/pocketdna/commit/2ba3c5a6c6557d8f4276396255539f4960682e2c). this is the direction I was taking 5 days ago. Unfortunately my preeliminary test build was rejected by Testflight and the bionformatics genetic pipeline (more on that below) took longer than expected so I focused entirely on a scoped out and deliverable web app as a last dash effort.
+
+The Bionformatics pipeline involves downloading >10GB of open source/CC license genetic data, prepping the dataset and then finally building a reference panel out of that dataset to compare our 23andMe results against. Since original, intermediary and final dataset volume easily exceeds 25 GB I have excluded them from the repo and instead shared links on where I downloaded them from. 
+
+Muse Wonder (medium mode) was crucial in this genetic pipeline. I was able to speedrun easily a weeks worth of work in 2 days. The genetic calculations to compute ancestry were also reverse engineered by Muse Wonder. Word of caution: lots of optimization and fine tuning needs to be done to the reverse engineered genetics calculations but I hope it shows the power of these models. 
+
 
 ## Architecture
 
@@ -187,7 +184,6 @@ between agents.
 
 | Input | Handling |
 | --- | --- |
-| Screenshot (PNG/JPEG, up to 10 MB) | Sent for extraction with disclosure. You correct the extracted percentages. They are used only as the provider reported them. No personal ancient percentages are invented. |
 | Raw export (`.txt` / `.zip`, up to 50 MB) | Parsed, QC'd and analysed in a browser Web Worker. Projection into **PocketDNA PCA-25** with a fixed basis, then separate Bronze Age, Medieval and Modern fits with weights that sum to one. Poor coverage yields a limitation, not invented precision. |
 
 Percentages are never added across eras, and nothing implies a proven genealogical chain.
@@ -209,12 +205,11 @@ builder's machine.
 
 | Dataset | Used for | Size on disk | Source |
 | --- | --- | --- | --- |
-| AADR v66.1, 1240K (Allen Ancient DNA Resource, Reich Lab, DOI 10.7910/DVN/FFIDCW) | Ancient source groups for the Bronze Age and Medieval fits; dated sampling sites behind citations and globe markers | about 6.6 GB genotypes, 74 MB markers, 13 MB annotations | _link to be added_ |
-| AADR v66.1, Human Origins | Present-day reference populations and the marker set of the PCA-25 basis | about 3.8 GB plus 1.8 GB compatibility genotypes | _link to be added_ |
-| EGDP (Estonian Biocentre Human Genome Diversity Panel, Pagani et al.) | Regional gaps in the modern reference set | about 131 MB | _link to be added_ |
-| SGDP (Simons Genome Diversity Project) | More modern reference individuals; cross-check | about 41 MB | _link to be added_ |
-| Franco-Cantabrian 190 (Flores-Bello et al.) | Western European regional detail | about 46 MB | _link to be added_ |
-| Builder's own 23andMe export | Test input for the demo episode; private, git-ignored | about 24 MB | not published |
+| AADR v66.1, 1240K (Allen Ancient DNA Resource, Reich Lab, DOI 10.7910/DVN/FFIDCW) | Ancient source groups for the Bronze Age and Medieval fits; dated sampling sites behind citations and globe markers | about 6.6 GB genotypes, 74 MB markers, 13 MB annotations | [dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/FFIDCW) |
+| AADR v66.1, Human Origins | Present-day reference populations and the marker set of the PCA-25 basis | about 3.8 GB plus 1.8 GB compatibility genotypes | [dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/FFIDCW) |
+| EGDP (Estonian Biocentre Human Genome Diversity Panel, Pagani et al.) | Regional gaps in the modern reference set | about 131 MB | [archives](https://evolbio.ut.ee/CGgenomes.html) |
+| SGDP (Simons Genome Diversity Project) | More modern reference individuals; cross-check | about 41 MB | [SGDP](https://reichdata.hms.harvard.edu/pub/datasets/sgdp/) |
+| Builder's own 23andMe export | Test input for the demo episode; private, git-ignored | about 24 MB | [23andMe](dataset/genome_reshad_%20monsur_n_v2_v3_Full_20171127205355.txt) |
 
 Provenance, identity checks and the rebuild path: [dataset/README.md](dataset/README.md),
 [docs/BIOINFORMATICS.md](docs/BIOINFORMATICS.md) and [docs/POPLIST.md](docs/POPLIST.md).
@@ -246,22 +241,6 @@ All diagrams are self-contained HTML under [diagram/](diagram/). For example,
 [diagram/04-agent-swimlane.html](diagram/04-agent-swimlane.html) shows who hands what to whom
 and [diagram/05-muse-call-sequence.html](diagram/05-muse-call-sequence.html) shows one model
 call end to end.
-
----
-
-## Local MP4 export
-
-The film is rendered deterministically, then stepped frame by frame by headless Chromium and
-encoded by FFmpeg. This is optional and not needed to judge the app.
-
-```sh
-npx playwright install chromium     # once; ffmpeg must be on PATH
-npm run serve
-npm run export -- --url http://localhost:8000 --out pocketdna.mp4
-```
-
-It writes a companion `pocketdna.mp4.manifest.json` with every beat, citation and Muse call.
-More: [demo/EXPORT.md](demo/EXPORT.md).
 
 ---
 
@@ -303,11 +282,9 @@ app/, backend/  Earlier Expo/FastAPI prototype, kept for reference and not on th
 
 ## Data rights
 
-- The builder's own DNA export is kept on disk for local testing and is git-ignored.
+- The builder's own DNA export is kept on disk for local testing.
 - Reference data: AADR v66.0 (Reich Lab, Harvard Dataverse, DOI 10.7910/DVN/FFIDCW; Mallick
   et al. 2024, Scientific Data), SGDP and EGDP, cited in [docs/POPLIST.md](docs/POPLIST.md).
-  Large source files stay outside git.
-- Shared screenshots are used only with permission, PII removed.
 - The film clock pattern is adapted from MengTo Skills html-reel (MIT, attributed).
 - Diagrams use the MIT-licensed diagram-design and anatomy skills; see
   [diagram/README.md](diagram/README.md).

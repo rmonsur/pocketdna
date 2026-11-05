@@ -279,7 +279,7 @@ function architecture() {
 
     /* nodes */
     node({ x: 64, y: 120, kind: "security", tag: "WORKER", name: "Ancestry worker", subs: ["PCA-25 · fits · in-memory"] }),
-    node({ x: 264, y: 224, kind: "input", tag: "SPA", name: "React app", subs: ["upload · correct · play"] }),
+    node({ x: 264, y: 224, kind: "input", tag: "SPA", name: "React app", subs: ["upload · analyse · play"] }),
     node({ x: 64, y: 328, kind: "backend", tag: "REEL", name: "Reel engine + globe", subs: ["t-driven · Three.js"] }),
     node({ x: 536, y: 224, kind: "backend", tag: "API", name: "Hono API", subs: ["/api/jobs · SSE · bundle"] }),
     node({ x: 536, y: 328, kind: "backend", tag: "ORCH", name: "Orchestrator", subs: ["pipeline.ts · gazetteer"] }),
@@ -339,7 +339,7 @@ function inputEvidence() {
     node({ x: 64, y: 328, kind: "input", tag: "TXT·ZIP", name: "Raw export", subs: ["≤50 MB · never uploaded"] }),
     node({ x: 272, y: 328, kind: "security", tag: "WORKER", name: "Parse + QC", subs: ["harmonize · call rate"] }),
     node({ x: 480, y: 328, kind: "security", tag: "WORKER", name: "Project + fit", subs: ["PCA-25 · era NNLS · boot"] }),
-    node({ x: 960, y: 232, kind: "focal", tag: "V1", name: "EvidenceRecord", subs: ["provider | raw"] }),
+    node({ x: 960, y: 232, kind: "focal", tag: "V1", name: "EvidenceRecord", subs: ["raw findings"] }),
 
     callout({ x: 1240, y: 56, text: "Only the raw branch carries measured results; a screenshot proves what the provider reported.", leader: "M 1180,62 Q 1200,140 1124,246", dot: [1120, 248] }),
     callout({ x: 1240, y: 444, text: "The server schema is strict: any genotype or coordinate field is a 400, never forwarded.", leader: "M 792,440 Q 650,440 564,396", dot: [560, 392] }),
@@ -379,9 +379,9 @@ function evidenceFilm() {
     label(1008, 340, "SCENES"),
     label(784, 340, "ASSETS"),
 
-    node({ x: 40, y: 136, kind: "input", tag: "V1", name: "EvidenceRecord", subs: ["provider | raw"] }),
+    node({ x: 40, y: 136, kind: "input", tag: "V1", name: "EvidenceRecord", subs: ["raw findings"] }),
     node({ x: 240, y: 136, kind: "backend", tag: "SPARK HI", name: "Interpretation", subs: ["cited claims · index"] }),
-    node({ x: 440, y: 136, kind: "backend", tag: "SPARK HI", name: "Population profiler", subs: ["both tiers · reference cards"] }),
+    node({ x: 440, y: 136, kind: "backend", tag: "SPARK HI", name: "Population profiler", subs: ["stories · reference cards"] }),
     node({ x: 640, y: 136, kind: "backend", tag: "SPARK HI", name: "Director", subs: ["ReelPlan v1 · 7–9 beats"] }),
     node({ x: 840, y: 136, kind: "backend", tag: "SPARK HI", name: "Narrative auditor", subs: ["parallel · captions · cuts"] }),
     node({ x: 1040, y: 136, kind: "backend", tag: "SPARK HI", name: "Compliance auditor", subs: ["parallel · ancestry-only"] }),
@@ -426,8 +426,7 @@ function swimlane() {
   body.push(`<line x1="160" y1="${laneTop}" x2="160" y2="${laneTop + 4 * laneH}" stroke="${ink(0.22)}" stroke-width="1"/>`);
 
   body.push(
-    arrow("M 312,128 H 384 Q 392,128 392,136 V 192"),
-    arrow("M 488,224 H 536"),
+    arrow("M 312,128 H 592 Q 600,128 600,136 V 192"),
     arrow("M 664,224 H 712"),
     arrow("M 792,256 V 288"),
     arrow("M 760,288 V 256", { dashed: true }),
@@ -436,7 +435,7 @@ function swimlane() {
     arrow("M 1016,320 H 1120 Q 1128,320 1128,328 V 384"),
     arrow("M 776,352 V 408 Q 776,416 784,416 H 1064"),
 
-    sideLabel(400, 152, "DISPATCH", "right"),
+    sideLabel(608, 152, "DISPATCH", "right"),
     sideLabel(800, 266, "DRAFT", "right"),
     sideLabel(752, 266, "REVISE", "left"),
     sideLabel(872, 260, "BOTH PASS", "right", T.accent),
@@ -445,7 +444,6 @@ function swimlane() {
     label(924, 424, "APPROVED PLAN"),
 
     node({ x: 184, y: 96, w: 128, kind: "backend", tag: "ORCH", name: "Route + budget", subs: ["mode · cap $5 · kill"] }),
-    node({ x: 360, y: 192, w: 128, kind: "backend", tag: "SPARK", name: "Gate + extract", subs: ["low · medium"] }),
     node({ x: 536, y: 192, w: 128, kind: "backend", tag: "SPARK", name: "Cite + profile", subs: ["high · index · records"] }),
     node({ x: 712, y: 192, w: 128, kind: "backend", tag: "SPARK", name: "Director", subs: ["high · ReelPlan"] }),
     node({ x: 712, y: 288, w: 128, kind: "backend", tag: "SPARK", name: "Two auditors", subs: ["narrative · rules"] }),
@@ -453,7 +451,7 @@ function swimlane() {
     node({ x: 888, y: 288, w: 128, kind: "backend", tag: "SPARK", name: "Visual auditor", subs: ["medium · pass/repair"] }),
     node({ x: 1064, y: 384, w: 128, kind: "focal", tag: "CODE", name: "Assemble film", subs: ["atlas · t-driven"] }),
 
-    callout({ x: 420, y: 120, anchor: "start", text: "Every step pushes a progress event; the browser follows it over SSE.", leader: "M 412,116 Q 380,112 316,104", dot: [312, 104] }),
+    callout({ x: 420, y: 100, anchor: "start", text: "Every step pushes a progress event; the browser follows it over SSE.", leader: "M 412,96 Q 380,96 316,104", dot: [312, 104] }),
 
     legend({ y: 492, x1: 1240, items: [
       { kind: "swatch", treat: "backend", text: "Role (Muse Spark unless marked)" },
@@ -464,7 +462,7 @@ function swimlane() {
     ] }),
   );
   return page({ slug: "agents", walk: WALK.swimlane, type: "Swimlane", title: "Who hands what to whom", width: W, height: H, body: body.join("\n"),
-    desc: "Swimlane diagram of the PocketDNA runtime roles: the orchestrator dispatches work, Spark workers extract, cite and direct, Spark auditors gate the plan and images, and deterministic code assembles the film." });
+    desc: "Swimlane diagram of the PocketDNA runtime roles: the orchestrator dispatches work, Spark workers cite, profile and direct, Spark auditors gate the plan and images, and deterministic code assembles the film." });
 }
 
 /* =========================================================================
@@ -615,8 +613,7 @@ function modelMap() {
     edge("M 820,152 V 192"),
     edge("M 1080,152 V 192", true),
     edge("M 388,256 V 288"),
-    edge("M 164,288 H 612"),
-    edge("M 164,288 V 320"),
+    edge("M 388,288 H 612"),
     edge("M 388,288 V 320"),
     edge("M 612,288 V 320"),
     edge("M 820,256 V 320"),
@@ -625,8 +622,7 @@ function modelMap() {
     node({ x: 308, y: 192, kind: "external", tag: "LLM", name: "Muse Spark", subs: ["$1.25 in · $4.25 out /M"] }),
     node({ x: 740, y: 192, kind: "external", tag: "IMG", name: "Muse Image", subs: ["$0.01 per image"] }),
     node({ x: 1000, y: 192, kind: "optional", tag: "DEV", name: "Muse Wonder", subs: ["dev + research only"] }),
-    node({ x: 64, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "Low", subs: ["temp 0.2 · 1024 tok", "gatekeeper"] }),
-    node({ x: 288, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "Medium", subs: ["temp 0.4 · 2048 tok", "extractor · visual auditor"] }),
+    node({ x: 288, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "Medium", subs: ["temp 0.4 · 2048 tok", "visual auditor"] }),
     node({ x: 512, y: 320, w: 200, h: 112, kind: "backend", tag: "EFFORT", name: "High", subs: ["temp 0.7 · 32768 tok", "profiler · interpretation", "director · two auditors"] }),
     node({ x: 720, y: 320, w: 200, h: 112, kind: "backend", tag: "TOOL", name: "Historical scenes", subs: ["HIST-IMAGE-01 · 16:9", "≤6 per episode · conc 2", "audited by Spark vision"] }),
 

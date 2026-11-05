@@ -1,0 +1,114 @@
+[
+  {
+    "start": 0,
+    "end": 12,
+    "layout": "hook",
+    "title": "Percentages.\nBut where is the story?",
+    "subtitle": "A DNA result is the beginning, not the explanation.",
+    "asset": "result-crop.png"
+  },
+  {
+    "start": 12,
+    "end": 25,
+    "layout": "community",
+    "title": "\u201cWhat does this mean?\u201d",
+    "subtitle": "The same question brings people to ancestry communities.",
+    "asset": ""
+  },
+  {
+    "start": 25,
+    "end": 30,
+    "layout": "bench",
+    "title": "Meet PocketDNA.",
+    "subtitle": "Your ancestry evidence becomes a short, cited documentary.",
+    "asset": "08-pocketdna-bench.png"
+  },
+  {
+    "start": 30,
+    "end": 38,
+    "layout": "film",
+    "title": "",
+    "subtitle": "",
+    "asset": "episode-poster.jpg"
+  },
+  {
+    "start": 38,
+    "end": 58,
+    "layout": "diagram",
+    "title": "Privacy is built into the architecture.",
+    "subtitle": "Raw genotypes stay in the browser. Findings cross the boundary.",
+    "asset": "01-system-architecture.png"
+  },
+  {
+    "start": 58,
+    "end": 73,
+    "layout": "diagram",
+    "title": "Two inputs. One evidence record.",
+    "subtitle": "Screenshot extraction or deterministic raw-file analysis. Ancestry only.",
+    "asset": "02-input-to-evidence.png"
+  },
+  {
+    "start": 73,
+    "end": 92,
+    "layout": "diagram",
+    "title": "Muse is the documentary crew.",
+    "subtitle": "Interpretation \u2192 direction \u2192 narrative audit \u2192 compliance audit.",
+    "asset": "03-evidence-to-film.png"
+  },
+  {
+    "start": 92,
+    "end": 100,
+    "layout": "diagram",
+    "title": "Every model call has guardrails.",
+    "subtitle": "One adapter. Structured output. Validation. Budgets.",
+    "asset": "05-muse-call-sequence.png"
+  },
+  {
+    "start": 100,
+    "end": 110,
+    "layout": "diagram",
+    "title": "Writers do not grade their own work.",
+    "subtitle": "Workers write. Auditors review. Deterministic code renders.",
+    "asset": "04-agent-swimlane.png"
+  },
+  {
+    "start": 110,
+    "end": 120,
+    "layout": "diagram",
+    "title": "The art department has an editor.",
+    "subtitle": "Generate \u2192 audit \u2192 bounded repair \u2192 reviewed fallback.",
+    "asset": "06-image-agent-state.png"
+  },
+  {
+    "start": 120,
+    "end": 155,
+    "layout": "film",
+    "title": "",
+    "subtitle": "",
+    "asset": "episode-poster.jpg"
+  },
+  {
+    "start": 155,
+    "end": 165,
+    "layout": "evidence",
+    "title": "A story you can inspect.",
+    "subtitle": "Historical context is tied to sources. Similarity is not a traced genealogy.",
+    "asset": "03-evidence-to-film.png"
+  },
+  {
+    "start": 165,
+    "end": 175,
+    "layout": "diagram",
+    "title": "One Meta-powered film crew.",
+    "subtitle": "Muse Spark \u00b7 Muse Image \u00b7 Muse Wonder \u00b7 Muse Code",
+    "asset": "07-muse-model-map.png"
+  },
+  {
+    "start": 175,
+    "end": 180,
+    "layout": "close",
+    "title": "From a DNA result\nto a story to share.",
+    "subtitle": "PocketDNA \u00b7 Meta Global AI Developer Hackathon \u00b7 Solo Indie Track",
+    "asset": "08-pocketdna-bench.png"
+  }
+]
